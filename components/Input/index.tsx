@@ -1,0 +1,92 @@
+// import { makeStyles } from '@mui/styles';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import IconButton from '@mui/material/IconButton';
+import clsx from 'clsx';
+import FormControl from '@mui/material/FormControl';
+import OutlinedInput from '@mui/material/OutlinedInput';
+// import styles from './input.module.css'
+
+// const useStyles = makeStyles((theme: any) => ({
+//     root: {
+//         display: 'flex',
+//         flexWrap: 'wrap',
+//     },
+//     textField: {
+//         padding: '2px',
+//     },
+// }));
+export default function MyInput(props: any) {
+    // const classes = useStyles();
+    return (
+        <div style={{ marginTop: '10px' }}>
+            {props.type == 'password' ? (
+                <>
+                    <FormControl
+                        // className={clsx(classes.margin, classes.textField)}
+                        variant="outlined"
+                        size="small"
+                        className="w-full"
+                    >
+                        <InputLabel htmlFor="outlined-adornment-password">
+                            Password
+                        </InputLabel>
+                        <OutlinedInput
+                            size="small"
+                            className="w-full bg-white"
+                            id="outlined-adornment-password"
+                            type={props.showPassword ? 'text' : 'password'}
+                            value={props.value}
+                            onChange={(e: any) =>
+                                props.onChange(e.target.value)
+                            }
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={(e: any) =>
+                                            props.setShowPassword(
+                                                !props.showPassword
+                                            )
+                                        }
+                                        onMouseDown={(e: any) =>
+                                            e.preventDefault()
+                                        }
+                                        edge="end"
+                                    >
+                                        {props.showPassword ? (
+                                            <Visibility />
+                                        ) : (
+                                            <VisibilityOff />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            // labelWidth={70}
+                        />
+                    </FormControl>
+                </>
+            ) : (
+                <FormControl className="w-full">
+                    <TextField
+                        className="w-full bg-white"
+                        key={props.name}
+                        label={props.name}
+                        size="small"
+                        variant="outlined"
+                        onChange={(e: any) => props.onChange(e.target.value)}
+                        value={props.value}
+                    />
+                </FormControl>
+            )}
+        </div>
+    );
+}
+MyInput.getInitialProps = async (props: any) => {
+    return props;
+};
