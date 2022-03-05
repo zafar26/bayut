@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import styles from './footer.module.css';
-import {
-    BsPencilSquare,
-    BsPieChartFill,
-    BsCalendar,
-    BsGraphUp,
-    BsExclamationSquareFill,
-} from 'react-icons/bs';
+// import {
+//     BsPencilSquare,
+//     BsPieChartFill,
+//     BsCalendar,
+//     BsGraphUp,
+//     BsExclamationSquareFill,
+// } from 'react-icons/bs';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
@@ -52,10 +52,10 @@ export default function Footer() {
                         className={styles['footer-item']}
                         onClick={(e) => setSelected('home')}
                     >
-                        <BsPencilSquare
+                        {/* <BsPencilSquare
                             size={22}
                             color={selected == 'home' ? 'black' : '#FFFFFF'}
-                        />
+                        /> */}
                     </button>
                 </a>
             </Link>
@@ -65,10 +65,10 @@ export default function Footer() {
                         className={styles['footer-item']}
                         onClick={(e) => setSelected('chart')}
                     >
-                        <BsPieChartFill
+                        {/* <BsPieChartFill
                             size={22}
                             color={selected == 'chart' ? 'black' : '#FFFFFF'}
-                        />
+                        /> */}
                     </button>
                 </a>
             </Link>
@@ -78,10 +78,10 @@ export default function Footer() {
                         className={styles['footer-item']}
                         onClick={(e) => setSelected('calender')}
                     >
-                        <BsCalendar
+                        {/* <BsCalendar
                             size={22}
                             color={selected == 'calender' ? 'black' : '#FFFFFF'}
-                        />
+                        /> */}
                     </button>
                 </a>
             </Link>
@@ -91,12 +91,12 @@ export default function Footer() {
                         className={styles['footer-item']}
                         onClick={(e) => setSelected('statistic')}
                     >
-                        <BsGraphUp
+                        {/* <BsGraphUp
                             size={22}
                             color={
                                 selected == 'statistic' ? 'black' : '#FFFFFF'
                             }
-                        />
+                        /> */}
                     </button>
                 </a>
             </Link>

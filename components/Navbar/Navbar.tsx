@@ -1,35 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import { makeStyles } from '@mui/styles';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
 import Link from 'next/link';
 import MenuAppBar from '../Appbar/index';
 import styles from './navbar.module.css';
-import HomeIcon from '@material-ui/icons/Home';
-import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
-import BusinessIcon from '@material-ui/icons/Business';
-import CallReceivedIcon from '@material-ui/icons/CallReceived';
-import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import InsertChartIcon from '@material-ui/icons/InsertChart';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import SettingsIcon from '@material-ui/icons/Settings';
-import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined';
-import DoneAllRoundedIcon from '@material-ui/icons/DoneAllRounded';
-import BookIcon from '@material-ui/icons/Book';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import HomeIcon from '@mui/icons-material/Home';
+import BusinessIcon from '@mui/icons-material/Business';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import InsertChartIcon from '@mui/icons-material/InsertChart';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import SettingsIcon from '@mui/icons-material/Settings';
+import DoneAllRoundedIcon from '@mui/icons-material/DoneAllRounded';
+import BookIcon from '@mui/icons-material/Book';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useViewportScroll } from 'framer-motion';
 
 const useStyles = makeStyles({
+    list: {},
     fullList: {
         width: 'auto',
         backgroundColor: 'red',
@@ -128,7 +121,7 @@ export default function Navbar() {
             </List>
         </div>
     );
-    let left = 'left';
+    let left: string = 'left';
 
     return (
         <React.Fragment key={left}>
@@ -138,7 +131,7 @@ export default function Navbar() {
             />
             <Drawer
                 className={styles.drawer}
-                anchor={left}
+                anchor={'left'}
                 open={state[left]}
                 onClose={toggleDrawer(left, false)}
             >
