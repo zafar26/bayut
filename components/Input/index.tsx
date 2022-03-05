@@ -1,28 +1,12 @@
-// import { makeStyles } from '@mui/styles';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
 import IconButton from '@mui/material/IconButton';
-import clsx from 'clsx';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
-// import styles from './input.module.css'
-
-// const useStyles = makeStyles((theme: any) => ({
-//     root: {
-//         display: 'flex',
-//         flexWrap: 'wrap',
-//     },
-//     textField: {
-//         padding: '2px',
-//     },
-// }));
 export default function MyInput(props: any) {
-    // const classes = useStyles();
     return (
         <div style={{ marginTop: '10px' }}>
             {props.type == 'password' ? (
