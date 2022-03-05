@@ -7,12 +7,8 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export default function CustomSelect(props: any) {
     return (
-        <div>
-            <FormControl
-                variant="outlined"
-                size="small"
-                className="mt-4 w-full"
-            >
+        <div className="mt-4 w-full">
+            <FormControl variant="outlined" size="small" className="w-full">
                 <InputLabel htmlFor="outlined-options-native-simple">
                     {props.label}
                 </InputLabel>
