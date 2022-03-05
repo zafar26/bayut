@@ -68,8 +68,8 @@ const CorporateLogin: NextPage = () => {
                             options={loginOptions}
                         />
                     </div>
-                    <div className="mt-4 bg-loginButton rounded">
-                        <Button variant="contained">
+                    <div className="mt-4 bg-green-700 rounded">
+                        <Button variant="contained" color="success">
                             <a href="/agent"> Login</a>
                         </Button>
                     </div>
