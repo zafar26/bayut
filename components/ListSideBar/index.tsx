@@ -58,18 +58,26 @@ const MyList = ({
                     return selectedLink == link.label ? (
                         <ListItem
                             button
-                            key={link.label}
-                            className="w-full text-baseColor flex items-center p-0 shadow "
+                            key={index}
+                            sx={{ padding: 0, color: '#0d47a1' }}
+                            className="w-full h-12 text-baseColor p-0 py-1 flex items-center  shadow  "
                         >
-                            <div className="w-full flex px-2 py-3 border-x-2 border-baseColor">
+                            <div className="w-1 h-full   bg-baseColor rounded-xl">
+                                i
+                            </div>
+                            <div className="w-full flex px-2   ">
                                 <div className="mr-2">{link.icon()}</div>
                                 <Link href={`${link.path}`}>{link.label}</Link>
+                            </div>
+                            <div className="w-1 h-full bg-baseColor rounded-xl">
+                                i
                             </div>
                         </ListItem>
                     ) : (
                         <ListItem
                             button
                             key={link.label}
+                            sx={{ color: 'GrayText' }}
                             className="text-gray-500 flex items-center"
                             onClick={() => setSelectedItem(index)}
                         >
