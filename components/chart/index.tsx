@@ -1,7 +1,7 @@
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 
-export default function Chart({ data, title }: any) {
+export default function MyChart({ data, title, width, height }: any) {
     let options = {
         title: {
             text: 'Pie point CSS',
@@ -24,6 +24,10 @@ export default function Chart({ data, title }: any) {
                 showInLegend: true,
             },
         ],
+        chart: {
+            width,
+            height,
+        },
     };
     if (title) {
         options.title.text = title;
@@ -33,12 +37,18 @@ export default function Chart({ data, title }: any) {
         options.series[0].data = data;
     }
     return (
-        <div style={{ backgroundColor: 'transparent' }}>
+        <div
+            style={{
+                backgroundColor: 'transparent',
+                // width: '100%',
+                // height: '80%',
+            }}
+        >
             <HighchartsReact highcharts={Highcharts} options={options} />
         </div>
     );
 }
-Chart.getInitialProps = async (props: any) => {
+MyChart.getInitialProps = async (props: any) => {
     return {
         data: props.data,
         title: props.title,
