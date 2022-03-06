@@ -67,7 +67,7 @@ const AgentDashboard = () => {
                                 data={country}
                                 title="Country Wise "
                                 width={isMobile ? 300 : isTablet ? 600 : 900}
-                                height={isMobile ? 300 : isTablet ? 400 : 450}
+                                height={isMobile ? 300 : isTablet ? 350 : 400}
                             />
                         )}
                         {selectedButton === 1 && (
@@ -75,7 +75,7 @@ const AgentDashboard = () => {
                                 data={country}
                                 title="Country Wise "
                                 width={isMobile ? 300 : isTablet ? 600 : 900}
-                                height={isMobile ? 300 : isTablet ? 400 : 450}
+                                height={isMobile ? 300 : isTablet ? 350 : 400}
                             />
                         )}
                         {selectedButton === 2 && (
@@ -83,7 +83,7 @@ const AgentDashboard = () => {
                                 data={country}
                                 title="Country Wise "
                                 width={isMobile ? 300 : isTablet ? 600 : 900}
-                                height={isMobile ? 300 : isTablet ? 400 : 450}
+                                height={isMobile ? 300 : isTablet ? 350 : 400}
                             />
                         )}
                     </div>
