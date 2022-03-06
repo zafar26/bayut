@@ -8,6 +8,7 @@ module.exports = {
             colors: {
                 primary: '#1B32AB',
                 secondary: '#ecc94b',
+                baseColor: '#0d47a1',
                 loginButton: '#389F14',
                 glassEffect: 'rgba(255, 255, 255, 0.8)',
             },

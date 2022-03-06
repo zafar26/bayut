@@ -1,56 +1,52 @@
 .navbar {
-    width:100vw;
-    height:60px;
-    padding:10px    ;
+    width: 100vw;
+    height: 60px;
+    padding: 10px;
     background-color: #11698e;
     display: flex;
-    justify-content: flex-start ;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    justify-content: flex-start;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     /* border-radius: 5px; */
     color: aliceblue;
     align-items: center;
 }
-.image-container{
-    padding:30px;
-    background-color:#dfe0df;
+.image-container {
+    padding: 30px;
+    background-color: #dfe0df;
     border-radius: 100px;
 }
-.username{
+.username {
     margin-left: 20px;
-    width:100px;
+    width: 100px;
 }
-.nav-container1{
-    list-style-type:none;
+.nav-container1 {
+    list-style-type: none;
     display: flex;
     /* flex-direction: column; */
     align-items: center;
 }
-.nav-container2{
-    
-    list-style-type:none;
+.nav-container2 {
+    list-style-type: none;
     display: flex;
     align-items: center;
-
-
-
 }
-.nav-item{
-    width:100px;
-    padding:15px;
+.nav-item {
+    width: 100px;
+    padding: 15px;
     border-radius: 5px;
     font-size: 12px;
-    color:#dfe0df;
+    color: #dfe0df;
     border: none;
     background: none;
 }
 .nav-item:hover {
     background-color: #dfe0df;
-    color:black;    
+    color: black;
 }
 
-.opensidebar{
-    width:50px;
-    height:60px;
+.opensidebar {
+    width: 50px;
+    height: 60px;
     padding: 5px;
     font-size: 44;
     border: none;
@@ -59,17 +55,21 @@
     position: relative;
     animation-name: sidebar;
     animation-duration: 0.3s;
-
 }
 @keyframes sidebar {
-  0%   { left:-100px; top:0px;}
-  100% { left:0px; top:0px;}
-
+    0% {
+        left: -100px;
+        top: 0px;
+    }
+    100% {
+        left: 0px;
+        top: 0px;
+    }
 }
 
-.closesidebar{
-width:40px;
-    height:40px;
+.closesidebar {
+    width: 40px;
+    height: 40px;
     padding: 10px;
     border: none;
     background: none;
@@ -78,22 +78,26 @@ width:40px;
     position: relative;
     animation-name: sidebar;
     animation-duration: 0.3s;
-
 }
 
 @keyframes sidebar {
-  0%   { left:0px; top:0px;}
-  100% { left:-100px; top:0px;}
-
+    0% {
+        left: 0px;
+        top: 0px;
+    }
+    100% {
+        left: -100px;
+        top: 0px;
+    }
 }
 /* .container { */
 
-    /* width:100vw; */
-    /* height: 100vh; */
-    /* margin:0;
+/* width:100vw; */
+/* height: 100vh; */
+/* margin:0;
     padding:0; */
 /* background-color: gray; */
- /* background: linear-gradient(135deg, 
+/* background: linear-gradient(135deg, 
   #0d47a1 25%,
   #1976d2 25%,
   #2196f3 50%,
@@ -101,3 +105,10 @@ width:40px;
   #bbdefb 75%,
   #e3f2fd 75%); */
 /* } */
+.MuiToolbar-root
+    MuiToolbar-gutters
+    MuiToolbar-regular
+    css-1t29gy6-MuiToolbar-root {
+    display: flex;
+    justify-content: space-between;
+}
