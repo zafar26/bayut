@@ -20,6 +20,7 @@ import MenuItem from '@mui/material/MenuItem';
 import EditIcon from '@mui/icons-material/Edit';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
 
 const Listings = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -36,7 +37,8 @@ const Listings = () => {
     };
     function CustomToolbar() {
         return (
-            <GridToolbarContainer>
+            <GridToolbarContainer className="flex justify-between">
+                Search
                 <GridToolbarExport />
             </GridToolbarContainer>
         );
@@ -207,7 +209,7 @@ const Listings = () => {
         },
     ];
     return (
-        <div className="pt-16 w-full h-full">
+        <div className="pt-14 md:pt-16 w-full h-full">
             <Navbar selectedLink={'Listings'} />
             <div className="p-2   h-full ">
                 <div className="flex justify-between">
@@ -220,10 +222,10 @@ const Listings = () => {
                         <LinearProgress variant="determinate" value={78} />
                     </div>
                 </div>
-                <div className="p-2 mt-4 w-full h-5/6  bg-lightGreenCard rounded shadow">
-                    <div className="flex justify-between p-2 bg-lightGreenCard rounded shadow">
+                <div className="p-2 mt-4 md:mt-4 w-full h-5/6  bg-lightGreenCard rounded shadow">
+                    <div className="flex justify-between items-center px-2  bg-lightGreenCard rounded shadow">
                         Filters
-                        <div className="px-1 py-2 w-4/5 shadow rounded flex overflow-x-auto">
+                        <div className="px-1 py-2 w-4/5 md:w-3/5 flex overflow-x-auto">
                             {filters.map((d) => (
                                 <ToggleSwitch
                                     width={d.width}
@@ -235,9 +237,20 @@ const Listings = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="mt-4 h-5/6">
-                        <p>Search</p>
-
+                    <div className="pt-1 md:pt-1 flex  justify-center">
+                        <Button
+                            variant="contained"
+                            color="success"
+                            className={
+                                isMobile
+                                    ? 'bg-green-700 text-xs'
+                                    : 'bg-green-700 '
+                            }
+                        >
+                            Search
+                        </Button>
+                    </div>
+                    <div className="pt-2 h-5/6">
                         <DataGrid
                             columns={columns}
                             rows={dummyData}
