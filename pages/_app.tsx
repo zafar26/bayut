@@ -16,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
                 <link rel="apple-touch-icon" href="/icon.png" />
                 <meta name="theme-color" content="#fff" />
             </Head>
-            <Component {...pageProps} />
+            <div className="w-screen h-screen">
+                <Component {...pageProps} />
+            </div>
         </>
     );
 }

@@ -13,6 +13,31 @@ a {
     box-sizing: border-box;
 }
 
+.switch {
+    /* width: 50px; */
+    margin: 2px;
+    /* height: 12px; */
+    background-color: #4ca85a;
+    color: white;
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 50px;
+    padding: 8px;
+}
+
+.switch[data-isOn='false'] {
+    justify-content: flex-end;
+    background-color: rgb(220 38 38);
+    /* color: ; */
+}
+
+.handle {
+    width: 13px;
+    height: 13px;
+    background-color: white;
+    border-radius: 10px;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

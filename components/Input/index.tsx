@@ -8,7 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 export default function MyInput(props: any) {
     return (
-        <div style={{ marginTop: '10px' }}>
+        <div className="w-full" style={{ marginTop: '10px' }}>
             {props.type == 'password' ? (
                 <>
                     <FormControl
@@ -58,7 +58,7 @@ export default function MyInput(props: any) {
             ) : (
                 <FormControl className="w-full">
                     <TextField
-                        className="w-full bg-white"
+                        className=" bg-white"
                         key={props.name}
                         label={props.name}
                         size="small"

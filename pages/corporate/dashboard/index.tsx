@@ -39,7 +39,7 @@ const AgentDashboard = () => {
                         Jan 25, 2022 to Feb 25, 2022
                     </p>
                 </div>
-                <div className="self-center w-full mt-6 p-2 md:w-full  h-4/5 md:h-full rounded bg-[#E8F6EF] shadow">
+                <div className="self-center w-full mt-6 p-2 md:w-full  h-4/5 md:h-full rounded bg-lightGreenCard shadow">
                     <p className="mb-2 text-sm font-thin ">
                         Your Listing Perfomance :
                     </p>
