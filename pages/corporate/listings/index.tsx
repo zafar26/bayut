@@ -49,19 +49,6 @@ const Listings = () => {
             field: 'id',
             headerName: 'ID',
             width: 120,
-            // componentsProps(params: any) {
-            //     return <div style={{ background: 'yellow' }}>{params}</div>;
-            // },
-            // renderCell: (headerparams: any) => {
-            //     // console.log(headerparams)
-            //     return (
-            //         <p>
-            //             <IconButton>
-            //                 <PersonIcon />
-            //             </IconButton>
-            //         </p>
-            //     );
-            // },
         },
         { field: 'guid', headerName: 'GU_ID', width: 200 },
         { field: 'isActive', headerName: ' Active', width: 100 },
@@ -218,8 +205,12 @@ const Listings = () => {
                         <LinearProgress variant="determinate" value={78} />
                     </div>
                     <div className="w-32 md:w-2/5 p-2 bg-lightGreenCard rounded shadow">
-                        <p className="pb-2 font-light text-sm">Quota Summary</p>
-                        <LinearProgress variant="determinate" value={78} />
+                        <a href="/corporate/listings/quota_usage">
+                            <p className="pb-2 font-light text-sm">
+                                Quota Summary
+                            </p>
+                            <LinearProgress variant="determinate" value={78} />
+                        </a>
                     </div>
                 </div>
                 <div className="p-2 mt-4 md:mt-4 w-full h-5/6  bg-lightGreenCard rounded shadow">
