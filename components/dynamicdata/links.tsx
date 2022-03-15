@@ -4,6 +4,7 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import InsightsIcon from '@mui/icons-material/Insights';
 import GroupIcon from '@mui/icons-material/Group';
 import PublicIcon from '@mui/icons-material/Public';
+import AddIcon from '@mui/icons-material/Add';
 
 export const corporateLinks: any = [
     {
@@ -35,5 +36,11 @@ export const corporateLinks: any = [
         label: 'Agency Website',
         path: '/corporate/agencyWebsite',
         icon: () => <PublicIcon />,
+    },
+
+    {
+        label: 'Add Property',
+        path: '/corporate/addproperty',
+        icon: () => <AddIcon />,
     },
 ];

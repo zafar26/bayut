@@ -55,6 +55,34 @@ export default function MyInput(props: any) {
                         />
                     </FormControl>
                 </>
+            ) : props.textdesc ? (
+                <FormControl className="w-full">
+                    <TextField
+                        id="outlined-multiline-static"
+                        multiline
+                        rows={props.noOfLines}
+                        maxRows={props.noOfLines + 2}
+                        className=" bg-white"
+                        key={props.name}
+                        label={props.name}
+                        size="small"
+                        onChange={(e: any) => props.onChange(e.target.value)}
+                        value={props.value}
+                    />
+                </FormControl>
+            ) : props.disabled ? (
+                <FormControl disabled className="w-full">
+                    <TextField
+                        disabled
+                        className=" bg-gray-100"
+                        key={props.name}
+                        label={props.name}
+                        size="small"
+                        variant="outlined"
+                        onChange={(e: any) => props.onChange(e.target.value)}
+                        value={props.value}
+                    />
+                </FormControl>
             ) : (
                 <FormControl className="w-full">
                     <TextField
