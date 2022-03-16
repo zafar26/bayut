@@ -212,7 +212,7 @@ const AddProperty = () => {
                         className="bg-green-600 hover:bg-green-500 text-white"
                         color="success"
                     >
-                        Next
+                        <a href="/corporate/addproperty/ammenities">Next</a>
                     </Button>
                 </div>
             </div>

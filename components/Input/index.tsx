@@ -83,6 +83,18 @@ export default function MyInput(props: any) {
                         value={props.value}
                     />
                 </FormControl>
+            ) : props.style ? (
+                <FormControl className="w-full p-0 m-0 ">
+                    <TextField
+                        className={props.style}
+                        key={props.name}
+                        label={props.name}
+                        size="small"
+                        variant="outlined"
+                        onChange={(e: any) => props.onChange(e.target.value)}
+                        value={props.value}
+                    />
+                </FormControl>
             ) : (
                 <FormControl className="w-full">
                     <TextField
