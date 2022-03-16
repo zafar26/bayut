@@ -1,11 +1,12 @@
 import Navbar from '../../../components/Navbar/Navbar';
 import MyStepper from '../../../components/Stepper';
-import { steps } from './utils';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+
+const steps = ['Details', 'Amenities', 'Uploads'];
 
 const UploadPage = () => {
     const [value, setValue] = useState(0);

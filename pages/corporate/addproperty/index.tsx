@@ -4,7 +4,8 @@ import MyInput from '../../../components/Input';
 import Navbar from '../../../components/Navbar/Navbar';
 import CustomSelect from '../../../components/Select';
 import MyStepper from '../../../components/Stepper';
-import { steps } from './utils';
+
+const steps = ['Details', 'Amenities', 'Uploads'];
 
 const AddProperty = () => {
     const [loginAs, setLoginAs] = useState<String>('');

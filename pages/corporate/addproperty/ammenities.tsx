@@ -1,12 +1,13 @@
 import Navbar from '../../../components/Navbar/Navbar';
 import MyStepper from '../../../components/Stepper';
-import { steps } from './utils';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
 import MyInput from '../../../components/Input';
 import Button from '@mui/material/Button';
+
+const steps = ['Details', 'Amenities', 'Uploads'];
 
 let recreationFamily = [
     {
