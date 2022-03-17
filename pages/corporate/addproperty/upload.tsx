@@ -63,12 +63,16 @@ const UploadPage = () => {
                     </div>
                 </div>
                 <div className="mt-8 flex justify-center">
-                    <Button
-                        className="bg-green-600 hover:bg-green-500 text-white"
-                        color="success"
-                    >
-                        Submit
-                    </Button>
+                    <div className="bg-green-600 hover:bg-green-500 rounded ">
+                        <Button color="success">
+                            <a
+                                href="/corporate/addproperty/upload"
+                                className="text-white"
+                            >
+                                Submit
+                            </a>
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>

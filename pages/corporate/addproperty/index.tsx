@@ -209,12 +209,16 @@ const AddProperty = () => {
                     </div>
                 </div>
                 <div className="mt-4 flex justify-center">
-                    <Button
-                        className="bg-green-600 hover:bg-green-500 text-white"
-                        color="success"
-                    >
-                        <a href="/corporate/addproperty/ammenities">Next</a>
-                    </Button>
+                    <div className="bg-green-600 hover:bg-green-500 rounded ">
+                        <Button color="success">
+                            <a
+                                href="/corporate/addproperty/ammenities"
+                                className="text-white"
+                            >
+                                Next
+                            </a>
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>

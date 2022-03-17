@@ -269,7 +269,7 @@ const Ammenities = () => {
     return (
         <div>
             <Navbar selectedLink={'Add Property'} />
-            <div className="pt-16">
+            <div className="pt-16 p-4">
                 <MyStepper steps={steps} activeStep={1} />
                 <p className="mt-4 text-sm ">
                     Please Select Amenities For this Property :
@@ -295,9 +295,7 @@ const Ammenities = () => {
                                     return (
                                         <FormGroup>
                                             <FormControlLabel
-                                                control={
-                                                    <Checkbox defaultChecked />
-                                                }
+                                                control={<Checkbox />}
                                                 label={d.label}
                                             />
                                         </FormGroup>
@@ -308,12 +306,16 @@ const Ammenities = () => {
                     </>
                 ))}
                 <div className="mt-4 flex justify-center">
-                    <Button
-                        className="bg-green-600 hover:bg-green-500 text-white"
-                        color="success"
-                    >
-                        <a href="/corporate/addproperty/upload">Next</a>
-                    </Button>
+                    <div className="bg-green-600 hover:bg-green-500 rounded ">
+                        <Button color="success">
+                            <a
+                                href="/corporate/addproperty/upload"
+                                className="text-white"
+                            >
+                                Next
+                            </a>
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>
