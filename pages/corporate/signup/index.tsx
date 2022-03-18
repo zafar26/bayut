@@ -6,8 +6,9 @@ import { useState } from 'react';
 import MyInput from '../../../components/Input';
 import CustomSelect from '../../../components/Select';
 import Button from '@mui/material/Button';
+import PhoneNoInput from '../../../components/PhoneInput';
 
-const CorporateLogin: NextPage = () => {
+const CorporateCreateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
 
     let loginOptions = [
@@ -40,7 +41,7 @@ const CorporateLogin: NextPage = () => {
                 <div className="p-4 md:p-12 bg-glassEffect w-4/5 md:w-1/3 h-3/5 md:h-4/5 top-20 left-9 md:left-1/3  flex flex-col justify-center items-center relative rounded shadow-lg shadow-black">
                     <div className="flex flex-col justify-center items-center h-32 text-2xl text-primary">
                         <AccountCircleIcon fontSize="large" />
-                        <h1>Corporate Login</h1>
+                        <h1> Create Account</h1>
                     </div>
 
                     <div className="md:w-72 ">
@@ -60,23 +61,27 @@ const CorporateLogin: NextPage = () => {
                         <CustomSelect
                             value={loginAs}
                             onChange={(e: any) => setLoginAs(e.target.value)}
-                            label={'Login As'}
+                            label={'Sign Up As'}
                             options={loginOptions}
                         />
+                        <div className="mt-4 ">
+                            <PhoneNoInput />
+                        </div>
                     </div>
                     <div className="mt-4 bg-green-700 rounded">
                         <Button variant="contained" color="success">
-                            <a href="/corporate/dashboard"> Login</a>
+                            <a href="/corporate/dashboard"> Create Account</a>
                         </Button>
                     </div>
+
                     <div className="mt-4 flex flex-col">
                         <h1 className="font-thin text-sm">
-                            Don't Have an Account
+                            Already Have an Account
                         </h1>
 
-                        <div className="self-center mt-2 bg-blue-600 w-42 rounded">
+                        <div className="self-center mt-2 bg-blue-600 w-20 rounded">
                             <Button variant="contained">
-                                <a href="/corporate/signup"> Create Account</a>
+                                <a href="/corporate/login"> Login</a>
                             </Button>
                         </div>
                     </div>
@@ -86,4 +91,4 @@ const CorporateLogin: NextPage = () => {
     );
 };
 
-export default CorporateLogin;
+export default CorporateCreateLogin;

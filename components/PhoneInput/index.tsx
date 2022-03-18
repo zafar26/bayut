@@ -7,8 +7,10 @@ import ar from 'react-phone-input-2/lang/ar.json';
 const PhoneNoInput = () => {
     const [phone, setPhone] = useState('');
     return (
-        <div>
+        <div className="w-full">
             <PhoneInput
+                enableSearch={true}
+                inputStyle={{ width: '100%' }}
                 localization={ar}
                 country={'us'}
                 value={phone}

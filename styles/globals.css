@@ -37,6 +37,10 @@ a {
     background-color: white;
     border-radius: 10px;
 }
+.react-tel-input .form-control {
+    width: 240px;
+    background-color: #4ca85a;
+}
 
 @tailwind base;
 @tailwind components;
