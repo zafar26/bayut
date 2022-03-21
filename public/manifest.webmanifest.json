@@ -4,8 +4,8 @@
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "bayut",
-    "short_name": "bayut",
+    "name": "Vlook",
+    "short_name": "vlook",
     "description": "Real Estate App",
     "icons": [
         {

@@ -4,28 +4,42 @@ import MyInput from '../../../components/Input';
 import Navbar from '../../../components/Navbar/Navbar';
 import CustomSelect from '../../../components/Select';
 import MyStepper from '../../../components/Stepper';
+import {
+    loginOptions,
+    subCategories,
+    categories,
+    propertyType,
+} from './options';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
 const AddProperty = () => {
     const [loginAs, setLoginAs] = useState<String>('');
     const [email, setEmail] = useState<String>('');
+    const [purpose, setPurpose] = useState<String>('');
+    const [category, setCategory] = useState<String>('');
+    const [subCategory, setSubCategory] = useState<String>('');
 
-    let loginOptions = [
+    let typeandPurpose = [
         {
-            value: 'agent',
-            label: 'Agent',
+            value: category,
+            setValue: setCategory,
+            label: 'Category',
+            options: categories,
         },
         {
-            value: 'owner',
-            label: 'Owner',
+            value: subCategory,
+            setValue: setSubCategory,
+            label: 'Sub Category',
+            options: subCategories.filter((d: any) => d.key == category),
         },
         {
-            value: 'tenant',
-            label: 'Tenant',
+            value: purpose,
+            setValue: setPurpose,
+            label: 'Purpose',
+            options: propertyType,
         },
     ];
-
     return (
         <div>
             <Navbar selectedLink={'Add Property'} />
@@ -33,30 +47,18 @@ const AddProperty = () => {
                 <MyStepper steps={steps} activeStep={0} />
                 <p className="ml-2 ">Type and Purpose</p>
                 <div className="flex flex-wrap">
-                    <div className="mx-4 w-72 ">
-                        <CustomSelect
-                            value={loginAs}
-                            onChange={(e: any) => setLoginAs(e.target.value)}
-                            label={'Category'}
-                            options={loginOptions}
-                        />
-                    </div>
-                    <div className="mx-4 w-72 ">
-                        <CustomSelect
-                            value={loginAs}
-                            onChange={(e: any) => setLoginAs(e.target.value)}
-                            label={'Sub Category'}
-                            options={loginOptions}
-                        />
-                    </div>
-                    <div className="mx-4 w-72 ">
-                        <CustomSelect
-                            value={loginAs}
-                            onChange={(e: any) => setLoginAs(e.target.value)}
-                            label={'Purpose'}
-                            options={loginOptions}
-                        />
-                    </div>
+                    {typeandPurpose.map((d) => (
+                        <div className="mx-4 w-72 ">
+                            <CustomSelect
+                                value={d.value}
+                                onChange={(e: any) =>
+                                    d.setValue(e.target.value)
+                                }
+                                label={d.label}
+                                options={d.options}
+                            />
+                        </div>
+                    ))}
                 </div>
                 <p className="mt-4 ml-2 ">Location and Address</p>
                 <div className="flex flex-wrap">

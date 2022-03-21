@@ -5,6 +5,11 @@ import InsightsIcon from '@mui/icons-material/Insights';
 import GroupIcon from '@mui/icons-material/Group';
 import PublicIcon from '@mui/icons-material/Public';
 import AddIcon from '@mui/icons-material/Add';
+//
+import HomeIcon from '@mui/icons-material/Home';
+import ApartmentIcon from '@mui/icons-material/Apartment';
+import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
+import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 
 export const corporateLinks: any = [
     {
@@ -42,5 +47,28 @@ export const corporateLinks: any = [
         label: 'Add Property',
         path: '/corporate/addproperty',
         icon: () => <AddIcon />,
+    },
+];
+
+export const clientLinks: any = [
+    {
+        label: 'Home',
+        path: '/',
+        icon: () => <HomeIcon />,
+    },
+    {
+        label: 'Property',
+        path: '/property',
+        icon: () => <ApartmentIcon />,
+    },
+    {
+        label: 'Contact Us',
+        path: '/contactus',
+        icon: () => <ContactPhoneIcon />,
+    },
+    {
+        label: 'Corporate Login',
+        path: '/corporate/login',
+        icon: () => <SupervisedUserCircleIcon />,
     },
 ];

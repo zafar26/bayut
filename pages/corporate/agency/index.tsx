@@ -21,6 +21,7 @@ import {
     GridToolbarDensitySelector,
 } from '@mui/x-data-grid';
 import dummyData from '../../../components/data/index.json';
+import CreateIcon from '@mui/icons-material/Create';
 
 const Agency = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -39,9 +40,8 @@ const Agency = () => {
     function CustomToolbar() {
         return (
             <GridToolbarContainer className="flex justify-between">
-                <p className="text-xs">Manage Users :</p>
-                <div className="p-0 w-40 shadow rounded flex items-center bg-white">
-                    {/* <TuneIcon /> */}
+                <p className="self-start text-xs">Manage Users :</p>
+                <div className="p-0 w-24 shadow rounded flex items-center ">
                     <CustomSelect
                         withoutMargin={true}
                         value={loginAs}
@@ -61,73 +61,30 @@ const Agency = () => {
             headerName: 'ID',
             width: 120,
         },
-        { field: 'guid', headerName: 'GU_ID', width: 200 },
-        { field: 'isActive', headerName: ' Active', width: 100 },
-        { field: 'balance', headerName: 'Balance', width: 120 },
-        { field: 'firstName', headerName: 'First name', width: 130 },
-        { field: 'lastName', headerName: 'Last name', width: 120 },
-        { field: 'age', headerName: 'Age', width: 90 },
-        { field: 'eyeColor', headerName: 'Eye Color', width: 120 },
-        { field: 'company', headerName: 'Company', width: 120 },
+        // { field: 'guid', headerName: 'GU_ID', width: 200 },
+        // { field: 'isActive', headerName: ' Active', width: 100 },
+        // { field: 'balance', headerName: 'Balance', width: 120 },
+        // { field: 'firstName', headerName: 'First name', width: 130 },
+        // { field: 'lastName', headerName: 'Last name', width: 120 },
+        // { field: 'age', headerName: 'Age', width: 90 },
+        // { field: 'eyeColor', headerName: 'Eye Color', width: 120 },
+        // { field: 'company', headerName: 'Company', width: 120 },
+        { field: 'phone', headerName: 'Name', width: 200 },
         { field: 'email', headerName: 'Email', width: 200 },
-        { field: 'phone', headerName: 'Phone No', width: 200 },
-        { field: 'mobile', headerName: 'Mobile No', width: 200 },
-        { field: 'address', headerName: 'Address', width: 300 },
-        { field: 'registered', headerName: 'Registered On', width: 300 },
-        { field: 'latitude', headerName: 'Latitude', width: 120 },
-        { field: 'longitude', headerName: 'Longitude', width: 120 },
+        { field: 'address', headerName: 'Answer Rate', width: 300 },
+        { field: 'mobile', headerName: 'Listings', width: 200 },
+        // { field: 'registered', headerName: 'Registered On', width: 300 },
+        // { field: 'latitude', headerName: 'Latitude', width: 120 },
+        // { field: 'longitude', headerName: 'Longitude', width: 120 },
         {
             field: 'action',
             headerName: 'Actions',
             width: 120,
             renderCell: (data: any) => {
                 return (
-                    <div>
-                        <IconButton
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            color="inherit"
-                        >
-                            <div>
-                                <MoreVertIcon
-                                    onClick={() => console.log('clicked')}
-                                />
-                            </div>
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            open={open}
-                            onClose={handleClose}
-                        >
-                            <MenuItem
-                                onClick={handleClose}
-                                className="flex items-center justify-center text-sm"
-                            >
-                                <EditIcon
-                                    className="mr-2 text-green-600"
-                                    fontSize={isMobile ? 'small' : 'medium'}
-                                />
-                                Edit Listing
-                            </MenuItem>
-                            <MenuItem
-                                onClick={handleClose}
-                                className="flex items-center justify-center text-sm"
-                            >
-                                <DeleteIcon
-                                    className="mr-2 text-red-600"
-                                    fontSize={isMobile ? 'small' : 'medium'}
-                                />
-                                Delete Listing
-                            </MenuItem>
-                        </Menu>
+                    <div className="w-full flex justify-around">
+                        <CreateIcon color="primary" />
+                        <DeleteIcon color="warning" />
                     </div>
                 );
             },
@@ -181,14 +138,12 @@ const Agency = () => {
                 </div>
             </div>
 
-            <div className="mx-2 self-center w-full p-4 md:w-full h-4/5 md:h-full rounded bg-lightGreenCard shadow">
-                <div className="flex"></div>
-
-                <div className="pt-2 h-5/6">
+            <div className=" self-center w-full p-2 md:w-full h-4/5 md:h-full ">
+                <div className=" h-full rounded bg-lightGreenCard shadow">
                     <DataGrid
                         columns={columns}
                         rows={dummyData}
-                        pageSize={15}
+                        pageSize={20}
                         checkboxSelection
                         components={{
                             Toolbar: CustomToolbar,

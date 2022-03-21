@@ -4,7 +4,7 @@ import MenuAppBar from '../Appbar/index';
 import styles from './navbar.module.css';
 import MyList from '../ListSideBar';
 
-export default function Navbar({ selectedLink }: any) {
+export default function Navbar({ selectedLink, clientUser }: any) {
     const [state, setState]: any = useState({ left: false });
 
     const toggleDrawer = (anchor: any, open: any) => (event: any) => {
@@ -24,6 +24,7 @@ export default function Navbar({ selectedLink }: any) {
             <MenuAppBar
                 className={styles.container}
                 toggleDrawer={toggleDrawer}
+                client={clientUser}
             />
             <Drawer
                 className={styles.drawer}
@@ -37,6 +38,7 @@ export default function Navbar({ selectedLink }: any) {
                     state={state}
                     toggleDrawer={toggleDrawer}
                     selectedLink={selectedLink}
+                    clientUser={clientUser}
                 />
             </Drawer>
         </React.Fragment>

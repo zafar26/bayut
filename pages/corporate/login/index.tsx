@@ -12,11 +12,11 @@ const CorporateLogin: NextPage = () => {
 
     let loginOptions = [
         {
-            value: '1',
+            value: '2',
             label: 'Individual',
         },
         {
-            value: '2',
+            value: '3',
             label: 'Company',
         },
     ];

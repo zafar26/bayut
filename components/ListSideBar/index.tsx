@@ -1,5 +1,5 @@
 import { makeStyles } from '@mui/styles';
-import { corporateLinks } from '../dynamicdata/links';
+import { clientLinks, corporateLinks } from '../dynamicdata/links';
 import Button from '@mui/material/Button';
 import clsx from 'clsx';
 import List from '@mui/material/List';
@@ -23,10 +23,14 @@ const MyList = ({
     state,
     toggleDrawer,
     selectedLink,
+    clientUser,
 }: any) => {
     const classes = useStyles();
     const [selectedItem, setSelectedItem]: any = useState(0);
-
+    let selectedLinkList: any = corporateLinks;
+    if (clientUser) {
+        selectedLinkList = clientLinks;
+    }
     return (
         <div
             className={clsx(classes.list, {
@@ -40,8 +44,9 @@ const MyList = ({
                 <div
                     style={{
                         height: '56px',
-                        background:
-                            'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
+                        background: clientUser
+                            ? '#630606'
+                            : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
 
                         display: 'flex',
                         justifyContent: 'space-around',
@@ -50,11 +55,11 @@ const MyList = ({
                 >
                     <ArrowBackIcon style={{ color: '#ffffff' }} />
                     <h6 style={{ fontSize: '1.25rem', color: '#ffffff' }}>
-                        Bayut
+                        Vlook
                     </h6>
                 </div>
                 <Divider />
-                {corporateLinks.map((link: any, index: any) => {
+                {selectedLinkList.map((link: any, index: any) => {
                     return selectedLink == link.label ? (
                         <ListItem
                             button

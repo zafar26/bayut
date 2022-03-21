@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme: any) => ({
     },
 }));
 
-export default function MenuAppBar({ toggleDrawer }: any) {
+export default function MenuAppBar({ toggleDrawer, client }: any) {
     const classes = useStyles();
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -60,8 +60,9 @@ export default function MenuAppBar({ toggleDrawer }: any) {
             position="fixed"
             color="transparent"
             style={{
-                background:
-                    'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
+                background: client
+                    ? ''
+                    : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
                 // borderRadius: '0px 0px 10px 10px',
             }}
         >
@@ -83,7 +84,7 @@ export default function MenuAppBar({ toggleDrawer }: any) {
                     className={classes.title}
                     style={{ color: '#FFFFFF' }}
                 >
-                    Bayut
+                    Vlook
                 </Typography>
 
                 {auth && (

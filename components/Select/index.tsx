@@ -5,7 +5,15 @@ import TuneIcon from '@mui/icons-material/Tune';
 
 export default function CustomSelect(props: any) {
     return (
-        <div className={props.withoutmargin ? ' w-full' : 'mt-4 w-full'}>
+        <div
+            className={
+                props.transparent
+                    ? 'w-full bg-whiteTransparent'
+                    : props.withoutMargin
+                    ? 'w-full'
+                    : 'mt-4 w-full'
+            }
+        >
             <FormControl
                 variant="outlined"
                 size="small"
@@ -16,7 +24,13 @@ export default function CustomSelect(props: any) {
                 </InputLabel>
 
                 <Select
-                    className={props.withoutmargin ? 'bg-white ' : 'bg-white'}
+                    className={
+                        props.tranparent
+                            ? 'bg-whiteTransparent'
+                            : props.withoutMargin
+                            ? 'bg-transparent'
+                            : 'bg-white'
+                    }
                     native
                     value={props.value}
                     onChange={props.onChange}
