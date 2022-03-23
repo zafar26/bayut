@@ -4,12 +4,7 @@ import MyInput from '../../../components/Input';
 import Navbar from '../../../components/Navbar/Navbar';
 import CustomSelect from '../../../components/Select';
 import MyStepper from '../../../components/Stepper';
-import {
-    loginOptions,
-    subCategories,
-    categories,
-    propertyType,
-} from './options';
+import JsonOptions from './options.json';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
@@ -25,19 +20,21 @@ const AddProperty = () => {
             value: category,
             setValue: setCategory,
             label: 'Category',
-            options: categories,
+            options: JsonOptions.categories,
         },
         {
             value: subCategory,
             setValue: setSubCategory,
             label: 'Sub Category',
-            options: subCategories.filter((d: any) => d.key == category),
+            options: JsonOptions.subCategories.filter(
+                (d: any) => d.key == category
+            ),
         },
         {
             value: purpose,
             setValue: setPurpose,
             label: 'Purpose',
-            options: propertyType,
+            options: JsonOptions.propertyType,
         },
     ];
     return (
@@ -145,7 +142,7 @@ const AddProperty = () => {
                                     setLoginAs(e.target.value)
                                 }
                                 label={'Completion Status'}
-                                options={loginOptions}
+                                options={JsonOptions.loginOptions}
                             />
                         </div>
                         <div className="mx-4 w-72 ">
@@ -155,7 +152,7 @@ const AddProperty = () => {
                                     setLoginAs(e.target.value)
                                 }
                                 label={'Ownership Status'}
-                                options={loginOptions}
+                                options={JsonOptions.loginOptions}
                             />
                         </div>
                     </div>
@@ -167,7 +164,7 @@ const AddProperty = () => {
                         value={loginAs}
                         onChange={(e: any) => setLoginAs(e.target.value)}
                         label={'Listing Owner'}
-                        options={loginOptions}
+                        options={JsonOptions.loginOptions}
                     />
                 </div>
                 <div className="m-4 flex items-end">

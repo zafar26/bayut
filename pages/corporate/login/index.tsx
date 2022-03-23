@@ -124,7 +124,7 @@ const CorporateLogin: NextPage = () => {
                         <Button
                             variant="contained"
                             color="success"
-                            onClick={() => onSubmit(db)}
+                            onClick={() => onSubmit()}
                         >
                             Login
                         </Button>
