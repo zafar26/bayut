@@ -2,14 +2,20 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MyInput from '../../../components/Input';
 import CustomSelect from '../../../components/Select';
 import Button from '@mui/material/Button';
+import axios from 'axios';
+import Snackbar from '@mui/material/Snackbar';
+// import CustomizedSnackbars from '../../../components/SnackBar';
+import { db } from '../../../db';
+import { useLiveQuery } from 'dexie-react-hooks';
+import { useRouter } from 'next/router';
 
 const CorporateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
-
+    const router = useRouter();
     let loginOptions = [
         {
             value: '2',
@@ -24,8 +30,58 @@ const CorporateLogin: NextPage = () => {
     const [password, setPassword] = useState<String>('');
 
     const [showPassword, setShowPassword] = useState<Boolean>(false);
+    const [snackbar, setSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
     const [loginAs, setLoginAs] = useState<String>('');
+    useEffect(() => {
+        db.table('user')
+            .toArray()
+            .then((user: any) => {
+                console.log(user, 'USER DATA');
+                if (user.length >= 1 && user[0].token) {
+                    router.push('/corporate/dashboard');
+                }
+            });
+    }, [db, router]);
 
+    async function onSubmit() {
+        try {
+            if (email == '' && password == '') return;
+            // console.log('CLicked', process.env.ServerURL);
+            const { data } = await axios.post(
+                'http://zaki786-001-site1.ftempurl.com/Users/signin',
+                {
+                    username: email,
+                    password: password,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            if (data) {
+                const id = await db.user.add(data.data);
+                router.push('/corporate/dashboard');
+            }
+
+            setTimeout(() => setSnackbar(false), 5000);
+            // console.log(data.data, 'DATA');
+            if (data.message) {
+                setErrorSnackbar(data.message);
+                setSnackbar(true);
+            } else {
+                setSnackbar(true);
+            }
+            return data;
+        } catch (error: any) {
+            if (axios.isAxiosError(error)) {
+                console.log(error);
+            } else {
+                console.log(error);
+            }
+        }
+    }
     return (
         <>
             <div className="w-screen h-screen ">
@@ -65,8 +121,12 @@ const CorporateLogin: NextPage = () => {
                         />
                     </div>
                     <div className="mt-4 bg-green-700 rounded">
-                        <Button variant="contained" color="success">
-                            <a href="/corporate/dashboard"> Login</a>
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={() => onSubmit(db)}
+                        >
+                            Login
                         </Button>
                     </div>
                     <div className="mt-4 flex flex-col">
@@ -79,6 +139,12 @@ const CorporateLogin: NextPage = () => {
                                 <a href="/corporate/signup"> Create Account</a>
                             </Button>
                         </div>
+                    </div>
+                    <div
+                        className="absolute top-1 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg"
+                        hidden={!snackbar}
+                    >
+                        {errorSnackbar ? errorSnackbar : 'Succes'}
                     </div>
                 </div>
             </div>

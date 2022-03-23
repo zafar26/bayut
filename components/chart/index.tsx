@@ -8,9 +8,9 @@ export default function MyChart({ data, title, width, height }: any) {
         },
         series: [
             {
-                type: 'pie',
+                type: 'spline',
                 allowPointSelect: true,
-                keys: ['name', 'y', 'selected', 'sliced'],
+                keys: ['name', 'y', 'x'],
                 data: [
                     ['Apples', 29.9, false],
                     ['Pears', 71.5, false],

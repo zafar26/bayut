@@ -144,7 +144,7 @@ const Agency = () => {
                         columns={columns}
                         rows={dummyData}
                         pageSize={20}
-                        checkboxSelection
+                        // checkboxSelection
                         components={{
                             Toolbar: CustomToolbar,
                         }}

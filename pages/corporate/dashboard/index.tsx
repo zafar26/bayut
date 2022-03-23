@@ -22,10 +22,14 @@ const AgentDashboard = () => {
             value: '5,778',
         },
     ];
-    let country: any = [
-        ['India', 55],
-        ['SriLanka', 10],
-        ['China', 35],
+    let perfomance: any = [
+        ['23/12/2022', 21, 300],
+        ['28/12/2022', 31, 400],
+        ['20/01/2022', 41, 500],
+        ['23/02/2022', 51, 600],
+        // ['India', 55, 20, 30, 40],
+        // ['SriLanka', 10],
+        // ['China', 35],
     ];
     // console.log(isTablet, 'ISTABLET');
     // console.log(isMobile, 'ISMobile');
@@ -64,24 +68,24 @@ const AgentDashboard = () => {
                     <div className="mt-4 w-full h-24 flex justify-center">
                         {selectedButton === 0 && (
                             <MyChart
-                                data={country}
-                                title="Country Wise "
+                                data={perfomance}
+                                title="Perfomance"
                                 width={isMobile ? 300 : isTablet ? 600 : 900}
                                 height={isMobile ? 300 : isTablet ? 350 : 400}
                             />
                         )}
                         {selectedButton === 1 && (
                             <MyChart
-                                data={country}
-                                title="Country Wise "
+                                data={perfomance}
+                                title="Perfomance"
                                 width={isMobile ? 300 : isTablet ? 600 : 900}
                                 height={isMobile ? 300 : isTablet ? 350 : 400}
                             />
                         )}
                         {selectedButton === 2 && (
                             <MyChart
-                                data={country}
-                                title="Country Wise "
+                                data={perfomance}
+                                title="Perfomance"
                                 width={isMobile ? 300 : isTablet ? 600 : 900}
                                 height={isMobile ? 300 : isTablet ? 350 : 400}
                             />

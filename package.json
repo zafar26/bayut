@@ -15,6 +15,7 @@
     "@mui/material": "^5.4.4",
     "@mui/styles": "^5.4.4",
     "@mui/x-data-grid": "^5.5.1",
+    "axios": "^0.26.1",
     "dexie": "^3.2.1",
     "dexie-react-hooks": "^1.1.1",
     "framer-motion": "^6.2.8",

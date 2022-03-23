@@ -70,12 +70,12 @@ const Home = () => {
                     objectFit="fill"
                 />
                 <Navbar selectedLink={'Home'} clientUser={true} />
-                <div className="relative top-14 md:top-16 p-2">
-                    <div className="text-white md:text-2xl text-md flex flex-col  ">
+                <div className="relative top-14 md:top-16 p-2 h-5/6 flex flex-col justify-center">
+                    <div className="text-white md:text-4xl text-xl flex flex-col  ">
                         <p className="flex justify-center font-bold">
                             Find Your Dream Home
                         </p>
-                        <p className="mt-4 text-white text-sm md:text-lg font-thin text-center">
+                        <p className="mt-4 md:w-3/5 self-center text-white text-sm md:text-lg font-thin text-center">
                             We are recognized for exceeding client expectations
                             and delivering great results through dedication,
                             ease of process, and extraordinary services to our
@@ -98,9 +98,9 @@ const Home = () => {
                         ))}
                     </div>
 
-                    <div className="mt-4 md:flex">
+                    <div className="mt-4 md:flex justify-center">
                         {searchField.map((d) => (
-                            <div className="m-1 md:w-48">
+                            <div className="m-1 md:w-48 border">
                                 <CustomSelect
                                     transparent={true}
                                     withoutMargin={true}
