@@ -42,10 +42,11 @@ const MyList = ({
         >
             <List style={{ paddingTop: 0 }}>
                 <div
+                    className="bg-amber-900"
                     style={{
                         height: '56px',
                         background: clientUser
-                            ? '#630606'
+                            ? ''
                             : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
 
                         display: 'flex',

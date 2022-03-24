@@ -225,6 +225,104 @@ const cleaningMaintenance = [
         setCheck: '',
     },
 ];
+const miscellaneous = [
+    {
+        label: 'View',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Floor',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Other Main Features',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Free Hold',
+        checked: '',
+        setCheck: '',
+    },
+    {
+        label: 'Pet Policy ID',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Others Room',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Atm Facility',
+        checked: '',
+        setCheck: '',
+    },
+    {
+        label: 'Other Facility',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Land Area',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Maids Room',
+        checked: '',
+        setChecked: '',
+    },
+    {
+        label: 'Number Of Bathrooms',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Number Of BedRooms',
+        value: '',
+        setValue: '',
+    },
+
+    {
+        label: 'Near By Schools',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Near By Hospital',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Number By ShoppingMall',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Distance From Airport',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Near By Public Transport',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Other Near By Places',
+        value: '',
+        setValue: '',
+    },
+    {
+        label: 'Hours Carcierge',
+        value: '',
+        setValue: '',
+    },
+];
 let ammenities = [
     {
         label: 'Recreation And Family',
@@ -264,8 +362,24 @@ let ammenities = [
         label: 'Cleaning and Maintenance',
         data: cleaningMaintenance,
     },
+    {
+        label: 'Miscellaneous',
+        data: miscellaneous,
+    },
 ];
 const Ammenities = () => {
+    console.log(ammenities, 'AMMENITIES');
+    // ammenities.map((d) => {
+    //     d.data.map((e) => {
+    //         let val: any =
+    //             e.label[0].toLowerCase() +
+    //             e.label.slice(1, e.label.length).replaceAll(' ', '');
+    //         let setval = 'set' + val;
+    //         const [val, setval] = useState('');
+    //         console.log(val, 'EACh');
+    //     });
+    // });
+
     return (
         <div>
             <Navbar selectedLink={'Add Property'} />
@@ -279,15 +393,16 @@ const Ammenities = () => {
                         <p className="mt-2 underline">{amenity.label}</p>
                         <div className="flex flex-wrap">
                             {amenity.data.map((d: any) => {
-                                const [val, setVal] = useState('');
                                 if (d.value == '') {
                                     return (
                                         <div className="mx-4 w-36 text-xs ">
                                             <MyInput
                                                 style={' text-xs'}
                                                 name={d.label}
-                                                value={val}
-                                                onChange={setVal}
+                                                value={d.value}
+                                                onChange={(e: any) =>
+                                                    (d.setValue = e)
+                                                }
                                             />
                                         </div>
                                     );
@@ -297,6 +412,11 @@ const Ammenities = () => {
                                             <FormControlLabel
                                                 control={<Checkbox />}
                                                 label={d.label}
+                                                checked={d.checked}
+                                                onChange={(e: any) =>
+                                                    (d.setChecked =
+                                                        e.target.value)
+                                                }
                                             />
                                         </FormGroup>
                                     );
