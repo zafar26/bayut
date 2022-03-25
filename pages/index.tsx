@@ -9,7 +9,11 @@ const Home = () => {
     const router = useRouter();
     const isMobile = useMediaQuery('(max-width:600px)');
     const [selectedType, setSelectedType] = useState(0);
-    const [loginAs, setLoginAs] = useState<String>('');
+    // const [loginAs, setLoginAs] = useState<String>('');
+    const [categories, setCategories] = useState<String>('');
+    const [city, setCity] = useState<String>('');
+    const [area, setArea] = useState<String>('');
+    const [room, setRoom] = useState<String>('');
 
     let rentalSaleButton = [
         {
@@ -35,26 +39,26 @@ const Home = () => {
     let searchField = [
         {
             label: 'Categories',
-            value: loginAs,
-            setValue: setLoginAs,
+            value: categories,
+            setValue: setCategories,
             options: loginOptions,
         },
         {
             label: 'City',
-            value: loginAs,
-            setValue: setLoginAs,
+            value: city,
+            setValue: setCity,
             options: loginOptions,
         },
         {
             label: 'Area',
-            value: loginAs,
-            setValue: setLoginAs,
+            value: area,
+            setValue: setArea,
             options: loginOptions,
         },
         {
             label: 'Room',
-            value: loginAs,
-            setValue: setLoginAs,
+            value: room,
+            setValue: setRoom,
             options: loginOptions,
         },
     ];

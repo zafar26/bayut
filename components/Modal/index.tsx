@@ -14,17 +14,17 @@ const useStyles = makeStyles((theme: any) => ({
         justifyContent: 'center',
     },
     paper: {
-        backgroundColor: theme.palette.background.paper,
+        // backgroundColor: theme.palette.background.paper,
         width: '300px',
         borderRadius: '10px',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
+        // boxShadow: theme.shadows[5],
+        // padding: theme.spacing(2, 4, 3),
     },
 }));
 
 export default function TransitionsModal(props: any) {
     const classes = useStyles();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(props.open ? true : false);
 
     const handleOpen = () => {
         setOpen(true);
@@ -36,7 +36,7 @@ export default function TransitionsModal(props: any) {
 
     return (
         <div>
-            <div style={{ float: 'right', position: 'relative', left: '20vw' }}>
+            {/* <div style={{ float: 'right', position: 'relative', left: '20vw' }}>
                 <button
                     type="button"
                     onClick={handleOpen}
@@ -48,7 +48,7 @@ export default function TransitionsModal(props: any) {
                 >
                     <FilterListIcon />
                 </button>
-            </div>
+            </div> */}
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"

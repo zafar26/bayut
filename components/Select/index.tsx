@@ -10,16 +10,21 @@ export default function CustomSelect(props: any) {
                 props.transparent
                     ? 'w-full bg-whiteTransparent'
                     : props.withoutMargin
-                    ? 'w-full'
-                    : 'mt-4 w-full'
+                    ? 'w-full '
+                    : 'mt-4 w-full ' + props.style
             }
         >
             <FormControl
                 variant="outlined"
                 size="small"
-                className="w-full flex"
+                className={'w-full flex ' + props.style}
             >
-                <InputLabel htmlFor="outlined-options-native-simple">
+                <InputLabel
+                    htmlFor="outlined-options-native-simple"
+                    className={
+                        props.transparent && props.withoutMargin && 'text-white'
+                    }
+                >
                     {props.label}
                 </InputLabel>
 
@@ -28,7 +33,7 @@ export default function CustomSelect(props: any) {
                         props.tranparent
                             ? 'bg-whiteTransparent'
                             : props.withoutMargin
-                            ? 'bg-transparent'
+                            ? 'bg-transparent text-white'
                             : 'bg-white'
                     }
                     native
