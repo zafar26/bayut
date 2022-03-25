@@ -70,38 +70,38 @@ const Properties = () => {
             setValue: setCategories,
         },
     ];
-    const transitionalModal = () => {
-        return (
-            <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                // className={classes.modal}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={open}>
-                    <div>
-                        <div>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={() => {
-                                    handleClose();
-                                }}
-                            >
-                                Priview
-                            </Button>
-                        </div>
-                    </div>
-                </Fade>
-            </Modal>
-        );
-    };
+    // const transitionalModal = () => {
+    //     return (
+    //         <Modal
+    //             aria-labelledby="transition-modal-title"
+    //             aria-describedby="transition-modal-description"
+    //             // className={classes.modal}
+    //             open={open}
+    //             onClose={handleClose}
+    //             closeAfterTransition
+    //             BackdropComponent={Backdrop}
+    //             BackdropProps={{
+    //                 timeout: 500,
+    //             }}
+    //         >
+    //             <Fade in={open}>
+    //                 <div>
+    //                     <div>
+    //                         <Button
+    //                             variant="contained"
+    //                             color="primary"
+    //                             onClick={() => {
+    //                                 handleClose();
+    //                             }}
+    //                         >
+    //                             Priview
+    //                         </Button>
+    //                     </div>
+    //                 </div>
+    //             </Fade>
+    //         </Modal>
+    //     );
+    // };
     return (
         <div>
             <div className="w-screen h-screen bg-amber-900">
@@ -213,7 +213,7 @@ const Properties = () => {
                                                     className="p-1  md:py-1 md:px-2 bg-lime-600	text-white flex rounded shadow flex items-center"
                                                     onClick={() => {
                                                         setModal(true);
-                                                        transitionalModal();
+                                                        // transitionalModal();
                                                     }}
                                                 >
                                                     <CallIcon
