@@ -70,60 +70,31 @@ const Properties = () => {
             setValue: setCategories,
         },
     ];
-    // const transitionalModal = () => {
-    //     return (
-    //         <Modal
-    //             aria-labelledby="transition-modal-title"
-    //             aria-describedby="transition-modal-description"
-    //             // className={classes.modal}
-    //             open={open}
-    //             onClose={handleClose}
-    //             closeAfterTransition
-    //             BackdropComponent={Backdrop}
-    //             BackdropProps={{
-    //                 timeout: 500,
-    //             }}
-    //         >
-    //             <Fade in={open}>
-    //                 <div>
-    //                     <div>
-    //                         <Button
-    //                             variant="contained"
-    //                             color="primary"
-    //                             onClick={() => {
-    //                                 handleClose();
-    //                             }}
-    //                         >
-    //                             Priview
-    //                         </Button>
-    //                     </div>
-    //                 </div>
-    //             </Fade>
-    //         </Modal>
-    //     );
-    // };
     return (
         <div>
-            <div className="w-screen h-screen bg-amber-900">
-                {isMobile && (
+            <div className=" bg-[#464E2E]">
+                {!isMobile && (
                     <div className="w-full ">
                         <Navbar selectedLink={'Property'} clientUser={true} />
                     </div>
                 )}
-                <div className="pt-16 md:pt-0 w-full h-full ">
-                    {!isMobile && (
-                        <div className="p-2  h-14 bg-transparent shadow-xl flex justify-between items-center text-white ">
-                            Vlook
-                            <div className="flex">
-                                {clientLinks.map((d: any) => (
-                                    <div className=" flex w-48 items-end hover:bg-green-50 hover:text-green-800 p-4 rounded">
-                                        {d.icon()}
-                                        <div className="ml-2 ">{d.label}</div>
-                                    </div>
-                                ))}
-                            </div>
+                {isMobile == null && (
+                    <div className="p-2  h-14 bg-transparent shadow-xl flex justify-between items-center text-white ">
+                        Vlook
+                        <div className="flex">
+                            {clientLinks.map((d: any) => (
+                                <a
+                                    href={d.path}
+                                    className=" flex w-48 items-end hover:bg-green-50 hover:text-green-800 p-4 rounded"
+                                >
+                                    {d.icon()}
+                                    <div className="ml-2 ">{d.label}</div>
+                                </a>
+                            ))}
                         </div>
-                    )}
+                    </div>
+                )}
+                <div className="pt-16  md:pt-20 w-screen h-screen ">
                     <div className="md:flex h-full 	">
                         <div className=" p-2 w-full md:w-1/4  md:h-full ">
                             <div className=" w-full md:h-5/6 bg-glassEffect shadow rounded ">
@@ -208,29 +179,17 @@ const Properties = () => {
                                                     / Furnished
                                                 </p>
                                             </div>
-                                            <div className="flex ">
-                                                <button
-                                                    className="p-1  md:py-1 md:px-2 bg-lime-600	text-white flex rounded shadow flex items-center"
-                                                    onClick={() => {
-                                                        setModal(true);
-                                                        // transitionalModal();
-                                                    }}
-                                                >
-                                                    <CallIcon
-                                                        fontSize={'small'}
+                                            <div className="w-full ">
+                                                {true && (
+                                                    <TransitionsModal
+                                                        phoneNo={
+                                                            '+918686842949'
+                                                        }
+                                                        email={
+                                                            'zafar@gmail.com'
+                                                        }
                                                     />
-                                                    <p className="md:ml-2 text-sm md:text-base">
-                                                        Call
-                                                    </p>
-                                                </button>
-                                                <button className="p-1 ml-4 md:py-1 md:px-2 bg-lime-600	text-white flex rounded shadow flex items-center">
-                                                    <EmailIcon
-                                                        fontSize={'small'}
-                                                    />
-                                                    <p className="md:ml-2 text-sm md:text-base">
-                                                        Email
-                                                    </p>
-                                                </button>
+                                                )}
                                             </div>
                                         </div>
                                     </div>

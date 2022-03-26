@@ -4,7 +4,7 @@ import MyInput from '../../../components/Input';
 import Navbar from '../../../components/Navbar/Navbar';
 import CustomSelect from '../../../components/Select';
 import MyStepper from '../../../components/Stepper';
-import JsonOptions from './options.json';
+import JsonOptions from '../../options.json';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 

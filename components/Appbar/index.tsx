@@ -9,6 +9,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 // import { motion, useTransform, useViewportScroll } from 'framer-motion';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import Button from '@mui/material/Button';
+import MyInput from '../Input';
 
 const useStyles = makeStyles((theme: any) => ({
     root: {
@@ -30,10 +32,15 @@ const useStyles = makeStyles((theme: any) => ({
     },
 }));
 
-export default function MenuAppBar({ toggleDrawer, client }: any) {
+export default function MenuAppBar({ toggleDrawer, client, login }: any) {
     const classes = useStyles();
     const [auth, setAuth] = React.useState(true);
+    const [email, setEmail] = useState<String>('');
+    const [password, setPassword] = useState<String>('');
+
+    const [showPassword, setShowPassword] = useState<Boolean>(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
+
     const open = Boolean(anchorEl);
 
     const handleMenu = (event: any) => {
@@ -103,24 +110,89 @@ export default function MenuAppBar({ toggleDrawer, client }: any) {
                                 <AccountCircle fontSize="large" />
                             </div>
                         </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            keepMounted
-                            transformOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                            open={open}
-                            onClose={handleClose}
-                        >
-                            <MenuItem onClick={handleClose}>Settings</MenuItem>
-                            <MenuItem onClick={handleClose}>Log out</MenuItem>
-                        </Menu>
+                        {login ? (
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={open}
+                                onClose={handleClose}
+                            >
+                                <MenuItem onClick={handleClose}>
+                                    Settings
+                                </MenuItem>
+                                <MenuItem onClick={handleClose}>
+                                    Log out
+                                </MenuItem>
+                            </Menu>
+                        ) : (
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                keepMounted
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={open}
+                                onClose={handleClose}
+                                className="p-0"
+                            >
+                                <div className=" p-4 w-full h-full bg-[#464E2E] ">
+                                    {/* <MenuItem onClick={handleClose}>
+                                        Settings
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        Log out
+                                    </MenuItem> */}
+                                    <div className="md:w-72 ">
+                                        <MyInput
+                                            name="Email"
+                                            value={email}
+                                            onChange={setEmail}
+                                        />
+                                        <MyInput
+                                            name="Password"
+                                            type="password"
+                                            value={password}
+                                            onChange={setPassword}
+                                            showPassword={showPassword}
+                                            setShowPassword={setShowPassword}
+                                        />
+                                    </div>
+                                    <div className="mt-4 w-full bg-green-700 rounded">
+                                        <Button
+                                            fullWidth
+                                            variant="contained"
+                                            color="success"
+                                            onClick={() =>
+                                                console.log('Submited')
+                                            }
+                                        >
+                                            Login
+                                        </Button>
+                                    </div>
+                                    <p className="pt-4 text-white text-center ">
+                                        Are You New To vlook properties
+                                    </p>
+                                    <div className="mt-4 border-white border text-white p-2 text-center hover:bg-gray-800">
+                                        <a>Become a Free Member</a>
+                                    </div>
+                                </div>
+                            </Menu>
+                        )}
                     </div>
                 )}
             </Toolbar>

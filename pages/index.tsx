@@ -4,6 +4,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Navbar from '../components/Navbar/Navbar';
 import { useState } from 'react';
 import CustomSelect from '../components/Select';
+import JsonOptions from './options.json';
 
 const Home = () => {
     const router = useRouter();
@@ -36,30 +37,50 @@ const Home = () => {
             label: 'Company',
         },
     ];
+    let cityOptions = [
+        {
+            value: '2',
+            label: 'Hyderabad',
+        },
+        {
+            value: '3',
+            label: 'Bangalore',
+        },
+    ];
+    let roomOptions = [
+        {
+            value: '2',
+            label: '2',
+        },
+        {
+            value: '3',
+            label: '3',
+        },
+    ];
     let searchField = [
         {
             label: 'Categories',
             value: categories,
             setValue: setCategories,
-            options: loginOptions,
+            options: JsonOptions.categories,
         },
         {
             label: 'City',
             value: city,
             setValue: setCity,
-            options: loginOptions,
+            options: cityOptions,
         },
         {
             label: 'Area',
             value: area,
             setValue: setArea,
-            options: loginOptions,
+            options: cityOptions,
         },
         {
             label: 'Room',
             value: room,
             setValue: setRoom,
-            options: loginOptions,
+            options: roomOptions,
         },
     ];
     return (
@@ -73,7 +94,7 @@ const Home = () => {
                     layout="fill"
                     objectFit="fill"
                 />
-                <Navbar selectedLink={'Home'} clientUser={true} />
+                <Navbar selectedLink={'Home'} clientUser={true} login={false} />
                 <div className="relative top-14 md:top-16 p-2 h-5/6 flex flex-col justify-center">
                     <div className="text-white md:text-4xl text-xl flex flex-col  ">
                         <p className="flex justify-center font-bold">

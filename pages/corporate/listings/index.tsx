@@ -50,7 +50,7 @@ const Listings = () => {
             headerName: 'ID',
             width: 120,
         },
-        { field: 'guid', headerName: 'GU_ID', width: 200 },
+        { field: 'guid', headerName: 'GU_ID', width: 200, editable: true },
         { field: 'isActive', headerName: ' Active', width: 100 },
         { field: 'balance', headerName: 'Balance', width: 120 },
         { field: 'firstName', headerName: 'First name', width: 130 },
@@ -213,7 +213,8 @@ const Listings = () => {
                         </a>
                     </div>
                 </div>
-                <div className="p-2 mt-4 md:mt-4 w-full h-5/6  bg-lightGreenCard rounded shadow">
+                <div className="p-2 mt-4 md:mt-4 w-full h-full  bg-lightGreenCard rounded shadow">
+                    <p className="text-center">Manage Listings</p>
                     <div className="flex justify-between items-center px-2  bg-lightGreenCard rounded shadow">
                         Filters
                         <div className="px-1 py-2 w-4/5 md:w-3/5 flex overflow-x-auto">
@@ -243,16 +244,18 @@ const Listings = () => {
                     </div>
                     <div className="pt-2 h-5/6">
                         <DataGrid
+                            editMode="row"
                             columns={columns}
                             rows={dummyData}
                             pageSize={15}
-                            checkboxSelection
+                            // checkboxSelection
                             components={{
                                 Toolbar: CustomToolbar,
                             }}
                             // showToolbar
                             density={isMobile ? 'compact' : 'standard'}
-                            disableSelectionOnClick
+                            // disableSelectionOnClick
+                            // experimentalFeatures={{ newEditingApi: true }}
                         />
                     </div>
                 </div>

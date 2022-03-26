@@ -12,6 +12,7 @@ import Snackbar from '@mui/material/Snackbar';
 import { db } from '../../../db';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useRouter } from 'next/router';
+import { Alert } from '@mui/material';
 
 const CorporateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -46,7 +47,10 @@ const CorporateLogin: NextPage = () => {
 
     async function onSubmit() {
         try {
-            if (email == '' && password == '') return;
+            if (email == '' && password == '') {
+                alert('Please Enter Email and Password');
+                return;
+            }
             // console.log('CLicked', process.env.ServerURL);
             const { data } = await axios.post(
                 'http://zaki786-001-site1.ftempurl.com/Users/signin',
@@ -61,7 +65,9 @@ const CorporateLogin: NextPage = () => {
                 }
             );
             if (data) {
-                const id = await db.user.add(data.data);
+                // alert(data, 'Data');
+                // console.log('DATA', data.responseData);
+                const id = await db.user.add(data.responseData.data);
                 router.push('/corporate/dashboard');
             }
 
@@ -93,7 +99,7 @@ const CorporateLogin: NextPage = () => {
                     layout="fill"
                     objectFit="fill"
                 />
-                <div className="p-4 md:p-12 bg-glassEffect w-4/5 md:w-1/3 h-3/5 md:h-4/5 top-20 left-9 md:left-1/3  flex flex-col justify-center items-center relative rounded shadow-lg shadow-black">
+                <div className="p-4 md:p-12 bg-glassEffect w-4/5 md:w-1/3 h-4/5 md:h-5/6 top-20 left-9 md:left-1/3  flex flex-col justify-center items-center relative rounded shadow-lg shadow-black">
                     <div className="flex flex-col justify-center items-center h-32 text-2xl text-primary">
                         <AccountCircleIcon fontSize="large" />
                         <h1>Corporate Login</h1>

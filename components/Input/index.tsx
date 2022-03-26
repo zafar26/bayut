@@ -18,7 +18,7 @@ export default function MyInput(props: any) {
                         className="w-full"
                     >
                         <InputLabel htmlFor="outlined-adornment-password">
-                            Password
+                            {props.name}
                         </InputLabel>
                         <OutlinedInput
                             size="small"
@@ -56,7 +56,7 @@ export default function MyInput(props: any) {
                     </FormControl>
                 </>
             ) : props.textdesc ? (
-                <FormControl className="w-full">
+                <FormControl className="w-full ">
                     <TextField
                         id="outlined-multiline-static"
                         multiline
@@ -71,7 +71,7 @@ export default function MyInput(props: any) {
                     />
                 </FormControl>
             ) : props.disabled ? (
-                <FormControl disabled className="w-full">
+                <FormControl disabled className="w-full ">
                     <TextField
                         disabled
                         className=" bg-gray-100"
@@ -84,7 +84,7 @@ export default function MyInput(props: any) {
                     />
                 </FormControl>
             ) : props.style ? (
-                <FormControl className="w-full p-0 m-0 ">
+                <FormControl className="w-full p-0 m-0  ">
                     <TextField
                         className={props.style}
                         key={props.name}
@@ -96,9 +96,9 @@ export default function MyInput(props: any) {
                     />
                 </FormControl>
             ) : (
-                <FormControl className="w-full">
+                <FormControl className="w-full ">
                     <TextField
-                        className=" bg-white"
+                        className=" bg-white rounded"
                         key={props.name}
                         label={props.name}
                         size="small"

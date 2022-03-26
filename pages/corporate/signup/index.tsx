@@ -11,7 +11,7 @@ import PhoneNoInput from '../../../components/PhoneInput';
 const CorporateCreateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
 
-    let loginOptions = [
+    let signupOptions = [
         {
             value: '1',
             label: 'Individual',
@@ -22,10 +22,12 @@ const CorporateCreateLogin: NextPage = () => {
         },
     ];
     const [email, setEmail] = useState<String>('');
+    const [name, setName] = useState<String>('');
     const [password, setPassword] = useState<String>('');
+    const [confirmPassword, setConfirmPassword] = useState<String>('');
 
     const [showPassword, setShowPassword] = useState<Boolean>(false);
-    const [loginAs, setLoginAs] = useState<String>('');
+    const [signupAs, setSignupAs] = useState<String>('');
 
     return (
         <>
@@ -38,13 +40,14 @@ const CorporateCreateLogin: NextPage = () => {
                     layout="fill"
                     objectFit="fill"
                 />
-                <div className="p-4 md:p-12 bg-glassEffect w-4/5 md:w-1/3 h-3/5 md:h-4/5 top-20 left-9 md:left-1/3  flex flex-col justify-center items-center relative rounded shadow-lg shadow-black">
+                <div className="p-4  bg-glassEffect w-4/5 md:w-1/3 h-full md:h-5/6 top-0 md:top-20 left-9 md:left-1/3  flex flex-col justify-center items-center relative rounded shadow-lg shadow-black">
                     <div className="flex flex-col justify-center items-center h-32 text-2xl text-primary">
                         <AccountCircleIcon fontSize="large" />
                         <h1> Create Account</h1>
                     </div>
 
-                    <div className="md:w-72 ">
+                    <div className="md:w-72 h-full ">
+                        <MyInput name="Name" value={name} onChange={setName} />
                         <MyInput
                             name="Email"
                             value={email}
@@ -58,11 +61,19 @@ const CorporateCreateLogin: NextPage = () => {
                             showPassword={showPassword}
                             setShowPassword={setShowPassword}
                         />
+                        <MyInput
+                            name="Confirm Password"
+                            type="password"
+                            value={confirmPassword}
+                            onChange={setConfirmPassword}
+                            showPassword={showPassword}
+                            setShowPassword={setShowPassword}
+                        />
                         <CustomSelect
-                            value={loginAs}
-                            onChange={(e: any) => setLoginAs(e.target.value)}
+                            value={signupAs}
+                            onChange={(e: any) => setSignupAs(e.target.value)}
                             label={'Sign Up As'}
-                            options={loginOptions}
+                            options={signupOptions}
                         />
                         <div className="mt-4 ">
                             <PhoneNoInput />

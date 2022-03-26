@@ -1,58 +1,59 @@
-import styles from './modal.module.css';
-import { makeStyles } from '@mui/styles';
-import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import { useState } from 'react';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { useState } from 'react';
+import CallIcon from '@mui/icons-material/Call';
+import EmailIcon from '@mui/icons-material/Email';
 
-const useStyles = makeStyles((theme: any) => ({
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    paper: {
-        // backgroundColor: theme.palette.background.paper,
-        width: '300px',
-        borderRadius: '10px',
-        // boxShadow: theme.shadows[5],
-        // padding: theme.spacing(2, 4, 3),
-    },
-}));
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};
 
 export default function TransitionsModal(props: any) {
-    const classes = useStyles();
-    const [open, setOpen] = useState(props.open ? true : false);
-
-    const handleOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const [open, setOpen] = useState(false);
+    const [selectedButton, setSelectedButton] = useState(0);
+    // const handleOpen = (c:any) =>
+    const handleClose = () => setOpen(false);
 
     return (
         <div>
-            {/* <div style={{ float: 'right', position: 'relative', left: '20vw' }}>
-                <button
-                    type="button"
-                    onClick={handleOpen}
-                    style={{
-                        borderRadius: '20px',
-                        padding: '5px',
-                        border: 'none',
+            <div className="flex ">
+                <Button
+                    onClick={() => {
+                        setSelectedButton(1);
+                        setOpen(true);
                     }}
+                    className="p-1  md:py-1 md:px-2 bg-lime-600	hover:text-lime-600  text-white flex rounded shadow flex items-center"
                 >
-                    <FilterListIcon />
-                </button>
-            </div> */}
+                    <CallIcon fontSize={'small'} />
+                    <p className="md:ml-1 text-sm md:text-base">Call</p>
+                </Button>
+                <Button
+                    onClick={() => {
+                        setSelectedButton(2);
+                        setOpen(true);
+                    }}
+                    className="p-1 ml-1  md:py-1 md:px-2 bg-lime-600 hover:text-lime-600  text-white flex rounded shadow flex items-center"
+                >
+                    <EmailIcon fontSize={'small'} />
+                    <p className="md:ml-1 text-sm md:text-base">Email</p>
+                </Button>
+            </div>
+
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                className={classes.modal}
                 open={open}
                 onClose={handleClose}
                 closeAfterTransition
@@ -62,32 +63,33 @@ export default function TransitionsModal(props: any) {
                 }}
             >
                 <Fade in={open}>
-                    <div className={classes.paper}>
-                        {props.component()}
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                            }}
+                    <Box sx={style}>
+                        <Typography
+                            id="transition-modal-title"
+                            variant="h6"
+                            component="h2"
                         >
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={() => {
-                                    handleClose();
-                                    props.onSubmit();
-                                }}
+                            {selectedButton == 1 ? 'Phone NO' : 'Email'}
+                        </Typography>
+                        <Typography
+                            id="transition-modal-description"
+                            sx={{ mt: 2 }}
+                        >
+                            <a
+                                href={
+                                    selectedButton == 1
+                                        ? `tel:${props.phoneNo}`
+                                        : `mailto: ${props.email}`
+                                }
                             >
-                                Priview
-                            </Button>
-                        </div>
-                    </div>
+                                {selectedButton == 1
+                                    ? props.phoneNo
+                                    : props.email}
+                            </a>
+                        </Typography>
+                    </Box>
                 </Fade>
             </Modal>
         </div>
     );
 }
-
-TransitionsModal.getInitialProps = async (props: any) => {
-    return props;
-};

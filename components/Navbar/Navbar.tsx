@@ -4,7 +4,7 @@ import MenuAppBar from '../Appbar/index';
 import styles from './navbar.module.css';
 import MyList from '../ListSideBar';
 
-export default function Navbar({ selectedLink, clientUser }: any) {
+export default function Navbar({ selectedLink, clientUser, login }: any) {
     const [state, setState]: any = useState({ left: false });
 
     const toggleDrawer = (anchor: any, open: any) => (event: any) => {
@@ -25,6 +25,7 @@ export default function Navbar({ selectedLink, clientUser }: any) {
                 className={styles.container}
                 toggleDrawer={toggleDrawer}
                 client={clientUser}
+                login={login}
             />
             <Drawer
                 className={styles.drawer}

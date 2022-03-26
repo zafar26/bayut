@@ -368,17 +368,7 @@ let ammenities = [
     },
 ];
 const Ammenities = () => {
-    console.log(ammenities, 'AMMENITIES');
-    // ammenities.map((d) => {
-    //     d.data.map((e) => {
-    //         let val: any =
-    //             e.label[0].toLowerCase() +
-    //             e.label.slice(1, e.label.length).replaceAll(' ', '');
-    //         let setval = 'set' + val;
-    //         const [val, setval] = useState('');
-    //         console.log(val, 'EACh');
-    //     });
-    // });
+    // console.log(ammenities, 'AMMENITIES');
 
     return (
         <div>
