@@ -4,8 +4,8 @@ import { useState } from 'react';
 import es from 'react-phone-input-2/lang/es.json';
 import ar from 'react-phone-input-2/lang/ar.json';
 
-const PhoneNoInput = () => {
-    const [phone, setPhone] = useState('');
+const PhoneNoInput = (props: any) => {
+    // const [phone, setPhone] = useState('');
     return (
         <div className="w-full">
             <PhoneInput
@@ -13,8 +13,8 @@ const PhoneNoInput = () => {
                 inputStyle={{ width: '100%' }}
                 localization={ar}
                 country={'us'}
-                value={phone}
-                onChange={(inputNo: any) => setPhone(inputNo)}
+                value={props.phoneNo}
+                onChange={(inputNo: any) => props.setPhoneNo(inputNo)}
             />
         </div>
     );

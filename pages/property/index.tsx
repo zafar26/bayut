@@ -5,20 +5,32 @@ import Image from 'next/image';
 import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
 import CustomSelect from '../../components/Select';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MyInput from '../../components/Input';
 import TransitionsModal from '../../components/Modal';
 import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
+import { db } from '../../db';
 
 const Properties = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [categories, setCategories] = useState<String>('');
     const [modal, setModal] = useState<Boolean>(false);
     const [open, setOpen] = useState<Boolean>(modal);
+    const [auth, setAuth] = useState(false);
 
+    useEffect(() => {
+        db.table('user')
+            .toArray()
+            .then((data: any) => {
+                console.log(data, 'data DATA');
+                if (data.length >= 1 && data[0].token) {
+                    setAuth(true);
+                }
+            });
+    }, [db]);
     const handleOpen = () => {
         setOpen(true);
     };
@@ -73,11 +85,11 @@ const Properties = () => {
     return (
         <div>
             <div className=" bg-[#464E2E]">
-                {!isMobile && (
+                {
                     <div className="w-full ">
                         <Navbar selectedLink={'Property'} clientUser={true} />
                     </div>
-                )}
+                }
                 {isMobile == null && (
                     <div className="p-2  h-14 bg-transparent shadow-xl flex justify-between items-center text-white ">
                         Vlook
@@ -98,7 +110,7 @@ const Properties = () => {
                     <div className="md:flex h-full 	">
                         <div className=" p-2 w-full md:w-1/4  md:h-full ">
                             <div className=" w-full md:h-5/6 bg-glassEffect shadow rounded ">
-                                <p className="md:text-base text-xs px-2  ">
+                                <p className="md:text-base text-xs px-2 font-thin ">
                                     Filters:
                                 </p>
                                 <div className="w-full flex md:flex-col overflow-x-auto items-center">
@@ -180,7 +192,7 @@ const Properties = () => {
                                                 </p>
                                             </div>
                                             <div className="w-full ">
-                                                {true && (
+                                                {auth && (
                                                     <TransitionsModal
                                                         phoneNo={
                                                             '+918686842949'

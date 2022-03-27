@@ -11,7 +11,7 @@ export default function CustomSelect(props: any) {
                     ? 'w-full bg-whiteTransparent'
                     : props.withoutMargin
                     ? 'w-full '
-                    : 'mt-4 w-full ' + props.style
+                    : 'mt-3  w-full ' + props.style
             }
         >
             <FormControl
@@ -22,7 +22,8 @@ export default function CustomSelect(props: any) {
                 <InputLabel
                     htmlFor="outlined-options-native-simple"
                     className={
-                        props.transparent && props.withoutMargin && 'text-white'
+                        ''
+                        // props.transparent && props.withoutMargin && 'text-white'
                     }
                 >
                     {props.label}
@@ -33,7 +34,7 @@ export default function CustomSelect(props: any) {
                         props.tranparent
                             ? 'bg-whiteTransparent'
                             : props.withoutMargin
-                            ? 'bg-transparent text-white'
+                            ? 'bg-transparent text-green-800'
                             : 'bg-white'
                     }
                     native
@@ -45,7 +46,7 @@ export default function CustomSelect(props: any) {
                     }}
                 >
                     <option aria-label="None" value="" />
-                    {props.options.map((item: any) => (
+                    {props.options?.map((item: any) => (
                         <option value={item.value} className="text-[#464E2E]">
                             {item.label}
                         </option>

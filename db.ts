@@ -13,11 +13,13 @@ export class MySubClassedDexie extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
   user!: Table<User>; 
+  corporate!: Table<User>; 
 
   constructor() {
     super('myDatabase');
     this.version(1).stores({
-      user: 'userID, name, username, token,  userRoleID ' // Primary key and indexed props
+      user: 'userID, name, username, token,  userRoleID ' ,// Primary key and indexed props
+      corporate: 'userID, name, username, token,  userRoleID ' // Primary key and indexed props
     });
   }
 }

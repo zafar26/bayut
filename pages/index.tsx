@@ -94,7 +94,7 @@ const Home = () => {
                     layout="fill"
                     objectFit="fill"
                 />
-                <Navbar selectedLink={'Home'} clientUser={true} login={false} />
+                <Navbar selectedLink={'Home'} clientUser={true} />
                 <div className="relative top-14 md:top-16 p-2 h-5/6 flex flex-col justify-center">
                     <div className="text-white md:text-4xl text-xl flex flex-col  ">
                         <p className="flex justify-center font-bold">

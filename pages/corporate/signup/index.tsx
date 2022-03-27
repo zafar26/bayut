@@ -7,17 +7,20 @@ import MyInput from '../../../components/Input';
 import CustomSelect from '../../../components/Select';
 import Button from '@mui/material/Button';
 import PhoneNoInput from '../../../components/PhoneInput';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { onCorporateSignUp } from '../../../helpers/apis/auth';
 
 const CorporateCreateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
 
     let signupOptions = [
         {
-            value: '1',
+            value: '2',
             label: 'Individual',
         },
         {
-            value: '2',
+            value: '3',
             label: 'Company',
         },
     ];
@@ -27,8 +30,49 @@ const CorporateCreateLogin: NextPage = () => {
     const [confirmPassword, setConfirmPassword] = useState<String>('');
 
     const [showPassword, setShowPassword] = useState<Boolean>(false);
+    const [showConfirmPassword, setConfirmShowPassword] =
+        useState<Boolean>(false);
     const [signupAs, setSignupAs] = useState<String>('');
+    const [phoneNo, setPhoneNO] = useState<String>('');
 
+    const [snackbar, setSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
+    const router = useRouter();
+
+    function onSubmit() {
+        let body = {
+            name: name,
+            username: email,
+            password: password,
+            mobileNo: '+' + phoneNo,
+            userRoleID: signupAs,
+        };
+
+        onCorporateSignUp(body).then((r: any) => {
+            console.log(r, 'RESULTSS');
+            if (r.error) {
+                setSnackbar(true);
+
+                setErrorSnackbar(r.message);
+                return;
+            }
+            if (r.data.statusCode == 200) {
+                setSnackbar(true);
+                if (r.localDb) {
+                    setTimeout(
+                        () => router.push(`/corporate/login?email=${email}`),
+                        5000
+                    );
+                }
+            } else {
+                if (r.data.errorData.message) {
+                    setErrorSnackbar(r.data.errorData.message);
+                    setSnackbar(true);
+                }
+            }
+            return;
+        });
+    }
     return (
         <>
             <div className="w-screen h-screen ">
@@ -66,8 +110,8 @@ const CorporateCreateLogin: NextPage = () => {
                             type="password"
                             value={confirmPassword}
                             onChange={setConfirmPassword}
-                            showPassword={showPassword}
-                            setShowPassword={setShowPassword}
+                            showPassword={showConfirmPassword}
+                            setShowPassword={setConfirmShowPassword}
                         />
                         <CustomSelect
                             value={signupAs}
@@ -76,12 +120,19 @@ const CorporateCreateLogin: NextPage = () => {
                             options={signupOptions}
                         />
                         <div className="mt-4 ">
-                            <PhoneNoInput />
+                            <PhoneNoInput
+                                phoneNo={phoneNo}
+                                setPhoneNo={setPhoneNO}
+                            />
                         </div>
                     </div>
                     <div className="mt-4 bg-green-700 rounded">
-                        <Button variant="contained" color="success">
-                            <a href="/corporate/dashboard"> Create Account</a>
+                        <Button
+                            variant="contained"
+                            color="success"
+                            onClick={() => onSubmit()}
+                        >
+                            Create Account
                         </Button>
                     </div>
 

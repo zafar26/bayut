@@ -5,11 +5,14 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
+import UploadAndDisplayImage from '../../../components/Upload';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
 const UploadPage = () => {
     const [value, setValue] = useState(0);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [imagebase64, setImageBase64] = useState(null);
 
     return (
         <div>
@@ -43,8 +46,19 @@ const UploadPage = () => {
                         {value == 0 && (
                             <div className="mt-4 bg-green-100 flex p-8 flex-col items-center">
                                 <p className="">
-                                    To Upload Iamge, Drag Files Here Or Click
-                                    Browse
+                                    {/* To Upload Iamge, Drag Files Here Or Click
+                                    Browse */}
+                                    <UploadAndDisplayImage
+                                        selectedImage={selectedImage}
+                                        setSelectedImage={setSelectedImage}
+                                        imagebase64={imagebase64}
+                                        setImageBase64={setImageBase64}
+                                    />
+                                    {/* {console.log(
+                                        selectedImage,
+                                        imagebase64,
+                                        'SsetSelectedImage'
+                                    )} */}
                                 </p>
                                 <p className="text-sm font-thin">
                                     Allowed Follwed Extension .jpg / .png

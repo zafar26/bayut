@@ -23,11 +23,11 @@ export default function ToggleSwitch({
             className="switch"
             style={{
                 width: width,
-                height: isMobile ? '10px' : '10px',
+                height: isMobile ? '12px' : '30px',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                padding: '10px 10px ',
+                padding: '14px 14px ',
             }}
             data-isOn={isOn}
             onClick={toggleSwitch}

@@ -21,11 +21,16 @@ import EditIcon from '@mui/icons-material/Edit';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from '@mui/material/Button';
+import MyInput from '../../../components/Input';
+import JsonOptions from '../../options.json';
+import CustomSelect from '../../../components/Select';
 
 const Listings = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
 
     const [anchorEl, setAnchorEl] = useState(null);
+    const [categories, setCategories] = useState('');
+    const [subCategories, setSubCategories] = useState('');
     const open = Boolean(anchorEl);
 
     const handleMenu = (event: any) => {
@@ -47,24 +52,25 @@ const Listings = () => {
     const columns = [
         {
             field: 'id',
-            headerName: 'ID',
+            headerName: 'ref',
             width: 120,
         },
-        { field: 'guid', headerName: 'GU_ID', width: 200, editable: true },
-        { field: 'isActive', headerName: ' Active', width: 100 },
-        { field: 'balance', headerName: 'Balance', width: 120 },
-        { field: 'firstName', headerName: 'First name', width: 130 },
-        { field: 'lastName', headerName: 'Last name', width: 120 },
-        { field: 'age', headerName: 'Age', width: 90 },
-        { field: 'eyeColor', headerName: 'Eye Color', width: 120 },
-        { field: 'company', headerName: 'Company', width: 120 },
-        { field: 'email', headerName: 'Email', width: 200 },
-        { field: 'phone', headerName: 'Phone No', width: 200 },
-        { field: 'mobile', headerName: 'Mobile No', width: 200 },
-        { field: 'address', headerName: 'Address', width: 300 },
-        { field: 'registered', headerName: 'Registered On', width: 300 },
-        { field: 'latitude', headerName: 'Latitude', width: 120 },
-        { field: 'longitude', headerName: 'Longitude', width: 120 },
+        { field: 'guid', headerName: 'type', width: 200, editable: true },
+        { field: 'isActive', headerName: ' purpose', width: 100 },
+        { field: 'balance', headerName: 'price', width: 120 },
+        { field: 'firstName', headerName: 'location', width: 130 },
+        { field: 'lastName', headerName: 'listedBy', width: 120 },
+        { field: 'age', headerName: 'beds', width: 90 },
+        { field: 'eyeColor', headerName: 'status', width: 120 },
+
+        // { field: 'company', headerName: 'Company', width: 120 },
+        // { field: 'email', headerName: 'Email', width: 200 },
+        // { field: 'phone', headerName: 'Phone No', width: 200 },
+        // { field: 'mobile', headerName: 'Mobile No', width: 200 },
+        // { field: 'address', headerName: 'Address', width: 300 },
+        // { field: 'registered', headerName: 'Registered On', width: 300 },
+        // { field: 'latitude', headerName: 'Latitude', width: 120 },
+        // { field: 'longitude', headerName: 'Longitude', width: 120 },
         {
             field: 'action',
             headerName: 'Actions',
@@ -141,58 +147,61 @@ const Listings = () => {
 
     let filters = [
         {
-            width: '70px',
-            onLabel: 'On',
-            offLabel: 'Off',
-            isToggleOn: true,
-        },
-        {
             width: '100px',
             onLabel: 'Active',
             offLabel: 'Inactive',
             isToggleOn: true,
         },
         {
-            width: '80px',
+            width: '100px',
+            onLabel: 'Draft',
+            offLabel: 'Draft',
+            isToggleOn: true,
+        },
+        {
+            width: '100px',
             onLabel: 'Sale',
             offLabel: 'Rent',
             isToggleOn: true,
         },
         {
             width: '70px',
-            onLabel: 'On',
-            offLabel: 'Off',
-            isToggleOn: true,
+            label: 'Location',
+            value: '',
+            setValue: '',
+            input: true,
         },
         {
             width: '70px',
-            onLabel: 'On',
-            offLabel: 'Off',
-            isToggleOn: false,
+            label: 'Purpose',
+            value: '',
+            setValue: '',
+            input: true,
         },
         {
             width: '70px',
-            onLabel: 'On',
-            offLabel: 'Off',
-            isToggleOn: false,
+            label: 'Category',
+            value: categories,
+            setValue: setCategories,
+            options: JsonOptions.categories,
+            select: true,
         },
         {
             width: '70px',
-            onLabel: 'On',
-            offLabel: 'Off',
-            isToggleOn: false,
+            label: 'Sub Category',
+            value: subCategories,
+            setValue: setSubCategories,
+            options: JsonOptions.subCategories.filter(
+                (d: any) => d.key == categories
+            ),
+            select: true,
         },
         {
             width: '70px',
-            onLabel: 'On',
-            offLabel: 'Off',
-            isToggleOn: false,
-        },
-        {
-            width: '70px',
-            onLabel: 'On',
-            offLabel: 'Off',
-            isToggleOn: false,
+            label: 'Beds',
+            value: '',
+            setValue: '',
+            input: true,
         },
     ];
     return (
@@ -217,16 +226,50 @@ const Listings = () => {
                     <p className="text-center">Manage Listings</p>
                     <div className="flex justify-between items-center px-2  bg-lightGreenCard rounded shadow">
                         Filters
-                        <div className="px-1 py-2 w-4/5 md:w-3/5 flex overflow-x-auto">
-                            {filters.map((d) => (
-                                <ToggleSwitch
-                                    width={d.width}
-                                    onLabel={d.onLabel}
-                                    offLabel={d.offLabel}
-                                    isToggleOn={d.isToggleOn}
-                                    // handleChange={}
-                                />
-                            ))}
+                        <div className="px-1 py-2 w-4/5 md:w-full flex overflow-x-auto items-center">
+                            {filters.map((d) => {
+                                if (d.isToggleOn) {
+                                    return (
+                                        <ToggleSwitch
+                                            width={d.width}
+                                            onLabel={d.onLabel}
+                                            offLabel={d.offLabel}
+                                            isToggleOn={d.isToggleOn}
+                                            // handleChange={}
+                                        />
+                                    );
+                                }
+                                if (d.input) {
+                                    return (
+                                        <div className="mx-1 w-full">
+                                            <MyInput
+                                                style={'w-[10rem]'}
+                                                filterInput={true}
+                                                name={d.label}
+                                                value={d.value}
+                                                onChange={d.setValue}
+                                            />
+                                        </div>
+                                    );
+                                }
+                                if (d.select) {
+                                    return (
+                                        <div className="w-full">
+                                            <CustomSelect
+                                                transparent={true}
+                                                withoutMargin={true}
+                                                style={'w-[10rem]'}
+                                                value={d.value}
+                                                onChange={(e: any) =>
+                                                    d.setValue(e.target.value)
+                                                }
+                                                label={d.label}
+                                                options={d.options}
+                                            />
+                                        </div>
+                                    );
+                                }
+                            })}
                         </div>
                     </div>
                     <div className="pt-1 md:pt-1 flex  justify-center">

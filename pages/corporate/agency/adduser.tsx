@@ -4,24 +4,224 @@ import Navbar from '../../../components/Navbar/Navbar';
 import CustomSelect from '../../../components/Select';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
+import { onAddUser } from '../../../helpers/apis/addUser';
 
 const AddUser = () => {
+    const [name, setName] = useState<String>('');
     const [email, setEmail] = useState<String>('');
+    const [nameAr, setNameAr] = useState<String>('');
+    const [password, setPassword] = useState<String>('');
+    const [confirmPassword, setConfirmPassword] = useState<String>('');
+    const [mobileNo, setMobileNo] = useState<String>('');
+    const [landline, setLandline] = useState<String>('');
+    const [whatsapp, setWhatsapp] = useState<String>('');
+    const [gender, setGender] = useState<String>('');
+    const [country, setCountry] = useState<String>('');
+    const [experience, setExperience] = useState<String>('');
+    const [specialities, setSpecialities] = useState<String>('');
+    const [serviceArea, setServiceArea] = useState<String>('');
+    const [languages, setLanguages] = useState<String>('');
+    const [facebook, setFacebook] = useState<String>('');
+    const [instagram, setInstagram] = useState<String>('');
+    const [twitter, setTwitter] = useState<String>('');
+    const [youtube, setYoutube] = useState<String>('');
+    const [listingQuota, setListingQuota] = useState<String>('');
     const [loginAs, setLoginAs] = useState<String>('');
+    const [snackbar, setSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
+
     let loginOptions = [
         {
-            value: 'agent',
-            label: 'Agent',
+            value: '2',
+            label: 'Individual',
         },
         {
-            value: 'owner',
-            label: 'Owner',
+            value: '3',
+            label: 'Company',
         },
         {
-            value: 'tenant',
-            label: 'Tenant',
+            value: '4',
+            label: "Company's Agent",
         },
     ];
+    let addUserInputs = [
+        {
+            name: 'Name',
+            value: name,
+            setValue: setName,
+            style: 'mx-4 w-72',
+        },
+        {
+            name: 'Name Ar',
+            value: nameAr,
+            setValue: setNameAr,
+            style: 'mx-4 w-72',
+        },
+        {
+            name: 'Email',
+            value: email,
+            setValue: setEmail,
+            style: 'mx-4 w-72',
+        },
+        {
+            name: 'Password',
+            value: password,
+            setValue: setPassword,
+            style: 'mx-4 w-72',
+        },
+        {
+            name: 'Confirm Password',
+            value: confirmPassword,
+            setValue: setConfirmPassword,
+            style: 'mx-4 w-72',
+        },
+        {
+            name: 'Mobile',
+            value: mobileNo,
+            setValue: setMobileNo,
+            style: 'mx-4 w-72',
+        },
+        {
+            name: 'Landline',
+            value: landline,
+            setValue: setLandline,
+            style: 'mx-4 w-72',
+        },
+        {
+            name: 'Whatsapp',
+            value: whatsapp,
+            setValue: setWhatsapp,
+            style: 'mx-4 w-72',
+        },
+        {
+            label: 'Agent Profile Details',
+            text: true,
+            style: 'mt-4 mb-2 ml-4 w-full',
+        },
+        {
+            label: 'Gender',
+            value: gender,
+            setValue: setGender,
+            options: [
+                { value: 1, label: 'Male' },
+                { value: 2, label: 'FeMale' },
+                { value: 3, label: 'other' },
+            ],
+            style: 'mx-4 w-48',
+        },
+        {
+            label: 'Country',
+            value: country,
+            setValue: setCountry,
+            options: [],
+            style: 'mx-4 w-48',
+        },
+        {
+            name: 'Experience (Years)',
+            value: experience,
+            setValue: setExperience,
+            style: 'mx-4 w-72',
+        },
+        {
+            label: 'Specialities',
+            value: specialities,
+            setValue: setSpecialities,
+            options: [],
+            style: 'mx-4 w-48',
+        },
+        {
+            label: 'Service Area',
+            value: serviceArea,
+            setValue: setServiceArea,
+            options: [],
+            style: 'mx-4 w-48',
+        },
+        {
+            label: 'Languages',
+            value: languages,
+            setValue: setLanguages,
+            options: [],
+            style: 'mx-4 w-48',
+        },
+        {
+            name: 'Facebook',
+            value: facebook,
+            setValue: setFacebook,
+            style: 'mx-4 w-72',
+        },
+
+        {
+            name: 'Instagram',
+            value: instagram,
+            setValue: setInstagram,
+            style: 'mx-4 w-72',
+        },
+        {
+            name: 'Twitter',
+            value: twitter,
+            setValue: setTwitter,
+            style: 'mx-4 w-72',
+        },
+        {
+            name: 'Youtube',
+            value: youtube,
+            setValue: setYoutube,
+            style: 'mx-4 w-72',
+        },
+        {
+            label: 'Agent Profile Details',
+            text: true,
+            style: 'mt-4 mb-2 ml-4 w-full',
+        },
+        {
+            name: 'Assign Listing Quota',
+            value: listingQuota,
+            setValue: setListingQuota,
+            style: 'mx-4 w-72',
+        },
+    ];
+    function onSubmit() {
+        let addUserBody = {
+            user: {
+                name: name,
+                nameAr: nameAr,
+                username: email,
+                mobileNo: mobileNo,
+                communication: true,
+                password: password,
+                parentUserID: 2,
+                userRoleID: 3,
+            },
+            userDetails: {
+                gender: gender,
+                landLineNo: landline,
+                whatsappNo: whatsapp,
+                experience: experience,
+                facebook: facebook,
+                instagram: instagram,
+                twitter: twitter,
+                youtube: youtube,
+            },
+            parentUserID: 2,
+        };
+        onAddUser(addUserBody).then((r: any) => {
+            // console.log(r, 'RESULTSS');
+            if (r.error) {
+                setSnackbar(true);
+                setErrorSnackbar(r.message);
+                return;
+            }
+            if (r.data.statusCode == 200) {
+                setSnackbar(true);
+            } else {
+                if (r.data.errorData.message) {
+                    setErrorSnackbar(r.data.errorData.message);
+                    setSnackbar(true);
+                }
+            }
+        });
+        // console.log(addUserBody, 'BODY');
+    }
 
     return (
         <div className="pt-14 md:pt-16 w-full h-full">
@@ -31,134 +231,55 @@ const AddUser = () => {
                 <h1>Add User</h1>
             </div>
             <div className="p-4 flex flex-wrap">
-                <div className="mx-4 w-72">
-                    <MyInput name="Name" value={email} onChange={setEmail} />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput
-                        name="Name (Ar)"
-                        value={email}
-                        onChange={setEmail}
-                    />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput
-                        name="Password"
-                        value={email}
-                        onChange={setEmail}
-                    />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput
-                        name="Confirm Password"
-                        value={email}
-                        onChange={setEmail}
-                    />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput name="Mobile" value={email} onChange={setEmail} />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput
-                        name="Landline"
-                        value={email}
-                        onChange={setEmail}
-                    />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput
-                        name="Whatsapp"
-                        value={email}
-                        onChange={setEmail}
-                    />
-                </div>
-            </div>
-            <p className="mt-4 mb-2 ml-4">Agent Profile Details</p>
-            <div className="p-4 w-full flex flex-wrap">
-                <div className="mx-4 w-48 ">
-                    <CustomSelect
-                        value={loginAs}
-                        onChange={(e: any) => setLoginAs(e.target.value)}
-                        label={'Gender'}
-                        options={loginOptions}
-                    />
-                </div>
-                <div className="mx-4 w-48 ">
-                    <CustomSelect
-                        value={loginAs}
-                        onChange={(e: any) => setLoginAs(e.target.value)}
-                        label={'Country'}
-                        options={loginOptions}
-                    />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput
-                        name="Experience (Years)"
-                        value={email}
-                        onChange={setEmail}
-                    />
-                </div>
-                <div className="mx-4 w-48 ">
-                    <CustomSelect
-                        value={loginAs}
-                        onChange={(e: any) => setLoginAs(e.target.value)}
-                        label={'Specialities'}
-                        options={loginOptions}
-                    />
-                </div>
-                <div className="mx-4 w-48 ">
-                    <CustomSelect
-                        value={loginAs}
-                        onChange={(e: any) => setLoginAs(e.target.value)}
-                        label={'Service Areas'}
-                        options={loginOptions}
-                    />
-                </div>
-                <div className="mx-4 w-48 ">
-                    <CustomSelect
-                        value={loginAs}
-                        onChange={(e: any) => setLoginAs(e.target.value)}
-                        label={'Languages'}
-                        options={loginOptions}
-                    />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput
-                        name="Facebook"
-                        value={email}
-                        onChange={setEmail}
-                    />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput
-                        name="Instagram"
-                        value={email}
-                        onChange={setEmail}
-                    />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput name="Twitter" value={email} onChange={setEmail} />
-                </div>
-                <div className="mx-4 w-72">
-                    <MyInput name="Youtube" value={email} onChange={setEmail} />
-                </div>
-                <p className="mt-4 mb-2 w-full">Assign Listing Quota :</p>
-                <div className="mx-4 w-72">
-                    <MyInput
-                        name="Assign Listing Quota"
-                        value={email}
-                        onChange={setEmail}
-                    />
-                </div>
+                {addUserInputs.map((d: any) => {
+                    if (d.text && !d.value) {
+                        return <p className={d.style}>{d.label}</p>;
+                    } else {
+                        if (d.label) {
+                            return (
+                                <div className={d.style}>
+                                    <CustomSelect
+                                        value={d.value}
+                                        onChange={(e: any) =>
+                                            d.setValue(e.target.value)
+                                        }
+                                        label={d.label}
+                                        options={d.options}
+                                    />
+                                </div>
+                            );
+                        }
+                        return (
+                            <div className={d.style}>
+                                <MyInput
+                                    name={d.name}
+                                    value={d.value}
+                                    onChange={d.setValue}
+                                />
+                            </div>
+                        );
+                    }
+                })}
             </div>
             <div className="flex justify-center self-center w-full ">
                 <Button
                     variant="contained"
                     color="success"
                     className="text-green-900 hover:text-white"
+                    onClick={() => onSubmit()}
                 >
                     Submit
                 </Button>
+            </div>
+            <div
+                className={
+                    errorSnackbar
+                        ? 'absolute top-1 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                        : 'absolute top-1 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                }
+                hidden={!snackbar}
+            >
+                {errorSnackbar ? errorSnackbar : 'Succes'}
             </div>
         </div>
     );

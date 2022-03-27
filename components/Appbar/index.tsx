@@ -11,6 +11,8 @@ import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import MyInput from '../Input';
+import { db } from '../../db';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme: any) => ({
     root: {
@@ -32,10 +34,11 @@ const useStyles = makeStyles((theme: any) => ({
     },
 }));
 
-export default function MenuAppBar({ toggleDrawer, client, login }: any) {
+export default function MenuAppBar({ toggleDrawer, client }: any) {
     const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
+    const [auth, setAuth] = React.useState(false);
     const [email, setEmail] = useState<String>('');
+    const [name, setName] = useState<String>('');
     const [password, setPassword] = useState<String>('');
 
     const [showPassword, setShowPassword] = useState<Boolean>(false);
@@ -46,11 +49,55 @@ export default function MenuAppBar({ toggleDrawer, client, login }: any) {
     const handleMenu = (event: any) => {
         setAnchorEl(event.currentTarget);
     };
-
+    useEffect(() => {
+        db.table('user')
+            .toArray()
+            .then((user: any) => {
+                console.log(user, 'USER DATA');
+                if (user.length >= 1 && user[0].token) {
+                    setAuth(true);
+                    setName(user[0].name);
+                }
+            });
+    }, [db]);
     const handleClose = () => {
-        console.log(anchorEl, 'EVENt');
         setAnchorEl(null);
     };
+    async function onSubmit() {
+        try {
+            if (email == '' && password == '') {
+                alert('Please Enter Email and Password');
+                return;
+            }
+            // console.log('CLicked', process.env.ServerURL);
+            const { data } = await axios.post(
+                'http://zaki786-001-site1.ftempurl.com/Users/signin',
+                {
+                    username: email,
+                    password: password,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+            if (data.statusCode == 200) {
+                // alert(data, 'Data');
+                console.log('DATA', data.responseData.data);
+                const id = await db.user.add(data.responseData.data);
+                setAuth(true);
+                return;
+            }
+            return;
+        } catch (error: any) {
+            if (axios.isAxiosError(error)) {
+                console.log(error);
+            } else {
+                console.log(error);
+            }
+        }
+    }
 
     return (
         // <motion.div
@@ -94,7 +141,7 @@ export default function MenuAppBar({ toggleDrawer, client, login }: any) {
                     Vlook
                 </Typography>
 
-                {auth && (
+                {
                     <div>
                         <IconButton
                             aria-label="account of current user"
@@ -104,13 +151,17 @@ export default function MenuAppBar({ toggleDrawer, client, login }: any) {
                             color="inherit"
                         >
                             <div
-                                className={classes.account}
-                                style={{ color: '#FFFFFF' }}
+                                // className={classes.account}
+                                // style={{ color: '#FFFFFF' }}
+                                className="text-white  flex items-center  "
                             >
+                                {name && (
+                                    <p className="text-xs p-0 mr-1  ">{name}</p>
+                                )}
                                 <AccountCircle fontSize="large" />
                             </div>
                         </IconButton>
-                        {login ? (
+                        {auth ? (
                             <Menu
                                 id="menu-appbar"
                                 anchorEl={anchorEl}
@@ -177,9 +228,10 @@ export default function MenuAppBar({ toggleDrawer, client, login }: any) {
                                             fullWidth
                                             variant="contained"
                                             color="success"
-                                            onClick={() =>
-                                                console.log('Submited')
-                                            }
+                                            onClick={() => {
+                                                console.log('Submited');
+                                                onSubmit();
+                                            }}
                                         >
                                             Login
                                         </Button>
@@ -194,7 +246,7 @@ export default function MenuAppBar({ toggleDrawer, client, login }: any) {
                             </Menu>
                         )}
                     </div>
-                )}
+                }
             </Toolbar>
         </AppBar>
         // </motion.div>

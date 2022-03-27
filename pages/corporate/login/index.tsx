@@ -11,12 +11,13 @@ import Snackbar from '@mui/material/Snackbar';
 // import CustomizedSnackbars from '../../../components/SnackBar';
 import { db } from '../../../db';
 import { useLiveQuery } from 'dexie-react-hooks';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import { Alert } from '@mui/material';
+import { onCorporateLogin } from '../../../helpers/apis/auth';
 
 const CorporateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
-    const router = useRouter();
+    const router: NextRouter = useRouter();
     let loginOptions = [
         {
             value: '2',
@@ -35,7 +36,10 @@ const CorporateLogin: NextPage = () => {
     const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
     const [loginAs, setLoginAs] = useState<String>('');
     useEffect(() => {
-        db.table('user')
+        let queryemail: any = router.query.email;
+        if (queryemail) setEmail(queryemail);
+        // console.log(router, 'ROUTER');
+        db.table('corporate')
             .toArray()
             .then((user: any) => {
                 console.log(user, 'USER DATA');
@@ -45,48 +49,33 @@ const CorporateLogin: NextPage = () => {
             });
     }, [db, router]);
 
-    async function onSubmit() {
-        try {
-            if (email == '' && password == '') {
-                alert('Please Enter Email and Password');
+    function onSubmit() {
+        setSnackbar(false);
+
+        let body = {
+            username: email,
+            password: password,
+        };
+        onCorporateLogin(body).then((r: any) => {
+            console.log(r, 'RESULTSS');
+            if (r.error) {
+                setSnackbar(true);
+
+                setErrorSnackbar(r.message);
                 return;
             }
-            // console.log('CLicked', process.env.ServerURL);
-            const { data } = await axios.post(
-                'http://zaki786-001-site1.ftempurl.com/Users/signin',
-                {
-                    username: email,
-                    password: password,
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+            if (r.data.statusCode == 200) {
+                setSnackbar(true);
+                if (r.localDb) {
+                    setTimeout(() => router.push('/corporate/dashboard'), 5000);
                 }
-            );
-            if (data) {
-                // alert(data, 'Data');
-                // console.log('DATA', data.responseData);
-                const id = await db.user.add(data.responseData.data);
-                router.push('/corporate/dashboard');
-            }
-
-            setTimeout(() => setSnackbar(false), 5000);
-            // console.log(data.data, 'DATA');
-            if (data.message) {
-                setErrorSnackbar(data.message);
-                setSnackbar(true);
             } else {
-                setSnackbar(true);
+                if (r.data.errorData.message) {
+                    setErrorSnackbar(r.data.errorData.message);
+                    setSnackbar(true);
+                }
             }
-            return data;
-        } catch (error: any) {
-            if (axios.isAxiosError(error)) {
-                console.log(error);
-            } else {
-                console.log(error);
-            }
-        }
+        });
     }
     return (
         <>
@@ -147,7 +136,11 @@ const CorporateLogin: NextPage = () => {
                         </div>
                     </div>
                     <div
-                        className="absolute top-1 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg"
+                        className={
+                            errorSnackbar
+                                ? 'absolute top-1 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                                : 'absolute top-1 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                        }
                         hidden={!snackbar}
                     >
                         {errorSnackbar ? errorSnackbar : 'Succes'}
