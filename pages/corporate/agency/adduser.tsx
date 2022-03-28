@@ -15,9 +15,9 @@ const AddUser = () => {
     const [mobileNo, setMobileNo] = useState<String>('');
     const [landline, setLandline] = useState<String>('');
     const [whatsapp, setWhatsapp] = useState<String>('');
-    const [gender, setGender] = useState<String>('');
+    const [gender, setGender] = useState<Number>(0);
     const [country, setCountry] = useState<String>('');
-    const [experience, setExperience] = useState<String>('');
+    const [experience, setExperience] = useState<Number>(0);
     const [specialities, setSpecialities] = useState<String>('');
     const [serviceArea, setServiceArea] = useState<String>('');
     const [languages, setLanguages] = useState<String>('');
@@ -184,26 +184,29 @@ const AddUser = () => {
         let addUserBody = {
             user: {
                 name: name,
-                nameAr: nameAr,
                 username: email,
                 mobileNo: mobileNo,
                 communication: true,
                 password: password,
-                parentUserID: 2,
+                parentUserID: 0,
                 userRoleID: 3,
+                status: 0,
             },
             userDetails: {
                 gender: gender,
                 landLineNo: landline,
                 whatsappNo: whatsapp,
+                status: 0,
+                countryID: 0,
                 experience: experience,
                 facebook: facebook,
                 instagram: instagram,
                 twitter: twitter,
                 youtube: youtube,
             },
-            parentUserID: 2,
+            // parentUserID: 0,
         };
+        // console.log(addUserBody, 'BODY');
         onAddUser(addUserBody).then((r: any) => {
             // console.log(r, 'RESULTSS');
             if (r.error) {
@@ -211,7 +214,7 @@ const AddUser = () => {
                 setErrorSnackbar(r.message);
                 return;
             }
-            if (r.data.statusCode == 200) {
+            if (r.data.statusCode == 200 || r.userID) {
                 setSnackbar(true);
             } else {
                 if (r.data.errorData.message) {
@@ -274,8 +277,8 @@ const AddUser = () => {
             <div
                 className={
                     errorSnackbar
-                        ? 'absolute top-1 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
-                        : 'absolute top-1 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                        ? 'absolute top-100 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                        : 'absolute top-100 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
                 }
                 hidden={!snackbar}
             >

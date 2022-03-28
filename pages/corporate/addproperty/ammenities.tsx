@@ -17,80 +17,80 @@ const Ammenities = () => {
     const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
     const router: NextRouter = useRouter();
     const [recreationFamily, setRecreationFamily] = useState<any>({
-        barbequeArea: true,
-        dayCareCenter: true,
-        kidsplayArea: true,
-        lawnOrGarden: true,
-        cafeteriaOrCateen: true,
+        barbequeArea: false,
+        dayCareCenter: false,
+        kidsplayArea: false,
+        lawnOrGarden: false,
+        cafeteriaOrCateen: false,
     });
     const [healthFitness, setHealthandFitness] = useState<any>({
-        firstAidMedicalCenter: true,
-        gymOrHealthClub: true,
-        jacuzzi: true,
-        sauna: true,
-        steamRoom: true,
-        swimmingpool: true,
-        facilitiesForDisabled: true,
+        firstAidMedicalCenter: false,
+        gymOrHealthClub: false,
+        jacuzzi: false,
+        sauna: false,
+        steamRoom: false,
+        swimmingpool: false,
+        facilitiesForDisabled: false,
     });
     const [laundryKitchen, setLaundryKitchen] = useState<any>({
-        laundryRoom: true,
-        laundryFacilty: true,
-        sharedKitchen: true,
+        laundryRoom: false,
+        laundryFacilty: false,
+        sharedKitchen: false,
     });
     const [building, setBuilding] = useState<any>({
-        completionYear: 2012,
-        balconyOrTerrace: true,
-        lobbyInBuilding: true,
-        elevatorsInBuilding: 12,
-        prayerRoom: true,
-        receptionOrWaitingRoom: true,
+        completionYear: 2022,
+        balconyOrTerrace: false,
+        lobbyInBuilding: false,
+        elevatorsInBuilding: 0,
+        prayerRoom: false,
+        receptionOrWaitingRoom: false,
     });
     const [businessSecurity, setBusinessSecurity] = useState<any>({
-        bussinessCenter: true,
-        conferenceRoom: true,
-        securityStaff: true,
-        cctvSecurity: true,
+        bussinessCenter: false,
+        conferenceRoom: false,
+        securityStaff: false,
+        cctvSecurity: false,
     });
     const [technology, setTechnology] = useState<any>({
-        broadBandInternet: true,
-        satelliteOrCableTv: true,
-        interCom: true,
+        broadBandInternet: false,
+        satelliteOrCableTv: false,
+        interCom: false,
     });
     const [features, setFeatures] = useState<any>({
-        doubleGlazedWindows: true,
-        centrallyAirConditioned: true,
-        centralHeating: true,
-        electricityBackUp: true,
-        furnished: true,
-        parkingSpaces: 'availabe',
-        storageAreas: true,
-        studyRoom: true,
+        doubleGlazedWindows: false,
+        centrallyAirConditioned: false,
+        centralHeating: false,
+        electricityBackUp: false,
+        furnished: false,
+        parkingSpaces: '',
+        storageAreas: false,
+        studyRoom: false,
     });
     const [cleaningMaintenance, setCleaningMaintenance] = useState<any>({
-        wasteDisposal: true,
-        maintainenceStaff: true,
-        cleaningServices: true,
+        wasteDisposal: false,
+        maintainenceStaff: false,
+        cleaningServices: false,
     });
     const [miscellaneous, setMiscellaneous] = useState<any>({
-        view: 'balcony view',
-        floor: 15,
-        otherMainFeatures: 'smart building',
-        freeHold: true,
-        petpolicyID: 1,
-        othersRoom: 'guest room',
-        atmFacility: true,
-        otherFacility: 'best service',
-        landArea: 'availabe',
-        maidsRoom: true,
-        numberOfBathRooms: 4,
-        numberOfBedRooms: 4,
-        nearBySchools: 'availabe',
-        nearByHospital: 'availabe',
-        nearByShoppingMall: 'availabe',
-        distanceFromAirport: 'availabe',
-        nearBypublicTransort: 'availabe',
-        otherNearByplaces: 'availabe',
-        hoursCarcierge: true,
+        view: '',
+        floor: 0,
+        otherMainFeatures: '',
+        freeHold: false,
+        petpolicyID: 0,
+        othersRoom: '',
+        atmFacility: false,
+        otherFacility: '',
+        landArea: '',
+        maidsRoom: false,
+        numberOfBathRooms: 0,
+        numberOfBedRooms: 0,
+        nearBySchools: '',
+        nearByHospital: '',
+        nearByShoppingMall: '',
+        distanceFromAirport: '',
+        nearBypublicTransort: '',
+        otherNearByplaces: '',
+        hoursCarcierge: false,
     });
 
     let recreationFamilyData = [
@@ -98,25 +98,30 @@ const Ammenities = () => {
             label: 'Barbeque Area',
             checked: recreationFamily.barbequeArea,
             name: 'barbequeArea',
+            type: 'checkbox',
         },
         {
             label: 'Day Care Center',
             checked: recreationFamily.dayCareCenter,
+            type: 'checkbox',
             name: 'dayCareCenter',
         },
         {
             label: 'Kids Play Area',
             checked: recreationFamily.kidsplayArea,
+            type: 'checkbox',
             name: 'kidsplayArea',
         },
         {
             label: 'Lawn Or Garden',
             checked: recreationFamily.lawnOrGarden,
+            type: 'checkbox',
             name: 'lawnOrGarden',
         },
         {
             label: 'Cafeteria / Canteen',
             checked: recreationFamily.cafeteriaOrCateen,
+            type: 'checkbox',
             name: 'cafeteriaOrCateen',
         },
     ];
@@ -125,43 +130,43 @@ const Ammenities = () => {
         {
             label: 'First Aid Medical Center',
             checked: healthFitness.firstAidMedicalCenter,
-
+            type: 'checkbox',
             name: 'firstAidMedicalCenter',
         },
         {
             label: 'Gym Or Health Club',
             checked: healthFitness.gymOrHealthClub,
-
+            type: 'checkbox',
             name: 'gymOrHealthClub',
         },
         {
             label: 'Jacuzzi',
             checked: healthFitness.jacuzzi,
-
+            type: 'checkbox',
             name: 'jacuzzi',
         },
         {
             label: 'Sauna',
             checked: healthFitness.sauna,
-
+            type: 'checkbox',
             name: 'sauna',
         },
         {
             label: 'Steam Room',
             checked: healthFitness.steamRoom,
-
+            type: 'checkbox',
             name: 'steamRoom',
         },
         {
             label: 'Swimming Pool',
             checked: healthFitness.swimmingpool,
-
+            type: 'checkbox',
             name: 'swimmingpool',
         },
         {
             label: 'Facilities For Disabled',
             checked: healthFitness.facilitiesForDisabled,
-
+            type: 'checkbox',
             name: 'facilitiesForDisabled',
         },
     ];
@@ -169,19 +174,19 @@ const Ammenities = () => {
         {
             label: 'Laundry Room',
             checked: laundryKitchen.laundryRoom,
-
+            type: 'checkbox',
             name: 'laundryRoom',
         },
         {
             label: 'Laundry Facility',
             checked: laundryKitchen.laundryFacilty,
-
+            type: 'checkbox',
             name: 'laundryFacilty',
         },
         {
             label: 'Shared Kitchen',
             checked: laundryKitchen.sharedKitchen,
-
+            type: 'checkbox',
             name: 'sharedKitchen',
         },
     ];
@@ -189,25 +194,25 @@ const Ammenities = () => {
         {
             label: 'Business Center',
             checked: businessSecurity.bussinessCenter,
-
+            type: 'checkbox',
             name: 'bussinessCenter',
         },
         {
             label: 'Conference Room',
             checked: businessSecurity.conferenceRoom,
-
+            type: 'checkbox',
             name: 'conferenceRoom',
         },
         {
             label: 'Security Staff',
             checked: businessSecurity.securityStaff,
-
+            type: 'checkbox',
             name: 'securityStaff',
         },
         {
             label: 'CCTV Security',
             checked: businessSecurity.cctvSecurity,
-
+            type: 'checkbox',
             name: 'cctvSecurity',
         },
     ];
@@ -217,34 +222,36 @@ const Ammenities = () => {
             label: 'Completion Year',
             value: building.completionYear,
             name: 'completionYear',
+            type: 'input',
         },
         {
             label: 'Elevators in Building',
             value: building.elevatorsInBuilding,
             name: 'elevatorsInBuilding',
+            type: 'input',
         },
         {
             label: 'Balcony or Terrace',
             checked: building.balconyOrTerrace,
-
+            type: 'checkbox',
             name: 'balconyOrTerrace',
         },
         {
             label: 'Lobby In Building',
             checked: building.lobbyInBuilding,
-
+            type: 'checkbox',
             name: 'lobbyInBuilding',
         },
         {
             label: 'Prayer Room',
             checked: building.prayerRoom,
-
+            type: 'checkbox',
             name: 'prayerRoom',
         },
         {
             label: 'Reception or Waiting Room',
             checked: building.receptionOrWaitingRoom,
-
+            type: 'checkbox',
             name: 'receptionOrWaitingRoom',
         },
     ];
@@ -253,19 +260,19 @@ const Ammenities = () => {
         {
             label: 'Broadband Internet',
             checked: technology.broadBandInternet,
-
+            type: 'checkbox',
             name: 'broadBandInternet',
         },
         {
             label: 'Satelite / Cable TV',
             checked: technology.satelliteOrCableTv,
-
+            type: 'checkbox',
             name: 'satelliteOrCableTv',
         },
         {
             label: 'Intercom',
             checked: technology.interCom,
-
+            type: 'checkbox',
             name: 'interCom',
         },
     ];
@@ -274,49 +281,50 @@ const Ammenities = () => {
         {
             label: 'Double Glazed Windows',
             checked: features.doubleGlazedWindows,
-
+            type: 'checkbox',
             name: 'doubleGlazedWindows',
         },
         {
             label: 'Centrally Air-Conditioned',
             checked: features.centrallyAirConditioned,
-
+            type: 'checkbox',
             name: 'centrallyAirConditioned',
         },
         {
             label: 'Central Heating',
             checked: features.centralHeating,
-
+            type: 'checkbox',
             name: 'centralHeating',
         },
         {
             label: 'Electricity Back Up',
             checked: features.electricityBackUp,
-
+            type: 'checkbox',
             name: 'electricityBackUp',
         },
         {
             label: 'Furnished',
             checked: features.furnished,
-
+            type: 'checkbox',
             name: 'furnished',
         },
         {
             label: 'Storage Areas',
             checked: features.storageAreas,
-
+            type: 'checkbox',
             name: 'storageAreas',
         },
         {
             label: 'Study Room',
             checked: features.studyRoom,
-
+            type: 'checkbox',
             name: 'studyRoom',
         },
         {
             label: 'Parking Spaces',
             value: features.parkingSpaces,
             name: 'parkingSpaces',
+            type: 'input',
         },
     ];
 
@@ -324,19 +332,19 @@ const Ammenities = () => {
         {
             label: 'Waste Disposal',
             checked: cleaningMaintenance.wasteDisposal,
-
+            type: 'checkbox',
             name: 'wasteDisposal',
         },
         {
             label: 'Maintenance Staff',
             checked: cleaningMaintenance.maintainenceStaff,
-
+            type: 'checkbox',
             name: 'maintainenceStaff',
         },
         {
             label: 'Cleaning Services',
             checked: cleaningMaintenance.cleaningServices,
-
+            type: 'checkbox',
             name: 'cleaningServices',
         },
     ];
@@ -345,230 +353,192 @@ const Ammenities = () => {
             label: 'View',
             value: miscellaneous.view,
             name: 'view',
+            type: 'input',
         },
         {
             label: 'Floor',
             value: miscellaneous.floor,
             name: 'floor',
+            type: 'input',
         },
         {
             label: 'Other Main Features',
             value: miscellaneous.otherMainFeatures,
             name: 'otherMainFeatures',
+            type: 'input',
         },
         {
             label: 'Free Hold',
             checked: miscellaneous.freeHold,
-
+            type: 'checkbox',
             name: 'freeHold',
         },
         {
             label: 'Pet Policy ID',
             value: miscellaneous.petpolicyID,
             name: 'petpolicyID',
+            type: 'input',
         },
         {
             label: 'Others Room',
             value: miscellaneous.othersRoom,
             name: 'othersRoom',
+            type: 'input',
         },
         {
             label: 'Atm Facility',
             checked: miscellaneous.atmFacility,
-
+            type: 'checkbox',
             name: 'atmFacility',
         },
         {
             label: 'Other Facility',
             value: miscellaneous.otherFacility,
             name: 'otherFacility',
+            type: 'input',
         },
         {
             label: 'Land Area',
             value: miscellaneous.landArea,
             name: 'landArea',
+            type: 'input',
         },
         {
             label: 'Maids Room',
             checked: miscellaneous.maidsRoom,
             name: 'maidsRoom',
+            type: 'checkbox',
         },
         {
             label: 'Number Of Bathrooms',
             value: miscellaneous.numberOfBathRooms,
             name: 'numberOfBathRooms',
+            type: 'input',
         },
         {
             label: 'Number Of BedRooms',
             value: miscellaneous.numberOfBedRooms,
             name: 'numberOfBedRooms',
+            type: 'input',
         },
 
         {
             label: 'Near By Schools',
             value: miscellaneous.nearBySchools,
             name: 'nearBySchools',
+            type: 'input',
         },
         {
             label: 'Near By Hospital',
             value: miscellaneous.nearByHospital,
             name: 'nearByHospital',
+            type: 'input',
         },
         {
             label: 'Number By ShoppingMall',
             value: miscellaneous.nearByShoppingMall,
             name: 'nearByShoppingMall',
+            type: 'input',
         },
         {
             label: 'Distance From Airport',
             value: miscellaneous.distanceFromAirport,
             name: 'distanceFromAirport',
+            type: 'input',
         },
         {
             label: 'Near By Public Transport',
             value: miscellaneous.nearBypublicTransort,
             name: 'nearBypublicTransort',
+            type: 'input',
         },
         {
             label: 'Other Near By Places',
             value: miscellaneous.otherNearByplaces,
             name: 'otherNearByplaces',
+            type: 'input',
         },
         {
             label: 'Hours Carcierge',
-            value: miscellaneous.hoursCarcierge,
+            checked: miscellaneous.hoursCarcierge,
             name: 'hoursCarcierge',
+            type: 'checkbox',
         },
     ];
+    function updateAmmenity(amenity: any, setAmmenity: any, d: any, e: any) {
+        let val;
+        if (d.type == 'checkbox') {
+            val = { $set: e.target.checked };
+        }
+        if (d.type == 'input') {
+            val = { $set: e };
+        }
+        let newdata = update(amenity, {
+            [d.name]: val,
+        });
+        setAmmenity(newdata);
+    }
     let ammenities = [
         {
             label: 'Recreation And Family',
             data: recreationFamilyData,
-            setChange: (e: any, d: any) => {
-                // console.log(e.target.checked, d, 'E');
-                let dat;
-                if (e.target.type == 'checkbox') {
-                    dat = update(recreationFamily, {
-                        [d.name]: { $set: e.target.checked },
-                    });
-                }
-
-                setRecreationFamily(dat);
-            },
+            setChange: (e: any, d: any) =>
+                updateAmmenity(recreationFamily, setRecreationFamily, d, e),
         },
         {
             label: 'Health and Fitness',
             data: healthFitnessData,
-            setChange: (e: any, d: any) => {
-                let dat;
-                if (e.target.type == 'checkbox') {
-                    dat = update(healthFitness, {
-                        [d.name]: { $set: e.target.checked },
-                    });
-                }
-
-                setHealthandFitness(dat);
-            },
+            setChange: (e: any, d: any) =>
+                updateAmmenity(healthFitness, setHealthandFitness, d, e),
         },
         {
             label: 'Laundry and Kitchen',
             data: laundryKitchenData,
-            setChange: (e: any, d: any) => {
-                let dat;
-                if (e.target.type == 'checkbox') {
-                    dat = update(laundryKitchen, {
-                        [d.name]: { $set: e.target.checked },
-                    });
-                }
-
-                setLaundryKitchen(dat);
-            },
+            setChange: (e: any, d: any) =>
+                updateAmmenity(laundryKitchen, setLaundryKitchen, d, e),
         },
 
         {
             label: 'Building',
             data: buildingData,
-            setChange: (e: any, d: any) => {
-                let dat;
-                if (e.target.type == 'checkbox') {
-                    dat = update(building, {
-                        [d.name]: { $set: e.target.checked },
-                    });
-                }
-
-                setBuilding(dat);
-            },
+            setChange: (e: any, d: any) =>
+                updateAmmenity(building, setBuilding, d, e),
         },
 
         {
             label: 'Business and Security',
             data: businessSecurityData,
-            setChange: (e: any, d: any) => {
-                let dat;
-                if (e.target.type == 'checkbox') {
-                    dat = update(businessSecurity, {
-                        [d.name]: { $set: e.target.checked },
-                    });
-                }
-
-                setBusinessSecurity(dat);
-            },
+            setChange: (e: any, d: any) =>
+                updateAmmenity(businessSecurity, setBusinessSecurity, d, e),
         },
         {
             label: 'Technology',
             data: technologyData,
-            setChange: (e: any, d: any) => {
-                let dat;
-                if (e.target.type == 'checkbox') {
-                    dat = update(technology, {
-                        [d.name]: { $set: e.target.checked },
-                    });
-                }
-
-                setTechnology(dat);
-            },
+            setChange: (e: any, d: any) =>
+                updateAmmenity(technology, setTechnology, d, e),
         },
         {
             label: 'Features',
             data: featuresData,
-            setChange: (e: any, d: any) => {
-                let dat;
-                if (e.target.type == 'checkbox') {
-                    dat = update(features, {
-                        [d.name]: { $set: e.target.checked },
-                    });
-                }
-
-                setFeatures(dat);
-            },
+            setChange: (e: any, d: any) =>
+                updateAmmenity(features, setFeatures, d, e),
         },
         {
             label: 'Cleaning and Maintenance',
             data: cleaningMaintenanceData,
-            setChange: (e: any, d: any) => {
-                let dat;
-                if (e.target.type == 'checkbox') {
-                    dat = update(cleaningMaintenance, {
-                        [d.name]: { $set: e.target.checked },
-                    });
-                }
-
-                setCleaningMaintenance(dat);
-            },
+            setChange: (e: any, d: any) =>
+                updateAmmenity(
+                    cleaningMaintenance,
+                    setCleaningMaintenance,
+                    d,
+                    e
+                ),
         },
         {
             label: 'Miscellaneous.',
             data: miscellaneousData,
-            setChange: (e: any, d: any) => {
-                let dat;
-                if (e.target.type == 'checkbox') {
-                    dat = update(miscellaneous, {
-                        [d.name]: { $set: e.target.checked },
-                    });
-                }
-
-                setMiscellaneous(dat);
-            },
+            setChange: (e: any, d: any) =>
+                updateAmmenity(miscellaneous, setMiscellaneous, d, e),
         },
     ];
     console.log(ammenities, 'AMMENITIES');
@@ -583,6 +553,7 @@ const Ammenities = () => {
             ...features,
             ...cleaningMaintenance,
             ...miscellaneous,
+            propertyID: 1,
         };
         onAddPropertyAmmenity(body)
             .then((r: any) => {
@@ -620,7 +591,7 @@ const Ammenities = () => {
                         <p className="mt-2 underline">{amenity.label}</p>
                         <div className="flex flex-wrap">
                             {amenity.data.map((d: any) => {
-                                if (d.value) {
+                                if (d.type == 'input') {
                                     return (
                                         <div className="mx-4 w-48 text-xs ">
                                             <MyInput

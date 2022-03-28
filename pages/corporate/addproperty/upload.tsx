@@ -6,14 +6,25 @@ import Tab from '@mui/material/Tab';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import UploadAndDisplayImage from '../../../components/Upload';
+import { onAddPropertyUpload } from '../../../helpers/apis/addProperty';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
 const UploadPage = () => {
     const [value, setValue] = useState(0);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedImage, setSelectedImage] = useState<any>(null);
     const [imagebase64, setImageBase64] = useState(null);
-
+    console.log(selectedImage, 'IMAGEBASE64');
+    function onSubmit() {
+        let body = {
+            imageData: imagebase64,
+            fileName: selectedImage.name,
+            mediaType: 'image/png',
+            mediaPath: '',
+        };
+        console.log(body, 'BODY');
+        onAddPropertyUpload(body).then((r: any) => console.log(r, 'RESULT'));
+    }
     return (
         <div>
             <Navbar selectedLink={'Add Property'} />
@@ -78,13 +89,13 @@ const UploadPage = () => {
                 </div>
                 <div className="mt-8 flex justify-center">
                     <div className="bg-green-600 hover:bg-green-500 rounded ">
-                        <Button color="success">
-                            <a
+                        <Button color="success" onClick={() => onSubmit()}>
+                            {/* <a
                                 href="/corporate/addproperty/upload"
                                 className="text-white"
-                            >
-                                Submit
-                            </a>
+                            > */}
+                            Submit
+                            {/* </a> */}
                         </Button>
                     </div>
                 </div>

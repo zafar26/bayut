@@ -155,7 +155,7 @@ export default function MenuAppBar({ toggleDrawer, client }: any) {
                                 // style={{ color: '#FFFFFF' }}
                                 className="text-white  flex items-center  "
                             >
-                                {name && (
+                                {client && name && (
                                     <p className="text-xs p-0 mr-1  ">{name}</p>
                                 )}
                                 <AccountCircle fontSize="large" />

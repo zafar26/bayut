@@ -13,6 +13,7 @@ import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { db } from '../../db';
+import { onUserSearch } from '../../helpers/apis/userSearch';
 
 const Properties = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -20,8 +21,14 @@ const Properties = () => {
     const [modal, setModal] = useState<Boolean>(false);
     const [open, setOpen] = useState<Boolean>(modal);
     const [auth, setAuth] = useState(false);
+    const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
+        onUserSearch().then((r: any) => {
+            console.log(r.data.responseData.data.items);
+            setData(r.data.responseData.data.items);
+        });
+
         db.table('user')
             .toArray()
             .then((data: any) => {
@@ -31,13 +38,7 @@ const Properties = () => {
                 }
             });
     }, [db]);
-    const handleOpen = () => {
-        setOpen(true);
-    };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
     let loginOptions = [
         {
             value: '2',
@@ -82,6 +83,7 @@ const Properties = () => {
             setValue: setCategories,
         },
     ];
+    console.log(data, 'DATA');
     return (
         <div>
             <div className=" bg-[#464E2E]">
@@ -160,14 +162,10 @@ const Properties = () => {
 
                         <div className=" p-2 w-full md:w-4/6  h-5/6  flex justify-center items-center">
                             <div className="md:p-4 p-2 w-full h-full   bg-glassEffect shadow rounded w-full overflow-y-scroll">
-                                {[0, 1, 2, 3, 4].map((d) => (
+                                {data.map((d: any) => (
                                     <div className="p-1 w-full shadow rounded flex ">
                                         <Image
-                                            src={`/images/properties/${
-                                                isMobile
-                                                    ? 'house1.jpeg'
-                                                    : 'house1.jpeg'
-                                            }`}
+                                            src={d.imageData}
                                             alt="House1 Picture "
                                             width={260}
                                             height={100}
@@ -179,9 +177,7 @@ const Properties = () => {
                                             <div className=" md:text-2xl font-bold">
                                                 AED 19,000
                                                 <p className="text-xs md:text-base font-normal">
-                                                    Jumeirah Living Marina Gate,
-                                                    Marina Gate, Dubai Marina,
-                                                    Dubai
+                                                    {d.address}
                                                 </p>
                                                 <p className="text-xs md:text-base font-semibold">
                                                     Apartment
@@ -194,12 +190,8 @@ const Properties = () => {
                                             <div className="w-full ">
                                                 {auth && (
                                                     <TransitionsModal
-                                                        phoneNo={
-                                                            '+918686842949'
-                                                        }
-                                                        email={
-                                                            'zafar@gmail.com'
-                                                        }
+                                                        phoneNo={d.phoneNumber}
+                                                        email={d.email}
                                                     />
                                                 )}
                                             </div>

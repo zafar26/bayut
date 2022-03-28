@@ -1,21 +1,25 @@
 import Button from '@mui/material/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MyInput from '../../../components/Input';
 import Navbar from '../../../components/Navbar/Navbar';
 import CustomSelect from '../../../components/Select';
 import MyStepper from '../../../components/Stepper';
-import { onAddProperty } from '../../../helpers/apis/addProperty';
+import {
+    onAddProperty,
+    onPropertyLookups,
+} from '../../../helpers/apis/addProperty';
 import JsonOptions from '../../options.json';
 import { NextRouter, useRouter } from 'next/router';
+import { responseSymbol } from 'next/dist/server/web/spec-compliant/fetch-event';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
 const AddProperty = () => {
     const [loginAs, setLoginAs] = useState<String>('');
-    const [email, setEmail] = useState<String>('');
-    const [purpose, setPurpose] = useState<String>('');
-    const [category, setCategory] = useState<String>('');
-    const [subCategory, setSubCategory] = useState<String>('');
+    const [propertyLookups, setPropertyLookups] = useState<any>();
+    const [purpose, setPurpose] = useState<any>('');
+    const [category, setCategory] = useState<any>('');
+    const [subCategory, setSubCategory] = useState<any>('');
     const [location, setLocation] = useState<String>('');
     const [address, setAddress] = useState<String>('');
     const [referenceNo, setReferenceNo] = useState<String>('');
@@ -53,13 +57,13 @@ const AddProperty = () => {
             value: category,
             setValue: setCategory,
             label: 'Category',
-            options: JsonOptions.categories,
+            options: propertyLookups?.categories,
         },
         {
             value: subCategory,
             setValue: setSubCategory,
             label: 'Sub Category',
-            options: JsonOptions.subCategories.filter(
+            options: propertyLookups?.subCategories.filter(
                 (d: any) => d.key == category
             ),
         },
@@ -67,7 +71,7 @@ const AddProperty = () => {
             value: purpose,
             setValue: setPurpose,
             label: 'Purpose',
-            options: JsonOptions.propertyType,
+            options: propertyLookups?.propertyType,
         },
         {
             style: 'mt-4 ml-2 w-full',
@@ -183,9 +187,9 @@ const AddProperty = () => {
     ];
     function onSubmit() {
         let addPropertyBody = {
-            categoryID: category,
-            subCategoryID: subCategory,
-            propertyTypeID: purpose,
+            categoryID: parseInt(category),
+            subCategoryID: parseInt(subCategory),
+            propertyTypeID: parseInt(purpose),
             location: location,
             address: address,
             referenceNo: referenceNo,
@@ -201,6 +205,7 @@ const AddProperty = () => {
             status: 0,
             price: price,
         };
+        console.log(addPropertyBody, 'ADDD PROPERTY');
         // router
         onAddProperty(addPropertyBody)
             .then((r: any) => {
@@ -224,6 +229,15 @@ const AddProperty = () => {
             })
             .catch((e) => console.log(e, 'ERR'));
     }
+    useEffect(() => {
+        onPropertyLookups()
+            // .then((response: any) => console.log(response, 'RESPONSE'))
+            .then((r: any) => {
+                console.log(r.data.responseData.data);
+                setPropertyLookups(r.data.responseData.data);
+            });
+    }, [setPropertyLookups]);
+
     return (
         <div>
             {console.log(snackbar, 'SnackBAr')}

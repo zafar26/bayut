@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { db } from '../../db';
 
-export async function onAddUser(body: any) {
+export async function getPropertyListing() {
 
 
     try {
@@ -9,17 +9,10 @@ export async function onAddUser(body: any) {
     let corporateUser = await db.table('corporate').toArray();
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
 
-        if (body.email == '' || body.password == '') {
-            alert('Please Enter Email and Password');
-            return;
-        }
-        if (body.password != body.confirmPassword) {
-            alert("Confirm Password Didn't Match");
-            return;
-        }
+       
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Agent/adduser',
-            body,
+            'http://zaki786-001-site1.ftempurl.com/Agent/managepropertylisting',
+            {},
             {
                 headers: {
                     'Content-Type': 'application/json',

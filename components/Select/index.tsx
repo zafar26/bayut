@@ -48,7 +48,7 @@ export default function CustomSelect(props: any) {
                     <option aria-label="None" value="" />
                     {props.options?.map((item: any) => (
                         <option value={item.value} className="text-[#464E2E]">
-                            {item.label}
+                            {item.label ? item.label : item.text}
                         </option>
                     ))}
                 </Select>

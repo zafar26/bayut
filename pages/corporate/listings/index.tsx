@@ -14,7 +14,7 @@ import dummyData from '../../../components/data/index.json';
 import IconButton from '@mui/material/IconButton';
 import PersonIcon from '@mui/icons-material/PersonAdd';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import EditIcon from '@mui/icons-material/Edit';
@@ -24,6 +24,7 @@ import Button from '@mui/material/Button';
 import MyInput from '../../../components/Input';
 import JsonOptions from '../../options.json';
 import CustomSelect from '../../../components/Select';
+import { getPropertyListing } from '../../../helpers/apis/managePropertyListing';
 
 const Listings = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -31,6 +32,7 @@ const Listings = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [categories, setCategories] = useState('');
     const [subCategories, setSubCategories] = useState('');
+    const [data, setData] = useState([]);
     const open = Boolean(anchorEl);
 
     const handleMenu = (event: any) => {
@@ -51,17 +53,17 @@ const Listings = () => {
 
     const columns = [
         {
-            field: 'id',
+            field: 'ref',
             headerName: 'ref',
-            width: 120,
+            width: 100,
         },
-        { field: 'guid', headerName: 'type', width: 200, editable: true },
-        { field: 'isActive', headerName: ' purpose', width: 100 },
-        { field: 'balance', headerName: 'price', width: 120 },
-        { field: 'firstName', headerName: 'location', width: 130 },
-        { field: 'lastName', headerName: 'listedBy', width: 120 },
-        { field: 'age', headerName: 'beds', width: 90 },
-        { field: 'eyeColor', headerName: 'status', width: 120 },
+        { field: 'type', headerName: 'type', width: 100, editable: true },
+        { field: 'purpose', headerName: ' purpose', width: 100 },
+        { field: 'location', headerName: 'location', width: 130 },
+        { field: 'price', headerName: 'price', width: 120 },
+        { field: 'beds', headerName: 'beds', width: 70 },
+        { field: 'listedBy', headerName: 'listedBy', width: 120 },
+        { field: 'status', headerName: 'status', width: 80 },
 
         // { field: 'company', headerName: 'Company', width: 120 },
         // { field: 'email', headerName: 'Email', width: 200 },
@@ -204,6 +206,13 @@ const Listings = () => {
             input: true,
         },
     ];
+    useEffect(() => {
+        getPropertyListing().then((r: any) => {
+            setData(r.data.responseData.data.tableData);
+            console.log(r, 'RESULT');
+        });
+    }, []);
+
     return (
         <div className="pt-14 md:pt-16 w-full h-full">
             <Navbar selectedLink={'Listings'} />
@@ -289,12 +298,13 @@ const Listings = () => {
                         <DataGrid
                             editMode="row"
                             columns={columns}
-                            rows={dummyData}
+                            rows={data}
                             pageSize={15}
                             // checkboxSelection
                             components={{
                                 Toolbar: CustomToolbar,
                             }}
+                            getRowId={(row: any) => row.ref}
                             // showToolbar
                             density={isMobile ? 'compact' : 'standard'}
                             // disableSelectionOnClick

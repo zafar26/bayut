@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar/Navbar';
 import { useState } from 'react';
 import CustomSelect from '../components/Select';
 import JsonOptions from './options.json';
+import { onUserSearch } from '../helpers/apis/userSearch';
 
 const Home = () => {
     const router = useRouter();
@@ -83,6 +84,9 @@ const Home = () => {
             options: roomOptions,
         },
     ];
+    function onSubmit() {
+        onUserSearch().then((r: any) => console.log(r));
+    }
     return (
         <div>
             <div className="w-screen h-screen ">
@@ -138,7 +142,10 @@ const Home = () => {
                                 />
                             </div>
                         ))}
-                        <button className="md:w-48 w-full h-9 md:m-1 bg-bluetransparent text-white  rounded shadow">
+                        <button
+                            className="md:w-48 w-full h-9 md:m-1 bg-bluetransparent text-white  rounded shadow"
+                            onClick={() => onSubmit()}
+                        >
                             Search
                         </button>
                     </div>
