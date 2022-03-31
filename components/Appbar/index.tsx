@@ -34,7 +34,11 @@ const useStyles = makeStyles((theme: any) => ({
     },
 }));
 
-export default function MenuAppBar({ toggleDrawer, client }: any) {
+export default function MenuAppBar({
+    toggleDrawer,
+    client,
+    setUserSigned,
+}: any) {
     const classes = useStyles();
     const [auth, setAuth] = React.useState(false);
     const [email, setEmail] = useState<String>('');
@@ -87,6 +91,7 @@ export default function MenuAppBar({ toggleDrawer, client }: any) {
                 console.log('DATA', data.responseData.data);
                 const id = await db.user.add(data.responseData.data);
                 setAuth(true);
+                setUserSigned(true);
                 return;
             }
             return;

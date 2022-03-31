@@ -18,7 +18,6 @@ export async function onUserSearch(body?: any) {
             {
                 headers: {
                     'Content-Type': 'application/json',
-                    "Authorization":"Bearer "+user[0].token
                 },
             }
         );

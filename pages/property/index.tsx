@@ -14,19 +14,29 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { db } from '../../db';
 import { onUserSearch } from '../../helpers/apis/userSearch';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { url } from 'inspector';
 
 const Properties = () => {
+    const router = useRouter();
+
     const isMobile = useMediaQuery('(max-width:600px)');
     const [categories, setCategories] = useState<String>('');
     const [modal, setModal] = useState<Boolean>(false);
     const [open, setOpen] = useState<Boolean>(modal);
     const [auth, setAuth] = useState(false);
+    const [userSigned, setUserSigned] = useState(false);
     const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
+        console.log(router, 'ROUTER');
         onUserSearch().then((r: any) => {
-            console.log(r.data.responseData.data.items);
-            setData(r.data.responseData.data.items);
+            console.log(r);
+            if (!r.error) {
+                console.log(r, 'R');
+                setData(r.data.responseData.data.items);
+            }
         });
 
         db.table('user')
@@ -83,13 +93,17 @@ const Properties = () => {
             setValue: setCategories,
         },
     ];
-    console.log(data, 'DATA');
+    // console.log(data, 'DATA');
     return (
         <div>
             <div className=" bg-[#464E2E]">
                 {
                     <div className="w-full ">
-                        <Navbar selectedLink={'Property'} clientUser={true} />
+                        <Navbar
+                            selectedLink={'Property'}
+                            clientUser={true}
+                            setUserSigned={setUserSigned}
+                        />
                     </div>
                 }
                 {isMobile == null && (
@@ -162,10 +176,13 @@ const Properties = () => {
 
                         <div className=" p-2 w-full md:w-4/6  h-5/6  flex justify-center items-center">
                             <div className="md:p-4 p-2 w-full h-full   bg-glassEffect shadow rounded w-full overflow-y-scroll">
+                                {data.length == 0 && <p>No Data Found </p>}
                                 {data.map((d: any) => (
                                     <div className="p-1 w-full shadow rounded flex ">
+                                        {console.log(d, 'DATA D')}
+
                                         <Image
-                                            src={d.imageData}
+                                            src={`/images/properties/house1.jpeg`}
                                             alt="House1 Picture "
                                             width={260}
                                             height={100}
@@ -173,14 +190,15 @@ const Properties = () => {
                                             // layout="responsive"
                                             objectFit={'cover'}
                                         />
+
                                         <div className="w-full ml-2 p-2 flex flex-col justify-between">
                                             <div className=" md:text-2xl font-bold">
-                                                AED 19,000
+                                                {d.propertyName}
                                                 <p className="text-xs md:text-base font-normal">
                                                     {d.address}
                                                 </p>
                                                 <p className="text-xs md:text-base font-semibold">
-                                                    Apartment
+                                                    {d.categoryName}
                                                 </p>
                                                 <p className="text-xs md:text-base font-thin">
                                                     Smart Living / Ready to Move
@@ -188,7 +206,7 @@ const Properties = () => {
                                                 </p>
                                             </div>
                                             <div className="w-full ">
-                                                {auth && (
+                                                {userSigned && (
                                                     <TransitionsModal
                                                         phoneNo={d.phoneNumber}
                                                         email={d.email}

@@ -6,6 +6,8 @@ import { useState } from 'react';
 import CustomSelect from '../components/Select';
 import JsonOptions from './options.json';
 import { onUserSearch } from '../helpers/apis/userSearch';
+import Link from 'next/link';
+import { BedSharp } from '@mui/icons-material';
 
 const Home = () => {
     const router = useRouter();
@@ -85,7 +87,10 @@ const Home = () => {
         },
     ];
     function onSubmit() {
-        onUserSearch().then((r: any) => console.log(r));
+        router.push(
+            `/property?category=${categories}?city=${city}?area=${area}?room=${room}`
+        );
+        //
     }
     return (
         <div>
@@ -146,7 +151,19 @@ const Home = () => {
                             className="md:w-48 w-full h-9 md:m-1 bg-bluetransparent text-white  rounded shadow"
                             onClick={() => onSubmit()}
                         >
+                            {/* <Link
+                                href={{
+                                    pathname: '/property',
+                                    query: {
+                                        category: categories,
+                                        city: city,
+                                        area: area,
+                                        room: room,
+                                    },
+                                }}
+                            > */}
                             Search
+                            {/* </Link> */}
                         </button>
                     </div>
                 </div>

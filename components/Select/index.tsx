@@ -10,7 +10,7 @@ export default function CustomSelect(props: any) {
                 props.transparent
                     ? 'w-full bg-whiteTransparent'
                     : props.withoutMargin
-                    ? 'w-full '
+                    ? 'w-full text-white'
                     : 'mt-3  w-full ' + props.style
             }
         >
@@ -22,8 +22,7 @@ export default function CustomSelect(props: any) {
                 <InputLabel
                     htmlFor="outlined-options-native-simple"
                     className={
-                        ''
-                        // props.transparent && props.withoutMargin && 'text-white'
+                        props.transparent && props.withoutMargin && 'text-white'
                     }
                 >
                     {props.label}
@@ -34,7 +33,7 @@ export default function CustomSelect(props: any) {
                         props.tranparent
                             ? 'bg-whiteTransparent'
                             : props.withoutMargin
-                            ? 'bg-transparent text-green-800'
+                            ? 'bg-transparent text-white'
                             : 'bg-white'
                     }
                     native
