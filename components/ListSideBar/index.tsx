@@ -41,24 +41,26 @@ const MyList = ({
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List style={{ paddingTop: 0 }}>
-                <div
-                    className="bg-[#464E2E]"
-                    style={{
-                        height: '56px',
-                        background: clientUser
-                            ? ''
-                            : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
+                {anchor && (
+                    <div
+                        className="bg-[#464E2E]"
+                        style={{
+                            height: '56px',
+                            background: clientUser
+                                ? ''
+                                : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
 
-                        display: 'flex',
-                        justifyContent: 'space-around',
-                        alignItems: 'center',
-                    }}
-                >
-                    <ArrowBackIcon style={{ color: '#ffffff' }} />
-                    <h6 style={{ fontSize: '1.25rem', color: '#ffffff' }}>
-                        Vlook
-                    </h6>
-                </div>
+                            display: 'flex',
+                            justifyContent: 'space-around',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <ArrowBackIcon style={{ color: '#ffffff' }} />
+                        <h6 style={{ fontSize: '1.25rem', color: '#ffffff' }}>
+                            Vlook
+                        </h6>
+                    </div>
+                )}
                 <Divider />
                 {selectedLinkList.map((link: any, index: any) => {
                     return selectedLink == link.label ? (
@@ -66,7 +68,7 @@ const MyList = ({
                             button
                             key={index}
                             sx={{ padding: 0, color: '#0d47a1' }}
-                            className="w-full h-12 text-baseColor p-0 py-1 flex items-center  shadow  "
+                            className="w-full h-12 text-baseColor p-0 py-1 flex items-center  shadow md:text-xl lg:text-2xl "
                         >
                             <div className="w-1 h-full   bg-baseColor rounded-xl">
                                 i
@@ -84,7 +86,7 @@ const MyList = ({
                             button
                             key={link.label}
                             sx={{ color: 'GrayText' }}
-                            className="text-gray-500 flex items-center"
+                            className="text-gray-500 flex items-center md:text-xl lg:text-2xl"
                             onClick={() => setSelectedItem(index)}
                         >
                             <div className="mr-2">{link.icon()}</div>

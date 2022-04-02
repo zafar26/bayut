@@ -8,6 +8,8 @@ import JsonOptions from './options.json';
 import { onUserSearch } from '../helpers/apis/userSearch';
 import Link from 'next/link';
 import { BedSharp } from '@mui/icons-material';
+import house from '../public/images/wallpapers/corporate.png';
+import { myLoader } from '../helpers/helper';
 
 const Home = () => {
     const router = useRouter();
@@ -96,9 +98,8 @@ const Home = () => {
         <div>
             <div className="w-screen h-screen ">
                 <Image
-                    src={`/images/wallpapers/${
-                        isMobile ? 'home-mobile.png' : 'home.png'
-                    }`}
+                    loader={myLoader}
+                    src={'home.png'}
                     alt="Background Picture "
                     layout="fill"
                     objectFit="fill"

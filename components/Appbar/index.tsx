@@ -126,18 +126,20 @@ export default function MenuAppBar({
             }}
         >
             <Toolbar className="w-full flex justify-between">
-                <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="menu"
-                >
-                    <MenuIcon
-                        // color="inherit"
-                        style={{ color: '#ffffff' }}
-                        onClick={toggleDrawer('left', true)}
-                    />
-                </IconButton>
+                {toggleDrawer && (
+                    <IconButton
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="menu"
+                    >
+                        <MenuIcon
+                            // color="inherit"
+                            style={{ color: '#ffffff' }}
+                            onClick={toggleDrawer('left', true)}
+                        />
+                    </IconButton>
+                )}
                 <Typography
                     variant="h6"
                     className={classes.title}

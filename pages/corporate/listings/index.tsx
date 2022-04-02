@@ -25,6 +25,9 @@ import MyInput from '../../../components/Input';
 import JsonOptions from '../../options.json';
 import CustomSelect from '../../../components/Select';
 import { getPropertyListing } from '../../../helpers/apis/managePropertyListing';
+import MyList from '../../../components/ListSideBar';
+import MenuAppBar from '../../../components/Appbar';
+import Logo from '../../../public/images/properties/house1.jpeg';
 
 const Listings = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -214,102 +217,130 @@ const Listings = () => {
     }, []);
 
     return (
-        <div className="pt-14 md:pt-16 w-full h-full">
-            <Navbar selectedLink={'Listings'} />
-            <div className="p-2   h-full ">
-                <div className="flex justify-between">
-                    <div className="w-32 md:w-2/5 p-2 bg-lightGreenCard rounded shadow">
-                        <p className="pb-2 font-light text-sm">Quota Summary</p>
-                        <LinearProgress variant="determinate" value={78} />
+        <div className="pt-14 md:pt-16 w-screen h-screen ">
+            {isMobile ? (
+                <Navbar selectedLink={'Listings'} />
+            ) : (
+                <MenuAppBar
+                // className={styles.container}
+                // toggleDrawer={toggleDrawer}
+                // client={clientUser}
+                // login={login}
+                // setUserSigned={setUserSigned}
+                />
+            )}
+            <div className="md:flex w-full justify-between h-full ">
+                {!isMobile && (
+                    <div className="w-1/6 h-full">
+                        <MyList
+                            toggleDrawer={(e: any, d: any) => console.log(e, d)}
+                            selectedLink={'Listings'}
+                        />
                     </div>
-                    <div className="w-32 md:w-2/5 p-2 bg-lightGreenCard rounded shadow">
-                        <a href="/corporate/listings/quota_usage">
-                            <p className="pb-2 font-light text-sm">
+                )}
+                <div className="p-2 w-full  h-full ">
+                    <div className="flex justify-between">
+                        <div className="w-32 md:w-2/5 p-2  bg-lightGreenCard rounded shadow lg:h-24 lg:p-8">
+                            <p className="pb-2 font-light text-sm md:text-base lg:text-xl">
                                 Quota Summary
                             </p>
                             <LinearProgress variant="determinate" value={78} />
-                        </a>
-                    </div>
-                </div>
-                <div className="p-2 mt-4 md:mt-4 w-full h-full  bg-lightGreenCard rounded shadow">
-                    <p className="text-center">Manage Listings</p>
-                    <div className="flex justify-between items-center px-2  bg-lightGreenCard rounded shadow">
-                        Filters
-                        <div className="px-1 py-2 w-4/5 md:w-full flex overflow-x-auto items-center">
-                            {filters.map((d) => {
-                                if (d.isToggleOn) {
-                                    return (
-                                        <ToggleSwitch
-                                            width={d.width}
-                                            onLabel={d.onLabel}
-                                            offLabel={d.offLabel}
-                                            isToggleOn={d.isToggleOn}
-                                            // handleChange={}
-                                        />
-                                    );
-                                }
-                                if (d.input) {
-                                    return (
-                                        <div className="mx-1 w-full">
-                                            <MyInput
-                                                style={'w-[10rem]'}
-                                                filterInput={true}
-                                                name={d.label}
-                                                value={d.value}
-                                                onChange={d.setValue}
-                                            />
-                                        </div>
-                                    );
-                                }
-                                if (d.select) {
-                                    return (
-                                        <div className="w-full">
-                                            <CustomSelect
-                                                transparent={true}
-                                                withoutMargin={true}
-                                                style={'w-[10rem]'}
-                                                value={d.value}
-                                                onChange={(e: any) =>
-                                                    d.setValue(e.target.value)
-                                                }
-                                                label={d.label}
-                                                options={d.options}
-                                            />
-                                        </div>
-                                    );
-                                }
-                            })}
+                        </div>
+                        <div className="w-32 md:w-2/5 p-2 bg-lightGreenCard rounded shadow lg:h-24 lg:p-8">
+                            <a href="/corporate/listings/quota_usage">
+                                <p className="pb-2 font-light text-sm md:text-base lg:text-xl">
+                                    Quota Summary
+                                </p>
+                                <LinearProgress
+                                    variant="determinate"
+                                    value={78}
+                                />
+                            </a>
                         </div>
                     </div>
-                    <div className="pt-1 md:pt-1 flex  justify-center">
-                        <Button
-                            variant="contained"
-                            color="success"
-                            className={
-                                isMobile
-                                    ? 'bg-green-700 text-xs'
-                                    : 'bg-green-700 '
-                            }
-                        >
-                            Search
-                        </Button>
-                    </div>
-                    <div className="pt-2 h-5/6">
-                        <DataGrid
-                            editMode="row"
-                            columns={columns}
-                            rows={data}
-                            pageSize={15}
-                            // checkboxSelection
-                            components={{
-                                Toolbar: CustomToolbar,
-                            }}
-                            getRowId={(row: any) => row.ref}
-                            // showToolbar
-                            density={isMobile ? 'compact' : 'standard'}
-                            // disableSelectionOnClick
-                            // experimentalFeatures={{ newEditingApi: true }}
-                        />
+                    <div className="p-2 mt-4 md:mt-4 w-full h-full  bg-lightGreenCard rounded shadow">
+                        <p className="text-center">Manage Listings</p>
+                        <div className="flex justify-between items-center px-2  bg-lightGreenCard rounded shadow">
+                            Filters
+                            <div className="px-1 py-2 w-4/5 md:w-full flex overflow-x-auto items-center">
+                                {filters.map((d) => {
+                                    if (d.isToggleOn) {
+                                        return (
+                                            <ToggleSwitch
+                                                width={d.width}
+                                                onLabel={d.onLabel}
+                                                offLabel={d.offLabel}
+                                                isToggleOn={d.isToggleOn}
+                                                // handleChange={}
+                                            />
+                                        );
+                                    }
+                                    if (d.input) {
+                                        return (
+                                            <div className="mx-1 w-full">
+                                                <MyInput
+                                                    style={'w-[10rem]'}
+                                                    filterInput={true}
+                                                    name={d.label}
+                                                    value={d.value}
+                                                    onChange={d.setValue}
+                                                />
+                                            </div>
+                                        );
+                                    }
+                                    if (d.select) {
+                                        return (
+                                            <div className="w-full">
+                                                <CustomSelect
+                                                    transparent={true}
+                                                    withoutMargin={true}
+                                                    style={'w-[10rem]'}
+                                                    value={d.value}
+                                                    onChange={(e: any) =>
+                                                        d.setValue(
+                                                            e.target.value
+                                                        )
+                                                    }
+                                                    label={d.label}
+                                                    options={d.options}
+                                                />
+                                            </div>
+                                        );
+                                    }
+                                })}
+                            </div>
+                        </div>
+                        <div className="pt-1 md:pt-1 flex  justify-center">
+                            <Button
+                                variant="contained"
+                                color="success"
+                                className={
+                                    isMobile
+                                        ? 'bg-green-700 text-xs'
+                                        : 'bg-green-700 '
+                                }
+                            >
+                                Search
+                            </Button>
+                        </div>
+                        <div className="pt-2 h-5/6 ">
+                            <DataGrid
+                                editMode="row"
+                                columns={columns}
+                                rows={data}
+                                pageSize={15}
+                                // checkboxSelection
+                                components={{
+                                    Toolbar: CustomToolbar,
+                                }}
+                                getRowId={(row: any) => row.ref}
+                                // showToolbar
+                                density={isMobile ? 'compact' : 'standard'}
+                                className="md:text-xl lg:text-xl"
+                                // disableSelectionOnClick
+                                // experimentalFeatures={{ newEditingApi: true }}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>

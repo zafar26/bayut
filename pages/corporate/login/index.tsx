@@ -14,7 +14,8 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { NextRouter, useRouter } from 'next/router';
 import { Alert } from '@mui/material';
 import { onCorporateLogin } from '../../../helpers/apis/auth';
-
+import corporate from '../../../public/images/wallpapers/corporate.png';
+import { myLoader } from '../../../helpers/helper';
 const CorporateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const router: NextRouter = useRouter();
@@ -81,9 +82,8 @@ const CorporateLogin: NextPage = () => {
         <>
             <div className="w-screen h-screen ">
                 <Image
-                    src={`/images/wallpapers/${
-                        isMobile ? 'corporate-mobile.png' : 'corporate.png'
-                    }`}
+                    loader={myLoader}
+                    src={'corporate.png'}
                     alt="Background Picture "
                     layout="fill"
                     objectFit="fill"

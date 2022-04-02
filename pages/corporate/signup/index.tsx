@@ -10,6 +10,8 @@ import PhoneNoInput from '../../../components/PhoneInput';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { onCorporateSignUp } from '../../../helpers/apis/auth';
+import corporate from '../../../public/images/wallpapers/corporate.png';
+import { myLoader } from '../../../helpers/helper';
 
 const CorporateCreateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -77,9 +79,8 @@ const CorporateCreateLogin: NextPage = () => {
         <>
             <div className="w-screen h-screen ">
                 <Image
-                    src={`/images/wallpapers/${
-                        isMobile ? 'corporate-mobile.png' : 'corporate.png'
-                    }`}
+                    loader={myLoader}
+                    src={'corporate.png'}
                     alt="Background Picture "
                     layout="fill"
                     objectFit="fill"

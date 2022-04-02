@@ -17,6 +17,8 @@ import { onUserSearch } from '../../helpers/apis/userSearch';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { url } from 'inspector';
+import house from '../../public/images/properties/house1.jpeg';
+import { myLoader } from '../../helpers/helper';
 
 const Properties = () => {
     const router = useRouter();
@@ -182,7 +184,8 @@ const Properties = () => {
                                         {console.log(d, 'DATA D')}
 
                                         <Image
-                                            src={`/images/properties/house1.jpeg`}
+                                            loader={myLoader}
+                                            src={'house1.png'}
                                             alt="House1 Picture "
                                             width={260}
                                             height={100}
