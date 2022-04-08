@@ -5,8 +5,12 @@ import CustomSelect from '../../../components/Select';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import { onAddUser } from '../../../helpers/apis/addUser';
+import MyList from '../../../components/ListSideBar';
+import MenuAppBar from '../../../components/Appbar';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const AddUser = () => {
+    const isMobile = useMediaQuery('(max-width:600px)');
     const [name, setName] = useState<String>('');
     const [email, setEmail] = useState<String>('');
     const [nameAr, setNameAr] = useState<String>('');
@@ -227,62 +231,75 @@ const AddUser = () => {
     }
 
     return (
-        <div className="pt-14 md:pt-16 w-full h-full">
-            <Navbar selectedLink={'Agency'} />
-            <div className="flex flex-col justify-center items-center h-32 text-2xl text-primary">
-                <AccountCircleIcon fontSize="large" />
-                <h1>Add User</h1>
-            </div>
-            <div className="p-4 flex flex-wrap">
-                {addUserInputs.map((d: any) => {
-                    if (d.text && !d.value) {
-                        return <p className={d.style}>{d.label}</p>;
-                    } else {
-                        if (d.label) {
-                            return (
-                                <div className={d.style}>
-                                    <CustomSelect
-                                        value={d.value}
-                                        onChange={(e: any) =>
-                                            d.setValue(e.target.value)
-                                        }
-                                        label={d.label}
-                                        options={d.options}
-                                    />
-                                </div>
-                            );
+        <div className="pt-14 md:pt-16 w-screen h-screen ">
+            {isMobile ? <Navbar selectedLink={'Agency'} /> : <MenuAppBar />}
+            <div className="flex">
+                {!isMobile && (
+                    <div className="w-1/6 h-full">
+                        <MyList
+                            toggleDrawer={(e: any, d: any) => console.log(e, d)}
+                            selectedLink={'Agency'}
+                        />
+                    </div>
+                )}
+                <div className=" w-full h-full">
+                    {/* <Navbar selectedLink={'Agency'} /> */}
+                    <div className="flex flex-col justify-center items-center h-32 text-2xl text-primary">
+                        <AccountCircleIcon fontSize="large" />
+                        <h1>Add User</h1>
+                    </div>
+                    <div className="p-4 flex flex-wrap">
+                        {addUserInputs.map((d: any) => {
+                            if (d.text && !d.value) {
+                                return <p className={d.style}>{d.label}</p>;
+                            } else {
+                                if (d.label) {
+                                    return (
+                                        <div className={d.style}>
+                                            <CustomSelect
+                                                value={d.value}
+                                                onChange={(e: any) =>
+                                                    d.setValue(e.target.value)
+                                                }
+                                                label={d.label}
+                                                options={d.options}
+                                            />
+                                        </div>
+                                    );
+                                }
+                                return (
+                                    <div className={d.style}>
+                                        <MyInput
+                                            name={d.name}
+                                            value={d.value}
+                                            onChange={d.setValue}
+                                        />
+                                    </div>
+                                );
+                            }
+                        })}
+                    </div>
+                    <div className="flex justify-center self-center w-full ">
+                        <Button
+                            variant="contained"
+                            color="success"
+                            className="text-green-900 hover:text-white"
+                            onClick={() => onSubmit()}
+                        >
+                            Submit
+                        </Button>
+                    </div>
+                    <div
+                        className={
+                            errorSnackbar
+                                ? 'absolute top-100 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                                : 'absolute top-100 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
                         }
-                        return (
-                            <div className={d.style}>
-                                <MyInput
-                                    name={d.name}
-                                    value={d.value}
-                                    onChange={d.setValue}
-                                />
-                            </div>
-                        );
-                    }
-                })}
-            </div>
-            <div className="flex justify-center self-center w-full ">
-                <Button
-                    variant="contained"
-                    color="success"
-                    className="text-green-900 hover:text-white"
-                    onClick={() => onSubmit()}
-                >
-                    Submit
-                </Button>
-            </div>
-            <div
-                className={
-                    errorSnackbar
-                        ? 'absolute top-100 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
-                        : 'absolute top-100 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
-                }
-                hidden={!snackbar}
-            >
-                {errorSnackbar ? errorSnackbar : 'Succes'}
+                        hidden={!snackbar}
+                    >
+                        {errorSnackbar ? errorSnackbar : 'Succes'}
+                    </div>
+                </div>
             </div>
         </div>
     );

@@ -19,6 +19,8 @@ import Link from 'next/link';
 import { url } from 'inspector';
 import house from '../../public/images/properties/house1.jpeg';
 import { myLoader } from '../../helpers/helper';
+import Slideshow from '../../components/SlideShow/slideShow';
+import { motion } from 'framer-motion';
 
 const Properties = () => {
     const router = useRouter();
@@ -32,11 +34,11 @@ const Properties = () => {
     const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
-        console.log(router, 'ROUTER');
+        // console.log(router, 'ROUTER');
         onUserSearch().then((r: any) => {
-            console.log(r);
+            // console.log(r);
             if (!r.error) {
-                console.log(r, 'R');
+                // console.log(r, 'R');
                 setData(r.data.responseData.data.items);
             }
         });
@@ -44,7 +46,7 @@ const Properties = () => {
         db.table('user')
             .toArray()
             .then((data: any) => {
-                console.log(data, 'data DATA');
+                // console.log(data, 'data DATA');
                 if (data.length >= 1 && data[0].token) {
                     setAuth(true);
                 }
@@ -108,7 +110,7 @@ const Properties = () => {
                         />
                     </div>
                 }
-                {isMobile == null && (
+                {/* {isMobile && (
                     <div className="p-2  h-14 bg-transparent shadow-xl flex justify-between items-center text-white ">
                         Vlook
                         <div className="flex">
@@ -123,7 +125,7 @@ const Properties = () => {
                             ))}
                         </div>
                     </div>
-                )}
+                )} */}
                 <div className="pt-16  md:pt-20 w-screen h-screen ">
                     <div className="md:flex h-full 	">
                         <div className=" p-2 w-full md:w-1/4  md:h-full ">
@@ -168,7 +170,7 @@ const Properties = () => {
                                             );
                                         }
                                     })}
-                                    <button className="bg-green-600 p-2 rounded shadow text-white mx-1 md:mt-4 ">
+                                    <button className="bg-green-600 p-2 rounded shadow text-white mx-1 md:mt-4 hover:bg-white hover:text-green-600">
                                         Search
                                     </button>
                                 </div>
@@ -180,32 +182,28 @@ const Properties = () => {
                             <div className="md:p-4 p-2 w-full h-full   bg-glassEffect shadow rounded w-full overflow-y-scroll">
                                 {data.length == 0 && <p>No Data Found </p>}
                                 {data.map((d: any) => (
-                                    <div className="p-1 w-full shadow rounded flex ">
-                                        {console.log(d, 'DATA D')}
-
-                                        <Image
-                                            loader={myLoader}
-                                            src={'house1.png'}
-                                            alt="House1 Picture "
-                                            width={260}
-                                            height={100}
-                                            className="rounded "
-                                            // layout="responsive"
-                                            objectFit={'cover'}
-                                        />
+                                    <div className="p-1 w-full h-40 shadow rounded flex ">
+                                        {/* {console.log(d, 'DATA D')} */}
+                                        <Slideshow images={d.mediaInfo} />
 
                                         <div className="w-full ml-2 p-2 flex flex-col justify-between">
-                                            <div className=" md:text-2xl font-bold">
-                                                {d.propertyName}
-                                                <p className="text-xs md:text-base font-normal">
+                                            <div className="text-sm md:text-xl ">
+                                                <p className="font-bold">
+                                                    {d.price}
+                                                </p>
+
+                                                <p>{d.propertyName}</p>
+                                                <p className="text-xs md:text-xs font-thin">
                                                     {d.address}
                                                 </p>
+
                                                 <p className="text-xs md:text-base font-semibold">
-                                                    {d.categoryName}
+                                                    {d.propertyType}
                                                 </p>
-                                                <p className="text-xs md:text-base font-thin">
-                                                    Smart Living / Ready to Move
-                                                    / Furnished
+                                                <p className="text-xs md:text-base ">
+                                                    {d.categoryName + ' '} -
+                                                    {'>'}
+                                                    {' ' + d.subCategoryName}
                                                 </p>
                                             </div>
                                             <div className="w-full ">

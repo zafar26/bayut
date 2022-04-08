@@ -11,10 +11,14 @@ import {
 import JsonOptions from '../../options.json';
 import { NextRouter, useRouter } from 'next/router';
 import { responseSymbol } from 'next/dist/server/web/spec-compliant/fetch-event';
+import MyList from '../../../components/ListSideBar';
+import MenuAppBar from '../../../components/Appbar';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
 const AddProperty = () => {
+    const isMobile = useMediaQuery('(max-width:600px)');
     const [loginAs, setLoginAs] = useState<String>('');
     const [propertyLookups, setPropertyLookups] = useState<any>();
     const [purpose, setPurpose] = useState<any>('');
@@ -205,7 +209,7 @@ const AddProperty = () => {
             status: 0,
             price: price,
         };
-        console.log(addPropertyBody, 'ADDD PROPERTY');
+        // console.log(addPropertyBody, 'ADDD PROPERTY');
         // router
         onAddProperty(addPropertyBody)
             .then((r: any) => {
@@ -233,108 +237,126 @@ const AddProperty = () => {
         onPropertyLookups()
             // .then((response: any) => console.log(response, 'RESPONSE'))
             .then((r: any) => {
-                console.log(r.data.responseData.data);
+                // console.log(r.data.responseData.data);
                 setPropertyLookups(r.data.responseData.data);
             });
     }, [setPropertyLookups]);
 
     return (
-        <div>
-            {console.log(snackbar, 'SnackBAr')}
-            <Navbar selectedLink={'Add Property'} />
-            <div className="pt-16">
-                <MyStepper steps={steps} activeStep={0} />
-                <div className="flex flex-wrap">
-                    {addPropertyOptions.map((d: any) => {
-                        if (d.button) {
-                            return (
-                                <div className={d.style}>
-                                    <Button color="inherit" size="small">
-                                        {d.label}
-                                    </Button>
-                                </div>
-                            );
-                        }
-                        if (d.label) {
-                            if (d.text == true) {
-                                return <p className={d.style}>{d.label}</p>;
-                            } else {
+        <div className="pt-14 md:pt-16 w-screen h-screen ">
+            <div className="flex">
+                {/* {console.log(snackbar, 'SnackBAr')} */}
+                {isMobile ? (
+                    <Navbar selectedLink={'Add Property'} />
+                ) : (
+                    <MenuAppBar />
+                )}
+
+                {/* <Navbar selectedLink={'Add Property'} /> */}
+                {!isMobile && (
+                    <div className="w-1/6 h-full">
+                        <MyList
+                            toggleDrawer={(e: any, d: any) => console.log(e, d)}
+                            selectedLink={'Add Property'}
+                        />
+                    </div>
+                )}
+                <div className="pt-16 w-full">
+                    <MyStepper steps={steps} activeStep={0} />
+                    <div className="flex flex-wrap">
+                        {addPropertyOptions.map((d: any) => {
+                            if (d.button) {
                                 return (
-                                    <div className={'mx-2 w-72'}>
-                                        <CustomSelect
-                                            value={d.value}
-                                            onChange={(e: any) =>
-                                                d.setValue(e.target.value)
-                                            }
-                                            label={d.label}
-                                            options={d.options}
-                                        />
+                                    <div className={d.style}>
+                                        <Button color="inherit" size="small">
+                                            {d.label}
+                                        </Button>
                                     </div>
                                 );
                             }
-                        }
-
-                        if (d.name) {
-                            if (d.setValue) {
-                                if (d.multilines) {
+                            if (d.label) {
+                                if (d.text == true) {
+                                    return <p className={d.style}>{d.label}</p>;
+                                } else {
                                     return (
-                                        <div className="md:w-2/6">
-                                            <div
-                                                className={'mx-2 w-72 md:w-96'}
-                                            >
-                                                <MyInput
-                                                    textdesc={true}
-                                                    noOfLines={4}
-                                                    name={d.name}
-                                                    value={d.value}
-                                                    onChange={d.setValue}
-                                                />
-                                            </div>
+                                        <div className={'mx-2 w-72'}>
+                                            <CustomSelect
+                                                value={d.value}
+                                                onChange={(e: any) =>
+                                                    d.setValue(e.target.value)
+                                                }
+                                                label={d.label}
+                                                options={d.options}
+                                            />
                                         </div>
                                     );
                                 }
-
-                                return (
-                                    <div className={'mx-2 w-72'}>
-                                        <MyInput
-                                            name={d.name}
-                                            value={d.value}
-                                            onChange={d.setValue}
-                                        />
-                                    </div>
-                                );
-                            } else {
-                                return (
-                                    <div className={'mx-2 w-72'}>
-                                        <MyInput
-                                            disabled={true}
-                                            name={d.name}
-                                            value={d.value}
-                                            onChange={d.setValue}
-                                        />
-                                    </div>
-                                );
                             }
-                        }
-                    })}
-                </div>
-                <div className="mt-4 flex justify-center">
-                    <div className="bg-green-600 hover:bg-green-500 rounded ">
-                        <Button color="success" onClick={() => onSubmit()}>
-                            <p className="text-white">Next</p>
-                        </Button>
+
+                            if (d.name) {
+                                if (d.setValue) {
+                                    if (d.multilines) {
+                                        return (
+                                            <div className="md:w-2/6">
+                                                <div
+                                                    className={
+                                                        'mx-2 w-72 md:w-96'
+                                                    }
+                                                >
+                                                    <MyInput
+                                                        textdesc={true}
+                                                        noOfLines={4}
+                                                        name={d.name}
+                                                        value={d.value}
+                                                        onChange={d.setValue}
+                                                    />
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+
+                                    return (
+                                        <div className={'mx-2 w-72'}>
+                                            <MyInput
+                                                name={d.name}
+                                                value={d.value}
+                                                onChange={d.setValue}
+                                            />
+                                        </div>
+                                    );
+                                } else {
+                                    return (
+                                        <div className={'mx-2 w-72'}>
+                                            <MyInput
+                                                disabled={true}
+                                                name={d.name}
+                                                value={d.value}
+                                                onChange={d.setValue}
+                                            />
+                                        </div>
+                                    );
+                                }
+                            }
+                        })}
+                    </div>
+                    <div className="mt-4 flex justify-center">
+                        <div className="bg-green-600 hover:bg-green-500 rounded ">
+                            <Button color="success" onClick={() => onSubmit()}>
+                                <p className="text-white">Next</p>
+                            </Button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div
-                className={
-                    errorSnackbar
-                        ? 'absolute bottom-100 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
-                        : 'absolute bottom-100 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
-                }
-                hidden={!snackbar}
-            >
-                {errorSnackbar ? errorSnackbar : 'Succes'}
+                <div
+                    className={
+                        errorSnackbar
+                            ? 'absolute bottom-100 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                            : 'absolute bottom-100 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                    }
+                    hidden={!snackbar}
+                >
+                    {errorSnackbar ? errorSnackbar : 'Succes'}
+                </div>
             </div>
         </div>
     );

@@ -9,10 +9,14 @@ import Button from '@mui/material/Button';
 import update from 'immutability-helper';
 import { onAddPropertyAmmenity } from '../../../helpers/apis/addProperty';
 import { NextRouter, useRouter } from 'next/router';
+import MyList from '../../../components/ListSideBar';
+import MenuAppBar from '../../../components/Appbar';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
 const Ammenities = () => {
+    const isMobile = useMediaQuery('(max-width:600px)');
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
     const router: NextRouter = useRouter();
@@ -541,7 +545,7 @@ const Ammenities = () => {
                 updateAmmenity(miscellaneous, setMiscellaneous, d, e),
         },
     ];
-    console.log(ammenities, 'AMMENITIES');
+    // console.log(ammenities, 'AMMENITIES');
     function onSubmit() {
         let body = {
             ...recreationFamily,
@@ -576,74 +580,104 @@ const Ammenities = () => {
                 }
             })
             .catch((e) => console.log(e, 'ERR'));
-        console.log(body, 'Body');
+        // console.log(body, 'Body');
     }
     return (
-        <div>
-            <Navbar selectedLink={'Add Property'} />
-            <div className="pt-16 p-4">
-                <MyStepper steps={steps} activeStep={1} />
-                <p className="mt-4 text-sm ">
-                    Please Select Amenities For this Property :
-                </p>
-                {ammenities.map((amenity: any) => (
-                    <>
-                        <p className="mt-2 underline">{amenity.label}</p>
-                        <div className="flex flex-wrap">
-                            {amenity.data.map((d: any) => {
-                                if (d.type == 'input') {
-                                    return (
-                                        <div className="mx-4 w-48 text-xs ">
-                                            <MyInput
-                                                style={' text-xs'}
-                                                name={d.label}
-                                                value={d.value}
-                                                onChange={(e: any) =>
-                                                    amenity.setChange(e, d)
-                                                }
-                                            />
-                                        </div>
-                                    );
-                                } else {
-                                    return (
-                                        <FormGroup>
-                                            <FormControlLabel
-                                                control={<Checkbox />}
-                                                label={d.label}
-                                                checked={d.checked}
-                                                onChange={(e: any) => {
-                                                    amenity.setChange(e, d);
-                                                }}
-                                            />
-                                        </FormGroup>
-                                    );
-                                }
-                            })}
-                        </div>
-                    </>
-                ))}
-                <div className="mt-4 flex justify-center">
-                    <div className="bg-green-600 hover:bg-green-500 rounded ">
-                        <Button color="success" onClick={() => onSubmit()}>
-                            {/* <a
+        <div className="pt-14 md:pt-16 w-screen h-screen ">
+            <div className="flex">
+                {isMobile ? (
+                    <Navbar selectedLink={'Add Property'} />
+                ) : (
+                    <MenuAppBar />
+                )}
+
+                {/* <Navbar selectedLink={'Add Property'} /> */}
+                {!isMobile && (
+                    <div className="w-1/6 h-full">
+                        <MyList
+                            toggleDrawer={(e: any, d: any) => console.log(e, d)}
+                            selectedLink={'Add Property'}
+                        />
+                    </div>
+                )}
+                <div className="w-full">
+                    {/* <Navbar selectedLink={'Add Property'} /> */}
+                    <div className="pt-16 p-4">
+                        <MyStepper steps={steps} activeStep={1} />
+                        <p className="mt-4 text-sm ">
+                            Please Select Amenities For this Property :
+                        </p>
+                        {ammenities.map((amenity: any) => (
+                            <>
+                                <p className="mt-2 underline">
+                                    {amenity.label}
+                                </p>
+                                <div className="flex flex-wrap">
+                                    {amenity.data.map((d: any) => {
+                                        if (d.type == 'input') {
+                                            return (
+                                                <div className="mx-4 w-48 text-xs ">
+                                                    <MyInput
+                                                        style={' text-xs'}
+                                                        name={d.label}
+                                                        value={d.value}
+                                                        onChange={(e: any) =>
+                                                            amenity.setChange(
+                                                                e,
+                                                                d
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
+                                            );
+                                        } else {
+                                            return (
+                                                <FormGroup>
+                                                    <FormControlLabel
+                                                        control={<Checkbox />}
+                                                        label={d.label}
+                                                        checked={d.checked}
+                                                        onChange={(e: any) => {
+                                                            amenity.setChange(
+                                                                e,
+                                                                d
+                                                            );
+                                                        }}
+                                                    />
+                                                </FormGroup>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                            </>
+                        ))}
+                        <div className="mt-4 flex justify-center">
+                            <div className="bg-green-600 hover:bg-green-500 rounded ">
+                                <Button
+                                    color="success"
+                                    onClick={() => onSubmit()}
+                                >
+                                    {/* <a
                                 href="/corporate/addproperty/upload"
                                 className="text-white"
                             > */}
-                            Next
-                            {/* </a> */}
-                        </Button>
+                                    Next
+                                    {/* </a> */}
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        className={
+                            errorSnackbar
+                                ? 'absolute bottom-100 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                                : 'absolute bottom-100 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                        }
+                        hidden={!snackbar}
+                    >
+                        {errorSnackbar ? errorSnackbar : 'Succes'}
                     </div>
                 </div>
-            </div>
-            <div
-                className={
-                    errorSnackbar
-                        ? 'absolute bottom-100 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
-                        : 'absolute bottom-100 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
-                }
-                hidden={!snackbar}
-            >
-                {errorSnackbar ? errorSnackbar : 'Succes'}
             </div>
         </div>
     );

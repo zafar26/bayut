@@ -89,9 +89,8 @@ const Home = () => {
         },
     ];
     function onSubmit() {
-        router.push(
-            `/property?category=${categories}?city=${city}?area=${area}?room=${room}`
-        );
+        // ?category=${categories}?city=${city}?area=${area}?room=${room}
+        router.push(`/property`);
         //
     }
     return (
@@ -124,7 +123,7 @@ const Home = () => {
                                 className={
                                     selectedType == i
                                         ? 'm-px p-2 bg-bluetransparent text-white rounded shadow '
-                                        : 'm-px p-2 bg-whiteTransparent rounded text-white'
+                                        : 'm-px p-2 bg-whiteTransparent rounded text-white hover:bg-gray-600 '
                                 }
                                 onClick={() => setSelectedType(i)}
                             >
@@ -149,20 +148,9 @@ const Home = () => {
                             </div>
                         ))}
                         <button
-                            className="md:w-48 w-full h-9 md:m-1 bg-bluetransparent text-white  rounded shadow"
+                            className="md:w-48 w-full  md:m-1 bg-bluetransparent text-white  rounded shadow hover:bg-gray-300 hover:text-primary"
                             onClick={() => onSubmit()}
                         >
-                            {/* <Link
-                                href={{
-                                    pathname: '/property',
-                                    query: {
-                                        category: categories,
-                                        city: city,
-                                        area: area,
-                                        room: room,
-                                    },
-                                }}
-                            > */}
                             Search
                             {/* </Link> */}
                         </button>

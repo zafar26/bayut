@@ -27,7 +27,7 @@ import CustomSelect from '../../../components/Select';
 import { getPropertyListing } from '../../../helpers/apis/managePropertyListing';
 import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
-import Logo from '../../../public/images/properties/house1.jpeg';
+import house from '../../../public/images/properties/house1.jpeg';
 
 const Listings = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -58,15 +58,32 @@ const Listings = () => {
         {
             field: 'ref',
             headerName: 'ref',
-            width: 100,
+            width: isMobile ? 100 : 100,
         },
-        { field: 'type', headerName: 'type', width: 100, editable: true },
-        { field: 'purpose', headerName: ' purpose', width: 100 },
-        { field: 'location', headerName: 'location', width: 130 },
-        { field: 'price', headerName: 'price', width: 120 },
-        { field: 'beds', headerName: 'beds', width: 70 },
-        { field: 'listedBy', headerName: 'listedBy', width: 120 },
-        { field: 'status', headerName: 'status', width: 80 },
+        {
+            field: 'type',
+            headerName: 'type',
+            width: isMobile ? 100 : 120,
+            editable: true,
+        },
+        {
+            field: 'purpose',
+            headerName: ' purpose',
+            width: isMobile ? 100 : 100,
+        },
+        {
+            field: 'location',
+            headerName: 'location',
+            width: isMobile ? 130 : 280,
+        },
+        { field: 'price', headerName: 'price', width: isMobile ? 120 : 120 },
+        { field: 'beds', headerName: 'beds', width: isMobile ? 70 : 80 },
+        {
+            field: 'listedBy',
+            headerName: 'listedBy',
+            width: isMobile ? 120 : 120,
+        },
+        { field: 'status', headerName: 'status', width: isMobile ? 80 : 100 },
 
         // { field: 'company', headerName: 'Company', width: 120 },
         // { field: 'email', headerName: 'Email', width: 200 },
@@ -79,7 +96,7 @@ const Listings = () => {
         {
             field: 'action',
             headerName: 'Actions',
-            width: 120,
+            width: isMobile ? 100 : 100,
             // componentsProps(params: any) {
             //     return <div style={{ background: 'yellow' }}>{params}</div>;
             // },
@@ -102,7 +119,7 @@ const Listings = () => {
                             // style={{ color: '#FFFFFF' }}
                             >
                                 <MoreVertIcon
-                                    onClick={() => console.log('clicked')}
+                                    onClick={() => Alert('clicked')}
                                 />
                                 {/* <AccountCircle fontSize="large" /> */}
                             </div>
@@ -212,23 +229,13 @@ const Listings = () => {
     useEffect(() => {
         getPropertyListing().then((r: any) => {
             setData(r.data.responseData.data.tableData);
-            console.log(r, 'RESULT');
+            // console.log(r, 'RESULT');
         });
     }, []);
 
     return (
         <div className="pt-14 md:pt-16 w-screen h-screen ">
-            {isMobile ? (
-                <Navbar selectedLink={'Listings'} />
-            ) : (
-                <MenuAppBar
-                // className={styles.container}
-                // toggleDrawer={toggleDrawer}
-                // client={clientUser}
-                // login={login}
-                // setUserSigned={setUserSigned}
-                />
-            )}
+            {isMobile ? <Navbar selectedLink={'Listings'} /> : <MenuAppBar />}
             <div className="md:flex w-full justify-between h-full ">
                 {!isMobile && (
                     <div className="w-1/6 h-full">
@@ -241,14 +248,14 @@ const Listings = () => {
                 <div className="p-2 w-full  h-full ">
                     <div className="flex justify-between">
                         <div className="w-32 md:w-2/5 p-2  bg-lightGreenCard rounded shadow lg:h-24 lg:p-8">
-                            <p className="pb-2 font-light text-sm md:text-base lg:text-xl">
+                            <p className="pb-2 font-light text-sm md:text-base ">
                                 Quota Summary
                             </p>
                             <LinearProgress variant="determinate" value={78} />
                         </div>
                         <div className="w-32 md:w-2/5 p-2 bg-lightGreenCard rounded shadow lg:h-24 lg:p-8">
                             <a href="/corporate/listings/quota_usage">
-                                <p className="pb-2 font-light text-sm md:text-base lg:text-xl">
+                                <p className="pb-2 font-light text-sm md:text-base ">
                                     Quota Summary
                                 </p>
                                 <LinearProgress
@@ -259,71 +266,73 @@ const Listings = () => {
                         </div>
                     </div>
                     <div className="p-2 mt-4 md:mt-4 w-full h-full  bg-lightGreenCard rounded shadow">
-                        <p className="text-center">Manage Listings</p>
-                        <div className="flex justify-between items-center px-2  bg-lightGreenCard rounded shadow">
-                            Filters
-                            <div className="px-1 py-2 w-4/5 md:w-full flex overflow-x-auto items-center">
-                                {filters.map((d) => {
-                                    if (d.isToggleOn) {
-                                        return (
-                                            <ToggleSwitch
-                                                width={d.width}
-                                                onLabel={d.onLabel}
-                                                offLabel={d.offLabel}
-                                                isToggleOn={d.isToggleOn}
-                                                // handleChange={}
-                                            />
-                                        );
-                                    }
-                                    if (d.input) {
-                                        return (
-                                            <div className="mx-1 w-full">
-                                                <MyInput
-                                                    style={'w-[10rem]'}
-                                                    filterInput={true}
-                                                    name={d.label}
-                                                    value={d.value}
-                                                    onChange={d.setValue}
+                        <div className="w-full h-2/6">
+                            <p className="text-center">Manage Listings</p>
+                            <div className="flex justify-between items-center px-2  bg-lightGreenCard rounded shadow">
+                                Filters
+                                <div className="px-1 py-2 w-4/5 md:w-full flex overflow-x-auto items-center">
+                                    {filters.map((d) => {
+                                        if (d.isToggleOn) {
+                                            return (
+                                                <ToggleSwitch
+                                                    width={d.width}
+                                                    onLabel={d.onLabel}
+                                                    offLabel={d.offLabel}
+                                                    isToggleOn={d.isToggleOn}
+                                                    // handleChange={}
                                                 />
-                                            </div>
-                                        );
+                                            );
+                                        }
+                                        if (d.input) {
+                                            return (
+                                                <div className="mx-1 w-full">
+                                                    <MyInput
+                                                        style={'w-[10rem]'}
+                                                        filterInput={true}
+                                                        name={d.label}
+                                                        value={d.value}
+                                                        onChange={d.setValue}
+                                                    />
+                                                </div>
+                                            );
+                                        }
+                                        if (d.select) {
+                                            return (
+                                                <div className="w-full">
+                                                    <CustomSelect
+                                                        transparent={true}
+                                                        withoutMargin={true}
+                                                        style={'w-[10rem]'}
+                                                        value={d.value}
+                                                        onChange={(e: any) =>
+                                                            d.setValue(
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        label={d.label}
+                                                        options={d.options}
+                                                    />
+                                                </div>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                            </div>
+                            <div className="pt-1 md:pt-1 flex  justify-center">
+                                <Button
+                                    variant="contained"
+                                    color="success"
+                                    className={
+                                        isMobile
+                                            ? 'bg-green-700 text-xs'
+                                            : 'bg-green-700 '
                                     }
-                                    if (d.select) {
-                                        return (
-                                            <div className="w-full">
-                                                <CustomSelect
-                                                    transparent={true}
-                                                    withoutMargin={true}
-                                                    style={'w-[10rem]'}
-                                                    value={d.value}
-                                                    onChange={(e: any) =>
-                                                        d.setValue(
-                                                            e.target.value
-                                                        )
-                                                    }
-                                                    label={d.label}
-                                                    options={d.options}
-                                                />
-                                            </div>
-                                        );
-                                    }
-                                })}
+                                >
+                                    Search
+                                </Button>
                             </div>
                         </div>
-                        <div className="pt-1 md:pt-1 flex  justify-center">
-                            <Button
-                                variant="contained"
-                                color="success"
-                                className={
-                                    isMobile
-                                        ? 'bg-green-700 text-xs'
-                                        : 'bg-green-700 '
-                                }
-                            >
-                                Search
-                            </Button>
-                        </div>
-                        <div className="pt-2 h-5/6 ">
+                        <div className="pt-2 h-4/6 ">
                             <DataGrid
                                 editMode="row"
                                 columns={columns}
@@ -336,7 +345,7 @@ const Listings = () => {
                                 getRowId={(row: any) => row.ref}
                                 // showToolbar
                                 density={isMobile ? 'compact' : 'standard'}
-                                className="md:text-xl lg:text-xl"
+                                className="h-full"
                                 // disableSelectionOnClick
                                 // experimentalFeatures={{ newEditingApi: true }}
                             />

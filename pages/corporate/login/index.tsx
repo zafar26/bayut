@@ -43,7 +43,7 @@ const CorporateLogin: NextPage = () => {
         db.table('corporate')
             .toArray()
             .then((user: any) => {
-                console.log(user, 'USER DATA');
+                // console.log(user, 'USER DATA');
                 if (user.length >= 1 && user[0].token) {
                     router.push('/corporate/dashboard');
                 }
@@ -58,7 +58,7 @@ const CorporateLogin: NextPage = () => {
             password: password,
         };
         onCorporateLogin(body).then((r: any) => {
-            console.log(r, 'RESULTSS');
+            // console.log(r, 'RESULTSS');
             if (r.error) {
                 setSnackbar(true);
 

@@ -19,7 +19,7 @@ export async function onPropertyLookups() {
         );
         // console.log(error,'ERROR')
         if (data.statusCode == 200) {
-            console.log('DATA', data);
+            // console.log('DATA', data);
             return { data };
         }
     } catch (error: any) {
@@ -49,7 +49,7 @@ export async function onAddProperty(body: any) {
         );
         // console.log(error,'ERROR')
         if (data.statusCode == 200) {
-            console.log('DATA', data);
+            // console.log('DATA', data);
             return { data };
         }
     } catch (error: any) {
@@ -83,7 +83,7 @@ export async function onAddPropertyAmmenity(body: any) {
         );
         // console.log(error,'ERROR')
         if (data.statusCode == 200) {
-            console.log('DATA', data);
+            // console.log('DATA', data);
             return { data };
         }
     } catch (error: any) {
@@ -115,9 +115,9 @@ export async function onAddPropertyUpload(body: any) {
                 },
             }
         );
-        console.log(data,'ERROR')
+        // console.log(data,'ERROR')
         if (data.statusCode == 200) {
-            console.log('DATA', data);
+            // console.log('DATA', data);
             return { data };
         }
     } catch (error: any) {

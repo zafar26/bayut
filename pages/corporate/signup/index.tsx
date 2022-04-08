@@ -51,7 +51,7 @@ const CorporateCreateLogin: NextPage = () => {
         };
 
         onCorporateSignUp(body).then((r: any) => {
-            console.log(r, 'RESULTSS');
+            // console.log(r, 'RESULTSS');
             if (r.error) {
                 setSnackbar(true);
 

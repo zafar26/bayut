@@ -13,6 +13,11 @@ import Button from '@mui/material/Button';
 import MyInput from '../Input';
 import { db } from '../../db';
 import axios from 'axios';
+import { clientLinks } from '../dynamicdata/links';
+import Link from 'next/link';
+import { ListItem } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const useStyles = makeStyles((theme: any) => ({
     root: {
@@ -38,6 +43,7 @@ export default function MenuAppBar({
     toggleDrawer,
     client,
     setUserSigned,
+    selectedLink,
 }: any) {
     const classes = useStyles();
     const [auth, setAuth] = React.useState(false);
@@ -47,6 +53,8 @@ export default function MenuAppBar({
 
     const [showPassword, setShowPassword] = useState<Boolean>(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [selectedItem, setSelectedItem]: any = useState(0);
+    const isMobile = useMediaQuery('(max-width:600px)');
 
     const open = Boolean(anchorEl);
 
@@ -54,13 +62,23 @@ export default function MenuAppBar({
         setAnchorEl(event.currentTarget);
     };
     useEffect(() => {
+        db.table('corporate')
+            .toArray()
+            .then((agent: any) => {
+                if (agent.length >= 1 && agent[0].token) {
+                    setAuth(true);
+                    setName(agent[0].name);
+                }
+            });
+
         db.table('user')
             .toArray()
             .then((user: any) => {
-                console.log(user, 'USER DATA');
+                // console.log(user, 'USER DATA');
                 if (user.length >= 1 && user[0].token) {
                     setAuth(true);
                     setName(user[0].name);
+                    setUserSigned(true);
                 }
             });
     }, [db]);
@@ -88,7 +106,7 @@ export default function MenuAppBar({
             );
             if (data.statusCode == 200) {
                 // alert(data, 'Data');
-                console.log('DATA', data.responseData.data);
+                // console.log('DATA', data.responseData.data);
                 const id = await db.user.add(data.responseData.data);
                 setAuth(true);
                 setUserSigned(true);
@@ -103,7 +121,131 @@ export default function MenuAppBar({
             }
         }
     }
+    if (client && !isMobile) {
+        return (
+            <div className="w-full absolute left-0 top-0 flex justify-between px-9">
+                <Typography
+                    variant="h6"
+                    className={'w-96 '}
+                    style={{ color: '#FFFFFF' }}
+                >
+                    Vlook
+                </Typography>
+                <div className="flex w-5/6">
+                    {clientLinks.map((link: any, index: any) => {
+                        return selectedLink == link.label ? (
+                            <ListItem
+                                button
+                                key={index}
+                                sx={{
+                                    padding: 0,
+                                    // color: '#0d47a1',
+                                    // backgroundColor: '#ffffff',
+                                }}
+                                className="ml-2 w-full h-12 bg-gray-50 opacity-40	 p-0 py-1 flex items-center text-brown-800 shadow md:text-xl lg:text-2xl rounded hover:bg-gray-500 "
+                            >
+                                {/* <div className="w-1 h-full   bg-baseColor rounded-xl">
+                                i
+                            </div> */}
+                                <div className="w-full flex px-2 	">
+                                    <div className="mr-2">{link.icon()}</div>
+                                    <Link href={`${link.path}`}>
+                                        {link.label}
+                                    </Link>
+                                </div>
+                                {/* <div className="w-1 h-full bg-baseColor rounded-xl">
+                                i
+                            </div> */}
+                            </ListItem>
+                        ) : (
+                            <ListItem
+                                button
+                                key={link.label}
+                                sx={{ color: 'GrayText' }}
+                                className="ml-2 w-full text-gray-300 flex items-center md:text-xl lg:text-xl hover:bg-gray-200 rounded hover:text-green-600"
+                                onClick={() => setSelectedItem(index)}
+                            >
+                                <div className="mr-2">{link.icon()}</div>
+                                <Link href={`${link.path}`}>{link.label}</Link>
+                            </ListItem>
+                        );
+                    })}
+                </div>
 
+                <button
+                    className="ml-2 w-40 bg-white rounded flex justify-center items-center bg-primary text-white hover:bg-white hover:text-primary"
+                    onClick={handleMenu}
+                >
+                    <AccountCircleIcon />
+                    <p className="text-sm pl-2">LOGIN</p>
+                </button>
+                <Menu
+                    id="menu-appbar"
+                    anchorEl={anchorEl}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    keepMounted
+                    transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'left',
+                    }}
+                    open={open}
+                    onClose={handleClose}
+                    className="p-0 "
+                    style={{
+                        paddingTop: '0px',
+                        paddingBottom: '0px',
+                    }}
+                >
+                    <div className=" p-4 w-full h-full bg-[#000000] ">
+                        {/* <MenuItem onClick={handleClose}>
+                                        Settings
+                                    </MenuItem>
+                                    <MenuItem onClick={handleClose}>
+                                        Log out
+                                    </MenuItem> */}
+                        <div className="md:w-72 ">
+                            <MyInput
+                                name="Email"
+                                value={email}
+                                onChange={setEmail}
+                            />
+                            <MyInput
+                                name="Password"
+                                type="password"
+                                value={password}
+                                onChange={setPassword}
+                                showPassword={showPassword}
+                                setShowPassword={setShowPassword}
+                            />
+                        </div>
+                        <div className="mt-4 w-full bg-green-700 rounded">
+                            <Button
+                                fullWidth
+                                variant="contained"
+                                color="success"
+                                onClick={() => {
+                                    // console.log('Submited');
+                                    onSubmit();
+                                }}
+                            >
+                                Login
+                            </Button>
+                        </div>
+                        <p className="pt-4 text-white text-center ">
+                            Are You New To vlook properties
+                        </p>
+                        <div className="mt-4 border-white border text-white p-2 text-center hover:bg-gray-800">
+                            <a>Become a Free Member</a>
+                        </div>
+                    </div>
+                </Menu>
+            </div>
+        );
+        // return <div className="bg-transparent "></div>;
+    }
     return (
         // <motion.div
         //     initial={{ y: -250 }}
@@ -206,9 +348,13 @@ export default function MenuAppBar({
                                 }}
                                 open={open}
                                 onClose={handleClose}
-                                className="p-0"
+                                className="p-0 "
+                                style={{
+                                    paddingTop: '0px',
+                                    paddingBottom: '0px',
+                                }}
                             >
-                                <div className=" p-4 w-full h-full bg-[#464E2E] ">
+                                <div className=" p-4 w-full h-full bg-[#000000] ">
                                     {/* <MenuItem onClick={handleClose}>
                                         Settings
                                     </MenuItem>
@@ -236,7 +382,7 @@ export default function MenuAppBar({
                                             variant="contained"
                                             color="success"
                                             onClick={() => {
-                                                console.log('Submited');
+                                                // console.log('Submited');
                                                 onSubmit();
                                             }}
                                         >

@@ -22,7 +22,7 @@ export async function getPropertyListing() {
         );
         // console.log(data,'ERROR')
         if (data.statusCode == 200) {
-            console.log('DATA', data.responseData.data);
+            // console.log('DATA', data.responseData.data);
             return { data };
         }
     } catch (error: any) {

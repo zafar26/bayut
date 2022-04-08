@@ -12,7 +12,7 @@ const UploadAndDisplayImage = ({
             cb(reader.result);
         };
         reader.onerror = function (error: any) {
-            console.log('Error: ', error);
+            // console.log('Error: ', error);
         };
     }
     return (
@@ -37,7 +37,7 @@ const UploadAndDisplayImage = ({
                 type="file"
                 name="myImage"
                 onChange={(event: any) => {
-                    console.log(event.target.files[0]);
+                    // console.log(event.target.files[0]);
                     getBase64(event.target.files[0], (result: any) => {
                         setImageBase64(result);
                     });

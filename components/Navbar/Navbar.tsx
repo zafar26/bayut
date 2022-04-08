@@ -3,6 +3,7 @@ import Drawer from '@mui/material/Drawer';
 import MenuAppBar from '../Appbar/index';
 import styles from './navbar.module.css';
 import MyList from '../ListSideBar';
+import { db } from '../../db';
 
 export default function Navbar({
     selectedLink,
@@ -32,6 +33,7 @@ export default function Navbar({
                 client={clientUser}
                 login={login}
                 setUserSigned={setUserSigned}
+                selectedLink={selectedLink}
             />
             <Drawer
                 className={styles.drawer}

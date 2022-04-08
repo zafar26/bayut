@@ -68,7 +68,7 @@ const MyList = ({
                             button
                             key={index}
                             sx={{ padding: 0, color: '#0d47a1' }}
-                            className="w-full h-12 text-baseColor p-0 py-1 flex items-center  shadow md:text-xl lg:text-2xl "
+                            className="w-full h-12 text-baseColor p-0 py-1 flex items-center  shadow md:text-xl  "
                         >
                             <div className="w-1 h-full   bg-baseColor rounded-xl">
                                 i
@@ -86,7 +86,7 @@ const MyList = ({
                             button
                             key={link.label}
                             sx={{ color: 'GrayText' }}
-                            className="text-gray-500 flex items-center md:text-xl lg:text-2xl"
+                            className="text-gray-500 flex items-center md:text-xl "
                             onClick={() => setSelectedItem(index)}
                         >
                             <div className="mr-2">{link.icon()}</div>
