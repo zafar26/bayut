@@ -119,7 +119,7 @@ const Listings = () => {
                             // style={{ color: '#FFFFFF' }}
                             >
                                 <MoreVertIcon
-                                    onClick={() => Alert('clicked')}
+                                    onClick={() => alert('clicked')}
                                 />
                                 {/* <AccountCircle fontSize="large" /> */}
                             </div>
