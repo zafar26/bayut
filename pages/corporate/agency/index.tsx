@@ -121,7 +121,7 @@ const Agency = () => {
                         />
                     </div>
                 )}
-                <div className="w-full">
+                <div className="md:w-5/6 w-full">
                     <div className="p-2 ">
                         <div className=" flex  justify-between">
                             <div className="w-44  bg-[#E8F6EF]  shadow p-2 rounded text-primary">

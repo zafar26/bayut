@@ -45,8 +45,12 @@ export default function CustomSelect(props: any) {
                     }}
                 >
                     <option aria-label="None" value="" />
-                    {props.options?.map((item: any) => (
-                        <option value={item.value} className="text-[#464E2E]">
+                    {props.options?.map((item: any, index: number) => (
+                        <option
+                            value={item.value}
+                            className="text-[#464E2E]"
+                            key={index}
+                        >
                             {item.label ? item.label : item.text}
                         </option>
                     ))}

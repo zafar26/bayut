@@ -20,7 +20,7 @@ const UploadPage = () => {
     const [imagebase64, setImageBase64] = useState(null);
 
     const [snackbar, setSnackbar] = useState<Boolean>(false);
-    const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
 
     // console.log(selectedImage, 'IMAGEBASE64');
     function onSubmit() {
@@ -59,7 +59,7 @@ const UploadPage = () => {
                         />
                     </div>
                 )}
-                <div className="w-full">
+                <div className="md:w-5/6 w-full">
                     <Navbar selectedLink={'Add Property'} />
                     <div className="pt-16">
                         <MyStepper steps={steps} activeStep={2} />

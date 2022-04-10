@@ -65,7 +65,7 @@ const QuotaUsage = () => {
                         />
                     </div>
                 )}
-                <div className="w-full h-full">
+                <div className="w-full md:w-5/6 h-full">
                     {/* <Navbar selectedLink={'Listings'} /> */}
                     <div className="h-full p-2 flex flex-col ">
                         <p className="flex justify-center text-sm font-bold">

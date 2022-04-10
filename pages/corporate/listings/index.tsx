@@ -245,7 +245,7 @@ const Listings = () => {
                         />
                     </div>
                 )}
-                <div className="p-2 w-full  h-full ">
+                <div className="p-2 md:w-5/6  h-full ">
                     <div className="flex justify-between">
                         <div className="w-32 md:w-2/5 p-2  bg-lightGreenCard rounded shadow lg:h-24 lg:p-8">
                             <p className="pb-2 font-light text-sm md:text-base ">

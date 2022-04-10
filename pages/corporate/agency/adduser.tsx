@@ -32,7 +32,7 @@ const AddUser = () => {
     const [listingQuota, setListingQuota] = useState<String>('');
     const [loginAs, setLoginAs] = useState<String>('');
     const [snackbar, setSnackbar] = useState<Boolean>(false);
-    const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
 
     let loginOptions = [
         {
@@ -242,7 +242,7 @@ const AddUser = () => {
                         />
                     </div>
                 )}
-                <div className=" w-full h-full">
+                <div className=" w-full md:w-5/6 h-full">
                     {/* <Navbar selectedLink={'Agency'} /> */}
                     <div className="flex flex-col justify-center items-center h-32 text-2xl text-primary">
                         <AccountCircleIcon fontSize="large" />

@@ -18,7 +18,7 @@ const steps = ['Details', 'Amenities', 'Uploads'];
 const Ammenities = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [snackbar, setSnackbar] = useState<Boolean>(false);
-    const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router: NextRouter = useRouter();
     const [recreationFamily, setRecreationFamily] = useState<any>({
         barbequeArea: false,
@@ -563,7 +563,9 @@ const Ammenities = () => {
             .then((r: any) => {
                 if (r.error) {
                     setSnackbar(true);
-                    setErrorSnackbar(r.message);
+                    if (r.message) {
+                        setErrorSnackbar(r.message);
+                    }
                     return;
                 }
                 if (r.data.statusCode == 200) {
@@ -600,7 +602,7 @@ const Ammenities = () => {
                         />
                     </div>
                 )}
-                <div className="w-full">
+                <div className="md:w-5/6 w-full">
                     {/* <Navbar selectedLink={'Add Property'} /> */}
                     <div className="pt-16 p-4">
                         <MyStepper steps={steps} activeStep={1} />
@@ -675,6 +677,7 @@ const Ammenities = () => {
                         }
                         hidden={!snackbar}
                     >
+                        Error:
                         {errorSnackbar ? errorSnackbar : 'Succes'}
                     </div>
                 </div>

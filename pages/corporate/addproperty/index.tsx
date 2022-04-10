@@ -44,7 +44,7 @@ const AddProperty = () => {
         mobile?: string;
     }>({});
     const [snackbar, setSnackbar] = useState<Boolean>(false);
-    const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router: NextRouter = useRouter();
 
     function ChangeListingOwner(e: any) {
@@ -261,7 +261,7 @@ const AddProperty = () => {
                         />
                     </div>
                 )}
-                <div className="pt-16 w-full">
+                <div className="pt-16 md:w-5/6 w-full">
                     <MyStepper steps={steps} activeStep={0} />
                     <div className="flex flex-wrap">
                         {addPropertyOptions.map((d: any) => {

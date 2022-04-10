@@ -34,7 +34,7 @@ const CorporateLogin: NextPage = () => {
 
     const [showPassword, setShowPassword] = useState<Boolean>(false);
     const [snackbar, setSnackbar] = useState<Boolean>(false);
-    const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const [loginAs, setLoginAs] = useState<String>('');
     useEffect(() => {
         let queryemail: any = router.query.email;

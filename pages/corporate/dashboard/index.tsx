@@ -58,7 +58,7 @@ const AgentDashboard = () => {
                         />
                     </div>
                 )}
-                <div className="h-full p-2 flex flex-col md:w-5/6 ">
+                <div className="h-full p-2 flex flex-col md:w-5/6 w-full">
                     <div className="w-48  bg-[#E8F6EF]  shadow p-2 rounded text-primary">
                         <p className="text-xs font-light">Date :</p>
                         <p className="text-xs font-bold">

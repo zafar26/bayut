@@ -120,6 +120,7 @@ const Home = () => {
                     <div className="mt-4 flex justify-center">
                         {rentalSaleButton.map((d: any, i: number) => (
                             <button
+                                key={i}
                                 className={
                                     selectedType == i
                                         ? 'm-px p-2 bg-bluetransparent text-white rounded shadow '
@@ -133,8 +134,8 @@ const Home = () => {
                     </div>
 
                     <div className="mt-4 md:flex justify-center">
-                        {searchField.map((d) => (
-                            <div className="m-1 md:w-48 border">
+                        {searchField.map((d: any, i: number) => (
+                            <div className="m-1 md:w-48 border" key={i}>
                                 <CustomSelect
                                     transparent={true}
                                     withoutMargin={true}
