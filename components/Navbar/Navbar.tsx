@@ -50,6 +50,7 @@ export default function Navbar({
                     toggleDrawer={toggleDrawer}
                     selectedLink={selectedLink}
                     clientUser={clientUser}
+                    indexPage={indexPage}
                 />
             </Drawer>
         </React.Fragment>

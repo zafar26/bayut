@@ -41,9 +41,14 @@ a {
     width: 240px;
     background-color: #4ca85a;
 }
-.css-6hp17o-MuiList-root-MuiMenu-list{
+/* .css-6hp17o-MuiList-root-MuiMenu-list{
     padding-top: 0px;
     padding-bottom: 0px;
+} */
+#menu-appbar{
+    padding-top: 0px;
+    padding-bottom: 0px;
+
 }
 @tailwind base;
 @tailwind components;

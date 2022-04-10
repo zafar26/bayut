@@ -46,6 +46,7 @@ const CorporateCreateLogin: NextPage = () => {
             name: name,
             username: email,
             password: password,
+            confirmPassword: confirmPassword,
             mobileNo: '+' + phoneNo,
             userRoleID: signupAs,
         };

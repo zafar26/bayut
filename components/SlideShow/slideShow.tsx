@@ -20,7 +20,7 @@ const Slideshow = ({ images, isFull }: any) => {
     const [imageIndex, setImageIndex] = useState(0);
     const [image, setImage] = useState(images[imageIndex].mediaData);
     return (
-        <div className="relative h-full w-full flex justify-between">
+        <div className="relative  w-full h-full">
             <div
                 className="bg-gray-200 absolute inset-y-2/4 left-1 z-50 p-2 flex items-center rounded-full "
                 onClick={() => {
@@ -35,14 +35,14 @@ const Slideshow = ({ images, isFull }: any) => {
             <Image
                 src={'data:image/gif;base64, ' + image}
                 alt="House1 Picture "
-                width={!isMobile ? (isFull ? 1000 : 280) : 280}
-                height={isFull ? 500 : 220}
+                width={!isMobile ? (isFull ? 480 : 380) : 380}
+                height={isMobile ? 440 : 210}
                 className="rounded h-full w-full"
                 // layout="responsive"
                 objectFit={'fill'}
             />
             <div
-                className="bg-gray-200 absolute inset-y-2/4 right-3 z-50 p-2 flex items-center rounded-full"
+                className="bg-gray-200 absolute inset-y-2/4 right-1 z-50 p-2 flex items-center rounded-full"
                 onClick={() => {
                     if (images[imageIndex + 1]) {
                         setImageIndex(imageIndex + 1);

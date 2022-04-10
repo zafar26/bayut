@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Navbar from '../components/Navbar/Navbar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CustomSelect from '../components/Select';
 import JsonOptions from './options.json';
 import { onUserSearch } from '../helpers/apis/userSearch';
@@ -10,6 +10,9 @@ import Link from 'next/link';
 import { BedSharp } from '@mui/icons-material';
 import house from '../public/images/wallpapers/corporate.png';
 import { myLoader } from '../helpers/helper';
+import { db } from '../db';
+import Slideshow from '../components/SlideShow/slideShow';
+import TransitionsModal from '../components/Modal';
 
 const Home = () => {
     const router = useRouter();
@@ -20,6 +23,32 @@ const Home = () => {
     const [city, setCity] = useState<String>('');
     const [area, setArea] = useState<String>('');
     const [room, setRoom] = useState<String>('');
+    const [auth, setAuth] = useState<Boolean>(false);
+    const [data, setData] = useState<any>([]);
+    useEffect(() => {
+        // console.log(router, 'ROUTER');
+        onUserSearch().then((r: any) => {
+            // console.log(r);
+            if (!r.error) {
+                console.log(r, 'R');
+                let data = [
+                    ...r.responseData.data.items,
+                    ...r.responseData.data.items,
+                ];
+                console.log(data, 'DATAFROMARRAY');
+                setData(data);
+            }
+        });
+
+        db.table('user')
+            .toArray()
+            .then((data: any) => {
+                // console.log(data, 'data DATA');
+                if (data.length >= 1 && data[0].token) {
+                    setAuth(true);
+                }
+            });
+    }, [db]);
 
     let rentalSaleButton = [
         {
@@ -160,6 +189,56 @@ const Home = () => {
                             {/* </Link> */}
                         </button>
                     </div>
+                </div>
+            </div>
+            <div className="w-screen h-screen">
+                <div className="flex justify-center flex-wrap w-full ">
+                    <p className="w-full flex justify-center font-bold text-xl md:text-3xl my-4 underline">
+                        Properties{' '}
+                    </p>
+                    {data.map((d: any, i: number) => (
+                        <div
+                            className="p-1 w-3/4 justify-center items-center md:w-3/12  shadow rounded flex flex-col m-1 "
+                            key={i}
+                        >
+                            <div className=" ">
+                                <Slideshow images={d.mediaInfo} />
+                            </div>
+                            {/* {console.log(d, 'DATA D')} */}
+
+                            <div
+                                className=" w-full  p-1 flex flex-col justify-between"
+                                onClick={() =>
+                                    router.push('/property/details/1')
+                                }
+                            >
+                                <div className="text-sm md:text-xl ">
+                                    <p className="font-bold">{d.price}</p>
+
+                                    <p>{d.propertyName}</p>
+                                    <p className="text-xs md:text-xs font-thin">
+                                        {d.address}
+                                    </p>
+
+                                    <p className="text-xs md:text-base font-semibold">
+                                        {d.propertyType}
+                                    </p>
+                                    <p className="text-xs md:text-base ">
+                                        {d.categoryName + ' '} -{'>'}
+                                        {' ' + d.subCategoryName}
+                                    </p>
+                                </div>
+                                <div className="w-full ">
+                                    {auth && (
+                                        <TransitionsModal
+                                            phoneNo={d.phoneNumber}
+                                            email={d.email}
+                                        />
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>

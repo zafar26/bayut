@@ -67,12 +67,12 @@ export async function onAddPropertyAmmenity(body: any) {
 
 
     try {
-        body.propertyID=1;
+        // body.propertyID=1;
     let corporateUser = await db.table('corporate').toArray();
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
-
+        console.log(body,'BODY')
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Agent/addpropertyamenity',
+            'http://zaki786-001-site1.ftempurl.com/Agent/addpropertyamenit',
             body,
             {
                 headers: {

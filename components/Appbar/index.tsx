@@ -147,7 +147,7 @@ export default function MenuAppBar({
                                     // color: '#0d47a1',
                                     // backgroundColor: '#ffffff',
                                 }}
-                                className="ml-2 w-full h-12 bg-gray-50 opacity-40	 p-0 py-1 flex items-center text-brown-800 shadow md:text-xl lg:text-2xl rounded hover:bg-gray-500 "
+                                className="ml-2 w-full  bg-gray-50 opacity-40	 p-0 py-1 flex items-center text-brown-800 shadow  rounded hover:bg-gray-500 "
                             >
                                 {/* <div className="w-1 h-full   bg-baseColor rounded-xl">
                                 i
@@ -167,7 +167,7 @@ export default function MenuAppBar({
                                 button
                                 key={link.label}
                                 sx={{ color: 'GrayText' }}
-                                className="ml-2 w-full text-gray-300 flex items-center md:text-xl lg:text-xl hover:bg-gray-200 rounded hover:text-green-600"
+                                className="ml-2 w-full text-gray-300 flex items-center  hover:bg-gray-200 rounded hover:text-green-600"
                                 onClick={() => setSelectedItem(index)}
                             >
                                 <div className="mr-2">{link.icon()}</div>
@@ -198,7 +198,7 @@ export default function MenuAppBar({
                     }}
                     open={open}
                     onClose={handleClose}
-                    className="p-0 "
+                    className="p-0 bg-[#000000]"
                     style={{
                         paddingTop: '0px',
                         paddingBottom: '0px',
@@ -268,7 +268,7 @@ export default function MenuAppBar({
             style={{
                 background: client
                     ? indexPage
-                        ? ''
+                        ? '#42240C'
                         : '#464E2E'
                     : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
                 // borderRadius: '0px 0px 10px 10px',

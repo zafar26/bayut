@@ -39,7 +39,7 @@ const Properties = () => {
             // console.log(r);
             if (!r.error) {
                 console.log(r, 'R');
-                setData(r.data.responseData.data.items);
+                setData(r.responseData.data.items);
             }
         });
 
@@ -110,22 +110,7 @@ const Properties = () => {
                         />
                     </div>
                 }
-                {/* {isMobile && (
-                    <div className="p-2  h-14 bg-transparent shadow-xl flex justify-between items-center text-white ">
-                        Vlook
-                        <div className="flex">
-                            {clientLinks.map((d: any) => (
-                                <a
-                                    href={d.path}
-                                    className=" flex w-48 items-end hover:bg-green-50 hover:text-green-800 p-4 rounded"
-                                >
-                                    {d.icon()}
-                                    <div className="ml-2 ">{d.label}</div>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-                )} */}
+
                 <div className="pt-16  md:pt-20 w-screen h-screen ">
                     <div className="md:flex h-full 	">
                         <div className=" p-2 w-full md:w-1/4  md:h-full ">
