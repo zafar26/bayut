@@ -23,7 +23,7 @@ const Slideshow = ({ images }: any) => {
                 onClick={() => {
                     if (images[imageIndex - 1]) {
                         setImageIndex(imageIndex - 1);
-                        setImage(images[imageIndex].mediaData);
+                        setImage(images[imageIndex - 1].mediaData);
                     }
                 }}
             >
@@ -43,7 +43,7 @@ const Slideshow = ({ images }: any) => {
                 onClick={() => {
                     if (images[imageIndex + 1]) {
                         setImageIndex(imageIndex + 1);
-                        setImage(images[imageIndex].mediaData);
+                        setImage(images[imageIndex + 1].mediaData);
                     }
                 }}
             >

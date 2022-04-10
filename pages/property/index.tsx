@@ -181,8 +181,11 @@ const Properties = () => {
                         <div className=" p-2 w-full md:w-4/6  h-5/6  flex justify-center items-center">
                             <div className="md:p-4 p-2 w-full h-full   bg-glassEffect shadow rounded w-full overflow-y-scroll">
                                 {data.length == 0 && <p>No Data Found </p>}
-                                {data.map((d: any) => (
-                                    <div className="p-1 w-full h-40 shadow rounded flex ">
+                                {data.map((d: any, i: number) => (
+                                    <div
+                                        className="p-1 w-full h-40 shadow rounded flex "
+                                        key={i}
+                                    >
                                         {/* {console.log(d, 'DATA D')} */}
                                         <Slideshow images={d.mediaInfo} />
 

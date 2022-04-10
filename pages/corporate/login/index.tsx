@@ -130,8 +130,11 @@ const CorporateLogin: NextPage = () => {
                         </h1>
 
                         <div className="self-center mt-2 bg-blue-600 w-42 rounded">
-                            <Button variant="contained">
-                                <a href="/corporate/signup"> Create Account</a>
+                            <Button
+                                variant="contained"
+                                onClick={() => router.push('/corporate/signup')}
+                            >
+                                Create Account
                             </Button>
                         </div>
                     </div>
