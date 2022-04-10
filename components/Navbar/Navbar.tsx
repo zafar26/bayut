@@ -10,6 +10,7 @@ export default function Navbar({
     clientUser,
     login,
     setUserSigned,
+    indexPage,
 }: any) {
     const [state, setState]: any = useState({ left: false });
 
@@ -34,6 +35,7 @@ export default function Navbar({
                 login={login}
                 setUserSigned={setUserSigned}
                 selectedLink={selectedLink}
+                indexPage={indexPage}
             />
             <Drawer
                 className={styles.drawer}

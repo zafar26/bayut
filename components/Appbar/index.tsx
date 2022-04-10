@@ -44,6 +44,7 @@ export default function MenuAppBar({
     client,
     setUserSigned,
     selectedLink,
+    indexPage,
 }: any) {
     const classes = useStyles();
     const [auth, setAuth] = React.useState(false);
@@ -123,7 +124,11 @@ export default function MenuAppBar({
     }
     if (client && !isMobile) {
         return (
-            <div className="w-full absolute left-0 top-0 flex justify-between px-9">
+            <div
+                className={`w-full absolute left-0 top-0 flex justify-between px-9 py-1  ${
+                    indexPage ? '' : 'bg-[#464E2E]'
+                }`}
+            >
                 <Typography
                     variant="h6"
                     className={'w-96 '}
@@ -262,7 +267,9 @@ export default function MenuAppBar({
             color="transparent"
             style={{
                 background: client
-                    ? ''
+                    ? indexPage
+                        ? ''
+                        : '#464E2E'
                     : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
                 // borderRadius: '0px 0px 10px 10px',
             }}

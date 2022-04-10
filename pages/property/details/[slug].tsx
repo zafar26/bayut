@@ -14,7 +14,7 @@ const PropertyDetails = () => {
         // });
     }, []);
     return (
-        <div className="bg-[#464E2E] w-screen h-screen">
+        <div className=" w-screen h-screen">
             <div className="pt-16 h-full  px-2 md:px-12 py-4 flex justify-center  ">
                 {
                     <div className=" ">

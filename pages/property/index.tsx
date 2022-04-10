@@ -100,7 +100,7 @@ const Properties = () => {
     // console.log(data, 'DATA');
     return (
         <div>
-            <div className=" bg-[#464E2E]">
+            <div className=" ">
                 {
                     <div className="w-full ">
                         <Navbar
@@ -187,9 +187,18 @@ const Properties = () => {
                                         key={i}
                                     >
                                         {/* {console.log(d, 'DATA D')} */}
-                                        <Slideshow images={d.mediaInfo} />
+                                        <div className="w-full md:w-1/2 ">
+                                            <Slideshow images={d.mediaInfo} />
+                                        </div>
 
-                                        <div className="w-full ml-2 p-2 flex flex-col justify-between">
+                                        <div
+                                            className="w-full ml-2 p-2 flex flex-col justify-between"
+                                            onClick={() =>
+                                                router.push(
+                                                    '/property/details/1'
+                                                )
+                                            }
+                                        >
                                             <div className="text-sm md:text-xl ">
                                                 <p className="font-bold">
                                                     {d.price}
