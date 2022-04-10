@@ -38,7 +38,7 @@ const Properties = () => {
         onUserSearch().then((r: any) => {
             // console.log(r);
             if (!r.error) {
-                // console.log(r, 'R');
+                console.log(r, 'R');
                 setData(r.data.responseData.data.items);
             }
         });
