@@ -154,8 +154,13 @@ const CorporateCreateLogin: NextPage = () => {
                             </h1>
 
                             <div className="self-center mt-2 bg-blue-600 w-20 rounded">
-                                <Button variant="contained">
-                                    <a href="/corporate/login"> Login</a>
+                                <Button
+                                    variant="contained"
+                                    onClick={() =>
+                                        router.push('/corporate/login')
+                                    }
+                                >
+                                    <p> Login</p>
                                 </Button>
                             </div>
                         </div>

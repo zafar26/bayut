@@ -18,6 +18,7 @@ import Link from 'next/link';
 import { ListItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme: any) => ({
     root: {
@@ -51,7 +52,7 @@ export default function MenuAppBar({
     const [email, setEmail] = useState<String>('');
     const [name, setName] = useState<String>('');
     const [password, setPassword] = useState<String>('');
-
+    const router = useRouter();
     const [showPassword, setShowPassword] = useState<Boolean>(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [selectedItem, setSelectedItem]: any = useState(0);
@@ -148,15 +149,19 @@ export default function MenuAppBar({
                                     // backgroundColor: '#ffffff',
                                 }}
                                 className="ml-2 w-full  bg-gray-50 opacity-40	 p-0 py-1 flex items-center text-brown-800 shadow  rounded hover:bg-gray-500 "
+                                onClick={() => router.push(link.path)}
                             >
                                 {/* <div className="w-1 h-full   bg-baseColor rounded-xl">
                                 i
                             </div> */}
-                                <div className="w-full flex px-2 	">
+                                <div
+                                    className="w-full flex px-2 	"
+                                    onClick={() => router.push(link.path)}
+                                >
                                     <div className="mr-2">{link.icon()}</div>
-                                    <Link href={`${link.path}`}>
-                                        {link.label}
-                                    </Link>
+                                    {/* <Link href={`${link.path}`}> */}
+                                    {link.label}
+                                    {/* </Link> */}
                                 </div>
                                 {/* <div className="w-1 h-full bg-baseColor rounded-xl">
                                 i
@@ -171,7 +176,9 @@ export default function MenuAppBar({
                                 onClick={() => setSelectedItem(index)}
                             >
                                 <div className="mr-2">{link.icon()}</div>
-                                <Link href={`${link.path}`}>{link.label}</Link>
+                                {/* <Link href={`${link.path}`}> */}
+                                {link.label}
+                                {/* </Link> */}
                             </ListItem>
                         );
                     })}
@@ -242,12 +249,17 @@ export default function MenuAppBar({
                         <p className="pt-4 text-white text-center ">
                             Are You New To vlook properties
                         </p>
-                        <div className="w-full flex justify-center">
-                            <Link href="/corporate/signup?signup=2 ">
-                                <a className="mt-4 w-full border-white border text-white p-2 text-center hover:bg-gray-800">
-                                    Become a Free Member
-                                </a>
-                            </Link>
+                        <div
+                            className="w-full flex justify-center"
+                            onClick={() =>
+                                router.push('/corporate/signup?signup=2')
+                            }
+                        >
+                            {/* <Link href="/corporate/signup?signup=2 "> */}
+                            <p className="mt-4 w-full border-white border text-white p-2 text-center hover:bg-gray-800">
+                                Become a Free Member
+                            </p>
+                            {/* </Link> */}
                         </div>
                     </div>
                 </Menu>
