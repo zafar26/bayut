@@ -132,7 +132,9 @@ const CorporateLogin: NextPage = () => {
                         <div className="self-center mt-2 bg-blue-600 w-42 rounded">
                             <Button
                                 variant="contained"
-                                onClick={() => router.push('/corporate/signup')}
+                                onClick={() =>
+                                    router.push('/corporate/signup?signupas=3')
+                                }
                             >
                                 Create Account
                             </Button>

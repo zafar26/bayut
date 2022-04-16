@@ -22,7 +22,7 @@ const Slideshow = ({ images, isFull }: any) => {
     return (
         <div className="relative  w-full h-full">
             <div
-                className="bg-gray-200 absolute inset-y-2/4 left-1 z-50 p-2 flex items-center rounded-full "
+                className="bg-gray-50 absolute inset-y-2/4 left-1 z-50 p-2 flex items-center rounded-full cursor-pointer"
                 onClick={() => {
                     if (images[imageIndex - 1]) {
                         setImageIndex(imageIndex - 1);
@@ -42,7 +42,7 @@ const Slideshow = ({ images, isFull }: any) => {
                 objectFit={'fill'}
             />
             <div
-                className="bg-gray-200 absolute inset-y-2/4 right-1 z-50 p-2 flex items-center rounded-full"
+                className="bg-gray-50 absolute inset-y-2/4 right-1 z-50 p-2 flex items-center rounded-full cursor-pointer"
                 onClick={() => {
                     if (images[imageIndex + 1]) {
                         setImageIndex(imageIndex + 1);

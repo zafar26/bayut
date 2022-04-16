@@ -19,7 +19,7 @@ const Home = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [selectedType, setSelectedType] = useState(0);
     // const [loginAs, setLoginAs] = useState<String>('');
-    const [categories, setCategories] = useState<String>('');
+    const [categories, setCategories] = useState<Number>(1);
     const [city, setCity] = useState<String>('');
     const [area, setArea] = useState<String>('');
     const [room, setRoom] = useState<String>('');
@@ -119,7 +119,7 @@ const Home = () => {
     ];
     function onSubmit() {
         // ?category=${categories}?city=${city}?area=${area}?room=${room}
-        router.push(`/property`);
+        router.push(`/property?category=${categories}`);
         //
     }
     return (
@@ -176,7 +176,7 @@ const Home = () => {
                                     onChange={(e: any) =>
                                         d.setValue(e.target.value)
                                     }
-                                    label={d.label}
+                                    label={d.value ? '' : d.label}
                                     options={d.options}
                                 />
                             </div>
@@ -186,7 +186,6 @@ const Home = () => {
                             onClick={() => onSubmit()}
                         >
                             Search
-                            {/* </Link> */}
                         </button>
                     </div>
                 </div>
@@ -207,7 +206,7 @@ const Home = () => {
                             {/* {console.log(d, 'DATA D')} */}
 
                             <div
-                                className=" w-full  p-1 flex flex-col justify-between"
+                                className=" w-full  p-1 flex flex-col justify-between cursor-pointer"
                                 onClick={() =>
                                     router.push('/property/details/1')
                                 }

@@ -3,9 +3,12 @@ import Navbar from '../../../components/Navbar/Navbar';
 import Slideshow from '../../../components/SlideShow/slideShow';
 import { useRouter } from 'next/router';
 import { onUserSearch } from '../../../helpers/apis/userSearch';
-import { objectEach } from 'highcharts';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { db } from '../../../db';
+import MyInput from '../../../components/Input';
+import CustomSelect from '../../../components/Select';
+import PhoneNoInput from '../../../components/PhoneInput';
+import TransitionsModal from '../../../components/Modal';
 let excludingAmmenities = [
     'propertyAmenityID',
     'propertyID',
@@ -20,6 +23,14 @@ const PropertyDetails = () => {
     const [auth, setAuth] = useState<Boolean>(false);
     const [ammenityFieldData, setAmmenityFieldData] = useState<any>([]);
     const isMobile = useMediaQuery('(max-width:600px)');
+    const [userSigned, setUserSigned] = useState(false);
+
+    const [phoneNo, setPhoneNo] = useState<String>('');
+    const [email, setEmail] = useState<String>('');
+    const [name, setName] = useState<String>('');
+    const [message, setMessage] = useState<String>(
+        'I would like to inquire about your property Vlook. Please contact me at your earliest convenience.'
+    );
 
     useEffect(() => {
         const { slug } = router.query;
@@ -115,12 +126,12 @@ const PropertyDetails = () => {
                         <Navbar
                             selectedLink={'Property'}
                             clientUser={true}
-                            // setUserSigned={setUserSigned}
+                            setUserSigned={setUserSigned}
                         />
                     </div>
                 }
                 <div className="p-2 pt-4   bg-white w-full flex flex-col items-center   rounded shadow">
-                    <div className="flex flex-col w-full md:w-3/6 justify-center">
+                    <div className="flex flex-col w-full md:w-4/6 justify-center">
                         <div className="justify-between flex items-center h-8  w-full">
                             <p className="text-sm font-bold md:w-1/2 w-full">
                                 {data.propertyName}
@@ -149,7 +160,7 @@ const PropertyDetails = () => {
                     </div>
 
                     <div className="flex  md:justify-center">
-                        <div className="mt-2 w-full md:w-4/6 ">
+                        <div className="mt-4 w-full  ">
                             {data.mediaInfo && (
                                 <Slideshow
                                     images={data.mediaInfo}
@@ -158,7 +169,7 @@ const PropertyDetails = () => {
                             )}
                         </div>
                     </div>
-                    <div className="flex w-full md:w-8/12  justify-center items-center">
+                    <div className="flex w-full md:w-4/6  justify-center items-center">
                         <div className="md:flex items-center font-light text-xs w-1/4">
                             <p>Price : </p>
                             <p className="font-bold text-xl md:ml-2">
@@ -172,10 +183,10 @@ const PropertyDetails = () => {
                             </p>
                         </div>
                     </div>
-                    <div className="flex w-full md:w-full  justify-center items-center">
-                        <div>
-                            Ammenities
-                            <div className="flex flex-wrap ">
+                    <div className="mt-8  p-6 flex w-full md:w-4/6  justify-center items-center">
+                        <div className="  w-full flex justify-center flex-col items-center">
+                            <p className="font-bold">Ammenities</p>
+                            <div className="flex mt-4  flex-wrap ">
                                 {ammenityFieldData.map(
                                     (d: any, index: number) => {
                                         if (
@@ -183,7 +194,7 @@ const PropertyDetails = () => {
                                             index
                                         ) {
                                             return (
-                                                <div className="px-4 w-full   justify-between">
+                                                <div className="px-4 w-5/6   justify-between">
                                                     <li className="w-full text-xs">
                                                         {Object.keys(d)[0]}
                                                         {' : '}
@@ -206,8 +217,8 @@ const PropertyDetails = () => {
                                     }
                                 )}
                             </div>
-                            Other Ammenities
-                            <div className="flex flex-wrap">
+                            <p className="font-bold mt-8 ">Other Ammenities</p>
+                            <div className="mt-4 flex flex-wrap">
                                 {ammenityData.map((d: string) => (
                                     <li className="w-48 text-xs">{d}</li>
                                 ))}
@@ -215,7 +226,63 @@ const PropertyDetails = () => {
                         </div>
                     </div>
                 </div>
-                {/* <div className="pt-16 bg-blue-200 w-3/12"></div> */}
+                <div className="pt-16 w-full md:w-4/12 flex flex-col items-center ">
+                    <div className="flex">
+                        <p>Agent :</p>
+                        <p>Company </p>
+                    </div>
+                    <div className="font-thin ">
+                        Contact Agent for more information
+                    </div>
+
+                    <div className="flex flex-col items-center w-5/6">
+                        <MyInput name="Name" value={name} onChange={setName} />
+                        <MyInput
+                            name="Email"
+                            value={email}
+                            onChange={setEmail}
+                        />
+
+                        <div className="mt-4 w-full">
+                            <PhoneNoInput
+                                phoneNo={phoneNo}
+                                setPhoneNo={setPhoneNo}
+                            />
+                        </div>
+                        <MyInput
+                            name="Message"
+                            textdesc={true}
+                            noOfLines={3}
+                            value={message}
+                            onChange={setMessage}
+                        />
+                        <div className="w-full ">
+                            {/* <button className="mt-4 bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
+                                Call
+                            </button>
+                            <button className="mt-4 bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
+                                Send Email
+                            </button> */}
+                            <div className="w-full mt-4">
+                                {userSigned ? (
+                                    <TransitionsModal
+                                        phoneNo={data.phoneNumber}
+                                        email={data.email}
+                                    />
+                                ) : (
+                                    <div className="flex justify-center w-full">
+                                        {/* <button className="mt-4 bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
+                                            Call
+                                        </button> */}
+                                        <button className=" bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
+                                            Send Email
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     );

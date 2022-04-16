@@ -242,8 +242,12 @@ export default function MenuAppBar({
                         <p className="pt-4 text-white text-center ">
                             Are You New To vlook properties
                         </p>
-                        <div className="mt-4 border-white border text-white p-2 text-center hover:bg-gray-800">
-                            <a>Become a Free Member</a>
+                        <div className="w-full flex justify-center">
+                            <Link href="/corporate/signup?signup=2 ">
+                                <a className="mt-4 w-full border-white border text-white p-2 text-center hover:bg-gray-800">
+                                    Become a Free Member
+                                </a>
+                            </Link>
                         </div>
                     </div>
                 </Menu>

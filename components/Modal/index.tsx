@@ -28,7 +28,7 @@ export default function TransitionsModal(props: any) {
 
     return (
         <div>
-            <div className="flex ">
+            <div className="flex justify-between">
                 <Button
                     onClick={() => {
                         setSelectedButton(1);

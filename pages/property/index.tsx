@@ -177,7 +177,7 @@ const Properties = () => {
                                         </div>
 
                                         <div
-                                            className="w-full ml-2 p-2 flex flex-col justify-between"
+                                            className="w-full ml-2 p-2 flex flex-col justify-between cursor-pointer	"
                                             onClick={() =>
                                                 router.push(
                                                     '/property/details/1'
