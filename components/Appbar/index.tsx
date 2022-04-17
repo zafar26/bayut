@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
 import MyInput from '../Input';
-import { db } from '../../db';
+import { db, resetDatabase } from '../../db';
 import axios from 'axios';
 import { clientLinks } from '../dynamicdata/links';
 import Link from 'next/link';
@@ -86,6 +86,10 @@ export default function MenuAppBar({
     }, [db]);
     const handleClose = () => {
         setAnchorEl(null);
+    };
+    const onLogOut = () => {
+        resetDatabase();
+        router.push('/corporate/login');
     };
     async function onSubmit() {
         try {
@@ -349,7 +353,7 @@ export default function MenuAppBar({
                                 <MenuItem onClick={handleClose}>
                                     Settings
                                 </MenuItem>
-                                <MenuItem onClick={handleClose}>
+                                <MenuItem onClick={() => onLogOut()}>
                                     Log out
                                 </MenuItem>
                             </Menu>

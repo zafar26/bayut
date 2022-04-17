@@ -58,16 +58,15 @@ export async function onManageUser(body?: any) {
         //     return;
         // }
 
-        const { data } = await axios.get(
-            'http://zaki786-001-site1.ftempurl.com/Agent/manageusers'
-            // ,
-            // {parentUserID:corporateUser[0].userID},
-            // {
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         "Authorization":"Bearer "+corporateUser[0].token
-            //     },
-            // }
+        const { data } = await axios.post(
+            'http://zaki786-001-site1.ftempurl.com/Agent/manageusers',
+            {parentUserID:corporateUser[0].userID},
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization":"Bearer "+corporateUser[0].token
+                },
+            }
         );
         console.log(data,'DATA')
         if (data.statusCode == 200) {

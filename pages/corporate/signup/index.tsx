@@ -33,11 +33,11 @@ const CorporateCreateLogin: NextPage = () => {
     const [showPassword, setShowPassword] = useState<Boolean>(false);
     const [showConfirmPassword, setConfirmShowPassword] =
         useState<Boolean>(false);
-    const [signupAs, setSignupAs] = useState<String>('');
+    const [signupAs, setSignupAs] = useState<Number>(2);
     const [phoneNo, setPhoneNO] = useState<String>('');
 
     const [snackbar, setSnackbar] = useState<Boolean>(false);
-    const [errorSnackbar, setErrorSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router = useRouter();
     useEffect(() => {
         const { signupas }: any = router.query;
@@ -67,12 +67,12 @@ const CorporateCreateLogin: NextPage = () => {
             if (r.data.statusCode == 200) {
                 console.log(r, 'RESULT');
                 setSnackbar(true);
-                if (r.localDb) {
-                    setTimeout(
-                        () => router.push(`/corporate/login?email=${email}`),
-                        5000
-                    );
-                }
+                setTimeout(
+                    () => router.push(`/corporate/login?email=${email}`),
+                    5000
+                );
+                //     if (r.localDb) {
+                // }
             } else {
                 if (r.data.errorData.message) {
                     setErrorSnackbar(r.data.errorData.message);
@@ -149,21 +149,33 @@ const CorporateCreateLogin: NextPage = () => {
                             </Button>
                         </div>
 
-                        <div className="mt-4 flex flex-col">
-                            <h1 className="font-thin text-sm">
-                                Already Have an Account
-                            </h1>
+                        {signupAs == 3 && (
+                            <div className="mt-4 flex flex-col">
+                                <h1 className="font-thin text-sm">
+                                    Already Have an Account
+                                </h1>
 
-                            <div className="self-center mt-2 bg-blue-600 w-20 rounded">
-                                <Button
-                                    variant="contained"
-                                    onClick={() =>
-                                        router.push('/corporate/login')
-                                    }
-                                >
-                                    <p> Login</p>
-                                </Button>
+                                <div className="self-center mt-2 bg-blue-600 w-20 rounded">
+                                    <Button
+                                        variant="contained"
+                                        onClick={() =>
+                                            router.push('/corporate/login')
+                                        }
+                                    >
+                                        <p> Login</p>
+                                    </Button>
+                                </div>
                             </div>
+                        )}
+                        <div
+                            className={
+                                errorSnackbar
+                                    ? 'absolute top-1 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                                    : 'absolute top-1 bg-green-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
+                            }
+                            hidden={!snackbar}
+                        >
+                            {errorSnackbar ? errorSnackbar : 'Succes'}
                         </div>
                     </div>
                 </div>

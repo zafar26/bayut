@@ -32,6 +32,7 @@ const Properties = () => {
     const [modal, setModal] = useState<Boolean>(false);
     const [open, setOpen] = useState<Boolean>(modal);
     const [auth, setAuth] = useState(false);
+    const [error, setError] = useState(false);
     const [userSigned, setUserSigned] = useState(false);
     const [data, setData] = useState<any[]>([]);
 
@@ -39,13 +40,17 @@ const Properties = () => {
         const query = router.query;
 
         // console.log(router, 'ROUTER');
-        onUserSearch(query).then((r: any) => {
-            // console.log(r);
-            if (!r.error) {
-                console.log(r, 'R');
-                setData(r.responseData.data.items);
-            }
-        });
+        onUserSearch(query)
+            .then((r: any) => {
+                // console.log(r);
+                if (!r.error) {
+                    console.log(r, 'R');
+                    setData(r.responseData.data.items);
+                }
+            })
+            .catch((e: any) => {
+                console.log(e, 'ERR'), setError(true);
+            });
 
         db.table('user')
             .toArray()
@@ -170,10 +175,14 @@ const Properties = () => {
                         <div className=" p-2 w-full md:w-4/6  h-full  flex flex-col justify-center items-center">
                             <p className="text-xl p-4 font-bold">Properties</p>
                             <div className=" p-2 w-full h-full   bg-glassEffect shadow rounded w-full overflow-y-scroll">
-                                {data.length == 0 && (
-                                    <Box sx={{ display: 'flex' }}>
-                                        <CircularProgress />
-                                    </Box>
+                                {error ? (
+                                    <p>Error </p>
+                                ) : (
+                                    data.length == 0 && (
+                                        <Box sx={{ display: 'flex' }}>
+                                            <CircularProgress />
+                                        </Box>
+                                    )
                                 )}
                                 {data.map((d: any, i: number) => (
                                     <div
@@ -189,7 +198,11 @@ const Properties = () => {
                                             className="w-full ml-2 p-2 flex flex-col justify-between cursor-pointer	"
                                             onClick={() =>
                                                 router.push(
-                                                    '/property/details/1'
+                                                    `/property/details/${
+                                                        d.propertyID
+                                                            ? d.propertyID
+                                                            : 1
+                                                    }`
                                                 )
                                             }
                                         >

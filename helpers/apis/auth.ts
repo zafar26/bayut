@@ -43,6 +43,7 @@ export async function onCorporateSignUp(body: any) {
             alert("Confirm Password Didn't Match");
             return;
         }
+        console.log(body,'BODY')
         const { data } = await axios.post(
             'http://zaki786-001-site1.ftempurl.com/Users/signup',
             body,
@@ -53,7 +54,7 @@ export async function onCorporateSignUp(body: any) {
             }
         );
         if (data.statusCode == 200) {
-            // console.log('DATA', data.responseData.data);
+            console.log('DATA', data.responseData.data);
             return { data };
         }
     } catch (error: any) {

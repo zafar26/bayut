@@ -11,11 +11,26 @@ export async function onUserSearch(body?: any) {
         if(user.length ==0 ){
             user = await db.table('corporate').toArray()
         }
+        console.log(body,'BODY')
+        let params:any = {   
+        }
+        if(body == undefined){
+            params={}
+        }
+        else if(body.category || body.subCategory){
+            params={
+
+            categoryID:body.category? body?.category:null,
+            subCategoryID:body.subcategory? body?.subcategory:null,
+            purpose:body.purpose? body?.purpose:null,
+        
+            }
+        }
         console.log(user,'AFTERWARDS')
         console.log(body,'BODY')
         const { data } = await axios.post(
             'http://zaki786-001-site1.ftempurl.com/Users/search',
-            {body},
+            params,
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,6 +41,8 @@ export async function onUserSearch(body?: any) {
         if (data.statusCode == 200) {
             // console.log('DATA', data.responseData.data);
             return data ;
+        }else{
+            new Error('Not Found')
         }
     } catch (error: any) {
         if (axios.isAxiosError(error)) {

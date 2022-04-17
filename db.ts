@@ -23,5 +23,10 @@ export class MySubClassedDexie extends Dexie {
     });
   }
 }
-
+export function resetDatabase() {
+  return db.transaction('rw', db.corporate, db.user, async () => {
+    await Promise.all(db.tables.map(table => table.clear()))
+  });
+  
+}
 export const db = new MySubClassedDexie();
