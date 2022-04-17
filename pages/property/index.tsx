@@ -116,8 +116,8 @@ const Properties = () => {
                 }
 
                 <div className="pt-16  md:pt-20 w-screen h-screen ">
-                    <div className="md:flex h-full 	">
-                        <div className=" p-2 w-full md:w-1/4  md:h-full ">
+                    <div className="md:flex h-full md:justify-center md:items-center	">
+                        {/* <div className=" p-2 w-full md:w-1/4  md:h-full ">
                             <div className=" w-full md:h-5/6 bg-glassEffect shadow rounded ">
                                 <p className="md:text-base text-xs px-2 font-thin ">
                                     Filters:
@@ -164,11 +164,12 @@ const Properties = () => {
                                     </button>
                                 </div>
                                 {/* Button */}
-                            </div>
-                        </div>
+                        {/* </div>
+                        </div> */}
 
-                        <div className=" p-2 w-full md:w-4/6  h-5/6  flex justify-center items-center">
-                            <div className="md:p-4 p-2 w-full h-full   bg-glassEffect shadow rounded w-full overflow-y-scroll">
+                        <div className=" p-2 w-full md:w-4/6  h-full  flex flex-col justify-center items-center">
+                            <p className="text-xl p-4 font-bold">Properties</p>
+                            <div className=" p-2 w-full h-full   bg-glassEffect shadow rounded w-full overflow-y-scroll">
                                 {data.length == 0 && (
                                     <Box sx={{ display: 'flex' }}>
                                         <CircularProgress />
