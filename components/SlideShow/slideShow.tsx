@@ -15,10 +15,18 @@ const Slideshow = ({ images, isFull }: any) => {
     //     animate={{ opacity: 1 }}
     //     exit={{ opacity: 0 }}
     // />
-    const isMobile = useMediaQuery('(max-width:600px)');
+    //     1. category
+    // 2.subcategory
+    // 3. purpose
+    // 4. name
+    // 5. area
 
+    const isMobile = useMediaQuery('(max-width:600px)');
+    // console.log(images, 'IMAGES');
     const [imageIndex, setImageIndex] = useState(0);
-    const [image, setImage] = useState(images[imageIndex].mediaData);
+    const [image, setImage] = useState(
+        images[0] ? (images[0].mediaData ? images[0].mediaData : '') : ''
+    );
     return (
         <div className="relative  w-full h-full">
             <div
@@ -34,7 +42,7 @@ const Slideshow = ({ images, isFull }: any) => {
             </div>
             <Image
                 src={'data:image/gif;base64, ' + image}
-                alt="House1 Picture "
+                alt="No Image "
                 width={!isMobile ? (isFull ? 480 : 380) : 380}
                 height={isMobile ? 440 : 210}
                 className="rounded h-full w-full"

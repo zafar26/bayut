@@ -249,16 +249,13 @@ export default function MenuAppBar({
                         <p className="pt-4 text-white text-center ">
                             Are You New To vlook properties
                         </p>
-                        <div
-                            className="w-full flex justify-center"
-                            onClick={() =>
-                                router.push('/corporate/signup?signup=2')
-                            }
-                        >
+                        <div className="w-full flex justify-center">
                             {/* <Link href="/corporate/signup?signup=2 "> */}
-                            <p className="mt-4 w-full border-white border text-white p-2 text-center hover:bg-gray-800">
-                                Become a Free Member
-                            </p>
+                            <Link href="/corporate/signup?signupas=2">
+                                <a className="mt-4 w-full border-white border text-white p-2 text-center hover:bg-gray-800">
+                                    Become a Free Member
+                                </a>
+                            </Link>
                             {/* </Link> */}
                         </div>
                     </div>
@@ -415,8 +412,14 @@ export default function MenuAppBar({
                                     <p className="pt-4 text-white text-center ">
                                         Are You New To vlook properties
                                     </p>
-                                    <div className="mt-4 border-white border text-white p-2 text-center hover:bg-gray-800">
-                                        <a>Become a Free Member</a>
+                                    <div className="w-full flex justify-center">
+                                        {/* <Link href="/corporate/signup?signup=2 "> */}
+                                        <Link href="/corporate/signup?signupas=2">
+                                            <a className="mt-4 w-full border-white border text-white p-2 text-center hover:bg-gray-800">
+                                                Become a Free Member
+                                            </a>
+                                        </Link>
+                                        {/* </Link> */}
                                     </div>
                                 </div>
                             </Menu>

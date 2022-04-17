@@ -3,13 +3,14 @@ import MyStepper from '../../../components/Stepper';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import UploadAndDisplayImage from '../../../components/Upload';
 import { onAddPropertyUpload } from '../../../helpers/apis/addProperty';
 import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { NextRouter, useRouter } from 'next/router';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
@@ -18,21 +19,28 @@ const UploadPage = () => {
     const [value, setValue] = useState(0);
     const [selectedImage, setSelectedImage] = useState<any>(null);
     const [imagebase64, setImageBase64] = useState(null);
+    const router: NextRouter = useRouter();
+    const [propertyID, setPropertyID] = useState<any>('');
 
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
-
+    useEffect(() => {
+        const { propertyid }: any = router.query;
+        setPropertyID(propertyid);
+    }, []);
     // console.log(selectedImage, 'IMAGEBASE64');
     function onSubmit() {
         let body = {
             imageData: imagebase64,
             fileName: selectedImage.name,
-            mediaType: 'image/png',
+            mediaType: 'image',
             mediaPath: '',
+            propertyID: propertyID,
         };
         // console.log(body, 'BODY');
         onAddPropertyUpload(body).then((r: any) => {
             if (r.statusCode == 200) {
+                console.log(r, 'RESULT');
                 setSnackbar(true);
             } else {
                 setSnackbar(true);
@@ -89,7 +97,7 @@ const UploadPage = () => {
                             <div>
                                 {value == 0 && (
                                     <div className="mt-4 bg-green-100 flex p-8 flex-col items-center">
-                                        <p className="">
+                                        <div className="">
                                             {/* To Upload Iamge, Drag Files Here Or Click
                                     Browse */}
                                             <UploadAndDisplayImage
@@ -105,7 +113,7 @@ const UploadPage = () => {
                                         imagebase64,
                                         'SsetSelectedImage'
                                     )} */}
-                                        </p>
+                                        </div>
                                         <p className="text-sm font-thin">
                                             Allowed Follwed Extension .jpg /
                                             .png

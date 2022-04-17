@@ -65,6 +65,7 @@ const CorporateCreateLogin: NextPage = () => {
                 return;
             }
             if (r.data.statusCode == 200) {
+                console.log(r, 'RESULT');
                 setSnackbar(true);
                 if (r.localDb) {
                     setTimeout(

@@ -228,8 +228,8 @@ const Listings = () => {
     ];
     useEffect(() => {
         getPropertyListing().then((r: any) => {
+            console.log(r, 'RESULT');
             setData(r.data.responseData.data.tableData);
-            // console.log(r, 'RESULT');
         });
     }, []);
 

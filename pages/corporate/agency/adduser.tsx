@@ -192,7 +192,7 @@ const AddUser = () => {
                 mobileNo: mobileNo,
                 communication: true,
                 password: password,
-                parentUserID: 0,
+                // parentUserID: 0,
                 userRoleID: 3,
                 status: 0,
             },
@@ -219,6 +219,7 @@ const AddUser = () => {
                 return;
             }
             if (r.data.statusCode == 200 || r.userID) {
+                console.log(r, 'RESULT');
                 setSnackbar(true);
             } else {
                 if (r.data.errorData.message) {

@@ -34,8 +34,10 @@ const Properties = () => {
     const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
+        const query = router.query;
+
         // console.log(router, 'ROUTER');
-        onUserSearch().then((r: any) => {
+        onUserSearch(query).then((r: any) => {
             // console.log(r);
             if (!r.error) {
                 console.log(r, 'R');

@@ -3,7 +3,7 @@ import MyStepper from '../../../components/Stepper';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import MyInput from '../../../components/Input';
 import Button from '@mui/material/Button';
 import update from 'immutability-helper';
@@ -20,6 +20,7 @@ const Ammenities = () => {
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router: NextRouter = useRouter();
+    const [propertyID, setPropertyID] = useState<any>('');
     const [recreationFamily, setRecreationFamily] = useState<any>({
         barbequeArea: false,
         dayCareCenter: false,
@@ -545,6 +546,10 @@ const Ammenities = () => {
                 updateAmmenity(miscellaneous, setMiscellaneous, d, e),
         },
     ];
+    useEffect(() => {
+        const { propertyid }: any = router.query;
+        setPropertyID(propertyid);
+    }, []);
     // console.log(ammenities, 'AMMENITIES');
     function onSubmit() {
         let body = {
@@ -557,7 +562,7 @@ const Ammenities = () => {
             ...features,
             ...cleaningMaintenance,
             ...miscellaneous,
-            propertyID: 1,
+            propertyID: propertyID,
         };
         onAddPropertyAmmenity(body)
             .then((r: any) => {
@@ -571,7 +576,10 @@ const Ammenities = () => {
                 if (r.data.statusCode == 200) {
                     setSnackbar(true);
                     setTimeout(
-                        () => router.push('/corporate/addproperty/upload'),
+                        () =>
+                            router.push(
+                                `/corporate/addproperty/upload?propertyid=${propertyID}`
+                            ),
                         5000
                     );
                 } else {

@@ -14,6 +14,7 @@ import { responseSymbol } from 'next/dist/server/web/spec-compliant/fetch-event'
 import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { db } from '../../../db';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
@@ -38,6 +39,7 @@ const AddProperty = () => {
     const [ownershipStatus, setOwnershipStatus] = useState<String>('');
     const [listingOwner, setListingOwner] = useState<String>('');
     const [listingOwnerData, setListingOwnerData] = useState<{
+        userID?: string;
         contactPerson?: string;
         email?: string;
         phone?: string;
@@ -48,7 +50,7 @@ const AddProperty = () => {
     const router: NextRouter = useRouter();
 
     function ChangeListingOwner(e: any) {
-        setListingOwner(e);
+        setListingOwner(e.name);
         // Fetch For Listing USer
     }
     let addPropertyOptions = [
@@ -205,7 +207,7 @@ const AddProperty = () => {
             permitNumber: permitNo,
             completionStatusID: 1,
             ownerShipStatusID: 1,
-            listingUserID: 1,
+            listingUserID: listingOwnerData.userID,
             status: 0,
             price: price,
         };
@@ -219,9 +221,13 @@ const AddProperty = () => {
                     return;
                 }
                 if (r.data.statusCode == 200) {
+                    console.log(r.data, 'RESULT');
                     setSnackbar(true);
                     setTimeout(
-                        () => router.push('/corporate/addproperty/ammenities'),
+                        () =>
+                            router.push(
+                                `/corporate/addproperty/ammenities?propertyid=${r.data}`
+                            ),
                         5000
                     );
                 } else {
@@ -234,9 +240,19 @@ const AddProperty = () => {
             .catch((e) => console.log(e, 'ERR'));
     }
     useEffect(() => {
+        async function getListingUser() {
+            let corporateUser = await db.table('corporate').toArray();
+            console.log(corporateUser, 'CORPORATEUSER');
+            return corporateUser[0];
+        }
         onPropertyLookups()
             // .then((response: any) => console.log(response, 'RESPONSE'))
             .then((r: any) => {
+                getListingUser().then((user: any) => {
+                    console.log(user, 'LISYTINGUSER');
+                    setListingOwnerData(user);
+                    setListingOwner(user.name);
+                });
                 // console.log(r.data.responseData.data);
                 setPropertyLookups(r.data.responseData.data);
             });

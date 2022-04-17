@@ -39,7 +39,9 @@ const UploadAndDisplayImage = ({
                 onChange={(event: any) => {
                     // console.log(event.target.files[0]);
                     getBase64(event.target.files[0], (result: any) => {
-                        setImageBase64(result);
+                        // console.log(result, 'IMAGE RESULT');
+                        // console.log(result.split(',')[1], 'IMAGE RESULT');
+                        setImageBase64(result.split(',')[1]);
                     });
                     setSelectedImage(event.target.files[0]);
                 }}

@@ -19,16 +19,20 @@ const Home = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [selectedType, setSelectedType] = useState(0);
     // const [loginAs, setLoginAs] = useState<String>('');
+    const [userSigned, setUserSigned] = useState(false);
+
     const [categories, setCategories] = useState<Number>(1);
     const [city, setCity] = useState<String>('');
     const [area, setArea] = useState<String>('');
-    const [room, setRoom] = useState<String>('');
+    const [purpose, setPurpose] = useState<String>('');
+    const [subCategory, setSubCategory] = useState<String>('');
     const [auth, setAuth] = useState<Boolean>(false);
     const [data, setData] = useState<any>([]);
     useEffect(() => {
         // console.log(router, 'ROUTER');
+
         onUserSearch().then((r: any) => {
-            // console.log(r);
+            console.log(r, 'RSULT PRoPERT SEARCH');
             if (!r.error) {
                 console.log(r, 'R');
                 let data = [
@@ -99,6 +103,19 @@ const Home = () => {
             options: JsonOptions.categories,
         },
         {
+            label: 'Sub Category',
+            value: subCategory,
+            setValue: setSubCategory,
+            options: JsonOptions.subCategories,
+        },
+        {
+            label: 'Purpose',
+            value: purpose,
+            setValue: setPurpose,
+            options: JsonOptions.propertyType,
+        },
+
+        {
             label: 'City',
             value: city,
             setValue: setCity,
@@ -110,16 +127,12 @@ const Home = () => {
             setValue: setArea,
             options: cityOptions,
         },
-        {
-            label: 'Room',
-            value: room,
-            setValue: setRoom,
-            options: roomOptions,
-        },
     ];
     function onSubmit() {
         // ?category=${categories}?city=${city}?area=${area}?room=${room}
-        router.push(`/property?category=${categories}`);
+        router.push(
+            `/property?category=${categories}&subcategory=${subCategory}&purpose=${purpose} `
+        );
         //
     }
     return (
@@ -136,6 +149,7 @@ const Home = () => {
                     selectedLink={'Home'}
                     clientUser={true}
                     indexPage={true}
+                    setUserSigned={setUserSigned}
                 />
                 <div className="relative top-14 md:top-16 p-2 h-5/6 flex flex-col justify-center">
                     <div className="text-white md:text-4xl text-xl flex flex-col  ">
@@ -203,12 +217,17 @@ const Home = () => {
                             <div className=" ">
                                 <Slideshow images={d.mediaInfo} />
                             </div>
-                            {/* {console.log(d, 'DATA D')} */}
+                            {/* {console.log(
+                                d.mediaInfo[0].mediaData,
+                                'EACH PROPERTY '
+                            )} */}
 
                             <div
                                 className=" w-full  p-1 flex flex-col justify-between cursor-pointer"
                                 onClick={() =>
-                                    router.push('/property/details/1')
+                                    router.push(
+                                        `/property/details/${d.propertyID}`
+                                    )
                                 }
                             >
                                 <div className="text-sm md:text-xl ">

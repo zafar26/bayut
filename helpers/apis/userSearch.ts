@@ -5,16 +5,17 @@ export async function onUserSearch(body?: any) {
 
 
     try {
-
+        
     let user = await db.table('user').toArray();
         console.log(user,'USER');
         if(user.length ==0 ){
             user = await db.table('corporate').toArray()
         }
         console.log(user,'AFTERWARDS')
+        console.log(body,'BODY')
         const { data } = await axios.post(
             'http://zaki786-001-site1.ftempurl.com/Users/search',
-            {},
+            {body},
             {
                 headers: {
                     'Content-Type': 'application/json',

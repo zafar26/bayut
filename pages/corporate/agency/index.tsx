@@ -3,7 +3,7 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import LinearProgress from '@mui/material/LinearProgress';
 import TuneIcon from '@mui/icons-material/Tune';
 import CustomSelect from '../../../components/Select';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -24,10 +24,12 @@ import dummyData from '../../../components/data/index.json';
 import CreateIcon from '@mui/icons-material/Create';
 import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
+import { onManageUser } from '../../../helpers/apis/addUser';
 
 const Agency = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [loginAs, setLoginAs] = useState<String>('');
+    const [usersData, setusersData] = useState<any>([]);
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -56,26 +58,33 @@ const Agency = () => {
             </GridToolbarContainer>
         );
     }
-
+    useEffect(() => {
+        onManageUser()
+            .then((r: any) => {
+                console.log(r, 'RESULT');
+                setusersData(r.data.responseData.data);
+            })
+            .catch((e: any) => console.log(e, 'ERR'));
+    }, []);
     const columns = [
         {
-            field: 'id',
-            headerName: 'ref',
-            width: 120,
+            field: 'userId',
+            headerName: 'User ID',
+            width: 80,
         },
         // { field: 'guid', headerName: 'GU_ID', width: 200 },
         // { field: 'isActive', headerName: ' Active', width: 100 },
         // { field: 'age', headerName: 'Age', width: 90 },
         // { field: 'eyeColor', headerName: 'Eye Color', width: 120 },
         // { field: 'company', headerName: 'Company', width: 120 },
-        { field: 'phone', headerName: 'type', width: 200 },
-        { field: 'email', headerName: 'purpose', width: 200 },
-        { field: 'address', headerName: 'location', width: 300 },
-        { field: 'mobile', headerName: 'price', width: 200 },
+        { field: 'name', headerName: 'Name', width: 160 },
+        { field: 'username', headerName: 'UserName', width: 200 },
+        { field: 'mobileNo', headerName: 'Mobile No', width: 140 },
+        // { field: 'mobile', headerName: 'price', width: 200 },
 
-        { field: 'balance', headerName: 'beds', width: 120 },
-        { field: 'firstName', headerName: 'listedBy', width: 130 },
-        { field: 'lastName', headerName: 'status', width: 120 },
+        // { field: 'balance', headerName: 'beds', width: 120 },
+        // { field: 'firstName', headerName: 'listedBy', width: 130 },
+        // { field: 'lastName', headerName: 'status', width: 120 },
         // { field: 'registered', headerName: 'Registered On', width: 300 },
         // { field: 'latitude', headerName: 'Latitude', width: 120 },
         // { field: 'longitude', headerName: 'Longitude', width: 120 },
@@ -160,8 +169,9 @@ const Agency = () => {
                         <div className=" h-full rounded bg-lightGreenCard shadow">
                             <DataGrid
                                 columns={columns}
-                                rows={dummyData}
+                                rows={usersData}
                                 pageSize={20}
+                                getRowId={(row: any) => row.userId}
                                 // checkboxSelection
                                 components={{
                                     Toolbar: CustomToolbar,

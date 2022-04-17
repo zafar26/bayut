@@ -36,7 +36,7 @@ export async function onAddProperty(body: any) {
 
     let corporateUser = await db.table('corporate').toArray();
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
-
+        // body.listingUserID = corporateUser[0].userID 
         const { data } = await axios.post(
             'http://zaki786-001-site1.ftempurl.com/Agent/addproperty',
             body,
@@ -47,7 +47,7 @@ export async function onAddProperty(body: any) {
                 },
             }
         );
-        // console.log(error,'ERROR')
+        console.log(data,'DATAA')
         if (data.statusCode == 200) {
             // console.log('DATA', data);
             return { data };
@@ -72,7 +72,7 @@ export async function onAddPropertyAmmenity(body: any) {
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
         console.log(body,'BODY')
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Agent/addpropertyamenit',
+            'http://zaki786-001-site1.ftempurl.com/Agent/addpropertyamenity',
             body,
             {
                 headers: {
@@ -101,10 +101,10 @@ export async function onAddPropertyUpload(body: any) {
 
 
     try {
-        body.propertyID=1;
+        // body.propertyID=1;
     let corporateUser = await db.table('corporate').toArray();
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
-
+        console.log(body,'BODY')
         const { data } = await axios.post(
             'http://zaki786-001-site1.ftempurl.com/Agent/addmedia',
             body,
