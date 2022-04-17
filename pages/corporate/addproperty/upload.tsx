@@ -20,7 +20,7 @@ const UploadPage = () => {
     const [selectedImage, setSelectedImage] = useState<any>(null);
     const [imagebase64, setImageBase64] = useState(null);
     const router: NextRouter = useRouter();
-    const [propertyID, setPropertyID] = useState<any>('');
+    const [propertyID, setPropertyID] = useState<Number>(0);
 
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);

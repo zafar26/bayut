@@ -25,11 +25,13 @@ import CreateIcon from '@mui/icons-material/Create';
 import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
 import { onManageUser } from '../../../helpers/apis/addUser';
+import { NextRouter, useRouter } from 'next/router';
 
 const Agency = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [loginAs, setLoginAs] = useState<String>('');
     const [usersData, setusersData] = useState<any>([]);
+    const router: NextRouter = useRouter();
 
     const [anchorEl, setAnchorEl] = useState(null);
 
@@ -62,7 +64,9 @@ const Agency = () => {
         onManageUser()
             .then((r: any) => {
                 console.log(r, 'RESULT');
-                setusersData(r.data.responseData.data);
+                if (!r.error) {
+                    setusersData(r.data.responseData.data);
+                }
             })
             .catch((e: any) => console.log(e, 'ERR'));
     }, []);
@@ -140,7 +144,12 @@ const Agency = () => {
                                 </p>
                             </div>
                             <div>
-                                <div className="ml-2  flex items-center bg-[#E8F6EF]  shadow p-2 rounded text-primary">
+                                <button
+                                    className="ml-2  flex items-center bg-[#E8F6EF]  shadow p-2 rounded text-primary"
+                                    onClick={(e: any) =>
+                                        router.push('/corporate/agency/adduser')
+                                    }
+                                >
                                     <PersonAddAltIcon
                                         fontSize={isMobile ? 'small' : 'medium'}
                                     />
@@ -149,7 +158,7 @@ const Agency = () => {
                                             Add New User
                                         </p>
                                     </a>
-                                </div>
+                                </button>
                             </div>
                         </div>
                         <div className="mt-2 ">

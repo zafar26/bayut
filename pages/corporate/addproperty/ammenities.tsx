@@ -20,7 +20,7 @@ const Ammenities = () => {
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router: NextRouter = useRouter();
-    const [propertyID, setPropertyID] = useState<any>('');
+    const [propertyID, setPropertyID] = useState<Number>(0);
     const [recreationFamily, setRecreationFamily] = useState<any>({
         barbequeArea: false,
         dayCareCenter: false,
@@ -548,6 +548,7 @@ const Ammenities = () => {
     ];
     useEffect(() => {
         const { propertyid }: any = router.query;
+        console.log(propertyid, 'PROPERRTY ID');
         setPropertyID(propertyid);
     }, []);
     // console.log(ammenities, 'AMMENITIES');

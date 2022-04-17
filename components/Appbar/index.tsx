@@ -159,9 +159,9 @@ export default function MenuAppBar({
                                     onClick={() => router.push(link.path)}
                                 >
                                     <div className="mr-2">{link.icon()}</div>
-                                    {/* <Link href={`${link.path}`}> */}
-                                    {link.label}
-                                    {/* </Link> */}
+                                    <Link href={`${link.path}`}>
+                                        <a>{link.label}</a>
+                                    </Link>
                                 </div>
                                 {/* <div className="w-1 h-full bg-baseColor rounded-xl">
                                 i
@@ -176,9 +176,9 @@ export default function MenuAppBar({
                                 onClick={() => setSelectedItem(index)}
                             >
                                 <div className="mr-2">{link.icon()}</div>
-                                {/* <Link href={`${link.path}`}> */}
-                                {link.label}
-                                {/* </Link> */}
+                                <Link href={`${link.path}`}>
+                                    <a>{link.label}</a>
+                                </Link>
                             </ListItem>
                         );
                     })}

@@ -226,7 +226,7 @@ const AddProperty = () => {
                     setTimeout(
                         () =>
                             router.push(
-                                `/corporate/addproperty/ammenities?propertyid=${r.data}`
+                                `/corporate/addproperty/ammenities?propertyid=${r.data.responseData.data}`
                             ),
                         5000
                     );

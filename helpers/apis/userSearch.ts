@@ -5,7 +5,7 @@ export async function onUserSearch(body?: any) {
 
 
     try {
-        
+        // body.
     let user = await db.table('user').toArray();
         console.log(user,'USER');
         if(user.length ==0 ){
