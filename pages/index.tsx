@@ -13,6 +13,8 @@ import { myLoader } from '../helpers/helper';
 import { db } from '../db';
 import Slideshow from '../components/SlideShow/slideShow';
 import TransitionsModal from '../components/Modal';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const Home = () => {
     const router = useRouter();
@@ -131,7 +133,9 @@ const Home = () => {
     function onSubmit() {
         // ?category=${categories}?city=${city}?area=${area}?room=${room}
         router.push(
-            `/property?category=${categories}&subcategory=${subCategory}&purpose=${purpose} `
+            `/property?category=${categories}${
+                subCategory ? `&subcategory=${subCategory}` : ''
+            } ${purpose ? `&purpose=${purpose}` : ''} `
         );
         //
     }
@@ -209,6 +213,11 @@ const Home = () => {
                     <p className="w-full flex justify-center font-bold text-xl md:text-3xl my-4 underline">
                         Properties{' '}
                     </p>
+                    {data.length == 0 && (
+                        <Box sx={{ display: 'flex' }}>
+                            <CircularProgress />
+                        </Box>
+                    )}
                     {data.map((d: any, i: number) => (
                         <div
                             className="p-1 w-3/4 justify-center items-center md:w-3/12  shadow rounded flex flex-col m-1 "
