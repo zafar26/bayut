@@ -5,6 +5,7 @@ import InsightsIcon from '@mui/icons-material/Insights';
 import GroupIcon from '@mui/icons-material/Group';
 import PublicIcon from '@mui/icons-material/Public';
 import AddIcon from '@mui/icons-material/Add';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
 //
 import HomeIcon from '@mui/icons-material/Home';
 import ApartmentIcon from '@mui/icons-material/Apartment';
@@ -18,7 +19,7 @@ export const corporateLinks: any = [
         icon: () => <DashboardIcon />,
     },
     {
-        label: 'Listings',
+        label: 'Property Listings',
         path: '/corporate/listings',
         icon: () => <ViewListIcon />,
     },
@@ -38,10 +39,15 @@ export const corporateLinks: any = [
         icon: () => <GroupIcon />,
     },
     {
-        label: 'Agency Website',
-        path: '/corporate/agencyWebsite',
-        icon: () => <PublicIcon />,
+        label: 'Add User',
+        path: '/corporate/agency/adduser',
+        icon: () => <GroupAddIcon />,
     },
+    // {
+    //     label: 'Agency Wbsite',
+    //     path: '/corporate/agencyWebsite',
+    //     icon: () => <PublicIcon />,
+    // },
 
     {
         label: 'Add Property',

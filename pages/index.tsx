@@ -140,8 +140,8 @@ const Home = () => {
         //
     }
     return (
-        <div>
-            <div className="w-screen h-screen ">
+        <div className="box-border overflow-hidden	">
+            <div className="w-screen h-screen overflow-hidden  box-content">
                 <Image
                     loader={myLoader}
                     src={'home.png'}
@@ -155,7 +155,7 @@ const Home = () => {
                     indexPage={true}
                     setUserSigned={setUserSigned}
                 />
-                <div className="relative top-14 md:top-16 p-2 h-5/6 flex flex-col justify-center">
+                <div className="relative top-8 md:top-16 p-2 h-full flex flex-col justify-center">
                     <div className="text-white md:text-4xl text-xl flex flex-col  ">
                         <p className="flex justify-center font-bold">
                             Find Your Dream Home
@@ -200,7 +200,7 @@ const Home = () => {
                             </div>
                         ))}
                         <button
-                            className="md:w-48 w-full  md:m-1 bg-bluetransparent text-white  rounded shadow hover:bg-gray-300 hover:text-primary"
+                            className="md:w-48 w-full py-2 md:m-1 bg-bluetransparent text-white  rounded shadow hover:bg-gray-300 hover:text-primary"
                             onClick={() => onSubmit()}
                         >
                             Search
@@ -208,10 +208,10 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-screen h-screen">
-                <div className="flex justify-center flex-wrap w-full ">
-                    <p className="w-full flex justify-center font-bold text-xl md:text-3xl my-4 underline">
-                        Properties{' '}
+            <div className="w-full h-full box-border	">
+                <div className="flex justify-center flex-wrap w-full md:mt-24 mt-12 scroll-smooth">
+                    <p className="w-full flex justify-center font-bold text-xl md:text-4xl md:my-8 my-4 ">
+                        Properties
                     </p>
                     {data.length == 0 && (
                         <Box sx={{ display: 'flex' }}>
@@ -220,16 +220,12 @@ const Home = () => {
                     )}
                     {data.map((d: any, i: number) => (
                         <div
-                            className="p-1 w-3/4 justify-center items-center md:w-3/12  shadow rounded flex flex-col m-1 "
+                            className="p-2 md:py-4 w-5/6 m-4  justify-center items-center md:w-3/12 shadow rounded flex flex-col  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300 hover:shadow-xl "
                             key={i}
                         >
-                            <div className=" ">
+                            <div className=" transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-x-105 hover:scale-y-105 md:hover:scale-y-110 duration-300 ">
                                 <Slideshow images={d.mediaInfo} />
                             </div>
-                            {/* {console.log(
-                                d.mediaInfo[0].mediaData,
-                                'EACH PROPERTY '
-                            )} */}
 
                             <div
                                 className=" w-full  p-1 flex flex-col justify-between cursor-pointer"

@@ -99,7 +99,7 @@ const Agency = () => {
             renderCell: (data: any) => {
                 return (
                     <div className="w-full flex justify-around">
-                        <CreateIcon color="primary" />
+                        {/* <CreateIcon color="primary" /> */}
                         <DeleteIcon color="warning" />
                     </div>
                 );
@@ -161,7 +161,7 @@ const Agency = () => {
                                 </button>
                             </div>
                         </div>
-                        <div className="mt-2 ">
+                        {/* <div className="mt-2 ">
                             <div className="w-32 md:w-2/5 p-2 bg-lightGreenCard rounded shadow">
                                 <p className="pb-2 font-light text-sm">
                                     Quota Summary
@@ -171,7 +171,7 @@ const Agency = () => {
                                     value={78}
                                 />
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className=" self-center w-full p-2 md:w-full h-4/5 md:h-full ">

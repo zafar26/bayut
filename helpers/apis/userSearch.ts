@@ -5,6 +5,7 @@ export async function onUserSearch(body?: any) {
 
 
     try {
+        console.log(body,'BODY')
         // body.
     let user = await db.table('user').toArray();
         console.log(user,'USER');
@@ -19,7 +20,6 @@ export async function onUserSearch(body?: any) {
         }
         else if(body.category || body.subCategory){
             params={
-
             categoryID:body.category? body?.category:null,
             subCategoryID:body.subcategory? body?.subcategory:null,
             purpose:body.purpose? body?.purpose:null,

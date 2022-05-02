@@ -43,8 +43,8 @@ const Slideshow = ({ images, isFull }: any) => {
             <Image
                 src={'data:image/gif;base64, ' + image}
                 alt="No Image "
-                width={!isMobile ? (isFull ? 480 : 380) : 380}
-                height={isMobile ? 440 : 210}
+                width={!isMobile ? (isFull ? 980 : 380) : 380}
+                height={isMobile ? 480 : isFull ? 500 : 250}
                 className="rounded h-full w-full"
                 // layout="responsive"
                 objectFit={'fill'}
@@ -63,6 +63,5 @@ const Slideshow = ({ images, isFull }: any) => {
         </div>
     );
 };
-// </AnimatePresence>
 
 export default Slideshow;

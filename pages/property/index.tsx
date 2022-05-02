@@ -30,17 +30,42 @@ const Properties = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [categories, setCategories] = useState<String>('');
     const [modal, setModal] = useState<Boolean>(false);
-    const [open, setOpen] = useState<Boolean>(modal);
     const [auth, setAuth] = useState(false);
     const [error, setError] = useState(false);
     const [userSigned, setUserSigned] = useState(false);
     const [data, setData] = useState<any[]>([]);
 
     useEffect(() => {
-        const query = router.query;
+        const { category, subcategory, purpose } = router.query;
 
-        // console.log(router, 'ROUTER');
-        onUserSearch(query)
+        let body: any = {};
+        console.log(
+            category,
+            window.location.search[0],
+            window.location.search.split('&'),
+            'QUERY'
+        );
+        let searchParams = window.location.search.split('&');
+
+        console.log(searchParams[0].split('='), 'SEARCHPARAMS');
+
+        if (!category && !subcategory && !purpose) {
+            body.category = 1;
+            body.subcategory = 2;
+            body.purpose = 3;
+        } else {
+            if (category) {
+                body.category = category;
+            }
+            if (subcategory) {
+                body.subcategory = subcategory;
+            }
+            if (purpose) {
+                body.purpose = purpose;
+            }
+        }
+        console.log(body, 'QUERY');
+        onUserSearch(body)
             .then((r: any) => {
                 // console.log(r);
                 if (!r.error) {
@@ -120,14 +145,14 @@ const Properties = () => {
                     </div>
                 }
 
-                <div className="pt-16  md:pt-20 w-screen h-screen ">
-                    <div className="md:flex h-full md:justify-center md:items-center	">
-                        {/* <div className=" p-2 w-full md:w-1/4  md:h-full ">
-                            <div className=" w-full md:h-5/6 bg-glassEffect shadow rounded ">
-                                <p className="md:text-base text-xs px-2 font-thin ">
+                <div className="pt-16  md:pt-16 w-screen h-screen overflow-hidden">
+                    <div className="md:flex h-full md:justify-around md:items-center  	">
+                        <div className=" p-2 w-full md:w-1/4 md:mt-28 md:h-full ">
+                            <div className=" w-full md:h-5/6   ">
+                                <p className="md:text-base text-xs px-2 font-thin md:text-center">
                                     Filters:
                                 </p>
-                                <div className="w-full flex md:flex-col overflow-x-auto items-center">
+                                <div className="w-full flex md:flex-col overflow-x-auto items-center scroll-smooth ">
                                     {filters.map((d: any) => {
                                         if (d.value == '') {
                                             return (
@@ -164,17 +189,18 @@ const Properties = () => {
                                             );
                                         }
                                     })}
-                                    <button className="bg-green-600 p-2 rounded shadow text-white mx-1 md:mt-4 hover:bg-white hover:text-green-600">
+                                    <button className="bg-green-600 w-72  p-2 rounded shadow text-white mx-1 md:mt-4 hover:bg-green-700 hover:text-green-100">
                                         Search
                                     </button>
                                 </div>
-                                {/* Button */}
-                        {/* </div>
-                        </div> */}
+                            </div>
+                        </div>
 
                         <div className=" p-2 w-full md:w-4/6  h-full  flex flex-col justify-center items-center">
-                            <p className="text-xl p-4 font-bold">Properties</p>
-                            <div className=" p-2 w-full h-full   bg-glassEffect shadow rounded w-full overflow-y-scroll">
+                            <p className="text-xl p-4 font-bold text-cyan-900">
+                                Properties
+                            </p>
+                            <div className=" p-2 w-full h-full  w-full overflow-y-scroll scroll-smooth overflow-x-hidden">
                                 {error ? (
                                     <p>Error </p>
                                 ) : (
@@ -186,7 +212,7 @@ const Properties = () => {
                                 )}
                                 {data.map((d: any, i: number) => (
                                     <div
-                                        className="p-1 w-full h-40 shadow rounded flex "
+                                        className="p-1 my-4 w-full h-48 shadow rounded flex "
                                         key={i}
                                     >
                                         {/* {console.log(d, 'DATA D')} */}

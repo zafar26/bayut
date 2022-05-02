@@ -16,6 +16,7 @@ import { Alert } from '@mui/material';
 import { onCorporateLogin } from '../../../helpers/apis/auth';
 import corporate from '../../../public/images/wallpapers/corporate.png';
 import { myLoader } from '../../../helpers/helper';
+
 const CorporateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const router: NextRouter = useRouter();
@@ -108,12 +109,12 @@ const CorporateLogin: NextPage = () => {
                             showPassword={showPassword}
                             setShowPassword={setShowPassword}
                         />
-                        <CustomSelect
+                        {/* <CustomSelect
                             value={loginAs}
                             onChange={(e: any) => setLoginAs(e.target.value)}
                             label={'Login As'}
                             options={loginOptions}
-                        />
+                        /> */}
                     </div>
                     <div className="mt-4 bg-green-700 rounded">
                         <Button

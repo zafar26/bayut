@@ -19,6 +19,9 @@ import { ListItem } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Vlook from '../../public/vlook.png';
+import { myPublicLoader } from '../../helpers/helper';
 
 const useStyles = makeStyles((theme: any) => ({
     root: {
@@ -130,17 +133,19 @@ export default function MenuAppBar({
     if (client && !isMobile) {
         return (
             <div
-                className={`w-full absolute left-0 top-0 flex justify-between px-9 py-1  ${
-                    indexPage ? '' : 'bg-[#464E2E]'
+                className={`w-full absolute left-0 top-0 flex justify-between items-center px-9 py-4  ${
+                    indexPage ? '' : 'bg-[#F7F6F2] '
                 }`}
             >
-                <Typography
-                    variant="h6"
-                    className={'w-96 '}
-                    style={{ color: '#FFFFFF' }}
-                >
-                    Vlook
-                </Typography>
+                <div className="w-1/6">
+                    <Image
+                        src={indexPage ? 'whitevlook.png' : 'vlook.png'}
+                        loader={myPublicLoader}
+                        layout={'fixed'}
+                        width={120}
+                        height={26}
+                    />
+                </div>
                 <div className="flex w-5/6">
                     {clientLinks.map((link: any, index: any) => {
                         return selectedLink == link.label ? (
@@ -149,17 +154,16 @@ export default function MenuAppBar({
                                 key={index}
                                 sx={{
                                     padding: 0,
-                                    // color: '#0d47a1',
-                                    // backgroundColor: '#ffffff',
                                 }}
-                                className="ml-2 w-full  bg-gray-50 opacity-40	 p-0 py-1 flex items-center text-brown-800 shadow  rounded hover:bg-gray-500 "
+                                className={`ml-2 w-full flex items-center ${
+                                    indexPage
+                                        ? 'text-white'
+                                        : 'bg-gray-50 text-[#005A8D]'
+                                } opacity-80 p-0 py-1   shadow  rounded hover:bg-gray-200 `}
                                 onClick={() => router.push(link.path)}
                             >
-                                {/* <div className="w-1 h-full   bg-baseColor rounded-xl">
-                                i
-                            </div> */}
                                 <div
-                                    className="w-full flex px-2 	"
+                                    className="w-full flex items-center px-2 	"
                                     onClick={() => router.push(link.path)}
                                 >
                                     <div className="mr-2">{link.icon()}</div>
@@ -167,16 +171,16 @@ export default function MenuAppBar({
                                         <a>{link.label}</a>
                                     </Link>
                                 </div>
-                                {/* <div className="w-1 h-full bg-baseColor rounded-xl">
-                                i
-                            </div> */}
                             </ListItem>
                         ) : (
                             <ListItem
                                 button
                                 key={link.label}
-                                sx={{ color: 'GrayText' }}
-                                className="ml-2 w-full text-gray-300 flex items-center  hover:bg-gray-200 rounded hover:text-green-600"
+                                className={`ml-2 w-full ${
+                                    indexPage
+                                        ? 'text-gray-400'
+                                        : 'text-[#005A8D]'
+                                }  opacity-100 flex items-center  hover:bg-gray-200 rounded hover:text-green-600`}
                                 onClick={() => setSelectedItem(index)}
                             >
                                 <div className="mr-2">{link.icon()}</div>
@@ -189,7 +193,7 @@ export default function MenuAppBar({
                 </div>
 
                 <button
-                    className="ml-2 w-40 bg-white rounded flex justify-center items-center bg-primary text-white hover:bg-white hover:text-primary"
+                    className={`ml-2 w-40 px-4 py-2 bg-white rounded flex justify-center items-center bg-primary text-white hover:bg-white hover:text-primary`}
                     onClick={handleMenu}
                 >
                     <AccountCircleIcon />

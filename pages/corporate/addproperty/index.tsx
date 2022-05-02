@@ -15,6 +15,7 @@ import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { db } from '../../../db';
+// import uniqid from 'uniqid';
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
@@ -37,7 +38,7 @@ const AddProperty = () => {
     const [permitNo, setPermitNo] = useState<String>('');
     const [completionStatus, setCompletionStatus] = useState<String>('');
     const [ownershipStatus, setOwnershipStatus] = useState<String>('');
-    const [listingOwner, setListingOwner] = useState<String>('');
+    const [listingOwners, setListingOwners] = useState<String>('');
     const [listingOwnerData, setListingOwnerData] = useState<{
         userID?: string;
         contactPerson?: string;
@@ -49,10 +50,6 @@ const AddProperty = () => {
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router: NextRouter = useRouter();
 
-    function ChangeListingOwner(e: any) {
-        setListingOwner(e.name);
-        // Fetch For Listing USer
-    }
     let addPropertyOptions = [
         {
             style: 'mt-4 ml-2 w-full',
@@ -109,6 +106,7 @@ const AddProperty = () => {
             button: true,
             label: 'Auto Generate',
             style: 'mx-2 bg-green-600 text-white rounded text-xs rounded flex items-center ',
+            // onSubmit: () => setReferenceNo(uniqid()),
         },
         {
             value: tittle,
@@ -165,9 +163,10 @@ const AddProperty = () => {
             label: 'Property Details',
         },
         {
-            value: listingOwner,
-            setValue: ChangeListingOwner,
-            name: 'Listing Owner',
+            value: listingOwners,
+            setValue: setListingOwners,
+            label: 'Listing Owner',
+            options: propertyLookups?.users,
         },
         {
             style: 'mt-4 ml-2 font-thin text-xs w-full',
@@ -248,12 +247,12 @@ const AddProperty = () => {
         onPropertyLookups()
             // .then((response: any) => console.log(response, 'RESPONSE'))
             .then((r: any) => {
-                getListingUser().then((user: any) => {
-                    console.log(user, 'LISYTINGUSER');
-                    setListingOwnerData(user);
-                    setListingOwner(user.name);
-                });
-                // console.log(r.data.responseData.data);
+                // getListingUser().then((user: any) => {
+                //     console.log(user, 'LISYTINGUSER');
+                //     setListingOwnerData(user);
+                //     setListingOwner(user.name);
+                // });
+                console.log(r, 'RESULTT');
                 setPropertyLookups(r.data.responseData.data);
             });
     }, [setPropertyLookups]);
