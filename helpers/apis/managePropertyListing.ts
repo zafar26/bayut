@@ -11,7 +11,7 @@ export async function getPropertyListing() {
 
        
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Agent/managepropertylisting',
+            'http://syed333-001-site1.ftempurl.com/Agent/managepropertylisting',
             {},
             {
                 headers: {

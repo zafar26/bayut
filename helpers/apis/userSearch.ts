@@ -29,7 +29,7 @@ export async function onUserSearch(body?: any) {
         console.log(user,'AFTERWARDS')
         console.log(body,'BODY')
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Users/search',
+            'http://syed333-001-site1.ftempurl.com/Users/search',
             params,
             {
                 headers: {
@@ -66,7 +66,7 @@ export async function searchPropertyDetail(id?: any) {
         }
         // console.log(user,'AFTERWARDS')
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Users/search',
+            'http://syed333-001-site1.ftempurl.com/Users/search',
             {},
             {
                 headers: {

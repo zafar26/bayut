@@ -80,7 +80,7 @@ const PropertyDetails = () => {
                     let ammenityDataArray: string[] = [];
                     let keylength: any;
                     let valuelength: any;
-                    if (filteredOne[0])
+                    if (filteredOne[0].propertyAmenities)
                         Object.entries(filteredOne[0].propertyAmenities).map(
                             (d: any, index: number) => {
                                 // console.log(d[0], 'key');

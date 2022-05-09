@@ -29,7 +29,7 @@ const Home = () => {
     const [purpose, setPurpose] = useState<String>('');
     const [subCategory, setSubCategory] = useState<String>('');
     const [auth, setAuth] = useState<Boolean>(false);
-    const [data, setData] = useState<any>([]);
+    const [data, setData] = useState<any>([{ id: 1, mediaInfo: [] }]);
     useEffect(() => {
         // console.log(router, 'ROUTER');
 

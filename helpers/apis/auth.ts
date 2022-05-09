@@ -9,7 +9,7 @@ export async function onCorporateLogin(body: any) {
         }
         // console.log('CLicked', process.env.ServerURL);
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Users/signin',
+            'http://syed333-001-site1.ftempurl.com/Users/signin',
             body,
             {
                 headers: {
@@ -45,7 +45,7 @@ export async function onCorporateSignUp(body: any) {
         }
         console.log(body,'BODY')
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Users/signup',
+            'http://syed333-001-site1.ftempurl.com/Users/signup',
             body,
             {
                 headers: {
@@ -75,7 +75,7 @@ export async function onUserLogin(body: any) {
         }
         // console.log('CLicked', process.env.ServerURL);
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Users/signin',
+            'http://syed333-001-site1.ftempurl.com/Users/signin',
             body,
             {
                 headers: {

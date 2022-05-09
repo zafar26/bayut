@@ -17,7 +17,7 @@ export async function onAddUser(body: any) {
             return;
         }
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Agent/adduser',
+            'http://syed333-001-site1.ftempurl.com/Agent/adduser',
             body,
             {
                 headers: {
@@ -59,7 +59,7 @@ export async function onManageUser(body?: any) {
         // }
 
         const { data } = await axios.post(
-            'http://zaki786-001-site1.ftempurl.com/Agent/manageusers',
+            'http://syed333-001-site1.ftempurl.com/Agent/manageusers',
             {parentUserID:corporateUser[0].userID},
             {
                 headers: {
