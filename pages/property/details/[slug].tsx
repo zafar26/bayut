@@ -26,7 +26,7 @@ const PropertyDetails = () => {
     const [auth, setAuth] = useState<Boolean>(false);
     const [ammenityFieldData, setAmmenityFieldData] = useState<any>([]);
     const isMobile = useMediaQuery('(max-width:600px)');
-    const [userSigned, setUserSigned] = useState(false);
+    const [userSigned, setUserSigned] = useState(true);
     const [loading, setLoading] = useState(false);
     const [phoneNo, setPhoneNo] = useState<String>('');
     const [email, setEmail] = useState<String>('');
@@ -300,19 +300,21 @@ const PropertyDetails = () => {
                             </div>
                             <div className="w-full ">
                                 <div className="w-full mt-4">
-                                    {userSigned ? (
-                                        <TransitionsModal
-                                            phoneNo={data.phoneNumber}
-                                            email={data.email}
-                                        />
-                                    ) : (
-                                        <div className="flex justify-center w-full">
-                                            {/* <button className="mt-4 bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
+                                    <div className="flex justify-center w-full">
+                                        {/* <button className="mt-4 bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
                                             Call
                                         </button> */}
-                                            <button className=" bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
-                                                Send Email
-                                            </button>
+                                        <button className=" bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
+                                            Send Email
+                                        </button>
+                                    </div>
+
+                                    {userSigned && (
+                                        <div className="mt-4 md:mt-8 ">
+                                            <TransitionsModal
+                                                phoneNo={data.phoneNumber}
+                                                email={data.email}
+                                            />
                                         </div>
                                     )}
                                 </div>
