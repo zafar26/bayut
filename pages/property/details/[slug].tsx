@@ -11,6 +11,7 @@ import PhoneNoInput from '../../../components/PhoneInput';
 import TransitionsModal from '../../../components/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { sendMail } from '../../../helpers/apis/sendEmail';
 
 let excludingAmmenities = [
     'propertyAmenityID',
@@ -140,6 +141,24 @@ const PropertyDetails = () => {
         });
     }, []);
     // console.log(data, 'DATA');
+
+    function onSendMail() {
+        let body: any = {
+            name,
+            email,
+            phoneNo,
+            message,
+            agentEmail: data.email,
+        };
+        sendMail(body)
+            .then((r: any) => {
+                if (r.data.responseData.data) {
+                    console.log('TRUEEEE');
+                }
+            })
+            .catch((e: any) => console.log(e, 'Error'));
+    }
+
     if (!data) {
         return <div>NO DATA FOUND</div>;
     } else if (loading) {
@@ -154,7 +173,7 @@ const PropertyDetails = () => {
     } else {
         return (
             <div className=" w-screen h-screen ">
-                <div className="pt-16   px-2 md:px-12 py-4 md:flex justify-center bg-[#F7F6F2] ">
+                <div className="pt-16   px-2 md:px-12 py-4 md:flex justify-center bg-[#F7F6F2] text-amber-800 ">
                     {
                         <div className={isMobile ? '' : 'h-12'}>
                             <Navbar
@@ -164,7 +183,7 @@ const PropertyDetails = () => {
                             />
                         </div>
                     }
-                    <div className="p-2 pt-4 md:mt-8  bg-white w-full flex flex-col items-center   rounded shadow">
+                    <div className="p-2 pt-4 md:mt-8  bg-white w-full flex flex-col items-center   rounded shadow shadow-amber-800/50">
                         <div className="flex flex-col w-full justify-center p-4 ">
                             <div className="justify-between flex items-center h-8  w-full">
                                 <p className="text-sm md:text-2xl font-bold md:w-1/2 w-full">
@@ -204,13 +223,13 @@ const PropertyDetails = () => {
                             </div>
                         </div>
                         <div className="flex w-full mt-4 p-4  justify-center items-center">
-                            <div className="md:flex items-center font-light text-xs w-1/2">
+                            <div className="md:flex items-center  w-1/2">
                                 <p>Price : </p>
                                 <p className="font-bold text-xl md:ml-2">
                                     {data.price}
                                 </p>
                             </div>
-                            <div className="md:flex items-center font-light text-xs w-3/4 ">
+                            <div className="md:flex items-center  w-3/4 ">
                                 <p>Address : </p>
                                 <p className=" text-lg md:ml-2 font-bold">
                                     {data.address}
@@ -263,11 +282,11 @@ const PropertyDetails = () => {
                         </div>
                     </div>
                     <div className="pt-16 w-full md:w-4/12 flex flex-col items-center ">
-                        <div className="flex">
+                        <div className="flex text-lg">
                             <p>Agent :</p>
                             <p>Company </p>
                         </div>
-                        <div className="font-thin ">
+                        <div className="font-thin text-sm ">
                             Contact Agent for more information
                         </div>
 
@@ -304,13 +323,16 @@ const PropertyDetails = () => {
                                         {/* <button className="mt-4 bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
                                             Call
                                         </button> */}
-                                        <button className=" bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center ">
+                                        <button
+                                            className=" bg-green-800 text-white rounded shadow w-24 px-2 py-2 flex items-center justify-center "
+                                            onClick={() => onSendMail()}
+                                        >
                                             Send Email
                                         </button>
                                     </div>
 
                                     {userSigned && (
-                                        <div className="mt-4 md:mt-8 ">
+                                        <div className="mt-4 md:mt-8 w-full flex justify-center ">
                                             <TransitionsModal
                                                 phoneNo={data.phoneNumber}
                                                 email={data.email}

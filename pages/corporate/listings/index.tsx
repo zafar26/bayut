@@ -28,6 +28,9 @@ import { getPropertyListing } from '../../../helpers/apis/managePropertyListing'
 import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
 import house from '../../../public/images/properties/house1.jpeg';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { onDelete } from '../../../helpers/apis/delete';
+import { onApprove } from '../../../helpers/apis/approve';
 
 const Listings = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -63,7 +66,7 @@ const Listings = () => {
         {
             field: 'type',
             headerName: 'type',
-            width: isMobile ? 100 : 120,
+            width: isMobile ? 100 : 100,
             editable: true,
         },
         {
@@ -102,65 +105,82 @@ const Listings = () => {
             // },
             renderCell: (data: any) => {
                 // console.log(data.id, 'DATA RENDER CELL');
+                // return (
+                //     <div>
+                //         {/* <IconButton>
+                //             <PersonIcon />
+                //         </IconButton> */}
+                //         <IconButton
+                //             aria-label="account of current user"
+                //             aria-controls="menu-appbar"
+                //             aria-haspopup="true"
+                //             onClick={handleMenu}
+                //             color="inherit"
+                //         >
+                //             <div
+                //             // className={classes.account}
+                //             // style={{ color: '#FFFFFF' }}
+                //             >
+                //                 <MoreVertIcon
+                //                     onClick={() => alert('clicked')}
+                //                 />
+                //                 {/* <AccountCircle fontSize="large" /> */}
+                //             </div>
+                //         </IconButton>
+                //         <Menu
+                //             id="menu-appbar"
+                //             anchorEl={anchorEl}
+                //             anchorOrigin={{
+                //                 vertical: 'bottom',
+                //                 horizontal: 'left',
+                //             }}
+                //             keepMounted
+                //             // transformOrigin={{
+                //             //     vertical: 'bottom',
+                //             //     horizontal: 'left',
+                //             // }}
+                //             open={open}
+                //             onClose={handleClose}
+                //         >
+                //             <MenuItem
+                //                 onClick={handleClose}
+                //                 className="flex items-center justify-center text-sm"
+                //             >
+                //                 <EditIcon
+                //                     className="mr-2 text-green-600"
+                //                     fontSize={isMobile ? 'small' : 'medium'}
+                //                     // color="error"
+                //                 />
+                //                 Edit Listing
+                //             </MenuItem>
+                //             <MenuItem
+                //                 onClick={handleClose}
+                //                 className="flex items-center justify-center text-sm"
+                //             >
+                //                 <DeleteIcon
+                //                     className="mr-2 text-red-600"
+                //                     fontSize={isMobile ? 'small' : 'medium'}
+                //                 />
+                //                 Delete Listing
+                //             </MenuItem>
+                //         </Menu>
+                //     </div>
+                // );
                 return (
-                    <div>
-                        {/* <IconButton>
-                            <PersonIcon />
-                        </IconButton> */}
-                        <IconButton
-                            aria-label="account of current user"
-                            aria-controls="menu-appbar"
-                            aria-haspopup="true"
-                            onClick={handleMenu}
-                            color="inherit"
-                        >
-                            <div
-                            // className={classes.account}
-                            // style={{ color: '#FFFFFF' }}
-                            >
-                                <MoreVertIcon
-                                    onClick={() => alert('clicked')}
-                                />
-                                {/* <AccountCircle fontSize="large" /> */}
-                            </div>
-                        </IconButton>
-                        <Menu
-                            id="menu-appbar"
-                            anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: 'bottom',
-                                horizontal: 'left',
-                            }}
-                            keepMounted
-                            // transformOrigin={{
-                            //     vertical: 'bottom',
-                            //     horizontal: 'left',
-                            // }}
-                            open={open}
-                            onClose={handleClose}
-                        >
-                            <MenuItem
-                                onClick={handleClose}
-                                className="flex items-center justify-center text-sm"
-                            >
-                                <EditIcon
-                                    className="mr-2 text-green-600"
-                                    fontSize={isMobile ? 'small' : 'medium'}
-                                    // color="error"
-                                />
-                                Edit Listing
-                            </MenuItem>
-                            <MenuItem
-                                onClick={handleClose}
-                                className="flex items-center justify-center text-sm"
-                            >
-                                <DeleteIcon
-                                    className="mr-2 text-red-600"
-                                    fontSize={isMobile ? 'small' : 'medium'}
-                                />
-                                Delete Listing
-                            </MenuItem>
-                        </Menu>
+                    <div className="flex">
+                        <CheckCircleOutlineIcon
+                            className="mr-2 "
+                            fontSize={'small'}
+                            color={data.isActive ? 'disabled' : 'success'}
+                            onClick={() => onActionClicked(data, 'Check')}
+                        />
+
+                        <DeleteIcon
+                            className="mr-2 "
+                            fontSize={'small'}
+                            color="error"
+                            onClick={() => onActionClicked(data, 'Delete')}
+                        />
                     </div>
                 );
             },
@@ -232,16 +252,43 @@ const Listings = () => {
             setData(r.data.responseData.data.tableData);
         });
     }, []);
-
+    function onActionClicked(data: any, type: string) {
+        let body: any = {
+            propertyid: data.propertyId,
+            type: 'property',
+        };
+        if (type == 'Delete') {
+            onDelete(body)
+                .then((r: any) => {
+                    if (r.data.responseData.data) {
+                        console.log('TRUEEEEEEEEEEEEEE');
+                    }
+                })
+                .catch((e: any) => console.log(e, 'ERror'));
+        }
+        if (type == 'Check') {
+            onApprove(body)
+                .then((r: any) => {
+                    if (r.data.responseData.data) {
+                        console.log('TRUEEEEEEEEEEEEEE');
+                    }
+                })
+                .catch((e: any) => console.log(e, 'ERror'));
+        }
+    }
     return (
         <div className="pt-14 md:pt-16 w-screen h-screen ">
-            {isMobile ? <Navbar selectedLink={'Listings'} /> : <MenuAppBar />}
+            {isMobile ? (
+                <Navbar selectedLink={'Property Listings'} />
+            ) : (
+                <MenuAppBar />
+            )}
             <div className="md:flex w-full justify-between h-full ">
                 {!isMobile && (
                     <div className="w-1/6 h-full">
                         <MyList
                             toggleDrawer={(e: any, d: any) => console.log(e, d)}
-                            selectedLink={'Listings'}
+                            selectedLink={'Property Listings'}
                         />
                     </div>
                 )}

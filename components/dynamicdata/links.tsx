@@ -34,7 +34,7 @@ export const corporateLinks: any = [
         icon: () => <InsightsIcon />,
     },
     {
-        label: 'Agency',
+        label: 'User Listings',
         path: '/corporate/agency',
         icon: () => <GroupIcon />,
     },

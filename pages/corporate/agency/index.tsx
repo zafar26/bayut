@@ -26,6 +26,9 @@ import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
 import { onManageUser } from '../../../helpers/apis/addUser';
 import { NextRouter, useRouter } from 'next/router';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import { onDelete } from '../../../helpers/apis/delete';
+import { onApprove } from '../../../helpers/apis/approve';
 
 const Agency = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -97,16 +100,53 @@ const Agency = () => {
             headerName: 'Actions',
             width: 120,
             renderCell: (data: any) => {
+                console.log(data, 'DATA');
                 return (
                     <div className="w-full flex justify-around">
-                        {/* <CreateIcon color="primary" /> */}
-                        <DeleteIcon color="warning" />
+                        <CheckCircleOutlineIcon
+                            className="mr-2 "
+                            fontSize={'small'}
+                            color={
+                                data.row.status == 0 ? 'success' : 'disabled'
+                            }
+                            onClick={() => onActionClicked(data.row, 'Check')}
+                        />
+
+                        <DeleteIcon
+                            className="mr-2 "
+                            fontSize={'small'}
+                            color="error"
+                            onClick={() => onActionClicked(data.row, 'Delete')}
+                        />
                     </div>
                 );
             },
         },
     ];
-
+    function onActionClicked(data: any, type: string) {
+        let body: any = {
+            userid: data.userId,
+            type: 'user',
+        };
+        if (type == 'Delete') {
+            onDelete(body)
+                .then((r: any) => {
+                    if (r.data.responseData.data) {
+                        console.log('TRUEEEEEEEEEEEEEE');
+                    }
+                })
+                .catch((e: any) => console.log(e, 'ERror'));
+        }
+        if (type == 'Check') {
+            onApprove(body)
+                .then((r: any) => {
+                    if (r.data.responseData.data) {
+                        console.log('TRUEEEEEEEEEEEEEE');
+                    }
+                })
+                .catch((e: any) => console.log(e, 'ERror'));
+        }
+    }
     let loginOptions = [
         {
             value: 'agent',
@@ -124,13 +164,17 @@ const Agency = () => {
 
     return (
         <div className="pt-14 md:pt-16 w-screen h-screen ">
-            {isMobile ? <Navbar selectedLink={'Agency'} /> : <MenuAppBar />}
+            {isMobile ? (
+                <Navbar selectedLink={'User Listings'} />
+            ) : (
+                <MenuAppBar />
+            )}
             <div className=" flex w-full h-full">
                 {!isMobile && (
                     <div className="w-1/6 h-full">
                         <MyList
                             toggleDrawer={(e: any, d: any) => console.log(e, d)}
-                            selectedLink={'Agency'}
+                            selectedLink={'User Listings'}
                         />
                     </div>
                 )}
@@ -143,7 +187,7 @@ const Agency = () => {
                                     Jan 25, 2022 - Feb 25, 2022
                                 </p>
                             </div>
-                            <div>
+                            {/* <div>
                                 <button
                                     className="ml-2  flex items-center bg-[#E8F6EF]  shadow p-2 rounded text-primary"
                                     onClick={(e: any) =>
@@ -159,7 +203,7 @@ const Agency = () => {
                                         </p>
                                     </a>
                                 </button>
-                            </div>
+                            </div> */}
                         </div>
                         {/* <div className="mt-2 ">
                             <div className="w-32 md:w-2/5 p-2 bg-lightGreenCard rounded shadow">

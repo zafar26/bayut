@@ -70,29 +70,33 @@ export default function MenuAppBar({
         db.table('corporate')
             .toArray()
             .then((agent: any) => {
-                if (agent.length >= 1 && agent[0].token) {
+                if (agent.length >= 1 && agent[0].token && !client) {
                     setAuth(true);
                     setName(agent[0].name);
-                }
-            });
-
-        db.table('user')
-            .toArray()
-            .then((user: any) => {
-                // console.log(user, 'USER DATA');
-                if (user.length >= 1 && user[0].token) {
-                    setAuth(true);
-                    setName(user[0].name);
-                    setUserSigned(true);
+                } else {
+                    db.table('user')
+                        .toArray()
+                        .then((user: any) => {
+                            console.log(user, 'USER DATA INDEXED DB');
+                            if (user.length >= 1 && user[0].token) {
+                                setAuth(true);
+                                setName(user[0].name);
+                                setUserSigned(true);
+                            }
+                        });
                 }
             });
     }, [db]);
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const onLogOut = () => {
+    const onLogOut = (client: any) => {
         resetDatabase();
-        router.push('/corporate/login');
+        if (client) {
+            router.push('/');
+        } else {
+            router.push('/corporate/login');
+        }
     };
     async function onSubmit() {
         try {
@@ -102,7 +106,7 @@ export default function MenuAppBar({
             }
             // console.log('CLicked', process.env.ServerURL);
             const { data } = await axios.post(
-                'http://zaki786-001-site1.ftempurl.com/Users/signin',
+                'http://syed333-001-site1.ftempurl.com/Users/signin',
                 {
                     username: email,
                     password: password,
@@ -115,7 +119,7 @@ export default function MenuAppBar({
             );
             if (data.statusCode == 200) {
                 // alert(data, 'Data');
-                // console.log('DATA', data.responseData.data);
+                console.log('DATA', data.responseData.data);
                 const id = await db.user.add(data.responseData.data);
                 setAuth(true);
                 setUserSigned(true);
@@ -134,7 +138,7 @@ export default function MenuAppBar({
         return (
             <div
                 className={`w-full absolute left-0 top-0 flex justify-between items-center px-9 py-4  ${
-                    indexPage ? '' : 'bg-[#F7F6F2] '
+                    indexPage ? '' : 'bg-amber-800 '
                 }`}
             >
                 <div className="w-1/6">
@@ -158,7 +162,7 @@ export default function MenuAppBar({
                                 className={`ml-2 w-full flex items-center ${
                                     indexPage
                                         ? 'text-white'
-                                        : 'bg-gray-50 text-[#005A8D]'
+                                        : 'bg-lime-100 text-[#005A8D]'
                                 } opacity-80 p-0 py-1   shadow  rounded hover:bg-gray-200 `}
                                 onClick={() => router.push(link.path)}
                             >
@@ -179,7 +183,7 @@ export default function MenuAppBar({
                                 className={`ml-2 w-full ${
                                     indexPage
                                         ? 'text-gray-400'
-                                        : 'text-[#005A8D]'
+                                        : 'text-amber-50'
                                 }  opacity-100 flex items-center  hover:bg-gray-200 rounded hover:text-green-600`}
                                 onClick={() => setSelectedItem(index)}
                             >
@@ -290,7 +294,7 @@ export default function MenuAppBar({
                 background: client
                     ? indexPage
                         ? '#42240C'
-                        : '#464E2E'
+                        : 'rgb(146 64 14)'
                     : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
                 // borderRadius: '0px 0px 10px 10px',
             }}
@@ -357,7 +361,7 @@ export default function MenuAppBar({
                                 <MenuItem onClick={handleClose}>
                                     Settings
                                 </MenuItem>
-                                <MenuItem onClick={() => onLogOut()}>
+                                <MenuItem onClick={() => onLogOut(client)}>
                                     Log out
                                 </MenuItem>
                             </Menu>

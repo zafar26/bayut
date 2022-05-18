@@ -13,7 +13,14 @@ import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-const steps = ['Details', 'Amenities', 'Uploads'];
+const steps = [
+    'Details',
+    'Amenities',
+    'Uploads',
+    'Parking Spaces',
+    'View',
+    'Pet Policy ID',
+];
 
 const Ammenities = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -325,12 +332,12 @@ const Ammenities = () => {
             type: 'checkbox',
             name: 'studyRoom',
         },
-        {
-            label: 'Parking Spaces',
-            value: features.parkingSpaces,
-            name: 'parkingSpaces',
-            type: 'input',
-        },
+        // {
+        //     label: 'Parking Spaces',
+        //     value: features.parkingSpaces,
+        //     name: 'parkingSpaces',
+        //     type: 'input',
+        // },
     ];
 
     const cleaningMaintenanceData = [
@@ -354,12 +361,12 @@ const Ammenities = () => {
         },
     ];
     const miscellaneousData = [
-        {
-            label: 'View',
-            value: miscellaneous.view,
-            name: 'view',
-            type: 'input',
-        },
+        // {
+        //     label: 'View',
+        //     value: miscellaneous.view,
+        //     name: 'view',
+        //     type: 'input',
+        // },
         {
             label: 'Floor',
             value: miscellaneous.floor,
@@ -378,18 +385,18 @@ const Ammenities = () => {
             type: 'checkbox',
             name: 'freeHold',
         },
-        {
-            label: 'Pet Policy ID',
-            value: miscellaneous.petpolicyID,
-            name: 'petpolicyID',
-            type: 'input',
-        },
-        {
-            label: 'Others Room',
-            value: miscellaneous.othersRoom,
-            name: 'othersRoom',
-            type: 'input',
-        },
+        // {
+        //     label: 'Pet Policy ID',
+        //     value: miscellaneous.petpolicyID,
+        //     name: 'petpolicyID',
+        //     type: 'input',
+        // },
+        // {
+        //     label: 'Others Room',
+        //     value: miscellaneous.othersRoom,
+        //     name: 'othersRoom',
+        //     type: 'input',
+        // },
         {
             label: 'Atm Facility',
             checked: miscellaneous.atmFacility,
@@ -440,7 +447,7 @@ const Ammenities = () => {
             type: 'input',
         },
         {
-            label: 'Number By ShoppingMall',
+            label: 'Near By ShoppingMall',
             value: miscellaneous.nearByShoppingMall,
             name: 'nearByShoppingMall',
             type: 'input',
@@ -672,7 +679,7 @@ const Ammenities = () => {
                                 href="/corporate/addproperty/upload"
                                 className="text-white"
                             > */}
-                                    Next
+                                    <p className="text-white"> Next </p>
                                     {/* </a> */}
                                 </Button>
                             </div>
@@ -686,7 +693,6 @@ const Ammenities = () => {
                         }
                         hidden={!snackbar}
                     >
-                        Error:
                         {errorSnackbar ? errorSnackbar : 'Succes'}
                     </div>
                 </div>

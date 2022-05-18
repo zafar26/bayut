@@ -29,7 +29,7 @@ const Home = () => {
     const [purpose, setPurpose] = useState<String>('');
     const [subCategory, setSubCategory] = useState<String>('');
     const [auth, setAuth] = useState<Boolean>(false);
-    const [data, setData] = useState<any>([{ id: 1, mediaInfo: [] }]);
+    const [data, setData] = useState<any>([]);
     useEffect(() => {
         // console.log(router, 'ROUTER');
 
@@ -67,16 +67,7 @@ const Home = () => {
             label: 'Invest',
         },
     ];
-    let loginOptions = [
-        {
-            value: '2',
-            label: 'Individual',
-        },
-        {
-            value: '3',
-            label: 'Company',
-        },
-    ];
+
     let cityOptions = [
         {
             value: '2',
@@ -251,14 +242,14 @@ const Home = () => {
                                         {' ' + d.subCategoryName}
                                     </p>
                                 </div>
-                                <div className="w-full ">
+                                {/* <div className="w-full ">
                                     {auth && (
                                         <TransitionsModal
                                             phoneNo={d.phoneNumber}
                                             email={d.email}
                                         />
                                     )}
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     ))}

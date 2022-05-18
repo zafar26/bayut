@@ -113,40 +113,40 @@ const AddUser = () => {
             ],
             style: 'mx-4 w-48',
         },
-        {
-            label: 'Country',
-            value: country,
-            setValue: setCountry,
-            options: [],
-            style: 'mx-4 w-48',
-        },
+        // {
+        //     label: 'Country',
+        //     value: country,
+        //     setValue: setCountry,
+        //     options: [],
+        //     style: 'mx-4 w-48',
+        // },
         {
             name: 'Experience (Years)',
             value: experience,
             setValue: setExperience,
             style: 'mx-4 w-72',
         },
-        {
-            label: 'Specialities',
-            value: specialities,
-            setValue: setSpecialities,
-            options: [],
-            style: 'mx-4 w-48',
-        },
-        {
-            label: 'Service Area',
-            value: serviceArea,
-            setValue: setServiceArea,
-            options: [],
-            style: 'mx-4 w-48',
-        },
-        {
-            label: 'Languages',
-            value: languages,
-            setValue: setLanguages,
-            options: [],
-            style: 'mx-4 w-48',
-        },
+        // {
+        //     label: 'Specialities',
+        //     value: specialities,
+        //     setValue: setSpecialities,
+        //     options: [],
+        //     style: 'mx-4 w-48',
+        // },
+        // {
+        //     label: 'Service Area',
+        //     value: serviceArea,
+        //     setValue: setServiceArea,
+        //     options: [],
+        //     style: 'mx-4 w-48',
+        // },
+        // {
+        //     label: 'Languages',
+        //     value: languages,
+        //     setValue: setLanguages,
+        //     options: [],
+        //     style: 'mx-4 w-48',
+        // },
         {
             name: 'Facebook',
             value: facebook,
@@ -233,13 +233,13 @@ const AddUser = () => {
 
     return (
         <div className="pt-14 md:pt-16 w-screen h-screen ">
-            {isMobile ? <Navbar selectedLink={'Agency'} /> : <MenuAppBar />}
+            {isMobile ? <Navbar selectedLink={'Add User'} /> : <MenuAppBar />}
             <div className="flex">
                 {!isMobile && (
                     <div className="w-1/6 h-full">
                         <MyList
                             toggleDrawer={(e: any, d: any) => console.log(e, d)}
-                            selectedLink={'Agency'}
+                            selectedLink={'Add User'}
                         />
                     </div>
                 )}

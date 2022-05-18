@@ -141,7 +141,7 @@ const UploadPage = () => {
                                 href="/corporate/addproperty/upload"
                                 className="text-white"
                             > */}
-                                    Submit
+                                    <p className="text-white"> Submit</p>
                                     {/* </a> */}
                                 </Button>
                             </div>

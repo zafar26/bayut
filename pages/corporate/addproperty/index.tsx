@@ -97,17 +97,17 @@ const AddProperty = () => {
             text: true,
             label: 'Property Details',
         },
-        {
-            value: referenceNo,
-            setValue: setReferenceNo,
-            name: 'Reference No',
-        },
-        {
-            button: true,
-            label: 'Auto Generate',
-            style: 'mx-2 bg-green-600 text-white rounded text-xs rounded flex items-center ',
-            // onSubmit: () => setReferenceNo(uniqid()),
-        },
+        // {
+        //     value: referenceNo,
+        //     setValue: setReferenceNo,
+        //     name: 'Reference No',
+        // },
+        // {
+        //     button: true,
+        //     label: 'Auto Generate',
+        //     style: 'mx-2 bg-green-600 text-white rounded text-xs rounded flex items-center ',
+        //     // onSubmit: () => setReferenceNo(uniqid()),
+        // },
         {
             value: tittle,
             setValue: setTittle,
@@ -145,18 +145,18 @@ const AddProperty = () => {
             setValue: setPermitNo,
             name: 'Permit Number',
         },
-        {
-            value: completionStatus,
-            setValue: setCompletionStatus,
-            label: 'Completion Status',
-            options: [],
-        },
-        {
-            value: ownershipStatus,
-            setValue: setOwnershipStatus,
-            label: 'OwnerShip Status',
-            options: [],
-        },
+        // {
+        //     value: completionStatus,
+        //     setValue: setCompletionStatus,
+        //     label: 'Completion Status',
+        //     options: [],
+        // },
+        // {
+        //     value: ownershipStatus,
+        //     setValue: setOwnershipStatus,
+        //     label: 'OwnerShip Status',
+        //     options: [],
+        // },
         {
             style: 'mt-4 ml-2 w-full',
             text: true,
@@ -168,27 +168,27 @@ const AddProperty = () => {
             label: 'Listing Owner',
             options: propertyLookups?.users,
         },
-        {
-            style: 'mt-4 ml-2 font-thin text-xs w-full',
-            text: true,
-            label: 'The Following Owner Information Linked To Your Listing :',
-        },
-        {
-            value: listingOwnerData?.contactPerson,
-            name: 'Contact Person',
-        },
-        {
-            value: listingOwnerData?.email,
-            name: 'Email',
-        },
-        {
-            value: listingOwnerData?.phone,
-            name: 'Phone',
-        },
-        {
-            value: listingOwnerData?.mobile,
-            name: 'Mobile',
-        },
+        // {
+        //     style: 'mt-4 ml-2 font-thin text-xs w-full',
+        //     text: true,
+        //     label: 'The Following Owner Information Linked To Your Listing :',
+        // },
+        // {
+        //     value: listingOwnerData?.contactPerson,
+        //     name: 'Contact Person',
+        // },
+        // {
+        //     value: listingOwnerData?.email,
+        //     name: 'Email',
+        // },
+        // {
+        //     value: listingOwnerData?.phone,
+        //     name: 'Phone',
+        // },
+        // {
+        //     value: listingOwnerData?.mobile,
+        //     name: 'Mobile',
+        // },
     ];
     function onSubmit() {
         let addPropertyBody = {
@@ -312,10 +312,10 @@ const AddProperty = () => {
                                 if (d.setValue) {
                                     if (d.multilines) {
                                         return (
-                                            <div className="md:w-2/6">
+                                            <div className="md:w-3/6">
                                                 <div
                                                     className={
-                                                        'mx-2 w-72 md:w-96'
+                                                        'mx-2 w-72 md:w-5/6'
                                                     }
                                                 >
                                                     <MyInput

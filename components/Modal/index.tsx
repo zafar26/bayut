@@ -28,13 +28,13 @@ export default function TransitionsModal(props: any) {
 
     return (
         <div>
-            <div className="flex justify-between">
+            <div className="flex justify-between md:justify-start">
                 <Button
                     onClick={() => {
                         setSelectedButton(1);
                         setOpen(true);
                     }}
-                    className="p-1  md:py-1 md:px-2 bg-lime-600	hover:text-lime-600  text-white flex rounded shadow flex items-center"
+                    className="p-1  md:py-1 md:px-2 bg-amber-700	hover:text-lime-600  text-white flex rounded shadow flex items-center"
                 >
                     <CallIcon fontSize={'small'} />
                     <p className="md:ml-1 text-sm md:text-base">Call</p>
@@ -44,7 +44,7 @@ export default function TransitionsModal(props: any) {
                         setSelectedButton(2);
                         setOpen(true);
                     }}
-                    className="p-1 ml-1  md:py-1 md:px-2 bg-lime-600 hover:text-lime-600  text-white flex rounded shadow flex items-center"
+                    className="p-1 ml-1  md:py-1 md:px-2 bg-amber-700 hover:text-lime-600  text-white flex rounded shadow flex items-center"
                 >
                     <EmailIcon fontSize={'small'} />
                     <p className="md:ml-1 text-sm md:text-base">Email</p>
