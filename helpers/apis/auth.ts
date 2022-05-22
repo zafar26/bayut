@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { db } from '../../db';
+import { Public_URL } from '../helper';
 
 export async function onCorporateLogin(body: any) {
     try {
@@ -9,7 +10,7 @@ export async function onCorporateLogin(body: any) {
         }
         // console.log('CLicked', process.env.ServerURL);
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Users/signin',
+            `${Public_URL}/Users/signin`,
             body,
             {
                 headers: {
@@ -45,7 +46,7 @@ export async function onCorporateSignUp(body: any) {
         }
         console.log(body,'BODY')
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Users/signup',
+            `${Public_URL}/Users/signup`,
             body,
             {
                 headers: {
@@ -75,7 +76,7 @@ export async function onUserLogin(body: any) {
         }
         // console.log('CLicked', process.env.ServerURL);
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Users/signin',
+            `${Public_URL}/Users/signin`,
             body,
             {
                 headers: {

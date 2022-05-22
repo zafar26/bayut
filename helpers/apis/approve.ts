@@ -1,6 +1,7 @@
 import { Panorama } from '@mui/icons-material';
 import axios from 'axios';
 import { db } from '../../db';
+import { Public_URL } from '../helper';
 
 export async function onApprove(body?: any) {
     try {
@@ -14,7 +15,7 @@ export async function onApprove(body?: any) {
         param.userid = body.userid
     }    
     const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Agent/approve',
+        `${Public_URL}/Agent/approve`,
             param,
             {
                 headers: {

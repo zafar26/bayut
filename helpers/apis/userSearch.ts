@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { db } from '../../db';
+import { Public_URL } from '../helper';
 
 export async function onUserSearch(body?: any) {
 
@@ -29,7 +30,7 @@ export async function onUserSearch(body?: any) {
         console.log(user,'AFTERWARDS')
         console.log(body,'BODY')
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Users/search',
+            `${Public_URL}/Users/search`,
             params,
             {
                 headers: {
@@ -66,7 +67,7 @@ export async function searchPropertyDetail(id?: any) {
         }
         // console.log(user,'AFTERWARDS')
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Users/search',
+            `${Public_URL}/Users/search`,
             {},
             {
                 headers: {

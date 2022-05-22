@@ -84,7 +84,7 @@ export default function MyInput(props: any) {
                     />
                 </FormControl>
             ) : props.style ? (
-                <FormControl className="w-full p-0 m-0  ">
+                <FormControl className="w-full p-0 m-0 border border-amber-800/50 ">
                     <TextField
                         className={props.style}
                         key={props.name}
@@ -96,7 +96,7 @@ export default function MyInput(props: any) {
                     />
                 </FormControl>
             ) : (
-                <FormControl className="w-full ">
+                <FormControl className="w-full  ">
                     <TextField
                         className=" bg-white rounded"
                         key={props.name}

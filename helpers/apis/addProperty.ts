@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { db } from '../../db';
+import { Public_URL } from '../helper';
 
 export async function onPropertyLookups() {
     try {
@@ -8,7 +9,7 @@ export async function onPropertyLookups() {
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
 
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Agent/propertylookups',
+            `${Public_URL}/Agent/propertylookups`,
             {},
             {
                 headers: {
@@ -38,7 +39,7 @@ export async function onAddProperty(body: any) {
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
         // body.listingUserID = corporateUser[0].userID 
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Agent/addproperty',
+            `${Public_URL}/Agent/addproperty`,
             body,
             {
                 headers: {
@@ -72,7 +73,7 @@ export async function onAddPropertyAmmenity(body: any) {
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
         console.log(body,'BODY')
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Agent/addpropertyamenity',
+            `${Public_URL}/Agent/addpropertyamenity`,
             body,
             {
                 headers: {
@@ -106,7 +107,7 @@ export async function onAddPropertyUpload(body: any) {
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
         console.log(body,'BODY')
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Agent/addmedia',
+            `${Public_URL}/Agent/addmedia`,
             body,
             {
                 headers: {

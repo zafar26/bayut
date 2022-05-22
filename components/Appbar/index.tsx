@@ -293,7 +293,7 @@ export default function MenuAppBar({
             style={{
                 background: client
                     ? indexPage
-                        ? '#42240C'
+                        ? 'rgb(146 64 14)   '
                         : 'rgb(146 64 14)'
                     : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
                 // borderRadius: '0px 0px 10px 10px',

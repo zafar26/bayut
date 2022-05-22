@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { db } from '../../db';
+import { Public_URL } from '../helper';
 
 export async function sendMail(body?: any) {
     try {
@@ -17,7 +18,7 @@ export async function sendMail(body?: any) {
         console.log(user,'AFTERWARDS')
         console.log(body,'BODY')
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Users/sendemail',
+            `${Public_URL}/Users/sendemail`,
             params,
             {
                 headers: {

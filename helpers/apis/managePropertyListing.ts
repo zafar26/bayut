@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { db } from '../../db';
+import { Public_URL } from '../helper';
 
 export async function getPropertyListing() {
 
@@ -11,7 +12,7 @@ export async function getPropertyListing() {
 
        
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Agent/managepropertylisting',
+            `${Public_URL}/Agent/managepropertylisting`,
             {},
             {
                 headers: {

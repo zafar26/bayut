@@ -290,13 +290,15 @@ const PropertyDetails = () => {
                             Contact Agent for more information
                         </div>
 
-                        <div className="flex flex-col items-center w-5/6">
+                        <div className="flex flex-col items-center w-full  ">
                             <MyInput
+                                style={'shadow-amber-800/50'}
                                 name="Name"
                                 value={name}
                                 onChange={setName}
                             />
                             <MyInput
+                                style={'shadow-amber-800/50'}
                                 name="Email"
                                 value={email}
                                 onChange={setEmail}

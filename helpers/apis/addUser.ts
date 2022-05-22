@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { db } from '../../db';
+import { Public_URL } from '../helper';
 
 export async function onAddUser(body: any) {
     try {
@@ -17,7 +18,7 @@ export async function onAddUser(body: any) {
             return;
         }
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Agent/adduser',
+            `${Public_URL}/Agent/adduser`,
             body,
             {
                 headers: {
@@ -59,7 +60,7 @@ export async function onManageUser(body?: any) {
         // }
 
         const { data } = await axios.post(
-            'http://syed333-001-site1.ftempurl.com/Agent/manageusers',
+            `${Public_URL}/Agent/manageusers`,
             {parentUserID:corporateUser[0].userID},
             {
                 headers: {
