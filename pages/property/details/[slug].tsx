@@ -173,7 +173,7 @@ const PropertyDetails = () => {
     } else {
         return (
             <div className=" w-screen h-screen ">
-                <div className="pt-16   px-2 md:px-12 py-4 md:flex justify-center bg-[#F7F6F2] text-amber-800 ">
+                <div className="pt-16   px-2 md:px-12 py-4 md:flex justify-center bg-[#F7F6F2] text-yellow-900 ">
                     {
                         <div className={isMobile ? '' : 'h-12'}>
                             <Navbar
@@ -281,7 +281,7 @@ const PropertyDetails = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="pt-16 w-full md:w-4/12 flex flex-col items-center ">
+                    <div className="pt-16 w-full md:w-4/12 flex flex-col items-center p-4 ">
                         <div className="flex text-lg">
                             <p>Agent :</p>
                             <p>Company </p>

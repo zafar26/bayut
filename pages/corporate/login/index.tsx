@@ -108,6 +108,8 @@ const CorporateLogin: NextPage = () => {
                             onChange={setPassword}
                             showPassword={showPassword}
                             setShowPassword={setShowPassword}
+                            onPressEnter = {true}
+                            onSubmit = {onSubmit}
                         />
                         {/* <CustomSelect
                             value={loginAs}
@@ -141,6 +143,23 @@ const CorporateLogin: NextPage = () => {
                             </Button>
                         </div>
                     </div>
+                    <div className="mt-4 flex items-center">
+                        <h1 className="font-thin text-sm">
+                         Go to 
+                        </h1>
+
+                        <div className="self-center mt-2 ml-2 text-black w-42 rounded">
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={() =>
+                                    router.push('/')
+                                }
+                            >
+                               Home
+                            </Button>
+                        </div>
+                    </div>
                     <div
                         className={
                             errorSnackbar
@@ -149,7 +168,7 @@ const CorporateLogin: NextPage = () => {
                         }
                         hidden={!snackbar}
                     >
-                        {errorSnackbar ? errorSnackbar : 'Succes'}
+                        {errorSnackbar ? 'Request Failed' : 'Succes'}
                     </div>
                 </div>
             </div>

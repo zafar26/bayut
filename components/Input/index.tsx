@@ -6,7 +6,25 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
+import { useEffect, useState } from 'react';
+
 export default function MyInput(props: any) {
+    useEffect(() => {
+        if(props.onPressEnter){ 
+        let input = document.getElementById("outlined-adornment-password");
+        input.addEventListener("keypress", function(event) {
+            // If the user presses the "Enter" key on the keyboard
+            if (event.key === "Enter"&&  props.onPressEnter) {
+              // Cancel the default action, if needed
+              // event.preventDefault();
+                props.onSubmit()
+              // Trigger the button element with a click
+            //   document.getElementById("createAccount").click();
+            }
+          });
+        }
+    
+    },[])
     return (
         <div className="w-full" style={{ marginTop: '10px' }}>
             {props.type == 'password' ? (
@@ -29,6 +47,7 @@ export default function MyInput(props: any) {
                             onChange={(e: any) =>
                                 props.onChange(e.target.value)
                             }
+
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton

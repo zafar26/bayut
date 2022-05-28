@@ -294,7 +294,7 @@ const Listings = () => {
                 )}
                 <div className="p-2 md:w-5/6  h-full ">
                     <div className="flex justify-between">
-                        <div className="w-32 md:w-2/5 p-2  bg-lightGreenCard rounded shadow lg:h-24 lg:p-8">
+                        {/* <div className="w-32 md:w-2/5 p-2  bg-lightGreenCard rounded shadow lg:h-24 lg:p-8">
                             <p className="pb-2 font-light text-sm md:text-base ">
                                 Quota Summary
                             </p>
@@ -310,7 +310,7 @@ const Listings = () => {
                                     value={78}
                                 />
                             </a>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="p-2 mt-4 md:mt-4 w-full h-full  bg-lightGreenCard rounded shadow">
                         <div className="w-full h-2/6">

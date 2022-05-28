@@ -23,16 +23,16 @@ export const corporateLinks: any = [
         path: '/corporate/listings',
         icon: () => <ViewListIcon />,
     },
-    {
-        label: 'Reports',
-        path: '/corporate/reports',
-        icon: () => <BarChartIcon />,
-    },
-    {
-        label: 'Insights',
-        path: '/corporate/insights',
-        icon: () => <InsightsIcon />,
-    },
+    // {
+    //     label: 'Reports',
+    //     path: '/corporate/reports',
+    //     icon: () => <BarChartIcon />,
+    // },
+    // {
+    //     label: 'Insights',
+    //     path: '/corporate/insights',
+    //     icon: () => <InsightsIcon />,
+    // },
     {
         label: 'User Listings',
         path: '/corporate/agency',

@@ -45,6 +45,10 @@ const CorporateCreateLogin: NextPage = () => {
             router.push('/');
         }
         setSignupAs(signupas);
+        
+
+       
+
     }, []);
     function onSubmit() {
         let body = {
@@ -55,9 +59,12 @@ const CorporateCreateLogin: NextPage = () => {
             mobileNo: '+' + phoneNo,
             userRoleID: signupAs,
         };
-
+        console.log('Clicked')
         onCorporateSignUp(body).then((r: any) => {
-            // console.log(r, 'RESULTSS');
+            console.log(r, 'RESULTSS');
+            if(!r){
+                return
+            }
             if (r.error) {
                 setSnackbar(true);
 
@@ -71,8 +78,7 @@ const CorporateCreateLogin: NextPage = () => {
                     () => router.push(`/corporate/login?email=${email}`),
                     5000
                 );
-                //     if (r.localDb) {
-                // }
+                
             } else {
                 if (r.data.errorData.message) {
                     setErrorSnackbar(r.data.errorData.message);
@@ -132,10 +138,13 @@ const CorporateCreateLogin: NextPage = () => {
                             label={'Sign Up As'}
                             options={signupOptions}
                         /> */}
-                            <div className="mt-4 ">
+                            <div className="mt-4 "id="phoneNo">
                                 <PhoneNoInput
                                     phoneNo={phoneNo}
                                     setPhoneNo={setPhoneNO}
+                                    onKeyEnter={true}
+                                    onClick={() => onSubmit()}
+
                                 />
                             </div>
                         </div>
@@ -144,18 +153,20 @@ const CorporateCreateLogin: NextPage = () => {
                                 variant="contained"
                                 color="success"
                                 onClick={() => onSubmit()}
+                                id="createAccount"
                             >
                                 Create Account
                             </Button>
                         </div>
 
-                        {signupAs == 3 && (
+                        {signupAs == 3 && (<>
                             <div className="mt-4 flex flex-col">
                                 <h1 className="font-thin text-sm">
                                     Already Have an Account
                                 </h1>
 
-                                <div className="self-center mt-2 bg-blue-600 w-20 rounded">
+                                <div className=" mt-2 flex justify-between w-full rounded">
+                                    <div className="bg-blue-600">
                                     <Button
                                         variant="contained"
                                         onClick={() =>
@@ -164,9 +175,21 @@ const CorporateCreateLogin: NextPage = () => {
                                     >
                                         <p> Login</p>
                                     </Button>
+                                    </div>
+                                    <Button
+                                 variant="contained"
+                                 color="secondary"
+                                 onClick={() =>
+                                     router.push('/')
+                                 }
+                             >
+                                Home
+                             </Button>
                                 </div>
-                            </div>
-                        )}
+                            
+                             
+                         </div>
+                        </>)}
                         <div
                             className={
                                 errorSnackbar
@@ -175,7 +198,7 @@ const CorporateCreateLogin: NextPage = () => {
                             }
                             hidden={!snackbar}
                         >
-                            {errorSnackbar ? errorSnackbar : 'Succes'}
+                            {errorSnackbar ? "Request Failed" : 'Succes'}
                         </div>
                     </div>
                 </div>
