@@ -232,6 +232,15 @@ const Properties = () => {
                                     <div
                                         className="p-1 my-4 w-full  shadow rounded flex shadow-amber-800/40	 "
                                         key={i}
+                                        onClick={() =>
+                                            router.push(
+                                                `/property/details/${
+                                                    d.propertyID
+                                                        ? d.propertyID
+                                                        : 1
+                                                }`
+                                            )
+                                        }
                                     >
                                         {/* {console.log(d, 'DATA D')} */}
                                         <div className="w-full md:w-1/2 ">
@@ -251,11 +260,12 @@ const Properties = () => {
                                             }
                                         >
                                             <div className="text-sm md:text-xl ">
+                                               
+
+                                                <p>{d.propertyName}</p>
                                                 <p className="font-bold">
                                                     {d.price}
                                                 </p>
-
-                                                <p>{d.propertyName}</p>
                                                 <p className="text-xs md:text-xs font-thin">
                                                     {d.address}
                                                 </p>

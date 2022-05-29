@@ -11,8 +11,8 @@ import { useEffect, useState } from 'react';
 export default function MyInput(props: any) {
     useEffect(() => {
         if(props.onPressEnter){ 
-        let input = document.getElementById("outlined-adornment-password");
-        input.addEventListener("keypress", function(event) {
+        let input:any = document.getElementById("outlined-adornment-password");
+        input.addEventListener("keypress", function(event:any) {
             // If the user presses the "Enter" key on the keyboard
             if (event.key === "Enter"&&  props.onPressEnter) {
               // Cancel the default action, if needed

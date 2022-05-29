@@ -138,7 +138,7 @@ export default function MenuAppBar({
         return (
             <div
                 className={`w-full absolute left-0 top-0 flex justify-between items-center px-9 py-4  ${
-                    indexPage ? '' : 'bg-amber-800 '
+                    indexPage ? '' : 'bg-amber-400 '
                 }`}
             >
                 <div className="w-1/6">
@@ -293,7 +293,7 @@ export default function MenuAppBar({
             style={{
                 background: client
                     ? indexPage
-                        ? 'rgb(146 64 14)   '
+                        ? '   '
                         : 'rgb(146 64 14)'
                     : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
                 // borderRadius: '0px 0px 10px 10px',
@@ -319,7 +319,8 @@ export default function MenuAppBar({
                     className={classes.title}
                     style={{ color: '#FFFFFF' }}
                 >
-                    Vlook
+                    Lookin
+                    <p className="text-xs">properties</p>
                 </Typography>
 
                 {

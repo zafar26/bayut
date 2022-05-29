@@ -69,7 +69,7 @@ const CorporateLogin: NextPage = () => {
             if (r.data.statusCode == 200) {
                 setSnackbar(true);
                 if (r.localDb) {
-                    setTimeout(() => router.push('/corporate/dashboard'), 5000);
+                    setTimeout(() => router.push('/corporate/dashboard'), 2000);
                 }
             } else {
                 if (r.data.errorData.message) {
@@ -118,6 +118,8 @@ const CorporateLogin: NextPage = () => {
                             options={loginOptions}
                         /> */}
                     </div>
+                    <div className="flex items-end">
+                        <div>
                     <div className="mt-4 bg-green-700 rounded">
                         <Button
                             variant="contained"
@@ -127,6 +129,28 @@ const CorporateLogin: NextPage = () => {
                             Login
                         </Button>
                     </div>
+                    </div>
+                    <div className="mt-4 flex flex-col items-center">
+                        
+
+                        <div className="self-center mt-2 ml-2 w-42 rounded">
+                        <p className="font-thin text-xs">
+                         Go to 
+                        </p>
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={() =>
+                                    router.push('/')
+                                }
+                            >
+                            
+                               Home
+                            </Button>
+                        </div>
+                        </div>
+                    </div>
+
                     <div className="mt-4 flex flex-col">
                         <h1 className="font-thin text-sm">
                             Don't Have an Account
@@ -143,23 +167,7 @@ const CorporateLogin: NextPage = () => {
                             </Button>
                         </div>
                     </div>
-                    <div className="mt-4 flex items-center">
-                        <h1 className="font-thin text-sm">
-                         Go to 
-                        </h1>
-
-                        <div className="self-center mt-2 ml-2 text-black w-42 rounded">
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                onClick={() =>
-                                    router.push('/')
-                                }
-                            >
-                               Home
-                            </Button>
-                        </div>
-                    </div>
+                    
                     <div
                         className={
                             errorSnackbar

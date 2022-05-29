@@ -44,7 +44,7 @@ const MyList = ({
             <List style={{ paddingTop: 0 }}>
                 {anchor && (
                     <div
-                        className="bg-[#464E2E]"
+                        className="text-yellow-900 "
                         style={{
                             height: '56px',
                             background: clientUser
@@ -60,7 +60,8 @@ const MyList = ({
                     >
                         <ArrowBackIcon style={{ color: '#ffffff' }} />
                         <h6 style={{ fontSize: '1.25rem', color: '#ffffff' }}>
-                            Vlook
+                            Lookin
+                            <p className="text-xs">Properties</p>
                         </h6>
                     </div>
                 )}

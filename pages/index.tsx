@@ -199,7 +199,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-full h-full box-border	">
+            <div className="w-full h-full box-border text-yellow-900	">
                 <div className="flex justify-center flex-wrap w-full md:mt-24 mt-12 scroll-smooth">
                     <p className="w-full flex justify-center font-bold text-xl md:text-4xl md:my-8 my-4 ">
                         Properties
@@ -227,16 +227,20 @@ const Home = () => {
                                 }
                             >
                                 <div className="text-sm md:text-xl ">
-                                    <p className="font-bold">{d.price}</p>
 
                                     <p>{d.propertyName}</p>
                                     <p className="text-xs md:text-xs font-thin">
                                         {d.address}
                                     </p>
+                                    <div className="flex justify-between items-center ">
 
-                                    <p className="text-xs md:text-base font-semibold">
-                                        {d.propertyType}
-                                    </p>
+
+                                        <p className="text-xs md:text-base font-semibold">
+                                            {d.propertyType}
+                                        </p>
+                                        <p className="font-bold">{d.price}</p>
+
+                                    </div>
                                     <p className="text-xs md:text-base ">
                                         {d.categoryName + ' '} -{'>'}
                                         {' ' + d.subCategoryName}

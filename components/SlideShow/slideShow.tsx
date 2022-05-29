@@ -48,6 +48,7 @@ const Slideshow = ({ images, isFull }: any) => {
                 className="rounded h-full w-full"
                 // layout="responsive"
                 objectFit={'fill'}
+                onClick={() => {}}
             />
             <div
                 className="bg-gray-50 absolute inset-y-2/4 right-1 z-50 p-2 flex items-center rounded-full cursor-pointer"

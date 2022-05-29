@@ -22,7 +22,7 @@ export default function CustomSelect(props: any) {
                 <InputLabel
                     htmlFor="outlined-options-native-simple"
                     className={
-                        props.transparent && props.withoutMargin && 'text-white'
+                        props.transparent && props.withoutMargin && 'text-yellow-900'
                     }
                 >
                     {props.label}
@@ -33,7 +33,7 @@ export default function CustomSelect(props: any) {
                         props.tranparent
                             ? 'bg-whiteTransparent'
                             : props.withoutMargin
-                            ? 'bg-transparent text-white'
+                            ? 'bg-transparent '
                             : 'bg-white'
                     }
                     native

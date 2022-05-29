@@ -5,7 +5,7 @@ import { Public_URL } from '../helper';
 export async function onCorporateLogin(body: any) {
     try {
         if (body.email == '' && body.password == '') {
-            alert('Please Enter Email and Password');
+            alert('Please Enter Username and Password');
             return;
         }
         // console.log('CLicked', process.env.ServerURL);
@@ -37,7 +37,7 @@ export async function onCorporateLogin(body: any) {
 export async function onCorporateSignUp(body: any) {
     try {
         if (body.email == '' || body.password == '') {
-            alert('Please Enter Email and Password');
+            alert('Please Enter Username and Password');
             return;
         }
         if (body.password != body.confirmPassword) {
@@ -71,7 +71,7 @@ export async function onCorporateSignUp(body: any) {
 export async function onUserLogin(body: any) {
     try {
         if (body.email == '' && body.password == '') {
-            alert('Please Enter Email and Password');
+            alert('Please Enter Username and Password');
             return;
         }
         // console.log('CLicked', process.env.ServerURL);
