@@ -10,8 +10,9 @@ import MenuAppBar from '../../../components/Appbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { NextRouter, useRouter } from 'next/router';
 
-const Alert = forwardRef(function Alert(props, ref) {
+const Alert = forwardRef(function Alert(props:any, ref:any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 const AddUser = () => {
@@ -38,8 +39,9 @@ const AddUser = () => {
     const [loginAs, setLoginAs] = useState<String>('');
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
-    const [open, setOpen] = useState<Boolean>(false);
-    const handleClose = (event, reason) => {
+    const [open, setOpen] = useState<any>(false);
+    const router: NextRouter = useRouter();
+    const handleClose = (event:any, reason:any) => {
         if (reason === 'clickaway') {
           return;
         }

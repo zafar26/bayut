@@ -16,7 +16,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 
-const Alert = forwardRef(function Alert(props, ref) {
+const Alert = forwardRef(function Alert(props:any, ref:any) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
@@ -46,9 +46,9 @@ const CorporateCreateLogin: NextPage = () => {
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router = useRouter();
-    const [open, setOpen] = useState<Boolean>(false);
+    const [open, setOpen] = useState<any>(false);
     const [validationError, setValidationError] = useState<Boolean>(false);
-    const handleClose = (event, reason) => {
+    const handleClose = (event:any, reason:any) => {
         if (reason === 'clickaway') {
           return;
         }

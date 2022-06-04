@@ -72,7 +72,7 @@ export default function MyInput(props: any) {
                         <OutlinedInput
                             // {props.error}
                             error
-                            helperText={error}    
+                            // helperText={error}    
                             size="small"
                             // className="w-full bg-white "
                             id="outlined-adornment-password"

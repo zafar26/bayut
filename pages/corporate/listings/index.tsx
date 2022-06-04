@@ -57,7 +57,7 @@ const Listings = () => {
         // console.log(anchorEl, 'EVENt');
         setAnchorEl(null);
     };
-    function CustomToolbar({setFilterButtonEl}) {
+    function CustomToolbar({setFilterButtonEl}:any) {
         return (
             <GridToolbarContainer className="flex justify-between">
                  <GridToolbarFilterButton ref={setFilterButtonEl} />
@@ -72,7 +72,7 @@ const Listings = () => {
         );
     }
 
-    const columns = [
+    const columns:any = [
         // {
         //     field: 'ref',
         //     headerName: 'ref',
@@ -322,7 +322,7 @@ const Listings = () => {
         }
     }
     const [filterValue, setFilterValue] = useState<any>();
-    const onFilterChange = useCallback((filterModel) => {
+    const onFilterChange = useCallback((filterModel:any) => {
         setFilterValue(filterModel.items[0].value);
       }, []);
     // const classes = useStyles();
@@ -434,7 +434,7 @@ const Listings = () => {
                                 name="search"
                                 value={searchValue}
                                 onChange={setSearchValue}
-                                onBlur={(e)=> {
+                                onBlur={(e:any)=> {
                                     if(e.target.value != ""){
                                         getSearchValue()
                                     }else{

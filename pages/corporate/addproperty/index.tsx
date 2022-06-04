@@ -19,7 +19,7 @@ import { db } from '../../../db';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
-const Alert = forwardRef(function Alert(props, ref) {
+const Alert = forwardRef(function Alert(props:any, ref:any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
@@ -53,10 +53,10 @@ const AddProperty = () => {
         mobile?: string;
     }>({});
     const [snackbar, setSnackbar] = useState<Boolean>(false);
-    const [open, setOpen] = useState<Boolean>(false);
+    const [open, setOpen] = useState<any>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router: NextRouter = useRouter();
-    const handleClose = (event, reason) => {
+    const handleClose = (event:any, reason:any) => {
         if (reason === 'clickaway') {
           return;
         }

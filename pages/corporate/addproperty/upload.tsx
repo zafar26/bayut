@@ -15,7 +15,7 @@ import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 
 
-const Alert = forwardRef(function Alert(props, ref) {
+const Alert = forwardRef(function Alert(props:any, ref:any) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
@@ -26,21 +26,19 @@ const UploadPage = () => {
     const [value, setValue] = useState(0);
     const [selectedImage, setSelectedImage] = useState<any>(null);
     const [imagebase64, setImageBase64] = useState(null);
-    const router: NextRouter = useRouter();
     const [propertyID, setPropertyID] = useState<Number>(0);
-    const [open, setOpen] = useState<Boolean>(false);
+    const [open, setOpen] = useState<any>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router: NextRouter = useRouter();
-    const handleClose = (event, reason) => {
+    const handleClose = (event:any, reason:any) => {
         if (reason === 'clickaway') {
           return;
         }
     
         setOpen(false);
       };
-    const [count, setCount] = useState<Number>(0)
+    const [count, setCount] = useState<any>(0)
     const [snackbar, setSnackbar] = useState<Boolean>(false);
-    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     useEffect(() => {
         const { propertyid }: any = router.query;
         setPropertyID(propertyid);
@@ -61,7 +59,8 @@ const UploadPage = () => {
         onAddPropertyUpload(body).then((r: any) => {
             setOpen(true)
             if (r.statusCode == 200) {
-                setCount(count++)
+                let times = count + 1 
+                setCount(times)
                 console.log(r, 'RESULT');
                 setSnackbar(true);
             } else {
