@@ -32,9 +32,9 @@ export default function MyInput(props: any) {
         }
     
     },[])
-    const [error ,setError] = useState('')
-    function getPasswordValidation(val){
-        let passw=   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+    const [error ,setError] = useState<any>('')
+    function getPasswordValidation(val:any){
+        let passw :any=   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
         if(!val.match(passw)){
             setError('6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter')
             props.setValidationError(true)
@@ -43,8 +43,8 @@ export default function MyInput(props: any) {
             setError('')
         }
     }
-    function getEmailValidation(val){
-        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    function getEmailValidation(val:any){
+        let mailformat:any = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if(!val.match(mailformat)){
             setError('example@gmail.com')
             props.setValidationError(true)
