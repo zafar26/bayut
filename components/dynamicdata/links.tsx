@@ -13,11 +13,11 @@ import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 
 export const corporateLinks: any = [
-    {
-        label: 'Overview',
-        path: '/corporate/dashboard',
-        icon: () => <DashboardIcon />,
-    },
+    // {
+    //     label: 'Overview',
+    //     path: '/corporate/dashboard',
+    //     icon: () => <DashboardIcon />,
+    // },
     {
         label: 'Property Listings',
         path: '/corporate/listings',
@@ -73,7 +73,7 @@ export const clientLinks: any = [
         icon: () => <ContactPhoneIcon />,
     },
     {
-        label: 'Corporate Login',
+        label: 'Login',
         path: '/corporate/login',
         icon: () => <SupervisedUserCircleIcon />,
     },

@@ -29,6 +29,7 @@ import { NextRouter, useRouter } from 'next/router';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { onDelete } from '../../../helpers/apis/delete';
 import { onApprove } from '../../../helpers/apis/approve';
+import Box from '@mui/material/Box';
 
 const Agency = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -49,16 +50,16 @@ const Agency = () => {
     function CustomToolbar() {
         return (
             <GridToolbarContainer className="flex justify-between">
-                <p className="self-start text-xs">Manage Users :</p>
-                <div className="p-0 w-24 shadow rounded flex items-center ">
-                    <CustomSelect
+                <p className="self-start text-xs md:text-base">Users :</p>
+                {/* <div className="p-0 w-24 shadow rounded flex items-center "> */}
+                    {/* <CustomSelect
                         withoutMargin={true}
                         value={loginAs}
                         onChange={(e: any) => setLoginAs(e.target.value)}
                         label={'Users'}
                         options={loginOptions}
                     />
-                </div>
+                </div> */}
                 <GridToolbarExport />
             </GridToolbarContainer>
         );
@@ -74,19 +75,29 @@ const Agency = () => {
             .catch((e: any) => console.log(e, 'ERR'));
     }, []);
     const columns = [
-        {
-            field: 'userId',
-            headerName: 'User ID',
-            width: 80,
-        },
+        // {
+        //     field: 'userId',
+        //     headerClassName: 'super-app-theme--header',
+        //     headerName: 'User ID',
+        //     width: 80,
+        // },
         // { field: 'guid', headerName: 'GU_ID', width: 200 },
         // { field: 'isActive', headerName: ' Active', width: 100 },
         // { field: 'age', headerName: 'Age', width: 90 },
         // { field: 'eyeColor', headerName: 'Eye Color', width: 120 },
         // { field: 'company', headerName: 'Company', width: 120 },
-        { field: 'name', headerName: 'Name', width: 160 },
-        { field: 'username', headerName: 'UserName', width: 200 },
-        { field: 'mobileNo', headerName: 'Mobile No', width: 140 },
+        { field: 'name', 
+        headerClassName: 'super-app-theme--header',
+            flex: 1,
+            headerName: 'Name', width: 160 },
+        { field: 'username', 
+        headerClassName: 'super-app-theme--header',
+            flex: 1,
+            headerName: 'UserName', width: 200 },
+        { field: 'mobileNo', 
+        headerClassName: 'super-app-theme--header',
+            flex: 1,
+            headerName: 'Mobile No', width: 140 },
         // { field: 'mobile', headerName: 'price', width: 200 },
 
         // { field: 'balance', headerName: 'beds', width: 120 },
@@ -97,15 +108,19 @@ const Agency = () => {
         // { field: 'longitude', headerName: 'Longitude', width: 120 },
         {
             field: 'action',
+            
+            headerClassName: 'super-app-theme--header',
             headerName: 'Actions',
-            width: 120,
+            // width: 120,
+            flex: 1,
+
             renderCell: (data: any) => {
                 console.log(data, 'DATA');
                 return (
                     <div className="w-full flex justify-around">
                         <CheckCircleOutlineIcon
                             className="mr-2 "
-                            fontSize={'small'}
+                            fontSize={'large'}
                             color={
                                 data.row.status == 0 ? 'success' : 'disabled'
                             }
@@ -114,7 +129,7 @@ const Agency = () => {
 
                         <DeleteIcon
                             className="mr-2 "
-                            fontSize={'small'}
+                            fontSize={'large'}
                             color="error"
                             onClick={() => onActionClicked(data.row, 'Delete')}
                         />
@@ -216,10 +231,21 @@ const Agency = () => {
                                 />
                             </div>
                         </div> */}
+                        <p className="flex justify-center text-2xl">Manage Users</p>
                     </div>
 
                     <div className=" self-center w-full p-2 md:w-full h-4/5 md:h-full ">
-                        <div className=" h-full rounded bg-lightGreenCard shadow">
+                        <div className="w-full h-full rounded  ">
+                        <Box
+                            sx={{
+                                height: '100%',
+                                width: '100%',
+                                '& .super-app-theme--header': {
+                                backgroundColor: '#4B5D67',
+                                color:'#F9F9F9'
+                                },
+                            }}
+                            >
                             <DataGrid
                                 columns={columns}
                                 rows={usersData}
@@ -229,9 +255,11 @@ const Agency = () => {
                                 components={{
                                     Toolbar: CustomToolbar,
                                 }}
-                                density={isMobile ? 'compact' : 'standard'}
+                                density={isMobile ? 'compact' : 'comfortable'}
                                 disableSelectionOnClick
+                                className="text-xl"
                             />
+                            </Box>
                         </div>
                     </div>
                 </div>

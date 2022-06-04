@@ -29,19 +29,21 @@ const Home = () => {
     const [purpose, setPurpose] = useState<String>('');
     const [subCategory, setSubCategory] = useState<String>('');
     const [auth, setAuth] = useState<Boolean>(false);
+    const [loading, setLoading] = useState<Boolean>(false);
     const [data, setData] = useState<any>([]);
     useEffect(() => {
         // console.log(router, 'ROUTER');
-
+        setLoading(true)
         onUserSearch().then((r: any) => {
             console.log(r, 'RSULT PRoPERT SEARCH');
             if (!r.error) {
                 console.log(r, 'R');
                 let data = [
                     ...r.responseData.data.items,
-                    ...r.responseData.data.items,
+                    // ...r.responseData.data.items,
                 ];
                 console.log(data, 'DATAFROMARRAY');
+                setLoading(false)
                 setData(data);
             }
         });
@@ -204,11 +206,12 @@ const Home = () => {
                     <p className="w-full flex justify-center font-bold text-xl md:text-4xl md:my-8 my-4 ">
                         Properties
                     </p>
-                    {data.length == 0 && (
+                    {loading && (
                         <Box sx={{ display: 'flex' }}>
                             <CircularProgress />
                         </Box>
                     )}
+                    {data.length == 0 && !loading && <p>No Data Found</p>}
                     {data.map((d: any, i: number) => (
                         <div
                             className="p-2 md:py-4 w-5/6 m-4  justify-center items-center md:w-3/12 shadow rounded flex flex-col  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300 hover:shadow-xl "

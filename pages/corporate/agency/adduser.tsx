@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState,forwardRef } from 'react';
 import MyInput from '../../../components/Input';
 import Navbar from '../../../components/Navbar/Navbar';
 import CustomSelect from '../../../components/Select';
@@ -8,7 +8,12 @@ import { onAddUser } from '../../../helpers/apis/addUser';
 import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 const AddUser = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [name, setName] = useState<String>('');
@@ -33,7 +38,15 @@ const AddUser = () => {
     const [loginAs, setLoginAs] = useState<String>('');
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
-
+    const [open, setOpen] = useState<Boolean>(false);
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+    
     let loginOptions = [
         {
             value: '2',
@@ -192,8 +205,7 @@ const AddUser = () => {
                 mobileNo: mobileNo,
                 communication: true,
                 password: password,
-                // parentUserID: 0,
-                userRoleID: 3,
+                userRoleID: 4,
                 status: 0,
             },
             userDetails: {
@@ -208,11 +220,11 @@ const AddUser = () => {
                 twitter: twitter,
                 youtube: youtube,
             },
-            // parentUserID: 0,
         };
         // console.log(addUserBody, 'BODY');
         onAddUser(addUserBody).then((r: any) => {
             // console.log(r, 'RESULTSS');
+            setOpen(true);
             if (r.error) {
                 setSnackbar(true);
                 setErrorSnackbar(r.message);
@@ -221,6 +233,7 @@ const AddUser = () => {
             if (r.data.statusCode == 200 || r.userID) {
                 console.log(r, 'RESULT');
                 setSnackbar(true);
+                router.push('/corporate/agency/adduser')
             } else {
                 if (r.data.errorData.message) {
                     setErrorSnackbar(r.data.errorData.message);
@@ -290,7 +303,16 @@ const AddUser = () => {
                             Submit
                         </Button>
                     </div>
-                    <div
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
+                        {errorSnackbar?
+                        "Failed to Add User"
+                        :
+                        "User Added successfully!"
+                        }
+                        </Alert>
+                    </Snackbar>
+                    {/* <div
                         className={
                             errorSnackbar
                                 ? 'absolute top-100 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
@@ -299,7 +321,7 @@ const AddUser = () => {
                         hidden={!snackbar}
                     >
                         {errorSnackbar ? errorSnackbar : 'Succes'}
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

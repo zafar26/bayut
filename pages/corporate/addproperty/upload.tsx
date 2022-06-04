@@ -3,7 +3,7 @@ import MyStepper from '../../../components/Stepper';
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,forwardRef } from 'react';
 import Button from '@mui/material/Button';
 import UploadAndDisplayImage from '../../../components/Upload';
 import { onAddPropertyUpload } from '../../../helpers/apis/addProperty';
@@ -11,6 +11,13 @@ import MyList from '../../../components/ListSideBar';
 import MenuAppBar from '../../../components/Appbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { NextRouter, useRouter } from 'next/router';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
+const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
@@ -21,12 +28,25 @@ const UploadPage = () => {
     const [imagebase64, setImageBase64] = useState(null);
     const router: NextRouter = useRouter();
     const [propertyID, setPropertyID] = useState<Number>(0);
-
+    const [open, setOpen] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
+    const router: NextRouter = useRouter();
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+    const [count, setCount] = useState<Number>(0)
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     useEffect(() => {
         const { propertyid }: any = router.query;
         setPropertyID(propertyid);
+        if(count > 2){
+            router.push('/corporate/listings')
+        }
     }, []);
     // console.log(selectedImage, 'IMAGEBASE64');
     function onSubmit() {
@@ -39,7 +59,9 @@ const UploadPage = () => {
         };
         // console.log(body, 'BODY');
         onAddPropertyUpload(body).then((r: any) => {
+            setOpen(true)
             if (r.statusCode == 200) {
+                setCount(count++)
                 console.log(r, 'RESULT');
                 setSnackbar(true);
             } else {
@@ -146,7 +168,16 @@ const UploadPage = () => {
                                 </Button>
                             </div>
                         </div>
-                        <div
+                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
+                        {errorSnackbar?
+                        "Failed to Add Property Image"
+                        :
+                        "Property Image Added successfully!"
+                        }
+                        </Alert>
+                    </Snackbar>
+                        {/* <div
                             className={
                                 errorSnackbar
                                     ? 'absolute bottom-100 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
@@ -155,7 +186,7 @@ const UploadPage = () => {
                             hidden={!snackbar}
                         >
                             {errorSnackbar ? errorSnackbar : 'Succes'}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

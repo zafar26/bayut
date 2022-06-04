@@ -142,13 +142,15 @@ export default function MenuAppBar({
                 }`}
             >
                 <div className="w-1/6">
-                    <Image
+                    {/* <Image
                         src={indexPage ? 'whitevlook.png' : 'vlook.png'}
                         loader={myPublicLoader}
                         layout={'fixed'}
                         width={120}
                         height={26}
-                    />
+                    /> */}
+                    <h1 className="text-xl">Lookin</h1>
+                    <p className="text-xs">Properties</p>
                 </div>
                 <div className="flex w-5/6">
                     {clientLinks.map((link: any, index: any) => {
@@ -196,7 +198,7 @@ export default function MenuAppBar({
                     })}
                 </div>
 
-                <button
+                {/* <button
                     className={`ml-2 w-40 px-4 py-2 bg-white rounded flex justify-center items-center bg-primary text-white hover:bg-white hover:text-primary`}
                     onClick={handleMenu}
                 >
@@ -230,7 +232,7 @@ export default function MenuAppBar({
                                     <MenuItem onClick={handleClose}>
                                         Log out
                                     </MenuItem> */}
-                        <div className="md:w-72 ">
+                        {/* <div className="md:w-72 ">
                             <MyInput
                                 name="Email"
                                 value={email}
@@ -263,30 +265,21 @@ export default function MenuAppBar({
                         </p>
                         <div className="w-full flex justify-center">
                             {/* <Link href="/corporate/signup?signup=2 "> */}
-                            <Link href="/corporate/signup?signupas=2">
+                            {/* <Link href="/corporate/signup?signupas=2">
                                 <a className="mt-4 w-full border-white border text-white p-2 text-center hover:bg-gray-800">
                                     Become a Free Member
                                 </a>
                             </Link>
                             {/* </Link> */}
-                        </div>
+                        {/* </div>
                     </div>
-                </Menu>
+                </Menu> */}
             </div>
         );
         // return <div className="bg-transparent "></div>;
     }
     return (
-        // <motion.div
-        //     initial={{ y: -250 }}
-        //     animate={{ y: 0 }}
-        //     transition={{
-        //         type: 'spring',
-        //         stiffness: 260,
-        //         damping: 20,
-        //     }}
-        //     className={classes.root}
-        // >
+        
         <AppBar
             position="fixed"
             color="transparent"
@@ -367,75 +360,76 @@ export default function MenuAppBar({
                                 </MenuItem>
                             </Menu>
                         ) : (
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={open}
-                                onClose={handleClose}
-                                className="p-0 "
-                                style={{
-                                    paddingTop: '0px',
-                                    paddingBottom: '0px',
-                                }}
-                            >
-                                <div className=" p-4 w-full h-full bg-[#000000] ">
-                                    {/* <MenuItem onClick={handleClose}>
-                                        Settings
-                                    </MenuItem>
-                                    <MenuItem onClick={handleClose}>
-                                        Log out
-                                    </MenuItem> */}
-                                    <div className="md:w-72 ">
-                                        <MyInput
-                                            name="Email"
-                                            value={email}
-                                            onChange={setEmail}
-                                        />
-                                        <MyInput
-                                            name="Password"
-                                            type="password"
-                                            value={password}
-                                            onChange={setPassword}
-                                            showPassword={showPassword}
-                                            setShowPassword={setShowPassword}
-                                        />
-                                    </div>
-                                    <div className="mt-4 w-full bg-green-700 rounded">
-                                        <Button
-                                            fullWidth
-                                            variant="contained"
-                                            color="success"
-                                            onClick={() => {
-                                                // console.log('Submited');
-                                                onSubmit();
-                                            }}
-                                        >
-                                            Login
-                                        </Button>
-                                    </div>
-                                    <p className="pt-4 text-white text-center ">
-                                        Are You New To vlook properties
-                                    </p>
-                                    <div className="w-full flex justify-center">
-                                        {/* <Link href="/corporate/signup?signup=2 "> */}
-                                        <Link href="/corporate/signup?signupas=2">
-                                            <a className="mt-4 w-full border-white border text-white p-2 text-center hover:bg-gray-800">
-                                                Become a Free Member
-                                            </a>
-                                        </Link>
-                                        {/* </Link> */}
-                                    </div>
-                                </div>
-                            </Menu>
+                            // <Menu
+                            //     id="menu-appbar"
+                            //     anchorEl={anchorEl}
+                            //     anchorOrigin={{
+                            //         vertical: 'top',
+                            //         horizontal: 'right',
+                            //     }}
+                            //     keepMounted
+                            //     transformOrigin={{
+                            //         vertical: 'top',
+                            //         horizontal: 'right',
+                            //     }}
+                            //     open={open}
+                            //     onClose={handleClose}
+                            //     className="p-0 "
+                            //     style={{
+                            //         paddingTop: '0px',
+                            //         paddingBottom: '0px',
+                            //     }}
+                            // >
+                            //     <div className=" p-4 w-full h-full bg-[#000000] ">
+                            //         {/* <MenuItem onClick={handleClose}>
+                            //             Settings
+                            //         </MenuItem>
+                            //         <MenuItem onClick={handleClose}>
+                            //             Log out
+                            //         </MenuItem> */}
+                            //         <div className="md:w-72 ">
+                            //             <MyInput
+                            //                 name="Email"
+                            //                 value={email}
+                            //                 onChange={setEmail}
+                            //             />
+                            //             <MyInput
+                            //                 name="Password"
+                            //                 type="password"
+                            //                 value={password}
+                            //                 onChange={setPassword}
+                            //                 showPassword={showPassword}
+                            //                 setShowPassword={setShowPassword}
+                            //             />
+                            //         </div>
+                            //         <div className="mt-4 w-full bg-green-700 rounded">
+                            //             <Button
+                            //                 fullWidth
+                            //                 variant="contained"
+                            //                 color="success"
+                            //                 onClick={() => {
+                            //                     // console.log('Submited');
+                            //                     onSubmit();
+                            //                 }}
+                            //             >
+                            //                 Login
+                            //             </Button>
+                            //         </div>
+                            //         <p className="pt-4 text-white text-center ">
+                            //             Are You New To vlook properties
+                            //         </p>
+                            //         <div className="w-full flex justify-center">
+                            //             {/* <Link href="/corporate/signup?signup=2 "> */}
+                            //             <Link href="/corporate/signup?signupas=2">
+                            //                 <a className="mt-4 w-full border-white border text-white p-2 text-center hover:bg-gray-800">
+                            //                     Become a Free Member
+                            //                 </a>
+                            //             </Link>
+                            //             {/* </Link> */}
+                            //         </div>
+                            //     </div>
+                            // </Menu>
+                            ""
                         )}
                     </div>
                 }

@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,forwardRef } from 'react';
 import MyInput from '../../../components/Input';
 import Navbar from '../../../components/Navbar/Navbar';
 import CustomSelect from '../../../components/Select';
@@ -16,6 +16,12 @@ import MenuAppBar from '../../../components/Appbar';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { db } from '../../../db';
 // import uniqid from 'uniqid';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
@@ -47,9 +53,18 @@ const AddProperty = () => {
         mobile?: string;
     }>({});
     const [snackbar, setSnackbar] = useState<Boolean>(false);
+    const [open, setOpen] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router: NextRouter = useRouter();
-
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+    
+    
     let addPropertyOptions = [
         {
             style: 'mt-4 ml-2 w-full',
@@ -164,7 +179,7 @@ const AddProperty = () => {
         },
         {
             value: listingOwners,
-            setValue: setListingOwners,
+            setValue:setListingOwners,
             label: 'Listing Owner',
             options: propertyLookups?.users,
         },
@@ -190,6 +205,7 @@ const AddProperty = () => {
         //     name: 'Mobile',
         // },
     ];
+    console.log(listingOwners,'LISTING VLAUE')
     function onSubmit() {
         let addPropertyBody = {
             categoryID: parseInt(category),
@@ -206,14 +222,15 @@ const AddProperty = () => {
             permitNumber: permitNo,
             completionStatusID: 1,
             ownerShipStatusID: 1,
-            listingUserID: listingOwnerData.userID,
+            listingUserID: listingOwners,
             status: 0,
             price: price,
         };
-        // console.log(addPropertyBody, 'ADDD PROPERTY');
+        console.log(addPropertyBody, 'ADDD PROPERTY');
         // router
         onAddProperty(addPropertyBody)
             .then((r: any) => {
+                setOpen(true)
                 if (r.error) {
                     setSnackbar(true);
                     setErrorSnackbar(r.message);
@@ -297,8 +314,10 @@ const AddProperty = () => {
                                         <div className={'mx-2 w-72'}>
                                             <CustomSelect
                                                 value={d.value}
-                                                onChange={(e: any) =>
+                                                onChange={(e: any) =>{
+                                                    console.log(e.target.value,'EVENT')
                                                     d.setValue(e.target.value)
+                                                }
                                                 }
                                                 label={d.label}
                                                 options={d.options}
@@ -362,6 +381,17 @@ const AddProperty = () => {
                         </div>
                     </div>
                 </div>
+
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
+                        {errorSnackbar?
+                        "Failed to Add Property"
+                        :
+                        "Property Added successfully!"
+                        }
+                        </Alert>
+                    </Snackbar>
+{/*                     
                 <div
                     className={
                         errorSnackbar
@@ -371,7 +401,7 @@ const AddProperty = () => {
                     hidden={!snackbar}
                 >
                     {errorSnackbar ? errorSnackbar : 'Succes'}
-                </div>
+                </div> */}
             </div>
         </div>
     );

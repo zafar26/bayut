@@ -19,7 +19,7 @@ export async function sendMail(body?: any) {
         console.log(body,'BODY')
         const { data } = await axios.post(
             `${Public_URL}/Users/sendemail`,
-            params,
+            body,
             {
                 headers: {
                     'Content-Type': 'application/json',

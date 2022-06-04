@@ -39,6 +39,7 @@ const Properties = () => {
     const [error, setError] = useState(false);
     const [userSigned, setUserSigned] = useState(false);
     const [data, setData] = useState<any[]>([]);
+    const [loading, setLoading] = useState<Boolean>(false);
 
     useEffect(() => {
         const { category, subcategory, purpose } = router.query;
@@ -196,9 +197,7 @@ const Properties = () => {
                                                                             .value
                                                                 )[0].label
                                                             );
-                                                            // d.setSelected(
-                                                            //     e.target.value
-                                                            // );
+                                                        
                                                         }}
                                                         label={d.label}
                                                         options={d.options}
@@ -222,11 +221,13 @@ const Properties = () => {
                                 {error ? (
                                     <p>Error </p>
                                 ) : (
-                                    data.length == 0 && (
+                                    loading ? (
                                         <Box sx={{ display: 'flex' }}>
                                             <CircularProgress />
                                         </Box>
                                     )
+                                    :
+                                    data.length == 0 && !loading && <p>No Data Found</p>
                                 )}
                                 {data.map((d: any, i: number) => (
                                     <div

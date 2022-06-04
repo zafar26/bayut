@@ -15,6 +15,13 @@ export default function MyInput(props: any) {
         input.addEventListener("keypress", function(event:any) {
             // If the user presses the "Enter" key on the keyboard
             if (event.key === "Enter"&&  props.onPressEnter) {
+                // props.array.map(d=>(
+                //     {
+
+                //     }
+                // ))
+
+                
               // Cancel the default action, if needed
               // event.preventDefault();
                 props.onSubmit()
@@ -25,9 +32,132 @@ export default function MyInput(props: any) {
         }
     
     },[])
+    const [error ,setError] = useState('')
+    function getPasswordValidation(val){
+        let passw=   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        if(!val.match(passw)){
+            setError('6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter')
+            props.setValidationError(true)
+        }
+        if(error!= "" && val.match(passw)){
+            setError('')
+        }
+    }
+    function getEmailValidation(val){
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if(!val.match(mailformat)){
+            setError('example@gmail.com')
+            props.setValidationError(true)
+
+        }
+        if(error!= "" && val.match(mailformat)){
+            setError('')
+        }
+    }
     return (
         <div className="w-full" style={{ marginTop: '10px' }}>
             {props.type == 'password' ? (
+                props.validationRequired ? 
+                    error ?
+                    <>
+                    <FormControl
+                        // className={clsx(classes.margin, classes.textField)}
+                        variant="outlined"
+                        size="small"
+                        className="w-full"
+                    >
+                        <InputLabel htmlFor="outlined-adornment-password" className={error?'text-red-600':''}>
+                            {props.name}
+                        </InputLabel>
+                        <OutlinedInput
+                            // {props.error}
+                            error
+                            helperText={error}    
+                            size="small"
+                            // className="w-full bg-white "
+                            id="outlined-adornment-password"
+                            type={props.showPassword ? 'text' : 'password'}
+                            value={props.value}
+                            onChange={(e: any) =>
+                                props.onChange(e.target.value)
+                            }
+                            onBlur={(e)=>getPasswordValidation(e.target.value)}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={(e: any) =>
+                                            props.setShowPassword(
+                                                !props.showPassword
+                                            )
+                                        }
+                                        onMouseDown={(e: any) =>
+                                            e.preventDefault()
+                                        }
+                                        edge="end"
+                                    >
+                                        {props.showPassword ? (
+                                            <Visibility />
+                                        ) : (
+                                            <VisibilityOff />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                            // labelWidth={70}
+                        />
+                        {error ?<p className="text-xs  text-red-900">6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter</p> : ''}
+                    </FormControl>
+                </>
+                    :
+                <>
+                <FormControl
+                    // className={clsx(classes.margin, classes.textField)}
+                    variant="outlined"
+                    size="small"
+                    className="w-full"
+                >
+                    <InputLabel htmlFor="outlined-adornment-password" className={error?'text-red-600':''}>
+                        {props.name}
+                    </InputLabel>
+                    <OutlinedInput
+                        // {props.error}
+                        size="small"
+                        className="w-full bg-white "
+                        id="outlined-adornment-password"
+                        type={props.showPassword ? 'text' : 'password'}
+                        value={props.value}
+                        onChange={(e: any) =>
+                            props.onChange(e.target.value)
+                        }
+                        onBlur={(e)=>getPasswordValidation(e.target.value)}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={(e: any) =>
+                                        props.setShowPassword(
+                                            !props.showPassword
+                                        )
+                                    }
+                                    onMouseDown={(e: any) =>
+                                        e.preventDefault()
+                                    }
+                                    edge="end"
+                                >
+                                    {props.showPassword ? (
+                                        <Visibility />
+                                    ) : (
+                                        <VisibilityOff />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        }
+                        // labelWidth={70}
+                    />
+                </FormControl>
+            </>
+            :
                 <>
                     <FormControl
                         // className={clsx(classes.margin, classes.textField)}
@@ -35,19 +165,19 @@ export default function MyInput(props: any) {
                         size="small"
                         className="w-full"
                     >
-                        <InputLabel htmlFor="outlined-adornment-password">
+                        <InputLabel htmlFor="outlined-adornment-password" className={error?'text-red-600':''}>
                             {props.name}
                         </InputLabel>
                         <OutlinedInput
+                            // {props.error}
                             size="small"
-                            className="w-full bg-white"
+                            className="w-full bg-white "
                             id="outlined-adornment-password"
                             type={props.showPassword ? 'text' : 'password'}
                             value={props.value}
                             onChange={(e: any) =>
                                 props.onChange(e.target.value)
                             }
-
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -105,6 +235,7 @@ export default function MyInput(props: any) {
             ) : props.style ? (
                 <FormControl className="w-full p-0 m-0 border border-amber-800/50 ">
                     <TextField
+                
                         className={props.style}
                         key={props.name}
                         label={props.name}
@@ -114,7 +245,57 @@ export default function MyInput(props: any) {
                         value={props.value}
                     />
                 </FormControl>
-            ) : (
+            ) : error != "" ? (
+                <FormControl className="w-full p-0 m-0 border border-amber-800/50 ">
+                    <TextField
+                        error
+                        helperText={error}
+                        className={props.style}
+                        key={props.name}
+                        label={props.name}
+                        size="small"
+                        variant="outlined"
+                        onChange={(e: any) => props.onChange(e.target.value)}
+                        value={props.value}
+                        onBlur={(e)=>getEmailValidation(e.target.value)}
+                    />
+                </FormControl>
+            )
+            :
+            props.validationRequired ?
+            (
+                <FormControl className="w-full  ">
+                    <TextField
+                        className=" bg-white rounded"
+                        key={props.name}
+                        label={props.name}
+                        size="small"
+                        variant="outlined"
+                        onChange={(e: any) => props.onChange(e.target.value)}
+                        value={props.value}
+                        onBlur={(e)=>getEmailValidation(e.target.value)}
+             
+                    />
+                </FormControl>
+            )
+            :
+            props.onBlur?
+            (
+                <FormControl className="w-full  ">
+                    <TextField
+                        className=" bg-white rounded"
+                        key={props.name}
+                        label={props.name}
+                        size="small"
+                        variant="outlined"
+                        onChange={(e: any) => props.onChange(e.target.value)}
+                        value={props.value}
+                        onBlur={props.onBlur}
+                    />
+                </FormControl>
+            )
+            :
+            (
                 <FormControl className="w-full  ">
                     <TextField
                         className=" bg-white rounded"

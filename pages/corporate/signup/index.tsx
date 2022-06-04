@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,forwardRef } from 'react';
 import MyInput from '../../../components/Input';
 import CustomSelect from '../../../components/Select';
 import Button from '@mui/material/Button';
@@ -12,6 +12,13 @@ import { useRouter } from 'next/router';
 import { onCorporateSignUp } from '../../../helpers/apis/auth';
 import corporate from '../../../public/images/wallpapers/corporate.png';
 import { myLoader } from '../../../helpers/helper';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+
+const Alert = forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
 const CorporateCreateLogin: NextPage = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
@@ -39,6 +46,18 @@ const CorporateCreateLogin: NextPage = () => {
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const router = useRouter();
+    const [open, setOpen] = useState<Boolean>(false);
+    const [validationError, setValidationError] = useState<Boolean>(false);
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+    
+    
+    
     useEffect(() => {
         const { signupas }: any = router.query;
         if (!signupas) {
@@ -59,9 +78,16 @@ const CorporateCreateLogin: NextPage = () => {
             mobileNo: '+' + phoneNo,
             userRoleID: signupAs,
         };
+        if(validationError){
+            setOpen(true)
+            setErrorSnackbar('Validation Error')
+            return
+        }
         console.log('Clicked')
         onCorporateSignUp(body).then((r: any) => {
             console.log(r, 'RESULTSS');
+            setOpen(true)
+            
             if(!r){
                 return
             }
@@ -115,6 +141,8 @@ const CorporateCreateLogin: NextPage = () => {
                                 name="Email"
                                 value={email}
                                 onChange={setEmail}
+                                validationRequired={true}
+                                setValidationError={setValidationError}
                             />
                             <MyInput
                                 name="Password"
@@ -123,6 +151,8 @@ const CorporateCreateLogin: NextPage = () => {
                                 onChange={setPassword}
                                 showPassword={showPassword}
                                 setShowPassword={setShowPassword}
+                                validationRequired={true}
+                                setValidationError={setValidationError}
                             />
                             <MyInput
                                 name="Confirm Password"
@@ -131,6 +161,8 @@ const CorporateCreateLogin: NextPage = () => {
                                 onChange={setConfirmPassword}
                                 showPassword={showConfirmPassword}
                                 setShowPassword={setConfirmShowPassword}
+                                validationRequired={true}
+                                setValidationError={setValidationError}
                             />
                             {/* <CustomSelect
                             value={signupAs}
@@ -190,7 +222,7 @@ const CorporateCreateLogin: NextPage = () => {
                              
                          </div>
                         </>)}
-                        <div
+                        {/* <div
                             className={
                                 errorSnackbar
                                     ? 'absolute top-1 bg-red-700 text-white p-1 px-4 text-sm w-full rounded shadow-lg'
@@ -199,7 +231,17 @@ const CorporateCreateLogin: NextPage = () => {
                             hidden={!snackbar}
                         >
                             {errorSnackbar ? "Request Failed" : 'Succes'}
-                        </div>
+                        </div> */}
+                        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                            <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
+                            {errorSnackbar?
+                            "SignUp  Failed"
+                            :
+                            "Created Account!"
+                            }
+                            </Alert>
+                        </Snackbar>
+
                     </div>
                 </div>
             </div>

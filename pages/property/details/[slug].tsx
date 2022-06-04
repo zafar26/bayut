@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState,forwardRef } from 'react';
 import Navbar from '../../../components/Navbar/Navbar';
 import Slideshow from '../../../components/SlideShow/slideShow';
 import { useRouter } from 'next/router';
@@ -12,6 +12,12 @@ import TransitionsModal from '../../../components/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { sendMail } from '../../../helpers/apis/sendEmail';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+
+const Alert = forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 let excludingAmmenities = [
     'propertyAmenityID',
@@ -35,7 +41,17 @@ const PropertyDetails = () => {
     const [message, setMessage] = useState<String>(
         'I would like to inquire about your property Vlook. Please contact me at your earliest convenience.'
     );
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
 
+    const [open, setOpen] = useState<Boolean>(false);
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+    
     useEffect(() => {
         const { slug, isReady } = router.query;
         // console.log(router, 'ROUTER');
@@ -50,6 +66,7 @@ const PropertyDetails = () => {
             });
         onUserSearch().then((r: any) => {
             console.log(r, 'RESULT FROM API');
+
             if (!r.error) {
                 if (r.statusCode == 200) {
                     let filteredOne: any[] = r.responseData.data.items.filter(
@@ -146,14 +163,19 @@ const PropertyDetails = () => {
         let body: any = {
             name,
             email,
-            phoneNo,
+            phoneNumber:phoneNo,
             message,
             agentEmail: data.email,
         };
+        console.log(body,'BODY')
         sendMail(body)
             .then((r: any) => {
+                setOpen(true);
+                setErrorSnackbar('')
+                
                 if (r.data.responseData.data) {
                     console.log('TRUEEEE');
+                    setErrorSnackbar('Sent')
                 }
             })
             .catch((e: any) => console.log(e, 'Error'));
@@ -345,6 +367,15 @@ const PropertyDetails = () => {
                             </div>
                         </div>
                     </div>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
+                        {errorSnackbar?
+                        "Failed to Send Email"
+                        :
+                        "Email Sent!"
+                        }
+                        </Alert>
+                    </Snackbar>
                 </div>
             </div>
         );
