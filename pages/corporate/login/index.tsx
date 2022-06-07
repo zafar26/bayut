@@ -74,16 +74,17 @@ const CorporateLogin: NextPage = () => {
         setSnackbar(false);
         if(validationError){
             let passw :any=   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
-            console.log(passw,password.match(passw),'PAssword')
-            if(!password.match(passw)){
-                setError('6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter')
-                props.setValidationError(true)
-                return
-            }
+            // console.log(passw,password.match(passw),'PAssword')
+            // if(!password.match(passw)){
+            //     setError('6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter')
+            //     props.setValidationError(true)
+            //     return
+            // }
             if( password.match(passw)){
                 // setError('')
                 return
-            }   console.log(error , "VAlidation Password")
+            }   
+            // console.log(error , "VAlidation Password")
             
             console.log('Validation Error')
             setOpen(true)

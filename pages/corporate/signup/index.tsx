@@ -22,7 +22,7 @@ const Alert = forwardRef(function Alert(props:any, ref:any) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-const CorporateCreateLogin: NextPage = () => {
+const CorporateCreateLogin: any = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     let signupOptions = [
         {
@@ -130,9 +130,9 @@ const CorporateCreateLogin: NextPage = () => {
     return (
         <>
             <div className="w-screen h-screen ">
-                {/* <div className="pt-0">
+                <div className="pt-0">
 
-            </div > */}
+                </div >
                 <Image
                     loader={myLoader}
                     src={'corporate.png'}
@@ -142,17 +142,17 @@ const CorporateCreateLogin: NextPage = () => {
                 />
                  {isMobile ? (
                 <Navbar selectedLink={'Login'} clientUser={true} />
-            ) : (
-                <MenuAppBar
-                // className={styles.container}
-                // toggleDrawer={toggleDrawer}
-                client={true}
-                // login={login}
-                // setUserSigned={setUserSigned}
-                />
-            )}
+                ) : (
+                    <MenuAppBar
+                    // className={styles.container}
+                    // toggleDrawer={toggleDrawer}
+                    client={true}
+                    // login={login}
+                    // setUserSigned={setUserSigned}
+                    />
+                )}
                 <div className="h-full w-full pt-20 ">
-                    <div className="py-4 px-4  bg-glassEffect w-4/5 md:w-1/3 h-full   md:h-full top-0 md:top-0 left-9 md:left-1/3  flex flex-col justify-center items-center relative rounded shadow-lg shadow-black">
+                    <div className="py-4 px-4 bg-glassEffect w-4/5 md:w-1/3 h-full md:h-full top-0 md:top-0 left-9 md:left-1/3 flex flex-col justify-center items-center relative rounded shadow-lg shadow-black">
                         <div className="flex p-4 flex-col justify-center items-center h-64 text-2xl text-primary">
                             <AccountCircleIcon fontSize="large" />
                             <h1> Create Account</h1>
@@ -196,7 +196,7 @@ const CorporateCreateLogin: NextPage = () => {
                             onChange={(e: any) => setSignupAs(e.target.value)}
                             label={'Sign Up As'}
                             options={signupOptions}
-                        /> */}
+                            /> */}
                             <div className="mt-4 "id="phoneNo">
                                 <PhoneNoInput
                                     phoneNo={phoneNo}
@@ -247,7 +247,7 @@ const CorporateCreateLogin: NextPage = () => {
                                 </div>
                             
                              
-                         </div>
+                            </div>
                         </>)}
                         {/* <div
                             className={
@@ -259,7 +259,7 @@ const CorporateCreateLogin: NextPage = () => {
                         >
                             {errorSnackbar ? "Request Failed" : 'Succes'}
                         </div> */}
-                        {console.log(errorSnackbar,'SNACKBAR')}
+                        {/* {console.log(errorSnackbar,'SNACKBAR')} */}
                         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                             <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
                             {errorSnackbar != ""?
