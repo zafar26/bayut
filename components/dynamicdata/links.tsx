@@ -11,6 +11,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
+import DomainAddIcon from '@mui/icons-material/DomainAdd';
 
 export const corporateLinks: any = [
     // {
@@ -52,7 +53,7 @@ export const corporateLinks: any = [
     {
         label: 'Add Property',
         path: '/corporate/addproperty',
-        icon: () => <AddIcon />,
+        icon: () => <DomainAddIcon />,
     },
 ];
 

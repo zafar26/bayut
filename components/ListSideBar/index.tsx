@@ -49,8 +49,8 @@ const MyList = ({
                             height: '56px',
                             background: clientUser
                                 ? indexPage
-                                    ? '#42240C'
-                                    : ''
+                                    ? 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)'
+                                    : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)'
                                 : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
 
                             display: 'flex',

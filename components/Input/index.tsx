@@ -21,11 +21,15 @@ export default function MyInput(props: any) {
                 //     }
                 // ))
 
+                if(props.type == "password"){
+                    getPasswordValidation(props.value)
                 
               // Cancel the default action, if needed
               // event.preventDefault();
+                
                 props.onSubmit()
-              // Trigger the button element with a click
+                
+            }// Trigger the button element with a click
             //   document.getElementById("createAccount").click();
             }
           });

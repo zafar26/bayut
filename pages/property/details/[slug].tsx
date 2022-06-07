@@ -153,6 +153,9 @@ const PropertyDetails = () => {
                     setAmmenityData(ammenityDataArray);
                     setLoading(false);
                     setAmmenityFieldData(stringNumberData);
+                }else{
+                    setOpen(true)
+                    setErrorSnackbar('Request Failed')
                 }
             }
         });
@@ -170,13 +173,19 @@ const PropertyDetails = () => {
         console.log(body,'BODY')
         sendMail(body)
             .then((r: any) => {
-                setOpen(true);
-                setErrorSnackbar('')
-                
-                if (r.data.responseData.data) {
-                    console.log('TRUEEEE');
-                    setErrorSnackbar('Sent')
+                if(r.statusCode != 200){
+                    setOpen(true);
+                    setErrorSnackbar('Request Failed')
                 }
+                
+                if (r.responseData.data) {
+                    setOpen(true);
+                    // console.log('TRUEEEE');
+                    setErrorSnackbar('')
+                }
+                // else{
+                //     setErrorSnackbar('Failed to Send')
+                // }
             })
             .catch((e: any) => console.log(e, 'Error'));
     }
@@ -368,9 +377,9 @@ const PropertyDetails = () => {
                         </div>
                     </div>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
-                        {errorSnackbar?
-                        "Failed to Send Email"
+                        <Alert onClose={handleClose} severity={errorSnackbar != "" ?"error" :"success"} sx={{ width: '100%' }}>
+                        {errorSnackbar != ""?
+                        errorSnackbar
                         :
                         "Email Sent!"
                         }

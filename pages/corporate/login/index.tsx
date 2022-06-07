@@ -18,6 +18,8 @@ import corporate from '../../../public/images/wallpapers/corporate.png';
 import { myLoader } from '../../../helpers/helper';
 // import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import Navbar from '../../../components/Navbar/Navbar';
+import MenuAppBar from '../../../components/Appbar';
 
 
 const Alert = forwardRef(function Alert(props:any, ref:any) {
@@ -71,15 +73,17 @@ const CorporateLogin: NextPage = () => {
     function onSubmit() {
         setSnackbar(false);
         if(validationError){
+            console.log('Validation Error')
             setOpen(true)
-            setErrorSnackbar('Validation Error')
+            setErrorSnackbar('Enter Details Correctly ')
             return
         }
         let body = {
             username: email,
             password: password,
         };
-        onCorporateLogin(body).then((r: any) => {
+        if(email!= "" && password != ""){
+            onCorporateLogin(body).then((r: any) => {
             // console.log(r, 'RESULTSS');
             setOpen(true)
 
@@ -100,7 +104,13 @@ const CorporateLogin: NextPage = () => {
                     setSnackbar(true);
                 }
             }
-        });
+        });}
+        else{
+            setOpen(true)
+            
+            setErrorSnackbar('Please enter valid credentials to login')
+            return
+        }
     }
     return (
         <>
@@ -112,6 +122,19 @@ const CorporateLogin: NextPage = () => {
                     layout="fill"
                     objectFit="fill"
                 />
+                <div className="">
+                {isMobile ? (
+                <Navbar selectedLink={'Login'} clientUser={true} />
+            ) : (
+                <MenuAppBar
+                // className={styles.container}
+                // toggleDrawer={toggleDrawer}
+                client={true}
+                // login={login}
+                // setUserSigned={setUserSigned}
+                />
+            )}
+            </div>
                 <div className="p-4 md:p-12 bg-glassEffect w-4/5 md:w-1/3 h-4/5 md:h-5/6 top-20 left-9 md:left-1/3  flex flex-col justify-center items-center relative rounded shadow-lg shadow-black">
                     <div className="flex flex-col justify-center items-center h-32 text-2xl text-primary">
                         <AccountCircleIcon fontSize="large" />
@@ -160,21 +183,21 @@ const CorporateLogin: NextPage = () => {
                     <div className="mt-4 flex flex-col items-center">
                         
 
-                        <div className="self-center mt-2 ml-2 w-42 rounded">
+                        {/* <div className="self-center mt-2 ml-2 w-42 rounded">
                         <p className="font-thin text-xs">
                          Go to 
                         </p>
-                            <Button
+                            {/* <Button
                                 variant="contained"
                                 color="secondary"
                                 onClick={() =>
-                                    router.push('/')
+                                     router.push('/')
                                 }
                             >
                             
                                Home
-                            </Button>
-                        </div>
+                            </Button> */}
+                        {/* </div> */} 
                         </div>
                     </div>
 
@@ -194,10 +217,15 @@ const CorporateLogin: NextPage = () => {
                             </Button>
                         </div>
                     </div>
+                    {/* {console.log(errorSnackbar,'ERROR Snackbar')} */}
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
                         {errorSnackbar !="" ?
-                        "Login Failed "
+                        
+                            errorSnackbar == "Request failed with status code 500" ?
+                                'Request Failed'
+                            :
+                                errorSnackbar
                         :
                         "Login Success!"
                         }

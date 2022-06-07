@@ -9,9 +9,10 @@ export async function onCorporateLogin(body: any) {
             return;
         }
         // console.log('CLicked', process.env.ServerURL);
+        console.log(body,'BODYT')
         const { data } = await axios.post(
             `${Public_URL}/Users/signin`,
-            body,
+            JSON.stringify(body),
             {
                 headers: {
                     'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ export async function onCorporateSignUp(body: any) {
         console.log(body,'BODY')
         const { data } = await axios.post(
             `${Public_URL}/Users/signup`,
-            body,
+            JSON.stringify(body),
             {
                 headers: {
                     'Content-Type': 'application/json',

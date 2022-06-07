@@ -26,12 +26,13 @@ const PhoneNoInput = (props: any) => {
             <PhoneInput
                 enableSearch={true}
                 inputStyle={{ width: '100%' }}
-                localization={es}
+                // localization={es}
                 country={'us'}
                 value={props.phoneNo}
                 onChange={(inputNo: any) => props.setPhoneNo(inputNo)}
                 // onKeyEnter={(e)=>}
                 // id="phoneNo"
+                // regions={'asia'}
                 inputClass="phoneNo"
             />
         </div>

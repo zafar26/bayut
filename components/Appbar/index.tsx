@@ -51,13 +51,13 @@ export default function MenuAppBar({
     indexPage,
 }: any) {
     const classes = useStyles();
-    const [auth, setAuth] = React.useState(false);
+    const [auth, setAuth] = useState(false);
     const [email, setEmail] = useState<String>('');
     const [name, setName] = useState<String>('');
     const [password, setPassword] = useState<String>('');
     const router = useRouter();
     const [showPassword, setShowPassword] = useState<Boolean>(false);
-    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
     const [selectedItem, setSelectedItem]: any = useState(0);
     const isMobile = useMediaQuery('(max-width:600px)');
 
@@ -137,8 +137,11 @@ export default function MenuAppBar({
     if (client && !isMobile) {
         return (
             <div
-                className={`w-full absolute left-0 top-0 flex justify-between items-center px-9 py-4  ${
-                    indexPage ? '' : 'bg-amber-400 '
+                style={{
+                    background: indexPage ? "":'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)'
+                }}
+                className={`w-full absolute left-0 top-0 flex justify-between items-center px-2 py-4 ${
+                    indexPage ? '' : 'bg-gradientBlue '   
                 }`}
             >
                 <div className="w-1/6">
@@ -152,7 +155,7 @@ export default function MenuAppBar({
                     <h1 className="text-xl">Lookin</h1>
                     <p className="text-xs">Properties</p>
                 </div>
-                <div className="flex w-5/6">
+                <div className="flex w-5/6 justify-between">
                     {clientLinks.map((link: any, index: any) => {
                         return selectedLink == link.label ? (
                             <ListItem
@@ -287,7 +290,7 @@ export default function MenuAppBar({
                 background: client
                     ? indexPage
                         ? '   '
-                        : 'rgb(146 64 14)'
+                        : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)'
                     : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
                 // borderRadius: '0px 0px 10px 10px',
             }}
@@ -315,7 +318,49 @@ export default function MenuAppBar({
                     Lookin
                     <p className="text-xs">properties</p>
                 </Typography>
-
+                {/* {clientLinks.map((link: any, index: any) => {
+                        return selectedLink == link.label ? (
+                            <ListItem
+                                button
+                                key={index}
+                                sx={{
+                                    padding: 0,
+                                }}
+                                className={`ml-2 w-full flex items-center ${
+                                    indexPage
+                                        ? 'text-white'
+                                        : 'bg-lime-100 text-[#005A8D]'
+                                } opacity-80 p-0 py-1   shadow  rounded hover:bg-gray-200 `}
+                                onClick={() => router.push(link.path)}
+                            >
+                                <div
+                                    className="w-full flex items-center px-2 	"
+                                    onClick={() => router.push(link.path)}
+                                >
+                                    <div className="mr-2">{link.icon()}</div>
+                                    <Link href={`${link.path}`}>
+                                        <a>{link.label}</a>
+                                    </Link>
+                                </div>
+                            </ListItem>
+                        ) : (
+                            <ListItem
+                                button
+                                key={link.label}
+                                className={`ml-2 w-full ${
+                                    indexPage
+                                        ? 'text-gray-400'
+                                        : 'text-amber-50'
+                                }  opacity-100 flex items-center  hover:bg-gray-200 rounded hover:text-green-600`}
+                                onClick={() => setSelectedItem(index)}
+                            >
+                                <div className="mr-2">{link.icon()}</div>
+                                <Link href={`${link.path}`}>
+                                    <a>{link.label}</a>
+                                </Link>
+                            </ListItem>
+                        );
+                    })} */}
                 {
                     <div>
                         <IconButton

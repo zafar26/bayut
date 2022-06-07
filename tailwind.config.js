@@ -14,6 +14,7 @@ module.exports = {
                 glassEffect: 'rgba(255, 255, 255, 0.8)',
                 bluetransparent: 'rgba(27, 50, 171, 0.7)',
                 whiteTransparent: 'rgba(247, 247, 247, 0.28)',
+                gradientBlue: 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
             },
         },
     },
