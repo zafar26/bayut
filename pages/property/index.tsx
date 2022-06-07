@@ -23,9 +23,12 @@ import Slideshow from '../../components/SlideShow/slideShow';
 import { motion } from 'framer-motion';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import JsonOptions from '../options.json';
 
 const Properties = () => {
     const router = useRouter();
+    const [purpose, setPurpose] = useState<String>('');
+    const [subCategory, setSubCategory] = useState<String>('');
 
     const isMobile = useMediaQuery('(max-width:600px)');
     const [categories, setCategories] = useState<String>('');
@@ -40,10 +43,54 @@ const Properties = () => {
     const [userSigned, setUserSigned] = useState(false);
     const [data, setData] = useState<any[]>([]);
     const [loading, setLoading] = useState<Boolean>(false);
+    function onSubmit(){
+        setData([])
+        setLoading(true)
+        let body: any = {};
+        // console.log(
+        //     category,
+        //     window.location.search[0],
+        //     window.location.search.split('&'),
+        //     'QUERY'
+        // );
+        // let searchParams = window.location.search.split('&');
 
+        // console.log(searchParams[0].split('='), 'SEARCHPARAMS');
+
+        // if (!category && !subcategory && !purpose) {
+        //     // body.category = 1;
+        //     // body.subcategory = 2;
+        //     // body.purpose = 3;
+        // } else {
+            if (categories) {
+                body.category = categories;
+            }
+            if (subCategory) {
+                body.subcategory = subCategory;
+            }
+            if (purpose) {
+                body.purpose = purpose;
+            }
+        // }
+        console.log(body, 'QUERY');
+        
+        onUserSearch(body)
+            .then((r: any) => {
+                // console.log(r);
+                setLoading(false)
+                if (!r.error) {
+                    console.log(r, 'R');
+                    setData(r.responseData.data.items);
+                }
+            })
+            .catch((e: any) => {
+                console.log(e, 'ERR'), setError(true);
+            });
+
+    }
     useEffect(() => {
         const { category, subcategory, purpose } = router.query;
-
+        setLoading(true)
         let body: any = {};
         console.log(
             category,
@@ -56,9 +103,9 @@ const Properties = () => {
         console.log(searchParams[0].split('='), 'SEARCHPARAMS');
 
         if (!category && !subcategory && !purpose) {
-            body.category = 1;
-            body.subcategory = 2;
-            body.purpose = 3;
+            // body.category = 1;
+            // body.subcategory = 2;
+            // body.purpose = 3;
         } else {
             if (category) {
                 body.category = category;
@@ -74,6 +121,7 @@ const Properties = () => {
         onUserSearch(body)
             .then((r: any) => {
                 // console.log(r);
+                setLoading(false)
                 if (!r.error) {
                     console.log(r, 'R');
                     setData(r.responseData.data.items);
@@ -92,7 +140,41 @@ const Properties = () => {
                 }
             });
     }, [db]);
+    let searchField = [
+        {
+            label: 'Categories',
+            value: categories,
+            setValue: setCategories,
+            options: JsonOptions.categories,
+        },
+        {
+            label: 'Sub Category',
+            value: subCategory,
+            setValue: setSubCategory,
+            options: JsonOptions.subCategories,
+        },
+        {
+            label: 'Purpose',
+            value: purpose,
+            setValue: setPurpose,
+            options: JsonOptions.propertyType,
+        },
 
+        // {
+        //     label: 'City',
+        //     value: city,
+        //     setValue: setCity,
+        //     options: cityOptions,
+        // },
+        // {
+        //     label: 'Area',
+        //     value: area,
+        //     setValue: setArea,
+        //     type: "text",
+        //     // options: cityOptions,
+        // },
+    ];
+   
     let loginOptions = [
         {
             value: 'individual',
@@ -158,7 +240,7 @@ const Properties = () => {
                                 <p className="md:text-base text-xs px-2 font-thin md:text-center text-amber-800">
                                     Filters:
                                 </p>
-                                <div className="w-full flex md:flex-col overflow-x-auto items-center scroll-smooth ">
+                                {/* <div className="w-full flex md:flex-col overflow-x-auto items-center scroll-smooth ">
                                     {filters.map((d: any) => {
                                         if (d.value == '') {
                                             return (
@@ -209,7 +291,39 @@ const Properties = () => {
                                     <button className="bg-green-600 w-72  p-2 rounded shadow text-white mx-1 md:mt-4 hover:bg-green-700 hover:text-green-100">
                                         Search
                                     </button>
-                                </div>
+                                </div> */}
+                                <div className="mt-4  justify-center">
+                        {searchField.map((d: any, i: number) => (
+                                d.type == "text" ?
+                                <div className="m-1 md:w-48 border" key={i}>
+                                <MyInput
+                                    style= {'bg-whiteTransparent'}
+                                    name={d.label}
+                                    value={d.value}
+                                    onChange={d.setValue}
+                            />
+                            </div>   
+                                :
+                            <div className="m-1 md:w-48 border" key={i}>
+                                <CustomSelect
+                                    transparent={true}
+                                    withoutMargin={true}
+                                    value={d.value}
+                                    onChange={(e: any) =>
+                                        d.setValue(e.target.value)
+                                    }
+                                    label={d.value ? '' : d.label}
+                                    options={d.options}
+                                />
+                            </div>
+                        ))}
+                        <button
+                            className="md:w-48 w-full py-2 md:m-1 bg-bluetransparent text-white  rounded shadow hover:bg-gray-300 hover:text-primary"
+                            onClick={() => onSubmit()}
+                        >
+                            Search
+                        </button>
+                    </div>
                             </div>
                         </div>
 

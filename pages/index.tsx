@@ -15,6 +15,7 @@ import Slideshow from '../components/SlideShow/slideShow';
 import TransitionsModal from '../components/Modal';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import MyInput from '../components/Input';
 
 const Home = () => {
     const router = useRouter();
@@ -23,7 +24,7 @@ const Home = () => {
     // const [loginAs, setLoginAs] = useState<String>('');
     const [userSigned, setUserSigned] = useState(false);
 
-    const [categories, setCategories] = useState<Number>(1);
+    const [categories, setCategories] = useState<String>('');
     const [city, setCity] = useState<String>('');
     const [area, setArea] = useState<String>('');
     const [purpose, setPurpose] = useState<String>('');
@@ -110,25 +111,24 @@ const Home = () => {
             options: JsonOptions.propertyType,
         },
 
-        {
-            label: 'City',
-            value: city,
-            setValue: setCity,
-            options: cityOptions,
-        },
-        {
-            label: 'Area',
-            value: area,
-            setValue: setArea,
-            options: cityOptions,
-        },
+        // {
+        //     label: 'City',
+        //     value: city,
+        //     setValue: setCity,
+        //     options: cityOptions,
+        // },
+        // {
+        //     label: 'Area',
+        //     value: area,
+        //     setValue: setArea,
+        //     type: "text",
+        //     // options: cityOptions,
+        // },
     ];
     function onSubmit() {
         // ?category=${categories}?city=${city}?area=${area}?room=${room}
         router.push(
-            `/property?category=${categories}${
-                subCategory ? `&subcategory=${subCategory}` : ''
-            } ${purpose ? `&purpose=${purpose}` : ''} `
+            `/property?${!categories ?'':`category=${categories}`}${subCategory ? `&subcategory=${subCategory}` : ''} ${purpose ? `&purpose=${purpose}` : ''} `
         );
         //
     }
@@ -179,6 +179,16 @@ const Home = () => {
 
                     <div className="mt-4 md:flex justify-center">
                         {searchField.map((d: any, i: number) => (
+                                d.type == "text" ?
+                                <div className="m-1 md:w-48 border" key={i}>
+                                <MyInput
+                                    style= {'bg-whiteTransparent'}
+                                    name={d.label}
+                                    value={d.value}
+                                    onChange={d.setValue}
+                            />
+                            </div>   
+                                :
                             <div className="m-1 md:w-48 border" key={i}>
                                 <CustomSelect
                                     transparent={true}

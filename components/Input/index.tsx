@@ -38,16 +38,23 @@ export default function MyInput(props: any) {
     },[])
     const [error ,setError] = useState<any>('')
     function getPasswordValidation(val:any){
+        console.log(val,'VALUE')
+
         let passw :any=   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        console.log(passw,val.match(passw),'PAssword')
         if(!val.match(passw)){
+
             setError('6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter')
             props.setValidationError(true)
         }
         if(error!= "" && val.match(passw)){
-            setError('')
-        }
+            // setError('')
+        }   console.log(error , "VAlidation Password")
+        
+
     }
     function getEmailValidation(val:any){
+        console.log(val,'VALUE')
         let mailformat:any = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         if(!val.match(mailformat)){
             setError('example@gmail.com')
@@ -57,7 +64,7 @@ export default function MyInput(props: any) {
         if(error!= "" && val.match(mailformat)){
             setError('')
         }
-    }
+    }   console.log(error , "ERORORORO")
     return (
         <div className="w-full" style={{ marginTop: '10px' }}>
             {props.type == 'password' ? (

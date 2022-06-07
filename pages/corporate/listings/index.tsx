@@ -31,6 +31,7 @@ import house from '../../../public/images/properties/house1.jpeg';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { onDelete } from '../../../helpers/apis/delete';
 import { onApprove } from '../../../helpers/apis/approve';
+// import Box from '@mui/material/Box';
 import Box from '@mui/material/Box';
 
 // const useStyles() = makeStyles((theme) => ({
@@ -299,28 +300,28 @@ const Listings = () => {
                 .catch((e: any) => console.log(e, 'ERror'));
         }
     }
-    function getSearchValue(){
-        if(searchValue!= ""){
-            let totalRows:any = data
-            let rowsData:any = []
-            for (let i =0; i<totalRows.length;i++){
-                // console.log(totalRows[i],'TOTALROW')
-                let valLength:any = Object.values(totalRows[i])
-                for (let j=0; j<valLength.length;j++){
-                    let singleVal:string = valLength[j] + " "
-                    console.log(singleVal.toLocaleLowerCase(),searchValue,'SEARCH VALUEE')
-                    if(singleVal.toLocaleLowerCase().startsWith(searchValue)){
-                        console.log('\n\n\n\ INSERTING')
-                        rowsData.push(totalRows[i])
-                        break
-                    }
-                }
-                console.log('COntinuing')
-            }
-            console.log(rowsData,'ROWSDATA')
-            setfilteredData(rowsData)
-        }
-    }
+    // function getSearchValue(){
+    //     if(searchValue!= ""){
+    //         let totalRows:any = data
+    //         let rowsData:any = []
+    //         for (let i =0; i<totalRows.length;i++){
+    //             // console.log(totalRows[i],'TOTALROW')
+    //             let valLength:any = Object.values(totalRows[i])
+    //             for (let j=0; j<valLength.length;j++){
+    //                 let singleVal:string = valLength[j] + " "
+    //                 console.log(singleVal.toLocaleLowerCase(),searchValue,'SEARCH VALUEE')
+    //                 if(singleVal.toLocaleLowerCase().startsWith(searchValue)){
+    //                     console.log('\n\n\n\ INSERTING')
+    //                     rowsData.push(totalRows[i])
+    //                     break
+    //                 }
+    //             }
+    //             console.log('COntinuing')
+    //         }
+    //         console.log(rowsData,'ROWSDATA')
+    //         setfilteredData(rowsData)
+    //     }
+    // }
     const [filterValue, setFilterValue] = useState<any>();
     const onFilterChange = useCallback((filterModel:any) => {
         setFilterValue(filterModel.items[0].value);
@@ -434,22 +435,23 @@ const Listings = () => {
                                 name="search"
                                 value={searchValue}
                                 onChange={setSearchValue}
-                                onBlur={(e:any)=> {
-                                    if(e.target.value != ""){
-                                        getSearchValue()
-                                    }else{
-                                        setData(data)
-                                    }
+                                // onBlur={(e:any)=> {
+                                //     if(e.target.value != ""){
+                                //         getSearchValue()
+                                //     }else{
+                                //         setData(data)
+                                //     }
                                 
-                                }
+                                // }
                                 
-                                }/>
+                                // }
+                                />
                         </div>
                         <div className="pt-2 h-full text-xl">
                         <Box
                             sx={{
                                 height: '100%',
-                                // width: ,
+                                width: '100%',
                                 '& .super-app-theme--header': {
                                 backgroundColor: '#4B5D67',
                                 color:'#F9F9F9'
@@ -457,40 +459,17 @@ const Listings = () => {
                             }}
                             >
                             <DataGrid
-                                editMode="row"
                                 columns={columns}
-                                rows={filteredData.length > 0 ? filteredData : data }
-                                pageSize={15}
+                                rows={data}
+                                pageSize={20}
+                                getRowId={(row: any) => row.propertyId}
                                 // checkboxSelection
-                                sx={{
-                                    // boxShadow: 2,
-                                    // border: 2,
-                                    // borderColor: 'primary.light',
-                                    // '& .MuiDataGrid-cell:hover': {
-                                    //   color: 'primary.main',
-                                    // },
-                                  }}
                                 components={{
                                     Toolbar: CustomToolbar,
                                 }}
-                                getRowId={(row: any) => row.ref}
-                                // showToolbar
-                                // componentsProps={{
-                                //     panel: {
-                                //       anchorEl: filterButtonEl,
-                                //     },
-                                //     toolbar: {
-                                //       setFilterButtonEl,
-                                //     },
-                                //   }}
-                                filterMode="server"
-                                onFilterModelChange={onFilterChange}
-
                                 density={isMobile ? 'compact' : 'comfortable'}
-                                
-                                className="h-5/6 text-xl"
-                                // disableSelectionOnClick
-                                // experimentalFeatures={{ newEditingApi: true }}
+                                disableSelectionOnClick
+                                className="text-xl"
                             />
                             </Box>
                             {/* <table className="table-fixed w-full">
