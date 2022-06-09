@@ -25,7 +25,7 @@ const Slideshow = ({ images, isFull }: any) => {
     // console.log(images, 'IMAGES');
     const [imageIndex, setImageIndex] = useState(0);
     const [image, setImage] = useState(
-        images[0] ? (images[0].mediaData ? images[0].mediaData : '') : ''
+        images[0] ? (images[0].mediaName ? images[0].mediaName : '') : ''
     );
     return (
         <div className="relative  w-full h-full">
@@ -34,14 +34,14 @@ const Slideshow = ({ images, isFull }: any) => {
                 onClick={() => {
                     if (images[imageIndex - 1]) {
                         setImageIndex(imageIndex - 1);
-                        setImage(images[imageIndex - 1].mediaData);
+                        setImage(images[imageIndex - 1].mediaName);
                     }
                 }}
             >
                 {'<'}
             </div>
             <Image
-                src={'data:image/gif;base64, ' + image}
+                src={`/images/${image}`}
                 alt="No Image "
                 width={!isMobile ? (isFull ? 980 : 380) : 380}
                 height={isMobile ? 480 : isFull ? 500 : 250}
@@ -55,7 +55,7 @@ const Slideshow = ({ images, isFull }: any) => {
                 onClick={() => {
                     if (images[imageIndex + 1]) {
                         setImageIndex(imageIndex + 1);
-                        setImage(images[imageIndex + 1].mediaData);
+                        setImage(images[imageIndex + 1].mediaName);
                     }
                 }}
             >

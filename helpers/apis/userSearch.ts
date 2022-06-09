@@ -68,7 +68,9 @@ export async function searchPropertyDetail(id?: any) {
         // console.log(user,'AFTERWARDS')
         const { data } = await axios.post(
             `${Public_URL}/Users/search`,
-            {},
+            {
+                propertyId:id
+            },
             {
                 headers: {
                     'Content-Type': 'application/json',

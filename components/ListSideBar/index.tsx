@@ -7,7 +7,8 @@ import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { db, resetDatabase } from '../../db';
 
 const useStyles = makeStyles({
     list: {},
@@ -16,7 +17,7 @@ const useStyles = makeStyles({
         backgroundColor: 'red',
     },
 });
-
+let hideList = ['User Listings', 'Add User'] 
 const MyList = ({
     anchor,
     setState,
@@ -28,10 +29,29 @@ const MyList = ({
 }: any) => {
     const classes = useStyles();
     const [selectedItem, setSelectedItem]: any = useState(0);
-    let selectedLinkList: any = corporateLinks;
-    if (clientUser) {
-        selectedLinkList = clientLinks;
-    }
+    const [selectedList, setSelectedList]: any = useState([]);
+    // async function getSelectedLinkList(){
+    //     let selectedLinkList: any = corporateLinks;
+    //     if (clientUser) {
+    //         selectedLinkList = clientLinks;
+    //     }
+    //     // console.log(selectedLinkList.slice(1,3),'SLECTD ')
+
+    //     let corporateUser = await db.table('corporate').toArray();
+    //     // console.log(JSON.parse(corporateUser),"user list SIdeBar")    
+    //     // if()
+    //     if(corporateUser[0].userRoleID == 3){
+    //         selectedLinkList.splice(1,2)
+        
+    //     }
+    //     console.log(selectedLinkList,"SELECTEDLINK")
+
+    //     setSelectedList(selectedLinkList)
+    
+    // }
+    useEffect(()=>{
+        // getSelectedLinkList()
+        },[db])
     return (
         <div
             className={clsx(classes.list, {
@@ -66,7 +86,7 @@ const MyList = ({
                     </div>
                 )}
                 <Divider />
-                {selectedLinkList.map((link: any, index: any) => {
+                {selectedList.map((link: any, index: any) => {
                     return selectedLink == link.label ? (
                         <ListItem
                             button

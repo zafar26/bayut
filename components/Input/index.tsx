@@ -48,7 +48,7 @@ export default function MyInput(props: any) {
             props.setValidationError(true)
         }
         if(error!= "" && val.match(passw)){
-            // setError('')
+            setError('')
         }   console.log(error , "VAlidation Password")
         
 

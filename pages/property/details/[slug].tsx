@@ -2,7 +2,7 @@ import { useEffect, useState,forwardRef } from 'react';
 import Navbar from '../../../components/Navbar/Navbar';
 import Slideshow from '../../../components/SlideShow/slideShow';
 import { useRouter } from 'next/router';
-import { onUserSearch } from '../../../helpers/apis/userSearch';
+import { searchPropertyDetail } from '../../../helpers/apis/userSearch';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { db } from '../../../db';
 import MyInput from '../../../components/Input';
@@ -54,7 +54,7 @@ const PropertyDetails = () => {
     
     useEffect(() => {
         const { slug, isReady } = router.query;
-        // console.log(router, 'ROUTER');
+        console.log(slug, 'Slug');
         setLoading(true);
         db.table('user')
             .toArray()
@@ -64,26 +64,27 @@ const PropertyDetails = () => {
                     setAuth(true);
                 }
             });
-        onUserSearch().then((r: any) => {
+            searchPropertyDetail(slug).then((r: any) => {
             console.log(r, 'RESULT FROM API');
 
             if (!r.error) {
                 if (r.statusCode == 200) {
-                    let filteredOne: any[] = r.responseData.data.items.filter(
-                        (d: any) => {
-                            if (!slug) {
-                                if (
-                                    d.propertyID ==
-                                    window.location.pathname.split('/').pop()
-                                ) {
-                                    return d;
-                                }
-                            }
-                            if (d.propertyID == slug) {
-                                return d;
-                            }
-                        }
-                    );
+                    let filteredOne: any[] = r.responseData.data.items;
+                    // .filter(
+                    //     (d: any) => {
+                    //         if (!slug) {
+                    //             if (
+                    //                 d.propertyID ==
+                    //                 window.location.pathname.split('/').pop()
+                    //             ) {
+                    //                 return d;
+                    //             }
+                    //         }
+                    //         if (d.propertyID == slug) {
+                    //             return d;
+                    //         }
+                    //     }
+                    // );
                     console.log(
                         filteredOne,
                         r.responseData.data.items,
