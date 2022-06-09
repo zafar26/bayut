@@ -3,6 +3,7 @@ import { myLoader } from '../../helpers/helper';
 import Image from 'next/image';
 import { useState } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import {Public_URL} from '../../helpers/helper'
 
 const Slideshow = ({ images, isFull }: any) => {
     // <AnimatePresence>
@@ -27,6 +28,7 @@ const Slideshow = ({ images, isFull }: any) => {
     const [image, setImage] = useState(
         images[0] ? (images[0].mediaName ? images[0].mediaName : '') : ''
     );
+    // console.log(`${Public_URL}/images/${image}`,'PUBLICURL')
     return (
         <div className="relative  w-full h-full">
             <div
@@ -40,16 +42,23 @@ const Slideshow = ({ images, isFull }: any) => {
             >
                 {'<'}
             </div>
+            {image !="" ?
+            // console.log(image,'IMAGE FROM REST ' )
             <Image
-                src={`/images/${image}`}
+                src={image}
                 alt="No Image "
                 width={!isMobile ? (isFull ? 980 : 380) : 380}
                 height={isMobile ? 480 : isFull ? 500 : 250}
                 className="rounded h-full w-full"
                 // layout="responsive"
                 objectFit={'fill'}
+                loader={({ src, width, quality }:any) => {
+                    return `${Public_URL}/images/${src}?w=${width}&q=${quality || 75}`
+                  }}
+
                 onClick={() => {}}
             />
+        :""}
             <div
                 className="bg-gray-50 absolute inset-y-2/4 right-1 z-50 p-2 flex items-center rounded-full cursor-pointer"
                 onClick={() => {

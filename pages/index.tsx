@@ -233,10 +233,11 @@ const Home = () => {
 
                             <div
                                 className=" w-full  p-1 flex flex-col justify-between cursor-pointer"
-                                onClick={() =>
+                                onClick={(e:any) =>
                                     router.push(
                                         `/property/details/${d.propertyID}`
                                     )
+                                    // console.log(e,'ERR')
                                 }
                             >
                                 <div className="text-sm md:text-xl ">
