@@ -31,10 +31,10 @@ const MyList = ({
     const [selectedItem, setSelectedItem]: any = useState(0);
     const [selectedList, setSelectedList]: any = useState([]);
     // async function getSelectedLinkList(){
-    //     let selectedLinkList: any = corporateLinks;
-    //     if (clientUser) {
-    //         selectedLinkList = clientLinks;
-    //     }
+        // let selectedLinkList: any = corporateLinks;
+        // if (clientUser) {
+        //     selectedLinkList = clientLinks;
+        // }
     //     // console.log(selectedLinkList.slice(1,3),'SLECTD ')
 
     //     let corporateUser = await db.table('corporate').toArray();
@@ -51,6 +51,13 @@ const MyList = ({
     // }
     useEffect(()=>{
         // getSelectedLinkList()
+        let selectedLinkList: any = corporateLinks;
+        if (clientUser) {
+            selectedLinkList = clientLinks;
+        }
+        setSelectedList(selectedLinkList)
+
+
         },[db])
     return (
         <div
