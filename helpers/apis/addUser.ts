@@ -8,7 +8,7 @@ export async function onAddUser(body: any) {
     let corporateUser = await db.table('corporate').toArray();
         // console.log(corporateUser[0].token,'CORPOPRATEUSER');
         // console.log(corporateUser[0].userID,'CorporateUSER')
-        body.user.parentUserID = corporateUser[0].userID
+        // body.user.parentUserID = corporateUser[0].userID
         if (body.email == '' || body.password == '') {
             alert('Please Enter Email and Password');
             return;

@@ -98,7 +98,25 @@ const Agency = () => {
         headerClassName: 'super-app-theme--header',
             flex: 1,
             headerName: 'Mobile No', width: 140 },
-        // { field: 'mobile', headerName: 'price', width: 200 },
+        { field: 'status', headerName: 'Status', width: 120,
+        headerClassName: 'super-app-theme--header',
+        renderCell: (data: any) => {
+            console.log(data, 'DATA');
+            return (
+                <div className="w-full flex justify-around">
+                    <CheckCircleOutlineIcon
+                        className="mr-2 "
+                        fontSize={'large'}
+                        color={
+                            data.row.status == 0 ? 'success' : 'disabled'
+                        }
+                        onClick={() => onActionClicked(data.row, 'Check')}
+                    />
+
+                  
+                </div>
+            );
+        } },
 
         // { field: 'balance', headerName: 'beds', width: 120 },
         // { field: 'firstName', headerName: 'listedBy', width: 130 },
@@ -117,15 +135,15 @@ const Agency = () => {
             renderCell: (data: any) => {
                 console.log(data, 'DATA');
                 return (
-                    <div className="w-full flex justify-around">
-                        <CheckCircleOutlineIcon
+                    <div className="w-full flex justify-start">
+                        {/* <CheckCircleOutlineIcon
                             className="mr-2 "
                             fontSize={'large'}
                             color={
                                 data.row.status == 0 ? 'success' : 'disabled'
                             }
                             onClick={() => onActionClicked(data.row, 'Check')}
-                        />
+                        /> */}
 
                         <DeleteIcon
                             className="mr-2 "
@@ -196,12 +214,12 @@ const Agency = () => {
                 <div className="md:w-5/6 w-full">
                     <div className="p-2 ">
                         <div className=" flex  justify-between">
-                            <div className="w-44  bg-[#E8F6EF]  shadow p-2 rounded text-primary">
+                            {/* <div className="w-44  bg-[#E8F6EF]  shadow p-2 rounded text-primary">
                                 <p className="text-xs font-light">Date :</p>
                                 <p className=" text-xs font-light">
                                     Jan 25, 2022 - Feb 25, 2022
                                 </p>
-                            </div>
+                            </div> */}
                             {/* <div>
                                 <button
                                     className="ml-2  flex items-center bg-[#E8F6EF]  shadow p-2 rounded text-primary"
@@ -241,8 +259,8 @@ const Agency = () => {
                                 height: '100%',
                                 width: '100%',
                                 '& .super-app-theme--header': {
-                                backgroundColor: '#4B5D67',
-                                color:'#F9F9F9'
+                                    backgroundColor: '#ecdbdc',
+                                    color:'#4b1037'
                                 },
                             }}
                             >

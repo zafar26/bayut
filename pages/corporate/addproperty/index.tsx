@@ -44,7 +44,7 @@ const AddProperty = () => {
     const [permitNo, setPermitNo] = useState<String>('');
     const [completionStatus, setCompletionStatus] = useState<String>('');
     const [ownershipStatus, setOwnershipStatus] = useState<String>('');
-    const [listingOwners, setListingOwners] = useState<String>('');
+    const [listingOwners, setListingOwners] = useState<String>();
     const [listingOwnerData, setListingOwnerData] = useState<{
         userID?: string;
         contactPerson?: string;
@@ -74,13 +74,13 @@ const AddProperty = () => {
         {
             value: category,
             setValue: setCategory,
-            label: 'Category',
+            label: 'Category *',
             options: propertyLookups?.categories,
         },
         {
             value: subCategory,
             setValue: setSubCategory,
-            label: 'Sub Category',
+            label: 'Sub Category *',
             options: propertyLookups?.subCategories.filter(
                 (d: any) => d.key == category
             ),
@@ -88,7 +88,7 @@ const AddProperty = () => {
         {
             value: purpose,
             setValue: setPurpose,
-            label: 'Purpose',
+            label: 'Purpose *',
             options: propertyLookups?.propertyType,
         },
         {
@@ -100,12 +100,12 @@ const AddProperty = () => {
         {
             value: location,
             setValue: setLocation,
-            name: 'Location',
+            name: 'Location *',
         },
         {
             value: address,
             setValue: setAddress,
-            name: 'Address',
+            name: 'Address *',
         },
         {
             style: 'mt-4 ml-2 w-full',
@@ -126,34 +126,34 @@ const AddProperty = () => {
         {
             value: tittle,
             setValue: setTittle,
-            name: 'Tittle',
+            name: 'Tittle *',
         },
-        {
-            value: tittleAr,
-            setValue: setTittleAr,
-            name: 'Tittle Ar',
-        },
+        // {
+        //     value: tittleAr,
+        //     setValue: setTittleAr,
+        //     name: 'Tittle Ar',
+        // },
         {
             value: description,
             setValue: setDescription,
-            name: 'Description',
+            name: 'Description *',
             multilines: true,
         },
-        {
-            value: descriptionAr,
-            setValue: setDescriptionAr,
-            name: 'Description Ar',
-            multilines: true,
-        },
+        // {
+        //     value: descriptionAr,
+        //     setValue: setDescriptionAr,
+        //     name: 'Description Ar',
+        //     multilines: true,
+        // },
         {
             value: area,
             setValue: setArea,
-            name: 'Area (sq.Feet)',
+            name: 'Area (sq.Feet) *',
         },
         {
             value: price,
             setValue: setPrice,
-            name: 'Price',
+            name: 'Price *',
         },
         {
             value: permitNo,
@@ -180,7 +180,7 @@ const AddProperty = () => {
         {
             value: listingOwners,
             setValue:setListingOwners,
-            label: 'Listing Owner',
+            label: 'Listing Owner *',
             options: propertyLookups?.users,
         },
         // {
@@ -207,6 +207,18 @@ const AddProperty = () => {
     ];
     console.log(listingOwners,'LISTING VLAUE')
     function onSubmit() {
+        if(category !== ""){setOpen(true);setErrorSnackbar("Please Enter Category");return }
+        if(!subCategory!== ""){setOpen(true);setErrorSnackbar("Please Enter subCategory");return }
+        if(!purpose !== ""){setOpen(true);setErrorSnackbar("Please Enter purpose");return }
+        if(!location){setOpen(true);setErrorSnackbar("Please Enter location");return }
+        if(!address){setOpen(true);setErrorSnackbar("Please Enter address");return }
+        if(!tittle){setOpen(true);setErrorSnackbar("Please Enter tittle");return }
+        if(!description){setOpen(true);setErrorSnackbar("Please Enter description");return }
+        if(!listingOwners){setOpen(true);setErrorSnackbar("Please Enter listing USer");return }
+        if(!price){setOpen(true);setErrorSnackbar("Please Enter price");return }
+        // if(!address){setOpen(true);setErrorSnackbar("Please Enter address");return }
+        // if(!address){setOpen(true);setErrorSnackbar("Please Enter address");return }
+        
         let addPropertyBody = {
             categoryID: parseInt(category),
             subCategoryID: parseInt(subCategory),
@@ -233,7 +245,7 @@ const AddProperty = () => {
                 setOpen(true)
                 if (r.error) {
                     setSnackbar(true);
-                    setErrorSnackbar(r.message);
+                    setErrorSnackbar('Failed To Add Property');
                     return;
                 }
                 if (r.data.statusCode == 200) {
@@ -264,11 +276,14 @@ const AddProperty = () => {
         onPropertyLookups()
             // .then((response: any) => console.log(response, 'RESPONSE'))
             .then((r: any) => {
-                // getListingUser().then((user: any) => {
-                //     console.log(user, 'LISYTINGUSER');
-                //     setListingOwnerData(user);
-                //     setListingOwner(user.name);
-                // });
+                getListingUser().then((user: any) => {
+                    console.log(user,r.data.responseData.data, 'LISYTINGUSER');
+                    setListingOwnerData(user);
+                    let userLookups:any = r.data.responseData.data
+                    // console.log(userLookups.users,'USERLLOKUPS')
+                    console.log(userLookups.users.filter((d:any)=>d.text == user.name)[0].value,'LOOKUPS')
+                    setListingOwners(userLookups.users.filter((d:any)=>d.text == user.name)[0].value);
+                });
                 console.log(r, 'RESULTT');
                 setPropertyLookups(r.data.responseData.data);
             });
@@ -384,8 +399,10 @@ const AddProperty = () => {
 
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
-                        {errorSnackbar?
-                        "Failed to Add Property"
+                        {errorSnackbar != "" 
+                        ?
+                            errorSnackbar
+                            
                         :
                         "Property Added successfully!"
                         }

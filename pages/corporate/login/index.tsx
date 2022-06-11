@@ -39,8 +39,8 @@ const CorporateLogin: NextPage = () => {
             label: 'Company',
         },
     ];
-    const [email, setEmail] = useState<String>('');
-    const [password, setPassword] = useState<String>('');
+    const [email, setEmail] = useState<any>('');
+    const [password, setPassword] = useState<any>('');
 
     const [showPassword, setShowPassword] = useState<Boolean>(false);
     const [snackbar, setSnackbar] = useState<Boolean>(false);
@@ -58,8 +58,10 @@ const CorporateLogin: NextPage = () => {
     
     useEffect(() => {
         let queryemail: any = router.query.email;
-        if (queryemail) setEmail(queryemail);
-        // console.log(router, 'ROUTER');
+        console.log(queryemail, 'Query ROUTER');
+        if (queryemail !="") {
+            setEmail(queryemail)
+        }
         db.table('corporate')
             .toArray()
             .then((user: any) => {
@@ -70,7 +72,7 @@ const CorporateLogin: NextPage = () => {
             });
     }, [db, router]);
 
-    function onSubmit() {
+    const  onSubmit = (email:any,password:any) =>{
         setSnackbar(false);
         if(validationError){
             let passw :any=   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
@@ -91,6 +93,7 @@ const CorporateLogin: NextPage = () => {
             setErrorSnackbar('Enter Details Correctly ')
             return
         }
+        console.log(email,password,'LOGIN CRDENTIALS')
         let body = {
             username: email,
             password: password,
@@ -170,7 +173,7 @@ const CorporateLogin: NextPage = () => {
                             onChange={setPassword}
                             showPassword={showPassword}
                             setShowPassword={setShowPassword}
-                            onPressEnter = {true}
+                            // onPressEnter = {true}
                             onSubmit = {onSubmit}
                             validationRequired={true}
                             setValidationError={setValidationError}
@@ -188,7 +191,7 @@ const CorporateLogin: NextPage = () => {
                         <Button
                             variant="contained"
                             color="success"
-                            onClick={() => onSubmit()}
+                            onClick={() => onSubmit(email,password)}
                         >
                             Login
                         </Button>

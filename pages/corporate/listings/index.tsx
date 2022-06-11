@@ -14,7 +14,7 @@ import dummyData from '../../../components/data/index.json';
 import IconButton from '@mui/material/IconButton';
 import PersonIcon from '@mui/icons-material/PersonAdd';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
-import { useEffect, useState,useCallback } from 'react';
+import { useEffect, useState,useCallback,forwardRef } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import EditIcon from '@mui/icons-material/Edit';
@@ -33,7 +33,13 @@ import { onDelete } from '../../../helpers/apis/delete';
 import { onApprove } from '../../../helpers/apis/approve';
 // import Box from '@mui/material/Box';
 import Box from '@mui/material/Box';
+import { NextRouter, useRouter } from 'next/router';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
+const Alert = forwardRef(function Alert(props:any, ref:any) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 // const useStyles() = makeStyles((theme) => ({
 //     root: {
 //         z-index: 500,
@@ -42,22 +48,29 @@ import Box from '@mui/material/Box';
 const Listings = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
 
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorEl, setAnchorEl] = useState<any>(null);
     const [categories, setCategories] = useState('');
     const [subCategories, setSubCategories] = useState('');
     const [searchValue, setSearchValue] = useState('');
     const [data, setData] = useState([]);
     const [filteredData, setfilteredData] = useState([]);
     const [filterButtonEl, setFilterButtonEl] = useState(null);
-    const open = Boolean(anchorEl);
-
+    const router: NextRouter = useRouter();
+    // const open = Boolean(anchorEl);
+    const [open, setOpen] = useState<any>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
+    const handleClose = (event:any, reason:any) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+    
     const handleMenu = (event: any) => {
         setAnchorEl(event.currentTarget);
     };
-    const handleClose = () => {
-        // console.log(anchorEl, 'EVENt');
-        setAnchorEl(null);
-    };
+    
     function CustomToolbar({setFilterButtonEl}:any) {
         return (
             <GridToolbarContainer className="flex justify-between">
@@ -192,12 +205,12 @@ const Listings = () => {
                 // );
                 return (
                     <div className="flex">
-                        <CheckCircleOutlineIcon
+                        {/* <CheckCircleOutlineIcon
                             className="mr-2 "
                             fontSize={'large'}
                             color={data.isActive ? 'disabled' : 'success'}
                             onClick={() => onActionClicked(data, 'Check')}
-                        />
+                        /> */}
 
                         <DeleteIcon
                             className="mr-2 "
@@ -284,8 +297,11 @@ const Listings = () => {
         if (type == 'Delete') {
             onDelete(body)
                 .then((r: any) => {
+
                     if (r.data.responseData.data) {
-                        console.log('TRUEEEEEEEEEEEEEE');
+                        setOpen(true);
+                        setErrorSnackbar("")
+                            console.log('TRUEEEEEEEEEEEEEE');
                     }
                 })
                 .catch((e: any) => console.log(e, 'ERror'));
@@ -330,7 +346,7 @@ const Listings = () => {
     return (
         <div className="pt-14 md:pt-16 w-screen h-screen ">
             {isMobile ? (
-                <Navbar selectedLink={'Property Listings'} />
+                <Navbar selectedLink={'Manage Property Listings'} />
             ) : (
                 <MenuAppBar />
             )}
@@ -339,7 +355,7 @@ const Listings = () => {
                     <div className="w-1/6 h-full">
                         <MyList
                             toggleDrawer={(e: any, d: any) => console.log(e, d)}
-                            selectedLink={'Property Listings'}
+                            selectedLink={'Manage Property Listings'}
                         />
                     </div>
                 )}
@@ -365,7 +381,7 @@ const Listings = () => {
                     </div>
                     <div className="p-2 mt-4 md:mt-4 w-full h-full  rounded shadow">
                         <div className="w-full ">
-                            <p className="text-center text-2xl ">Manage Listings</p>
+                            <p className="text-center text-2xl ">Manage Property Listings</p>
                             {/* <div className="flex justify-between items-center px-2   rounded shadow">
                                 Filters
                                 <div className="px-1 py-2 w-4/5 md:w-full flex overflow-x-auto items-center justify-between">
@@ -453,8 +469,8 @@ const Listings = () => {
                                 height: '100%',
                                 width: '100%',
                                 '& .super-app-theme--header': {
-                                backgroundColor: '#4B5D67',
-                                color:'#F9F9F9'
+                                backgroundColor: '#ecdbdc',
+                                color:'#4b1037'
                                 },
                             }}
                             >
@@ -464,6 +480,12 @@ const Listings = () => {
                                 pageSize={20}
                                 getRowId={(row: any) => row.propertyId}
                                 // checkboxSelection
+                                onCellClick={(params: GridCellParams, event: MuiEvent<React.MouseEvent>) => {
+                                    console.log(params,event,'CLICKED ROW')
+                                    if(params.field != "action"){
+                                        router.push(`/property/details/${params.id}`)
+                                    }
+                                  }}
                                 components={{
                                     Toolbar: CustomToolbar,
                                 }}
@@ -519,6 +541,17 @@ const Listings = () => {
                         </div>
                     </div>
                 </div>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
+                        {errorSnackbar != "" 
+                        ?
+                            errorSnackbar
+                            
+                        :
+                        "Succesfuly Deleted!"
+                        }
+                        </Alert>
+                    </Snackbar>
             </div>
         </div>
     );

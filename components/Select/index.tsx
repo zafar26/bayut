@@ -40,9 +40,9 @@ export default function CustomSelect(props: any) {
                     value={props.value}
                     onChange={props.onChange}
                     label={props.label}
-                    inputProps={{
-                        id: 'outlined-options-native-simple',
-                    }}
+                    // inputProps={{
+                    //     id: 'outlined-options-native-simple',
+                    // }}
                 >
                     <option aria-label="None" value="" />
                     {props.options?.map((item: any, index: number) => (

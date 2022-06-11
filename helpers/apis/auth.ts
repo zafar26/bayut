@@ -8,14 +8,58 @@ export async function onCorporateLogin(body: any) {
             alert('Please Enter Username and Password');
             return;
         }
+
         // console.log('CLicked', process.env.ServerURL);
         console.log(body,'BODYT')
         const { data } = await axios.post(
             `${Public_URL}/Users/signin`,
-            JSON.stringify(body),
+            body,
             {
                 headers: {
                     'Content-Type': 'application/json',
+
+                },
+            }
+        );
+        if (data.statusCode == 200) {
+            const id = await db.corporate.add(data.responseData.data);
+            return { data, localDb: id }
+        }
+
+        return;
+    } catch (error: any) {
+        if (axios.isAxiosError(error)) {
+            console.log(error);
+        } else {
+            console.log(error);
+        }
+        return { error: true, message: error.message };
+    }
+}
+
+
+export async function onChangePassword(body: any) {
+    try {
+        if(body.password == ""){
+            alert("Please Enter Password");
+            return
+        }
+        if (body.password ==  body.confirmPassword ) {
+            alert("Password Didn't Match");
+            return;
+        }
+        let corporateUser = await db.table('corporate').toArray();
+
+        // console.log('CLicked', process.env.ServerURL);
+        console.log(body,'BODYT')
+        const { data } = await axios.post(
+            `${Public_URL}/Agent/changepassword`,
+            body,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    "Authorization":"Bearer "+corporateUser[0].token
+
                 },
             }
         );
@@ -48,7 +92,7 @@ export async function onCorporateSignUp(body: any) {
         console.log(body,'BODY')
         const { data } = await axios.post(
             `${Public_URL}/Users/signup`,
-            JSON.stringify(body),
+            body,
             {
                 headers: {
                     'Content-Type': 'application/json',

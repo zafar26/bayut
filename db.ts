@@ -19,7 +19,8 @@ export class MySubClassedDexie extends Dexie {
     super('myDatabase');
     this.version(1).stores({
       user: 'userID, name, username, token,  userRoleID ' ,// Primary key and indexed props
-      corporate: 'userID, name, username, token,  userRoleID ' // Primary key and indexed props
+      corporate: 'userID, name, username, token,  userRoleID ', // Primary key and indexed props
+      // images: 'PropertyID, image, base64' // Primary key and indexed props
     });
   }
 }

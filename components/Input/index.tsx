@@ -20,9 +20,9 @@ export default function MyInput(props: any) {
 
                 //     }
                 // ))
-
-                if(props.type == "password"){
-                    getPasswordValidation(props.value)
+                console.log(event,'EVENET')
+                if(props.type == "password" && event.target.value ){
+                    getPasswordValidation(event.target.value)
                 
               // Cancel the default action, if needed
               // event.preventDefault();
@@ -37,6 +37,7 @@ export default function MyInput(props: any) {
     
     },[])
     const [error ,setError] = useState<any>('')
+    const [notEmpty ,setNotEmpty] = useState<any>('')
     function getPasswordValidation(val:any){
         console.log(val,'VALUE')
 
@@ -268,7 +269,7 @@ export default function MyInput(props: any) {
                         variant="outlined"
                         onChange={(e: any) => props.onChange(e.target.value)}
                         value={props.value}
-                        onBlur={(e)=>getEmailValidation(e.target.value)}
+                        onBlur={(e:any)=>getEmailValidation(e.target.value)}
                     />
                 </FormControl>
             )
@@ -284,7 +285,7 @@ export default function MyInput(props: any) {
                         variant="outlined"
                         onChange={(e: any) => props.onChange(e.target.value)}
                         value={props.value}
-                        onBlur={(e)=>getEmailValidation(e.target.value)}
+                        onBlur={(e:any)=>getEmailValidation(e.target.value)}
              
                     />
                 </FormControl>
@@ -306,6 +307,45 @@ export default function MyInput(props: any) {
                 </FormControl>
             )
             :
+            notEmpty != "" ? (
+                <FormControl className="w-full p-0 m-0 border border-amber-800/50 ">
+                    <TextField
+                        error
+                        helperText={error}
+                        className={props.style}
+                        key={props.name}
+                        label={props.name}
+                        size="small"
+                        variant="outlined"
+                        onChange={(e: any) => props.onChange(e.target.value)}
+                        value={props.value}
+                        onBlur={(e:any)=> {
+                            if(e.target.value !=""){
+                                setNotEmpty('')
+                            }
+                    }}
+                    />
+                </FormControl>
+            ):
+
+            props.notIsEmpty ? (
+                <FormControl className="w-full p-0 m-0 border border-amber-800/50 ">
+                    <TextField
+                        className={props.style}
+                        key={props.name}
+                        label={props.name}
+                        size="small"
+                        variant="outlined"
+                        onChange={(e: any) => props.onChange(e.target.value)}
+                        value={props.value}
+                        onBlur={(e:any)=> {
+                            if(e.target.value !=""){
+                                setNotEmpty('Required')
+                            }
+                    }}
+                    />
+                </FormControl>
+            ):
             (
                 <FormControl className="w-full  ">
                     <TextField

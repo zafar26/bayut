@@ -709,7 +709,7 @@ const Ammenities = () => {
                         {errorSnackbar?
                         "Failed to Add Property Ammenity"
                         :
-                        "Property Ammenity Added successfully!"
+                        "Property Amenities section update is successful"
                         }
                         </Alert>
                     </Snackbar>

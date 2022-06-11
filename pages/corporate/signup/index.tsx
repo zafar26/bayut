@@ -160,19 +160,19 @@ const CorporateCreateLogin: any = () => {
 
                         <div className="md:w-72 h-full ">
                             <MyInput
-                                name="Name"
+                                name="Name *"
                                 value={name}
                                 onChange={setName}
                             />
                             <MyInput
-                                name="Email"
+                                name="Email *"
                                 value={email}
                                 onChange={setEmail}
                                 validationRequired={true}
                                 setValidationError={setValidationError}
                             />
                             <MyInput
-                                name="Password"
+                                name="Password *"
                                 type="password"
                                 value={password}
                                 onChange={setPassword}
@@ -182,7 +182,7 @@ const CorporateCreateLogin: any = () => {
                                 setValidationError={setValidationError}
                             />
                             <MyInput
-                                name="Confirm Password"
+                                name="Confirm Password *"
                                 type="password"
                                 value={confirmPassword}
                                 onChange={setConfirmPassword}

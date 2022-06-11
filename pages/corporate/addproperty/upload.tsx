@@ -26,6 +26,13 @@ const UploadPage = () => {
     const [value, setValue] = useState(0);
     const [selectedImage, setSelectedImage] = useState<any>(null);
     const [imagebase64, setImageBase64] = useState(null);
+
+    const [selectedImage1, setSelectedImage1] = useState<any>(null);
+    const [imagebase641, setImageBase641] = useState(null);
+
+    const [selectedImage2, setSelectedImage2] = useState<any>(null);
+    const [imagebase642, setImageBase642] = useState(null);
+
     const [propertyID, setPropertyID] = useState<Number>(0);
     const [open, setOpen] = useState<any>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
@@ -48,27 +55,80 @@ const UploadPage = () => {
     }, []);
     // console.log(selectedImage, 'IMAGEBASE64');
     function onSubmit() {
-        let body = {
-            imageData: imagebase64,
-            fileName: selectedImage.name,
-            mediaType: 'image',
-            mediaPath: '',
-            propertyID: propertyID,
-        };
-        // console.log(body, 'BODY');
-        onAddPropertyUpload(body).then((r: any) => {
-            setOpen(true)
-            if (r.statusCode == 200) {
-                let times = count + 1 
-                setCount(times)
-                console.log(r, 'RESULT');
-                setSnackbar(true);
-            } else {
-                setSnackbar(true);
-                setErrorSnackbar(r.message);
-            }
-            // console.log(r, 'RESULT')
-        });
+        if(selectedImage){
+            let body = {
+                imageData: imagebase64,
+                fileName: selectedImage.name,
+                mediaType: 'image',
+                mediaPath: '',
+                propertyID: propertyID,
+            };
+            // console.log(body, 'BODY');
+            onAddPropertyUpload(body).then((r: any) => {
+                setOpen(true)
+                if (r.statusCode == 200) {
+                    let times = count + 1 
+                    setCount(times)
+                    console.log(r, 'RESULT');
+                    setSnackbar(true);
+                } else {
+                    setSnackbar(true);
+                    setErrorSnackbar(r.message);
+                }
+                // console.log(r, 'RESULT')
+            });
+        }
+
+        if( selectedImage1){
+            let body = {
+                imageData: imagebase641,
+                fileName: selectedImage1.name,
+                mediaType: 'image',
+                mediaPath: '',
+                propertyID: propertyID,
+            };
+            // console.log(body, 'BODY');
+            onAddPropertyUpload(body).then((r: any) => {
+                setOpen(true)
+                if (r.statusCode == 200) {
+                    let times = count + 1 
+                    setCount(times)
+                    console.log(r, 'RESULT');
+                    setSnackbar(true);
+                } else {
+                    setSnackbar(true);
+                    setErrorSnackbar(r.message);
+                }
+                // console.log(r, 'RESULT')
+            });
+        }
+        if(selectedImage2){
+            let body = {
+                imageData: imagebase642,
+                fileName: selectedImage2.name,
+                mediaType: 'image',
+                mediaPath: '',
+                propertyID: propertyID,
+            };
+            // console.log(body, 'BODY');
+            onAddPropertyUpload(body).then((r: any) => {
+                setOpen(true)
+                if (r.statusCode == 200) {
+                    let times = count + 1 
+                    setCount(times)
+                    console.log(r, 'RESULT');
+                    setSnackbar(true);
+                } else {
+                    setSnackbar(true);
+                    setErrorSnackbar(r.message);
+                }
+                // console.log(r, 'RESULT')
+            });
+        
+
+            
+        }
+        router.push('/corporate/listings')
     }
     return (
         <div className="pt-14 md:pt-16 w-screen h-screen ">
@@ -118,7 +178,7 @@ const UploadPage = () => {
                             <div>
                                 {value == 0 && (
                                     <div className="mt-4 bg-green-100 flex p-8 flex-col items-center">
-                                        <div className="">
+                                        <div className="md:flex">
                                             {/* To Upload Iamge, Drag Files Here Or Click
                                     Browse */}
                                             <UploadAndDisplayImage
@@ -128,6 +188,22 @@ const UploadPage = () => {
                                                 }
                                                 imagebase64={imagebase64}
                                                 setImageBase64={setImageBase64}
+                                            />
+                                            <UploadAndDisplayImage
+                                                selectedImage={selectedImage1}
+                                                setSelectedImage={
+                                                    setSelectedImage1
+                                                }
+                                                imagebase64={imagebase641}
+                                                setImageBase64={setImageBase641}
+                                            />
+                                            <UploadAndDisplayImage
+                                                selectedImage={selectedImage2}
+                                                setSelectedImage={
+                                                    setSelectedImage2
+                                                }
+                                                imagebase64={imagebase642}
+                                                setImageBase64={setImageBase642}
                                             />
                                             {/* {console.log(
                                         selectedImage,
@@ -145,15 +221,26 @@ const UploadPage = () => {
                                     </div>
                                 )}
                                 {value == 1 && (
-                                    <div className="mt-4 bg-green-100">1</div>
+                                    <div className="mt-4 ">Will be available soon</div>
                                 )}
                                 {value == 2 && (
-                                    <div className="mt-4 bg-green-100">2</div>
+                                    <div className="mt-4 ">Will be available soon</div>
                                 )}
                             </div>
                         </div>
-                        <div className="mt-8 flex justify-center">
-                            <div className="bg-green-600 hover:bg-green-500 rounded ">
+                       { value == 0 &&<div className="mt-8 flex justify-between">
+                                <Button
+                                            color="success"
+                                            onClick={() => router.push('/corporate/listings')}
+                                        >
+                                            {/* <a
+                                        href="/corporate/addproperty/upload"
+                                        className="text-white"
+                                    > */}
+                                            <p className="text-xs ">Go To Property Listing</p>
+                                            {/* </a> */}
+                                </Button>
+                             <div className="bg-green-600 hover:bg-green-500 rounded  ">
                                 <Button
                                     color="success"
                                     onClick={() => onSubmit()}
@@ -166,7 +253,9 @@ const UploadPage = () => {
                                     {/* </a> */}
                                 </Button>
                             </div>
-                        </div>
+
+                               
+                        </div>}
                         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
                         {errorSnackbar?

@@ -40,6 +40,9 @@ const AddUser = () => {
     const [snackbar, setSnackbar] = useState<Boolean>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
     const [open, setOpen] = useState<any>(false);
+    const [validationError, setValidationError] = useState<Boolean>(false);
+    const [showPassword, setShowPassword] = useState<Boolean>(false);
+
     const router: NextRouter = useRouter();
     const handleClose = (event:any, reason:any) => {
         if (reason === 'clickaway') {
@@ -65,37 +68,45 @@ const AddUser = () => {
     ];
     let addUserInputs = [
         {
-            name: 'Name',
+            name: 'Name    *',
             value: name,
+            required:true,
             setValue: setName,
             style: 'mx-4 w-72',
         },
+        // {
+        //     name: 'Name Ar',
+        //     value: nameAr,
+        //     setValue: setNameAr,
+        //     style: 'mx-4 w-72',
+        // },
         {
-            name: 'Name Ar',
-            value: nameAr,
-            setValue: setNameAr,
-            style: 'mx-4 w-72',
-        },
-        {
-            name: 'Email',
+            name: 'Email    *',
             value: email,
+            required:true,
             setValue: setEmail,
             style: 'mx-4 w-72',
         },
         {
-            name: 'Password',
+            name: 'Password    *',
+            type:"password",
             value: password,
+            required:true,
+            validationRequired:true,
+            setValidationError:setValidationError,
             setValue: setPassword,
             style: 'mx-4 w-72',
         },
         {
-            name: 'Confirm Password',
+            name: 'Confirm Password    *',
+            type:"password",
             value: confirmPassword,
+            required:true,
             setValue: setConfirmPassword,
             style: 'mx-4 w-72',
         },
         {
-            name: 'Mobile',
+            name: 'Mobile    *',
             value: mobileNo,
             setValue: setMobileNo,
             style: 'mx-4 w-72',
@@ -200,6 +211,14 @@ const AddUser = () => {
         },
     ];
     function onSubmit() {
+        
+        if(!name){setOpen(true);setErrorSnackbar("Please Enter Name");return }
+        if(!email){setOpen(true);setErrorSnackbar("Please Enter Email");return }
+        if(password != confirmPassword){setOpen(true);setErrorSnackbar("Confirm Password Did'nt MAtch");return}
+        if(!password){setOpen(true);setErrorSnackbar("Please Enter password");return}
+        if(!mobileNo){setOpen(true);setErrorSnackbar("Please Enter Mobile No");return}
+        // if(!email){setErrorSnackbar("Please Enter Email")}
+        // if(!email){setErrorSnackbar("Please Enter Email")}
         let addUserBody = {
             user: {
                 name: name,
@@ -223,19 +242,19 @@ const AddUser = () => {
                 youtube: youtube,
             },
         };
-        // console.log(addUserBody, 'BODY');
+        console.log(addUserBody, 'BODY');
         onAddUser(addUserBody).then((r: any) => {
             // console.log(r, 'RESULTSS');
             setOpen(true);
             if (r.error) {
                 setSnackbar(true);
-                setErrorSnackbar(r.message);
+                setErrorSnackbar("Failed to Add User");
                 return;
             }
             if (r.data.statusCode == 200 || r.userID) {
                 console.log(r, 'RESULT');
                 setSnackbar(true);
-                router.push('/corporate/agency/adduser')
+                router.push('/corporate/agency')
             } else {
                 if (r.data.errorData.message) {
                     setErrorSnackbar(r.data.errorData.message);
@@ -260,7 +279,7 @@ const AddUser = () => {
                 )}
                 <div className=" w-full md:w-5/6 h-full">
                     {/* <Navbar selectedLink={'Agency'} /> */}
-                    <div className="flex flex-col justify-center items-center h-32 text-2xl text-primary">
+                    <div className="flex flex-col justify-center items-center h-32 text-2xl text-[#4b1037">
                         <AccountCircleIcon fontSize="large" />
                         <h1>Add User</h1>
                     </div>
@@ -286,9 +305,15 @@ const AddUser = () => {
                                 return (
                                     <div className={d.style}>
                                         <MyInput
+                                            type={d.type == "password" ?  "password" :false}
                                             name={d.name}
                                             value={d.value}
                                             onChange={d.setValue}
+                                            validationRequired = {d.validationRequired}
+                                            showPassword={showPassword}
+                                            setShowPassword={setShowPassword}                
+                                            // validationRequired={true}
+                                            setValidationError={setValidationError}
                                         />
                                     </div>
                                 );
@@ -307,8 +332,8 @@ const AddUser = () => {
                     </div>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
-                        {errorSnackbar?
-                        "Failed to Add User"
+                        {errorSnackbar ?
+                        errorSnackbar
                         :
                         "User Added successfully!"
                         }

@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Head key={'1'}>
                 <title>Vlook</title>
                 <meta name="description" content="Real Estate App" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="icon" href="/whitelogo.svg" />
                 <link rel="manifest" href="/manifest.webmanifest.json" />
                 <link rel="apple-touch-icon" href="/icon.png" />
                 <meta name="theme-color" content="#fff" />

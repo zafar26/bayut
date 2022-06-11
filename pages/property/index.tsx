@@ -24,7 +24,9 @@ import { motion } from 'framer-motion';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import JsonOptions from '../options.json';
-
+import {
+    onPropertyLookups,
+} from '../../helpers/apis/addProperty';
 const Properties = () => {
     const router = useRouter();
     const [purpose, setPurpose] = useState<String>('');
@@ -42,6 +44,7 @@ const Properties = () => {
     const [error, setError] = useState(false);
     const [userSigned, setUserSigned] = useState(false);
     const [data, setData] = useState<any[]>([]);
+    const [propertyLookups, setPropertyLookups] = useState<any>();
     const [loading, setLoading] = useState<Boolean>(false);
     function onSubmit(){
         setData([])
@@ -92,6 +95,12 @@ const Properties = () => {
         const { category, subcategory, purpose } = router.query;
         setLoading(true)
         let body: any = {};
+        onPropertyLookups()
+        // .then((response: any) => console.log(response, 'RESPONSE'))
+        .then((r: any) => {
+            console.log(r, 'RESULTT');
+            setPropertyLookups(r.data.responseData.data);
+        });
         console.log(
             category,
             window.location.search[0],
@@ -140,6 +149,7 @@ const Properties = () => {
                 }
             });
     }, [db]);
+    console.log(propertyLookups,'propertyLookups')
     let searchField = [
         {
             label: 'Categories',
@@ -222,7 +232,7 @@ const Properties = () => {
     // console.log(data, 'DATA');
     return (
         <div>
-            <div className=" ">
+            <div className="bg-[#ecdbdc]  ">
                 {
                     <div className="w-full ">
                         <Navbar
@@ -235,7 +245,7 @@ const Properties = () => {
 
                 <div className="pt-16  md:pt-16 w-screen h-screen overflow-hidden">
                     <div className="md:flex h-full md:justify-around md:items-center  	">
-                        <div className=" p-2 w-full md:w-1/4 md:mt-28 md:h-full ">
+                        <div className=" p-2 w-full md:w-1/6 md:mt-28 md:h-full ">
                             <div className=" w-full md:h-5/6   ">
                                 <p className="md:text-base text-xs px-2 font-thin md:text-center text-amber-800">
                                     Filters:
@@ -324,19 +334,19 @@ const Properties = () => {
                             Search
                         </button>
                     </div>
-                            </div>
+                    </div>
                         </div>
 
                         <div className=" p-2 w-full md:w-4/6  h-full  flex flex-col justify-center items-center">
                             <p className="text-xl p-4 font-bold text-amber-900">
                                 Properties
                             </p>
-                            <div className=" p-2 w-full h-full  w-full overflow-y-scroll scroll-smooth overflow-x-hidden">
+                            <div className=" p-2 w-full h-full flex flex-wrap w-full overflow-y-scroll scroll-smooth overflow-x-hidden">
                                 {error ? (
                                     <p>Error </p>
                                 ) : (
                                     loading ? (
-                                        <Box sx={{ display: 'flex' }}>
+                                        <Box sx={{ width:'100%', height:'100%',display: 'flex',justifyContent:'center',alignItems:'center' }}>
                                             <CircularProgress />
                                         </Box>
                                     )
@@ -344,67 +354,54 @@ const Properties = () => {
                                     data.length == 0 && !loading && <p>No Data Found</p>
                                 )}
                                 {data.map((d: any, i: number) => (
-                                    <div
-                                        className="p-1 my-4 w-full  shadow rounded flex shadow-amber-800/40	 "
-                                        key={i}
-                                        onClick={() =>
-                                            router.push(
-                                                `/property/details/${
-                                                    d.propertyID
-                                                        ? d.propertyID
-                                                        : 1
-                                                }`
-                                            )
-                                        }
-                                    >
-                                        {/* {console.log(d, 'DATA D')} */}
-                                        <div className="w-full md:w-1/2 ">
-                                            <Slideshow images={d.mediaInfo} />
-                                        </div>
+                        <div
+                            className="p-2 md:py-4 w-5/6 m-4  justify-center items-center md:w-5/12 shadow rounded flex flex-col  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300 hover:shadow-xl "
+                            key={i}
+                        >
+                            <div className=" transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-x-105 hover:scale-y-105 md:hover:scale-y-110 duration-300 ">
+                                <Slideshow images={d.mediaInfo} />
+                            </div>
 
-                                        <div
-                                            className="w-full ml-2 p-2 flex flex-col justify-between cursor-pointer	text-amber-800"
-                                            onClick={() =>
-                                                router.push(
-                                                    `/property/details/${
-                                                        d.propertyID
-                                                            ? d.propertyID
-                                                            : 1
-                                                    }`
-                                                )
-                                            }
-                                        >
-                                            <div className="text-sm md:text-xl ">
-                                               
+                            <div
+                                className=" w-full  p-1 flex flex-col justify-between cursor-pointer"
+                                onClick={(e:any) =>
+                                    router.push(
+                                        `/property/details/${d.propertyID}`
+                                    )
+                                    // console.log(e,'ERR')
+                                }
+                            >
+                                <div className="text-sm md:text-xl ">
 
-                                                <p>{d.propertyName}</p>
-                                                <p className="font-bold">
-                                                    {d.price}
-                                                </p>
-                                                <p className="text-xs md:text-xs font-thin">
-                                                    {d.address}
-                                                </p>
+                                    <p>{d.propertyName}</p>
+                                    <p className="text-xs md:text-xs font-thin">
+                                        {d.address}
+                                    </p>
+                                    <div className="flex justify-between items-center ">
 
-                                                <p className="text-xs md:text-base font-semibold">
-                                                    {d.propertyType}
-                                                </p>
-                                                <p className="text-xs md:text-base ">
-                                                    {d.categoryName + ' '} -
-                                                    {'>'}
-                                                    {' ' + d.subCategoryName}
-                                                </p>
-                                            </div>
-                                            <div className="w-full ">
-                                                {userSigned && (
-                                                    <TransitionsModal
-                                                        phoneNo={d.phoneNumber}
-                                                        email={d.email}
-                                                    />
-                                                )}
-                                            </div>
-                                        </div>
+
+                                        <p className="text-xs md:text-base font-semibold">
+                                            {d.propertyType}
+                                        </p>
+                                        <p className="font-bold">{d.price}</p>
+
                                     </div>
-                                ))}
+                                    <p className="text-xs md:text-base ">
+                                        {d.categoryName + ' '} -{'>'}
+                                        {' ' + d.subCategoryName}
+                                    </p>
+                                </div>
+                                {/* <div className="w-full ">
+                                    {auth && (
+                                        <TransitionsModal
+                                            phoneNo={d.phoneNumber}
+                                            email={d.email}
+                                        />
+                                    )}
+                                </div> */}
+                            </div>
+                        </div>
+                    ))}
                             </div>
                         </div>
                     </div>

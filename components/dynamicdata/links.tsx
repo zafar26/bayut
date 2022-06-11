@@ -20,9 +20,14 @@ export const corporateLinks: any = [
     //     icon: () => <DashboardIcon />,
     // },
     {
-        label: 'Property Listings',
+        label: 'Manage Property Listings',
         path: '/corporate/listings',
         icon: () => <ViewListIcon />,
+    },
+    {
+        label: 'Add Property',
+        path: '/corporate/addproperty',
+        icon: () => <DomainAddIcon />,
     },
     // {
     //     label: 'Reports',
@@ -50,11 +55,7 @@ export const corporateLinks: any = [
     //     icon: () => <PublicIcon />,
     // },
 
-    {
-        label: 'Add Property',
-        path: '/corporate/addproperty',
-        icon: () => <DomainAddIcon />,
-    },
+    
 ];
 
 export const clientLinks: any = [
@@ -75,6 +76,8 @@ export const clientLinks: any = [
     },
     {
         label: 'Login',
+        authLabel: 'My Account',
+        authPath: '/corporate/myaccount',
         path: '/corporate/login',
         icon: () => <SupervisedUserCircleIcon />,
     },

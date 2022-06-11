@@ -93,67 +93,68 @@ const PropertyDetails = () => {
                     );
 
                     setData(filteredOne[0]);
+                    if(filteredOne.length >= 1){
+                        let stringNumberData: { [x: string]: string | number }[] =
+                            [];
+                        let ammenityDataArray: string[] = [];
+                        let keylength: any;
+                        let valuelength: any;
+                        if (filteredOne[0].propertyAmenities)
+                            Object.entries(filteredOne[0].propertyAmenities).map(
+                                (d: any, index: number) => {
+                                    // console.log(d[0], 'key');
+                                    let k = d[0].replace(/([A-Z])/g, ' $1');
 
-                    let stringNumberData: { [x: string]: string | number }[] =
-                        [];
-                    let ammenityDataArray: string[] = [];
-                    let keylength: any;
-                    let valuelength: any;
-                    if (filteredOne[0].propertyAmenities)
-                        Object.entries(filteredOne[0].propertyAmenities).map(
-                            (d: any, index: number) => {
-                                // console.log(d[0], 'key');
-                                let k = d[0].replace(/([A-Z])/g, ' $1');
-
-                                if (
-                                    !excludingAmmenities.includes(d[0]) &&
-                                    d[1]
-                                ) {
                                     if (
-                                        typeof d[1] == 'string' ||
-                                        typeof d[1] == 'number'
+                                        !excludingAmmenities.includes(d[0]) &&
+                                        d[1]
                                     ) {
-                                        let renamedKey =
-                                            k[0].toUpperCase() + k.slice(1);
-                                        if (keylength > renamedKey.length) {
-                                            console.log(
-                                                keylength,
-                                                renamedKey.length,
-                                                d,
-                                                'LENGTH'
-                                            );
-                                            keylength = renamedKey.length;
+                                        if (
+                                            typeof d[1] == 'string' ||
+                                            typeof d[1] == 'number'
+                                        ) {
+                                            let renamedKey =
+                                                k[0].toUpperCase() + k.slice(1);
+                                            if (keylength > renamedKey.length) {
+                                                console.log(
+                                                    keylength,
+                                                    renamedKey.length,
+                                                    d,
+                                                    'LENGTH'
+                                                );
+                                                keylength = renamedKey.length;
 
-                                            stringNumberData.splice(
-                                                index - 1,
-                                                index,
-                                                {
-                                                    [renamedKey]: d[1],
+                                                stringNumberData.splice(
+                                                    index - 1,
+                                                    index,
+                                                    {
+                                                        [renamedKey]: d[1],
+                                                    }
+                                                );
+                                            } else {
+                                                keylength = renamedKey.length;
+                                                let value = d[1];
+                                                if (typeof value == 'string') {
+                                                    valuelength = value.length;
                                                 }
-                                            );
-                                        } else {
-                                            keylength = renamedKey.length;
-                                            let value = d[1];
-                                            if (typeof value == 'string') {
-                                                valuelength = value.length;
+                                                if (value)
+                                                    stringNumberData.push({
+                                                        [renamedKey]: value,
+                                                    });
                                             }
-                                            if (value)
-                                                stringNumberData.push({
-                                                    [renamedKey]: value,
-                                                });
+                                        } else {
+                                            ammenityDataArray.push(
+                                                k[0].toUpperCase() + k.slice(1)
+                                            );
                                         }
-                                    } else {
-                                        ammenityDataArray.push(
-                                            k[0].toUpperCase() + k.slice(1)
-                                        );
                                     }
                                 }
-                            }
-                        );
-                    console.log(stringNumberData, 'SAMENITYDATA');
-                    setAmmenityData(ammenityDataArray);
-                    setLoading(false);
-                    setAmmenityFieldData(stringNumberData);
+                            );
+                        console.log(stringNumberData, 'SAMENITYDATA');
+                        setAmmenityData(ammenityDataArray);
+                        setLoading(false);
+                        setAmmenityFieldData(stringNumberData);
+                    }
                 }else{
                     setOpen(true)
                     setErrorSnackbar('Request Failed')
@@ -205,7 +206,7 @@ const PropertyDetails = () => {
     } else {
         return (
             <div className=" w-screen h-screen ">
-                <div className="pt-16   px-2 md:px-12 py-4 md:flex justify-center bg-[#F7F6F2] text-yellow-900 ">
+                <div className="pt-16   px-2 md:px-12 py-4 md:flex justify-center bg-[#ecdbdc] text-yellow-900 ">
                     {
                         <div className={isMobile ? '' : 'h-12'}>
                             <Navbar

@@ -9,6 +9,8 @@ import Link from 'next/link';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useState,useEffect } from 'react';
 import { db, resetDatabase } from '../../db';
+import Image from 'next/image';
+import { myPublicLoader } from '../../helpers/helper';
 
 const useStyles = makeStyles({
     list: {},
@@ -30,34 +32,33 @@ const MyList = ({
     const classes = useStyles();
     const [selectedItem, setSelectedItem]: any = useState(0);
     const [selectedList, setSelectedList]: any = useState([]);
-    // async function getSelectedLinkList(){
-        // let selectedLinkList: any = corporateLinks;
-        // if (clientUser) {
-        //     selectedLinkList = clientLinks;
-        // }
-    //     // console.log(selectedLinkList.slice(1,3),'SLECTD ')
-
-    //     let corporateUser = await db.table('corporate').toArray();
-    //     // console.log(JSON.parse(corporateUser),"user list SIdeBar")    
-    //     // if()
-    //     if(corporateUser[0].userRoleID == 3){
-    //         selectedLinkList.splice(1,2)
-        
-    //     }
-    //     console.log(selectedLinkList,"SELECTEDLINK")
-
-    //     setSelectedList(selectedLinkList)
-    
-    // }
-    useEffect(()=>{
-        // getSelectedLinkList()
+    async function getSelectedLinkList(){
         let selectedLinkList: any = corporateLinks;
         if (clientUser) {
             selectedLinkList = clientLinks;
         }
+        // console.log(selectedLinkList.slice(1,3),'SLECTD ')
+
+        let corporateUser = await db.table('corporate').toArray();
+        // console.log(JSON.parse(corporateUser),"user list SIdeBar")    
+        // if()
+        if(corporateUser[0].userRoleID == 4 && !clientUser){
+            // corporateLinks.splice(2,2)
+            selectedLinkList.splice(2,2)
+        
+        }
+        console.log(selectedLinkList,"SELECTEDLINK")
+
         setSelectedList(selectedLinkList)
-
-
+    
+    }
+    useEffect(()=>{
+        getSelectedLinkList()
+        // let selectedLinkList: any = corporateLinks;
+        // if (clientUser) {
+        //     selectedLinkList = clientLinks;
+        // }
+        // setSelectedList(selectedLinkList)
         },[db])
     return (
         <div
@@ -76,9 +77,9 @@ const MyList = ({
                             height: '56px',
                             background: clientUser
                                 ? indexPage
-                                    ? 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)'
-                                    : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)'
-                                : 'linear-gradient(220deg, #0d47a1 20%,#1e88e5 95%, #64b5f6 100%)',
+                                    ? 'rgb(75,16,55)'
+                                    : 'rgb(75,16,55)'
+                                : 'rgb(75,16,55)',
 
                             display: 'flex',
                             justifyContent: 'space-around',
@@ -86,29 +87,36 @@ const MyList = ({
                         }}
                     >
                         <ArrowBackIcon style={{ color: '#ffffff' }} />
-                        <h6 style={{ fontSize: '1.25rem', color: '#ffffff' }}>
+                        {/* <h6 style={{ fontSize: '1.25rem', color: '#ffffff' }}>
                             Lookin
                             <p className="text-xs">Properties</p>
-                        </h6>
+                        </h6> */}
+                         <Image
+                        src={indexPage ? 'logo.svg' : 'whitelogo.svg'}
+                        loader={myPublicLoader}
+                        layout={'fixed'}
+                        width={120}
+                        height={50}
+                    />
                     </div>
                 )}
-                <Divider />
+                <Divider className="mb-6"/>
                 {selectedList.map((link: any, index: any) => {
                     return selectedLink == link.label ? (
                         <ListItem
                             button
                             key={index}
-                            sx={{ padding: 0, color: '#0d47a1' }}
-                            className="w-full h-12 text-baseColor p-0 py-1 flex items-center  shadow md:text-xl  "
+                            sx={{ padding: 0, color: '#4b1037' }}
+                            className="w-full h-16 text-[#4b1037] p-0 py-0 flex items-center  shadow md:text-xl  "
                         >
-                            <div className="w-1 h-full   bg-baseColor rounded-xl">
+                            <div className="w-1 h-full   bg-[#4b1037] rounded-xl">
                                 i
                             </div>
                             <div className="w-full flex px-2   ">
                                 <div className="mr-2">{link.icon()}</div>
                                 <Link href={`${link.path}`}>{link.label}</Link>
                             </div>
-                            <div className="w-1 h-full bg-baseColor rounded-xl">
+                            <div className="w-1 h-full bg-[#4b1037] rounded-xl">
                                 i
                             </div>
                         </ListItem>
@@ -117,7 +125,7 @@ const MyList = ({
                             button
                             key={link.label}
                             sx={{ color: 'GrayText' }}
-                            className="text-gray-500 flex items-center md:text-xl "
+                            className="text-[#bca4b4] h-16 flex items-center md:text-xl "
                             onClick={() => setSelectedItem(index)}
                         >
                             <div className="mr-2">{link.icon()}</div>
