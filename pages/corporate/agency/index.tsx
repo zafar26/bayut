@@ -3,7 +3,7 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import LinearProgress from '@mui/material/LinearProgress';
 import TuneIcon from '@mui/icons-material/Tune';
 import CustomSelect from '../../../components/Select';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,forwardRef } from 'react';
 import IconButton from '@mui/material/IconButton';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -30,23 +30,41 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { onDelete } from '../../../helpers/apis/delete';
 import { onApprove } from '../../../helpers/apis/approve';
 import Box from '@mui/material/Box';
+import MuiAlert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 
+
+const Alert = forwardRef(function Alert(props:any, ref:any) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
+  
 const Agency = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [loginAs, setLoginAs] = useState<String>('');
     const [usersData, setusersData] = useState<any>([]);
     const router: NextRouter = useRouter();
-
+    const [open, setOpen] = useState<any>(false);
+    const [validationError, setValidationError] = useState<Boolean>(false);
+    const [showPassword, setShowPassword] = useState<Boolean>(false);
+    const [snackbar, setSnackbar] = useState<Boolean>(false);
+    const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
+   
     const [anchorEl, setAnchorEl] = useState(null);
 
     const handleMenu = (event: any) => {
         setAnchorEl(event.currentTarget);
     };
-
-    const handleClose = () => {
-        // console.log(anchorEl, 'EVENt');
-        setAnchorEl(null);
-    };
+    const handleClose = (event:any, reason:any) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+    
+        setOpen(false);
+      };
+    // const handleClose = () => {
+    //     // console.log(anchorEl, 'EVENt');
+    //     setAnchorEl(null);
+    // };
     function CustomToolbar() {
         return (
             <GridToolbarContainer className="flex justify-between">
@@ -164,6 +182,7 @@ const Agency = () => {
         if (type == 'Delete') {
             onDelete(body)
                 .then((r: any) => {
+                    setOpen(true)
                     if (r.data.responseData.data) {
                         console.log('TRUEEEEEEEEEEEEEE');
                     }
@@ -281,6 +300,17 @@ const Agency = () => {
                         </div>
                     </div>
                 </div>
+                <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
+                        {errorSnackbar != "" 
+                        ?
+                            errorSnackbar
+                            
+                        :
+                        "Deleted!"
+                        }
+                        </Alert>
+                    </Snackbar>
             </div>
         </div>
     );

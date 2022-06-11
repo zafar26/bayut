@@ -142,7 +142,7 @@ const Listings = () => {
             //     return <div style={{ background: 'yellow' }}>{params}</div>;
             // },
             renderCell: (data: any) => {
-                // console.log(data.id, 'DATA RENDER CELL');
+                console.log(data.id, 'DATA RENDER CELL');
                 // return (
                 //     <div>
                 //         {/* <IconButton>
@@ -291,10 +291,12 @@ const Listings = () => {
         });
     }, []);
     function onActionClicked(data: any, type: string) {
+        console.log(data,'DATAAAAAAAAAAAAAAAAAAAAAA')
         let body: any = {
-            propertyid: data.propertyId,
+            propertyId: data.id,
             type: 'property',
         };
+        console.log(body,'BODY')
         if (type == 'Delete') {
             onDelete(body)
                 .then((r: any) => {

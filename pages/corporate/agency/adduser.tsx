@@ -52,6 +52,7 @@ const AddUser = () => {
         setOpen(false);
       };
     
+    
     let loginOptions = [
         {
             value: '2',
@@ -211,7 +212,6 @@ const AddUser = () => {
         },
     ];
     function onSubmit() {
-        
         if(!name){setOpen(true);setErrorSnackbar("Please Enter Name");return }
         if(!email){setOpen(true);setErrorSnackbar("Please Enter Email");return }
         if(password != confirmPassword){setOpen(true);setErrorSnackbar("Confirm Password Did'nt MAtch");return}

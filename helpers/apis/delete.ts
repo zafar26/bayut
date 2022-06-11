@@ -9,7 +9,7 @@ export async function onDelete(body?: any) {
     let param :any = {
     }
     if(body.type == 'property' ){
-        param.propertyid = body.propertyid
+        param.propertyId = body.propertyId
     }
     if(body.type == 'user'){
         param.userid = body.userid

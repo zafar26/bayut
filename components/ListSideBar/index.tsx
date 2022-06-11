@@ -42,7 +42,7 @@ const MyList = ({
         let corporateUser = await db.table('corporate').toArray();
         // console.log(JSON.parse(corporateUser),"user list SIdeBar")    
         // if()
-        if(corporateUser[0].userRoleID == 4 && !clientUser){
+        if(corporateUser[0] && corporateUser[0].userRoleID == 4 && !clientUser){
             // corporateLinks.splice(2,2)
             selectedLinkList.splice(2,2)
         

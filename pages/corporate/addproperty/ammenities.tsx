@@ -23,10 +23,7 @@ const Alert = forwardRef(function Alert(props:any, ref:any) {
 const steps = [
     'Details',
     'Amenities',
-    'Uploads',
-    'Parking Spaces',
-    'View',
-    'Pet Policy ID',
+    'Uploads'
 ];
 
 const Ammenities = () => {
