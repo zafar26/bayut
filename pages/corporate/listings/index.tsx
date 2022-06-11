@@ -36,6 +36,7 @@ import Box from '@mui/material/Box';
 import { NextRouter, useRouter } from 'next/router';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { GridCellParams } from '@mui/x-data-grid';
 
 const Alert = forwardRef(function Alert(props:any, ref:any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -480,8 +481,8 @@ const Listings = () => {
                                 pageSize={20}
                                 getRowId={(row: any) => row.propertyId}
                                 // checkboxSelection
-                                onCellClick={(params: GridCellParams, event: MuiEvent<React.MouseEvent>) => {
-                                    console.log(params,event,'CLICKED ROW')
+                                onCellClick={(params: GridCellParams) => {
+                                    console.log(params,'CLICKED ROW')
                                     if(params.field != "action"){
                                         router.push(`/property/details/${params.id}`)
                                     }

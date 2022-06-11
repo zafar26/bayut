@@ -18,6 +18,7 @@ import { db } from '../../../db';
 // import uniqid from 'uniqid';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { GridCellParams } from '@mui/x-data-grid';
 
 const Alert = forwardRef(function Alert(props:any, ref:any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -207,15 +208,15 @@ const AddProperty = () => {
     ];
     console.log(listingOwners,'LISTING VLAUE')
     function onSubmit() {
-        if(category !== ""){setOpen(true);setErrorSnackbar("Please Enter Category");return }
-        if(!subCategory!== ""){setOpen(true);setErrorSnackbar("Please Enter subCategory");return }
-        if(!purpose !== ""){setOpen(true);setErrorSnackbar("Please Enter purpose");return }
-        if(!location){setOpen(true);setErrorSnackbar("Please Enter location");return }
-        if(!address){setOpen(true);setErrorSnackbar("Please Enter address");return }
-        if(!tittle){setOpen(true);setErrorSnackbar("Please Enter tittle");return }
-        if(!description){setOpen(true);setErrorSnackbar("Please Enter description");return }
-        if(!listingOwners){setOpen(true);setErrorSnackbar("Please Enter listing USer");return }
-        if(!price){setOpen(true);setErrorSnackbar("Please Enter price");return }
+        if(category != ""){setOpen(true);setErrorSnackbar("Please Enter Category");return }
+        if(subCategory!= ""){setOpen(true);setErrorSnackbar("Please Enter subCategory");return }
+        if(purpose != ""){setOpen(true);setErrorSnackbar("Please Enter purpose");return }
+        if(location!= ""){setOpen(true);setErrorSnackbar("Please Enter location");return }
+        if(address != ""){setOpen(true);setErrorSnackbar("Please Enter address");return }
+        if(tittle != ""){setOpen(true);setErrorSnackbar("Please Enter tittle");return }
+        if(description != ""){setOpen(true);setErrorSnackbar("Please Enter description");return }
+        if(listingOwners!= ""){setOpen(true);setErrorSnackbar("Please Enter listing USer");return }
+        if(price != ""){setOpen(true);setErrorSnackbar("Please Enter price");return }
         // if(!address){setOpen(true);setErrorSnackbar("Please Enter address");return }
         // if(!address){setOpen(true);setErrorSnackbar("Please Enter address");return }
         
