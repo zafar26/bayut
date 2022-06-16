@@ -74,6 +74,8 @@ const CorporateLogin: NextPage = () => {
 
     const  onSubmit = (email:any,password:any) =>{
         setSnackbar(false);
+        setErrorSnackbar("")
+
         if(validationError){
             let passw :any=   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
             // console.log(passw,password.match(passw),'PAssword')

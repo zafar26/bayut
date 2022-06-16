@@ -259,7 +259,7 @@ const PropertyDetails = () => {
                             <div className="md:flex items-center  w-1/2">
                                 <p>Price : </p>
                                 <p className="font-bold text-xl md:ml-2">
-                                    {data.price}
+                                    {data.price} {data.tenure}
                                 </p>
                             </div>
                             <div className="md:flex items-center  w-3/4 ">

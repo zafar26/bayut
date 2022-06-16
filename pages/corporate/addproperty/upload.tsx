@@ -33,6 +33,15 @@ const UploadPage = () => {
     const [selectedImage2, setSelectedImage2] = useState<any>(null);
     const [imagebase642, setImageBase642] = useState(null);
 
+    const [selectedImage3, setSelectedImage3] = useState<any>(null);
+    const [imagebase643, setImageBase643] = useState(null);
+
+    const [selectedImage4, setSelectedImage4] = useState<any>(null);
+    const [imagebase644, setImageBase644] = useState(null);
+
+    const [selectedImage5, setSelectedImage5] = useState<any>(null);
+    const [imagebase645, setImageBase645] = useState(null);
+
     const [propertyID, setPropertyID] = useState<Number>(0);
     const [open, setOpen] = useState<any>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
@@ -124,11 +133,83 @@ const UploadPage = () => {
                 }
                 // console.log(r, 'RESULT')
             });
-        
-
-            
         }
-        router.push('/corporate/listings')
+
+        if( selectedImage3){
+            let body = {
+                imageData: imagebase643,
+                fileName: selectedImage3.name,
+                mediaType: 'image',
+                mediaPath: '',
+                propertyID: propertyID,
+            };
+            // console.log(body, 'BODY');
+            onAddPropertyUpload(body).then((r: any) => {
+                setOpen(true)
+                if (r.statusCode == 200) {
+                    let times = count + 1 
+                    setCount(times)
+                    console.log(r, 'RESULT');
+                    setSnackbar(true);
+                } else {
+                    setSnackbar(true);
+                    setErrorSnackbar(r.message);
+                }
+                // console.log(r, 'RESULT')
+            });
+        }
+
+        if( selectedImage4){
+            let body = {
+                imageData: imagebase644,
+                fileName: selectedImage4.name,
+                mediaType: 'image',
+                mediaPath: '',
+                propertyID: propertyID,
+            };
+            // console.log(body, 'BODY');
+            onAddPropertyUpload(body).then((r: any) => {
+                setOpen(true)
+                if (r.statusCode == 200) {
+                    let times = count + 1 
+                    setCount(times)
+                    console.log(r, 'RESULT');
+                    setSnackbar(true);
+                } else {
+                    setSnackbar(true);
+                    setErrorSnackbar(r.message);
+                }
+                // console.log(r, 'RESULT')
+            });
+        }
+
+        if( selectedImage5){
+            let body = {
+                imageData: imagebase645,
+                fileName: selectedImage5.name,
+                mediaType: 'image',
+                mediaPath: '',
+                propertyID: propertyID,
+            };
+            // console.log(body, 'BODY');
+            onAddPropertyUpload(body).then((r: any) => {
+                setOpen(true)
+                if (r.statusCode == 200) {
+                    let times = count + 1 
+                    setCount(times)
+                    
+                    console.log(r, 'RESULT');
+                    setSnackbar(true);
+                    router.push('/corporate/listings')
+                } else {
+                    setSnackbar(true);
+                    setErrorSnackbar(r.message);
+                }
+                // console.log(r, 'RESULT')
+            });
+        }
+        
+        
     }
     return (
         <div className="pt-14 md:pt-16 w-screen h-screen ">
@@ -178,7 +259,7 @@ const UploadPage = () => {
                             <div>
                                 {value == 0 && (
                                     <div className="mt-4 bg-green-100 flex p-8 flex-col items-center">
-                                        <div className="md:flex">
+                                        <div className="md:flex flex-wrap">
                                             {/* To Upload Iamge, Drag Files Here Or Click
                                     Browse */}
                                             <UploadAndDisplayImage
@@ -205,6 +286,32 @@ const UploadPage = () => {
                                                 imagebase64={imagebase642}
                                                 setImageBase64={setImageBase642}
                                             />
+
+                                            <UploadAndDisplayImage
+                                                selectedImage={selectedImage3}
+                                                setSelectedImage={
+                                                    setSelectedImage3
+                                                }
+                                                imagebase64={imagebase643}
+                                                setImageBase64={setImageBase643}
+                                            />
+                                            <UploadAndDisplayImage
+                                                selectedImage={selectedImage4}
+                                                setSelectedImage={
+                                                    setSelectedImage4
+                                                }
+                                                imagebase64={imagebase644}
+                                                setImageBase64={setImageBase644}
+                                            />
+                                            <UploadAndDisplayImage
+                                                selectedImage={selectedImage5}
+                                                setSelectedImage={
+                                                    setSelectedImage5
+                                                }
+                                                imagebase64={imagebase645}
+                                                setImageBase64={setImageBase645}
+                                            />
+
                                             {/* {console.log(
                                         selectedImage,
                                         imagebase64,

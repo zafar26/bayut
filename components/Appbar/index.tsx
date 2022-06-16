@@ -139,7 +139,7 @@ export default function MenuAppBar({
             <div
                 style={{
                     background: indexPage ? "":'',
-                    color:"#4b1037"
+                    // color:"#4b1037"
                 }}
                 className={`w-full absolute left-0 top-0 flex justify-between items-center px-2 py-4 `}
             >
@@ -165,7 +165,7 @@ export default function MenuAppBar({
                 </div>
                 <div className="flex w-3/6 justify-between">
                     {clientLinks.map((link: any, index: any) => {
-                        return selectedLink == link.label ? (
+                        return selectedLink === link.label ? (
                             <ListItem
                                 button
                                 key={index}
@@ -197,7 +197,7 @@ export default function MenuAppBar({
                                     indexPage
                                         ? 'text-white'
                                         : 'text-[#4b1037]'
-                                }  opacity-100 flex items-center  hover:bg-gray-200 rounded hover:text-green-600`}
+                                } opacity-100 flex items-center  hover:bg-gray-200 rounded hover:text-green-600`}
                                 onClick={() => setSelectedItem(index)}
                             >
                                 <div className="mr-2">{link.icon()}</div>

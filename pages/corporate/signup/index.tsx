@@ -72,6 +72,8 @@ const CorporateCreateLogin: any = () => {
 
     }, []);
     function onSubmit() {
+        setErrorSnackbar("")
+
         let body = {
             name: name,
             username: email,
@@ -94,12 +96,12 @@ const CorporateCreateLogin: any = () => {
         if(name!="" && password != "" && email != ""){
             onCorporateSignUp(body).then((r: any) => {
                 console.log(r, 'RESULTSS');
-                setOpen(true)
                 
                 if(!r){
                     return
                 }
                 if (r.error) {
+
                     setSnackbar(true);
 
                     setErrorSnackbar(r.message);
@@ -119,6 +121,7 @@ const CorporateCreateLogin: any = () => {
                         setSnackbar(true);
                     }
                 }
+                setOpen(true)
                 return;
             });
         }else{

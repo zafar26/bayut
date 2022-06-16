@@ -44,11 +44,11 @@ export default function MyInput(props: any) {
         let passw :any=   /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
         console.log(passw,val.match(passw),'PAssword')
         if(!val.match(passw)){
-
             setError('6 to 20 characters which contain at least one numeric digit, one uppercase and one lowercase letter')
             props.setValidationError(true)
         }
         if(error!= "" && val.match(passw)){
+            props.setValidationError(false)
             setError('')
         }   console.log(error , "VAlidation Password")
         

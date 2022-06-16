@@ -44,6 +44,7 @@ const AddProperty = () => {
     const [price, setPrice] = useState<String>('');
     const [permitNo, setPermitNo] = useState<String>('');
     const [completionStatus, setCompletionStatus] = useState<String>('');
+    const [priceTime, setPriceTime] = useState<String>('');
     const [ownershipStatus, setOwnershipStatus] = useState<String>('');
     const [listingOwners, setListingOwners] = useState<String>();
     const [listingOwnerData, setListingOwnerData] = useState<{
@@ -157,6 +158,29 @@ const AddProperty = () => {
             name: 'Price *',
         },
         {
+            value: priceTime,
+            setValue:setPriceTime,
+            label: 'Select Tenure *',
+            dependsOn:purpose == "For Rent",
+            options: [{
+                value:1,
+                text:"Monthly",
+            },
+            {
+                value:2,
+                text:"Quarterly",
+            },
+            {
+                value:3,
+                text:"Half yearly",
+            },
+            {
+                value:4,
+                text:"Yearly",
+            },
+        ],
+        },
+        {
             value: permitNo,
             setValue: setPermitNo,
             name: 'Permit Number',
@@ -219,7 +243,8 @@ const AddProperty = () => {
         if(price == ""){setOpen(true);setErrorSnackbar("Please Enter price");return }
         // if(!address){setOpen(true);setErrorSnackbar("Please Enter address");return }
         // if(!address){setOpen(true);setErrorSnackbar("Please Enter address");return }
-        
+        if(purpose == "For Rent" && priceTime == "") { setOpen(true);setErrorSnackbar("Please Enter Tenure");return}
+        setErrorSnackbar("")
         let addPropertyBody = {
             categoryID: parseInt(category),
             subCategoryID: parseInt(subCategory),
@@ -238,6 +263,7 @@ const AddProperty = () => {
             listingUserID: listingOwners,
             status: 0,
             price: price,
+            tenure:priceTime
         };
         console.log(addPropertyBody, 'ADDD PROPERTY');
         // router
@@ -329,7 +355,7 @@ const AddProperty = () => {
                                     return (
                                         <div className={'mx-2 w-72'}>
                                             <CustomSelect
-                                                value={d.value}
+                                                value={d.value || ""}
                                                 onChange={(e: any) =>{
                                                     console.log(e.target.value,'EVENT')
                                                     d.setValue(e.target.value)
