@@ -43,18 +43,18 @@ const Slideshow = ({ images, isFull }: any) => {
     // 4. name
     // 5. area
     useEffect(()=>{
-        let filteredVideos = images.filter((d)=>d.mediaType == 'video');
+        let filteredVideos:any = images.filter((d:any)=>d.mediaType == 'video');
 
         if(filteredVideos.length > 0){
             setVideos(filteredVideos)
-            setDisplayVideo(images.filter((d)=>d.mediaType == 'video')[0].mediaName)
+            setDisplayVideo(filteredVideos[0].mediaName)
         }
     },[])
     const isMobile = useMediaQuery('(max-width:600px)');
     // console.log(images, 'IMAGES');
     const [imageIndex, setImageIndex] = useState(0);
     const [videoIndex, setVideoIndex] = useState(0);
-    const [videos, setVideos] = useState([]);
+    const [videos, setVideos] = useState<any>([]);
     const [displayVideo, setDisplayVideo] = useState('');
     const [image, setImage] = useState(
         images[0] ? (images[0].mediaName ? images[0].mediaName : '') : ''
@@ -146,7 +146,7 @@ const Slideshow = ({ images, isFull }: any) => {
                             {'<'}
                         </div>
                             <div className="mt-4 flex items-center">
-                                <video className="w-full " width="800" height="600" autoplay controls src={`${Public_URL}/videos/${displayVideo}`}>
+                                <video className="w-full " width="800" height="600" autoPlay controls src={`${Public_URL}/videos/${displayVideo}`}>
                                     The “video” tag is not supported by your browser.
                                 </video>
                             </div>
