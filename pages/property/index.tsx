@@ -302,7 +302,7 @@ const Properties = () => {
                                         Search
                                     </button>
                                 </div> */}
-                                <div className="mt-4  justify-center">
+                                <div className="mt-4 flex md:flex-col justify-center md:overflow-x-hidden overflow-x-scroll scroll-smooth overflow-y-hidden ">
                         {searchField.map((d: any, i: number) => (
                                 d.type == "text" ?
                                 <div className="m-1 md:w-48 border" key={i}>
@@ -355,15 +355,15 @@ const Properties = () => {
                                 )}
                                 {data.map((d: any, i: number) => (
                         <div
-                            className="p-2 md:py-4 w-5/6 m-4  justify-center items-center md:w-5/12 shadow rounded flex flex-col  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300 hover:shadow-xl "
+                            className="p-2 md:py-0 w-5/6 m-4  justify-center items-start md:w-11/12 shadow rounded flex   transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110  duration-300 hover:shadow-xl "
                             key={i}
                         >
-                            <div className=" transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-x-105 hover:scale-y-105 md:hover:scale-y-110 duration-300 ">
+                            <div className=" h-auto  w-full transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-x-105 hover:scale-y-105 md:hover:scale-y-110 duration-300 ">
                                 <Slideshow images={d.mediaInfo} />
                             </div>
 
                             <div
-                                className=" w-full  p-1 flex flex-col justify-between cursor-pointer"
+                                className=" w-full h-full p-4 flex  justify-between cursor-pointer"
                                 onClick={(e:any) =>
                                     router.push(
                                         `/property/details/${d.propertyID}`
@@ -371,34 +371,36 @@ const Properties = () => {
                                     // console.log(e,'ERR')
                                 }
                             >
-                                <div className="text-sm md:text-xl ">
+                                <div className="text-sm md:text-xl flex flex-col justify-around h-auto ">
+                                    <p className="font-bold">&#x62f;&#x2e;&#x625; {d.price}</p>
 
                                     <p>{d.propertyName}</p>
                                     <p className="text-xs md:text-xs font-thin">
                                         {d.address}
                                     </p>
-                                    <div className="flex justify-between items-center ">
 
 
                                         <p className="text-xs md:text-base font-semibold">
                                             {d.propertyType}
                                         </p>
-                                        <p className="font-bold">{d.price}</p>
 
-                                    </div>
-                                    <p className="text-xs md:text-base ">
-                                        {d.categoryName + ' '} -{'>'}
-                                        {' ' + d.subCategoryName}
+
+                                        <div className="flex">
+                                        <p className="text-xs md:text-base ">
+                                        {d.categoryName + ' '} -{'>'} {' ' + d.subCategoryName}
                                     </p>
+                                    </div>
                                 </div>
-                                {/* <div className="w-full ">
-                                    {auth && (
+
+                                <div className="w-1/4 flex items-end justify-end h-auto ">
+                                    {/* {auth && (
                                         <TransitionsModal
                                             phoneNo={d.phoneNumber}
                                             email={d.email}
                                         />
-                                    )}
-                                </div> */}
+                                    )} */}
+                                    <p className="text-gray-500">{d.companyName}</p>
+                                </div>
                             </div>
                         </div>
                     ))}

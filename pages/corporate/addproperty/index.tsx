@@ -259,11 +259,11 @@ const AddProperty = () => {
             area: area,
             permitNumber: permitNo,
             completionStatusID: 1,
-            ownerShipStatusID: 1,
+            ownerShipStatusID: priceTime,
             listingUserID: listingOwners,
             status: 0,
-            price: price,
-            tenure:priceTime
+            price: price
+            // tenure:priceTime
         };
         console.log(addPropertyBody, 'ADDD PROPERTY');
         // router

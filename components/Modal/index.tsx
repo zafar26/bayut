@@ -7,15 +7,18 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import CallIcon from '@mui/icons-material/Call';
 import EmailIcon from '@mui/icons-material/Email';
+import WifiCalling3Icon from '@mui/icons-material/WifiCalling3';
+import useMediaQuery from '@mui/material/useMediaQuery';
+// import EmailIcon from '@mui/icons-material/Email';
 
 const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 200,
+    width: 400,
     bgcolor: 'background.paper',
-    border: '2px solid #000',
+    border: '1px solid #ecdbdc',
     boxShadow: 24,
     p: 4,
 };
@@ -23,9 +26,12 @@ const style = {
 export default function TransitionsModal(props: any) {
     const [open, setOpen] = useState(false);
     const [selectedButton, setSelectedButton] = useState(0);
+    const isMobile = useMediaQuery('(max-width:600px)');
     // const handleOpen = (c:any) =>
     const handleClose = () => setOpen(false);
-
+        if(isMobile){
+            style.width = 200
+        }
     return (
         <div>
             <div className="flex justify-between md:justify-start">
@@ -64,6 +70,7 @@ export default function TransitionsModal(props: any) {
             >
                 <Fade in={open}>
                     <Box sx={style}>
+                        <div className="w-full flex flex-col items-center">
                         <Typography
                             id="transition-modal-title"
                             variant="h6"
@@ -71,11 +78,14 @@ export default function TransitionsModal(props: any) {
                         >
                             {selectedButton == 1 ? 'Phone NO' : 'Email'}
                         </Typography>
+                        <div className="mt-4 flex items-center">
+                        {selectedButton == 1 ?<WifiCalling3Icon fontSize="small" color="success"/>:<EmailIcon fontSize="small" color="success"/>}
                         <Typography
                             id="transition-modal-description"
-                            sx={{ mt: 2 }}
+                            sx={{ mt: 0,ml:2,color:"blue" }}
                         >
                             <a
+                            className="hover:underline"
                                 href={
                                     selectedButton == 1
                                         ? `tel:${props.phoneNo}`
@@ -87,6 +97,9 @@ export default function TransitionsModal(props: any) {
                                     : props.email}
                             </a>
                         </Typography>
+                        </div>
+                        </div>
+
                     </Box>
                 </Fade>
             </Modal>

@@ -42,6 +42,9 @@ const UploadPage = () => {
     const [selectedImage5, setSelectedImage5] = useState<any>(null);
     const [imagebase645, setImageBase645] = useState(null);
 
+    const [selectedVideo, setSelectedVideo] = useState<any>(null);
+    const [videoBase64, setVideoBase64] = useState(null);
+
     const [propertyID, setPropertyID] = useState<Number>(0);
     const [open, setOpen] = useState<any>(false);
     const [errorSnackbar, setErrorSnackbar] = useState<any>(false);
@@ -64,6 +67,7 @@ const UploadPage = () => {
     }, []);
     // console.log(selectedImage, 'IMAGEBASE64');
     function onSubmit() {
+    
         if(selectedImage){
             let body = {
                 imageData: imagebase64,
@@ -198,9 +202,17 @@ const UploadPage = () => {
                     let times = count + 1 
                     setCount(times)
                     
+
+                    setSelectedImage(null)
+                    setSelectedImage1(null)
+                    setSelectedImage2(null)
+                    setSelectedImage3(null)
+                    setSelectedImage4(null)
+                    setSelectedImage5(null)
+                    
                     console.log(r, 'RESULT');
                     setSnackbar(true);
-                    router.push('/corporate/listings')
+                    // router.push('/corporate/listings')
                 } else {
                     setSnackbar(true);
                     setErrorSnackbar(r.message);
@@ -208,7 +220,31 @@ const UploadPage = () => {
                 // console.log(r, 'RESULT')
             });
         }
-        
+        console.log(selectedVideo,'SELCTED VIDEO')
+        if(selectedVideo){
+            let body = {
+                imageData: videoBase64,
+                fileName: selectedVideo.name,
+                mediaType: 'video',
+                mediaPath: '',
+                propertyID: propertyID,
+            };
+            // console.log(body, 'BODY');
+            onAddPropertyUpload(body).then((r: any) => {
+                setOpen(true)
+                if (r.statusCode == 200) {
+                    let times = count + 1 
+                    setCount(times)
+                    console.log(r, 'RESULT');
+                    setSnackbar(true);
+                } else {
+                    setSnackbar(true);
+                    setErrorSnackbar(r.message);
+                }
+                // console.log(r, 'RESULT')
+            });
+        }
+
         
     }
     return (
@@ -328,14 +364,33 @@ const UploadPage = () => {
                                     </div>
                                 )}
                                 {value == 1 && (
-                                    <div className="mt-4 ">Will be available soon</div>
+                                    <div className="mt-4 ">
+                                            <UploadAndDisplayImage
+                                                type="video"
+                                                selectedImage={selectedVideo}
+                                                setSelectedImage={
+                                                    setSelectedVideo
+                                                }
+                                                imagebase64={videoBase64}
+                                                setImageBase64={setVideoBase64}
+                                            />
+                                            <div>
+                                                <p className="text-sm font-thin">
+                                                    Allowed Follwed Extension .mp4 /
+                                                    .3gp
+                                                </p>
+                                                <p className="text-sm font-thin">
+                                                    Max Allowed Video Size is 5 MB
+                                                </p>
+                                            </div>
+                                    </div>
                                 )}
                                 {value == 2 && (
                                     <div className="mt-4 ">Will be available soon</div>
                                 )}
                             </div>
                         </div>
-                       { value == 0 &&<div className="mt-8 flex justify-between">
+                       { value == 0 || value ==1 &&<div className="mt-8 flex justify-between">
                                 <Button
                                             color="success"
                                             onClick={() => router.push('/corporate/listings')}
@@ -368,7 +423,7 @@ const UploadPage = () => {
                         {errorSnackbar?
                         "Failed to Add Property Image"
                         :
-                        "Property Image Added successfully!"
+                        "Property Media Added successfully!"
                         }
                         </Alert>
                     </Snackbar>

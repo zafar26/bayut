@@ -79,7 +79,7 @@ export async function searchPropertyDetail(id?: any) {
         );
         // console.log(data,'ERROR')
         if (data.statusCode == 200) {
-            // console.log('DATA', data.responseData.data);
+            console.log('PRoperty Details ', data.responseData.data);
             return data ;
         }
     } catch (error: any) {

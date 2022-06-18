@@ -138,14 +138,14 @@ export default function MenuAppBar({
         return (
             <div
                 style={{
-                    background: indexPage ? "":'',
+                    background: indexPage ? "":'#4b1037',
                     // color:"#4b1037"
                 }}
                 className={`w-full absolute left-0 top-0 flex justify-between items-center px-2 py-4 `}
             >
                 <div className="w-1/6">
                     <Image
-                        src={indexPage ? 'whitelogo.svg' : 'logo.svg'}
+                        src={indexPage ? 'whitelogo.svg' : 'whitelogo.svg'}
                         loader={myPublicLoader}
                         layout={'fixed'}
                         width={120}
@@ -174,8 +174,8 @@ export default function MenuAppBar({
                                 }}
                                 className={`ml-2 w-full flex items-center ${
                                     indexPage
-                                        ? ''
-                                        : 'text-[#4b1037]'
+                                        ? 'text-[#4b1037]'
+                                        : 'bg-white'
                                 } opacity-80 p-0 py-1   shadow  rounded hover:bg-gray-200 `}
                                 onClick={() => router.push(link.path)}
                             >
@@ -196,7 +196,7 @@ export default function MenuAppBar({
                                 className={`ml-2 w-full ${
                                     indexPage
                                         ? 'text-white'
-                                        : 'text-[#4b1037]'
+                                        : 'text-white'
                                 } opacity-100 flex items-center  hover:bg-gray-200 rounded hover:text-green-600`}
                                 onClick={() => setSelectedItem(index)}
                             >

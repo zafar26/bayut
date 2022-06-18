@@ -1,9 +1,30 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { myLoader } from '../../helpers/helper';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import {Public_URL} from '../../helpers/helper'
+// import useMediaQuery from '@mui/material/useMediaQuery';
+// import EmailIcon from '@mui/icons-material/Email';
+import Button from '@mui/material/Button';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Typography from '@mui/material/Typography';
+import ReactPlayer from 'react-player'
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    bgcolor: 'background.paper',
+    border: '1px solid #ecdbdc',
+    boxShadow: 24,
+    p: 4,
+};
 
 const Slideshow = ({ images, isFull }: any) => {
     // <AnimatePresence>
@@ -21,13 +42,29 @@ const Slideshow = ({ images, isFull }: any) => {
     // 3. purpose
     // 4. name
     // 5. area
+    useEffect(()=>{
+        let filteredVideos = images.filter((d)=>d.mediaType == 'video');
 
+        if(filteredVideos.length > 0){
+            setVideos(filteredVideos)
+            setDisplayVideo(images.filter((d)=>d.mediaType == 'video')[0].mediaName)
+        }
+    },[])
     const isMobile = useMediaQuery('(max-width:600px)');
     // console.log(images, 'IMAGES');
     const [imageIndex, setImageIndex] = useState(0);
+    const [videoIndex, setVideoIndex] = useState(0);
+    const [videos, setVideos] = useState([]);
+    const [displayVideo, setDisplayVideo] = useState('');
     const [image, setImage] = useState(
         images[0] ? (images[0].mediaName ? images[0].mediaName : '') : ''
     );
+    const [open, setOpen] = useState(false);
+
+    const handleClose = () => setOpen(false);
+        if(isMobile){
+            style.width = 200
+        }
     // console.log(`${Public_URL}/images/${image}`,'PUBLICURL')
     return (
         <div className="relative  w-full h-full">
@@ -69,6 +106,67 @@ const Slideshow = ({ images, isFull }: any) => {
                 }}
             >
                 {'>'}
+            </div>
+            <div className="absolute bottom-2 left-2 z-50 cursor-pointer" onClick={()=>{console.log('VIDEO BUTTON')}}>
+            {isFull &&
+                <Button
+                    onClick={() => {
+                        // setSelectedButton(2);
+                        setOpen(true);
+                    }}
+                    className="p-1 ml-1  md:py-1 md:px-2  bg-gray-100 text-[#4b1037] flex rounded shadow flex items-center"
+                >
+                    <p className="md:ml-1 text-sm md:text-base">Video</p>
+                </Button>}
+                <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={open}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={open}>
+                    <Box sx={style}>
+                    {/* <ReactPlayer url={`${Public_URL}/videos/${displayVideo}`} /> */}
+                        <div className="w-full flex flex-col items-center">
+                        <div
+                            className="bg-gray-50 absolute top-48 left-1 z-50 p-4 flex items-center rounded-full cursor-pointer"
+                            onClick={() => {
+                                console.log(videos,videoIndex,'VIDEOINDEX')
+                                if (videos[videoIndex - 1]) {
+                                    setVideoIndex(videoIndex - 1);
+                                    setDisplayVideo(videos[videoIndex - 1].mediaName);
+                                }
+                            }}
+                        >
+                            {'<'}
+                        </div>
+                            <div className="mt-4 flex items-center">
+                                <video className="w-full " width="800" height="600" autoplay controls src={`${Public_URL}/videos/${displayVideo}`}>
+                                    The “video” tag is not supported by your browser.
+                                </video>
+                            </div>
+                            <div
+                                className="bg-gray-50 absolute top-48 right-1 z-50 p-4 flex items-center rounded-full cursor-pointer"
+                                onClick={() => {
+                                console.log(videos,videoIndex,'VIDEOINDEX')
+
+                                    if (videos[videoIndex + 1]) {
+                                        setVideoIndex(videoIndex + 1);
+                                        setDisplayVideo(videos[videoIndex + 1].mediaName);
+                                    }
+                                }}
+                            >
+                                {'>'}
+                            </div>
+                        </div>
+                    </Box>
+                </Fade>
+            </Modal>
             </div>
         </div>
     );

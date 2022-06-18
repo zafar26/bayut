@@ -216,7 +216,9 @@ const PropertyDetails = () => {
                             />
                         </div>
                     }
-                    <div className="p-2 pt-4 md:mt-8  bg-white w-full flex flex-col items-center   rounded shadow shadow-amber-800/50">
+                    <div className="p-2 w-full md:mt-8">
+                    <p className="cursor-pointer" onClick={()=>router.push('/property')}> {"<--    "}Go Back to Search</p>
+                    <div className="p-2 pt-4 mt-2  bg-white w-full flex flex-col items-center   rounded shadow shadow-amber-800/50">
                         <div className="flex flex-col w-full justify-center p-4 ">
                             <div className="justify-between flex items-center h-8  w-full">
                                 <p className="text-sm md:text-2xl font-bold md:w-1/2 w-full">
@@ -259,7 +261,7 @@ const PropertyDetails = () => {
                             <div className="md:flex items-center  w-1/2">
                                 <p>Price : </p>
                                 <p className="font-bold text-xl md:ml-2">
-                                    {data.price} {data.tenure}
+                                &#x62f;&#x2e;&#x625; {data.price} {data.tenure}
                                 </p>
                             </div>
                             <div className="md:flex items-center  w-3/4 ">
@@ -314,10 +316,14 @@ const PropertyDetails = () => {
                             </div>
                         </div>
                     </div>
+                    </div>
                     <div className="pt-16 w-full md:w-4/12 flex flex-col items-center p-4 ">
-                        <div className="flex text-lg">
+                    <div className="flex text-lg py-4">
+                            <p>{data.companyName} </p>
+                        </div>
+                        <div className="flex text-lg py-1">
                             <p>Agent :</p>
-                            <p>Company </p>
+                            <p>{data.agentName} </p>
                         </div>
                         <div className="font-thin text-sm ">
                             Contact Agent for more information
