@@ -247,8 +247,8 @@ const Properties = () => {
                     <div className="md:flex h-full md:justify-around md:items-center  	">
                         <div className=" p-2 w-full md:w-1/6 md:mt-28 md:h-full ">
                             <div className=" w-full md:h-5/6   ">
-                                <p className="md:text-base text-xs px-2 font-thin md:text-center text-amber-800">
-                                    Filters:
+                                <p className="md:text-base text-xs px-2 font-thin md:text-left text-amber-800">
+                                    Search Properties:
                                 </p>
                                 {/* <div className="w-full flex md:flex-col overflow-x-auto items-center scroll-smooth ">
                                     {filters.map((d: any) => {
@@ -338,8 +338,8 @@ const Properties = () => {
                         </div>
 
                         <div className=" p-2 w-full md:w-4/6  h-full  flex flex-col justify-center items-center">
-                            <p className="text-xl p-4 font-bold text-amber-900">
-                                Properties
+                            <p className="text-xl p-4 md:mt-4  font-bold text-amber-900">
+                            Property Listings
                             </p>
                             <div className=" p-2 w-full h-full flex flex-wrap w-full overflow-y-scroll scroll-smooth overflow-x-hidden">
                                 {error ? (

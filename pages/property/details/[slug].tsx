@@ -19,7 +19,7 @@ const Alert = forwardRef(function Alert(props:any, ref:any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-let excludingAmmenities = [
+let excludingAmenities = [
     'propertyAmenityID',
     'propertyID',
     'userID',
@@ -106,7 +106,7 @@ const PropertyDetails = () => {
                                     let k = d[0].replace(/([A-Z])/g, ' $1');
 
                                     if (
-                                        !excludingAmmenities.includes(d[0]) &&
+                                        !excludingAmenities.includes(d[0]) &&
                                         d[1]
                                     ) {
                                         if (
@@ -273,7 +273,7 @@ const PropertyDetails = () => {
                         </div>
                         <div className="mt-8  p-4 flex w-full   justify-center items-center">
                             <div className="  w-full flex justify-center flex-col items-center">
-                                <p className="font-bold">Ammenities</p>
+                                <p className="font-bold">Amenities</p>
                                 <div className="flex mt-4  flex-wrap ">
                                     {ammenityFieldData.map(
                                         (d: any, index: number) => {
@@ -306,7 +306,7 @@ const PropertyDetails = () => {
                                     )}
                                 </div>
                                 <p className="font-bold mt-8 ">
-                                    Other Ammenities
+                                    Other Amenities
                                 </p>
                                 <div className=" p-4  flex flex-wrap">
                                     {ammenityData.map((d: string) => (

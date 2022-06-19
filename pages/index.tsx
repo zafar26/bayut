@@ -214,7 +214,7 @@ const Home = () => {
             <div className="w-full h-full box-border text-[#4b1037]	">
                 <div className="flex justify-center flex-wrap w-full md:mt-24 mt-12 scroll-smooth">
                     <p className="w-full flex justify-center font-bold text-xl md:text-4xl md:my-8 my-4 ">
-                        Properties
+                    Property Listings
                     </p>
                     {loading && (
                         <Box sx={{ display: 'flex' }}>

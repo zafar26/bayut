@@ -65,7 +65,7 @@ export const clientLinks: any = [
         icon: () => <HomeIcon />,
     },
     {
-        label: 'Property',
+        label: 'Properties',
         path: '/property',
         icon: () => <ApartmentIcon />,
     },
