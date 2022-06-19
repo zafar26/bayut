@@ -25,7 +25,6 @@
     "next-pwa": "^5.5.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
-    "react-player": "^2.10.1",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {

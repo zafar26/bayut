@@ -12,7 +12,6 @@ import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Typography from '@mui/material/Typography';
-import ReactPlayer from 'react-player'
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -131,7 +130,6 @@ const Slideshow = ({ images, isFull }: any) => {
             >
                 <Fade in={open}>
                     <Box sx={style}>
-                    {/* <ReactPlayer url={`${Public_URL}/videos/${displayVideo}`} /> */}
                         <div className="w-full flex flex-col items-center">
                         <div
                             className="bg-gray-50 absolute top-48 left-1 z-50 p-4 flex items-center rounded-full cursor-pointer"
