@@ -107,6 +107,9 @@ const CorporateCreateLogin: any = () => {
                     setErrorSnackbar(r.message);
                     return;
                 }
+                if(r.data.statusCode == 404){
+                    setErrorSnackbar('Invalid Details / User Already Exist')
+                }
                 if (r.data.statusCode == 200) {
                     console.log(r, 'RESULT');
                     setSnackbar(true);

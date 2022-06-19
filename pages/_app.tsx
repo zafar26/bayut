@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
         <>
             <Head key={'1'}>
-                <title>Vlook</title>
+                <title>Lookin Properties</title>
                 <meta name="description" content="Real Estate App" />
                 <link rel="icon" href="/whitelogo.svg" />
                 <link rel="manifest" href="/manifest.webmanifest.json" />

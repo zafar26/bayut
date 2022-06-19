@@ -266,7 +266,7 @@ const UploadPage = () => {
                     </div>
                 )}
                 <div className="md:w-5/6 w-full">
-                    <Navbar selectedLink={'Add Property'} />
+                    {/* <Navbar selectedLink={'Add Property'} /> */}
                     <div className="pt-16">
                         <MyStepper steps={steps} activeStep={2} />
                         <div className="mt-8 ">
@@ -390,19 +390,9 @@ const UploadPage = () => {
                                 )}
                             </div>
                         </div>
-                       { value == 0 || value ==1 &&<div className="mt-8 flex justify-between">
-                                <Button
-                                            color="success"
-                                            onClick={() => router.push('/corporate/listings')}
-                                        >
-                                            {/* <a
-                                        href="/corporate/addproperty/upload"
-                                        className="text-white"
-                                    > */}
-                                            <p className="text-xs ">Go To Property Listing</p>
-                                            {/* </a> */}
-                                </Button>
-                             <div className="bg-green-600 hover:bg-green-500 rounded  ">
+                       {  value >=0 &&<div className="mt-8 flex flex-col justify-center items-center">
+                                
+                             <div className="bg-green-600 hover:bg-green-500 rounded text-center w-20">
                                 <Button
                                     color="success"
                                     onClick={() => onSubmit()}
@@ -416,7 +406,17 @@ const UploadPage = () => {
                                 </Button>
                             </div>
 
-                               
+                            <Button
+                                            color="success"
+                                            onClick={() => router.push('/corporate/listings')}
+                                        >
+                                            {/* <a
+                                        href="/corporate/addproperty/upload"
+                                        className="text-white"
+                                    > */}
+                                            <p className="text-xs ">Go To Property Listing</p>
+                                            {/* </a> */}
+                                </Button>  
                         </div>}
                         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>

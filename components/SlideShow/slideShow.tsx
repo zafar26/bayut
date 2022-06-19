@@ -19,8 +19,9 @@ const style = {
     left: '50%',
     transform: 'translate(-50%, -50%)',
     width: 600,
-    bgcolor: 'background.paper',
-    border: '1px solid #ecdbdc',
+    height:500,
+    bgcolor: '#ecdbdc',
+    border: '1px solid #4b1037',
     boxShadow: 24,
     p: 4,
 };
@@ -68,7 +69,7 @@ const Slideshow = ({ images, isFull }: any) => {
     return (
         <div className="relative  w-full h-full">
             <div
-                className="bg-gray-50 absolute inset-y-2/4 left-1 z-50 p-2 flex items-center rounded-full cursor-pointer"
+                className="bg-gray-50 opacity-50 hover:opacity-100 text-[#4b1037] absolute inset-y-2/4 left-1 z-50 p-4 text-2xl flex items-center rounded cursor-pointer"
                 onClick={() => {
                     if (images[imageIndex - 1]) {
                         setImageIndex(imageIndex - 1);
@@ -96,7 +97,7 @@ const Slideshow = ({ images, isFull }: any) => {
             />
         :""}
             <div
-                className="bg-gray-50 absolute inset-y-2/4 right-1 z-50 p-2 flex items-center rounded-full cursor-pointer"
+                className="bg-gray-50 opacity-50 hover:opacity-100 text-[#4b1037] absolute inset-y-2/4 right-1 z-50 p-4 text-2xl flex items-center rounded cursor-pointer"
                 onClick={() => {
                     if (images[imageIndex + 1]) {
                         setImageIndex(imageIndex + 1);
@@ -130,9 +131,9 @@ const Slideshow = ({ images, isFull }: any) => {
             >
                 <Fade in={open}>
                     <Box sx={style}>
-                        <div className="w-full flex flex-col items-center">
+                        <div className="w-full h-full flex flex-col items-center bg-[#ecdbdc]">
                         <div
-                            className="bg-gray-50 absolute top-48 left-1 z-50 p-4 flex items-center rounded-full cursor-pointer"
+                            className="bg-gray-50 absolute top-32 text-xl left-1 z-50 p-4 flex items-center rounded cursor-pointer"
                             onClick={() => {
                                 console.log(videos,videoIndex,'VIDEOINDEX')
                                 if (videos[videoIndex - 1]) {
@@ -149,7 +150,7 @@ const Slideshow = ({ images, isFull }: any) => {
                                 </video>
                             </div>
                             <div
-                                className="bg-gray-50 absolute top-48 right-1 z-50 p-4 flex items-center rounded-full cursor-pointer"
+                                className="bg-gray-50  absolute top-32 right-1 z-50 p-4 flex text-xl items-center rounded cursor-pointer"
                                 onClick={() => {
                                 console.log(videos,videoIndex,'VIDEOINDEX')
 
@@ -161,6 +162,16 @@ const Slideshow = ({ images, isFull }: any) => {
                             >
                                 {'>'}
                             </div>
+
+                        <div className="flex h-full w-full justify-center items-center">
+                        <Button
+
+                            onClick={handleClose}
+                            className="p-1 ml-1  md:py-1 md:px-2  bg-gray-100  flex rounded shadow  "
+                        >
+                            <p className="md:ml-1 text-sm md:text-base">Close</p>
+                        </Button>
+                        </div>
                         </div>
                     </Box>
                 </Fade>

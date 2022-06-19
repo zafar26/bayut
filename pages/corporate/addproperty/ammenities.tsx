@@ -121,31 +121,31 @@ const Ammenities = () => {
 
     let recreationFamilyData = [
         {
-            label: 'Barbeque Area',
+            label: 'Barbeque area',
             checked: recreationFamily.barbequeArea,
             name: 'barbequeArea',
             type: 'checkbox',
         },
         {
-            label: 'Day Care Center',
+            label: 'Day care center',
             checked: recreationFamily.dayCareCenter,
             type: 'checkbox',
             name: 'dayCareCenter',
         },
         {
-            label: 'Kids Play Area',
+            label: 'Kids play area',
             checked: recreationFamily.kidsplayArea,
             type: 'checkbox',
             name: 'kidsplayArea',
         },
         {
-            label: 'Lawn Or Garden',
+            label: 'Lawn/Garden',
             checked: recreationFamily.lawnOrGarden,
             type: 'checkbox',
             name: 'lawnOrGarden',
         },
         {
-            label: 'Cafeteria / Canteen',
+            label: 'Cafeteria/Canteen',
             checked: recreationFamily.cafeteriaOrCateen,
             type: 'checkbox',
             name: 'cafeteriaOrCateen',
@@ -154,13 +154,13 @@ const Ammenities = () => {
 
     let healthFitnessData = [
         {
-            label: 'First Aid Medical Center',
+            label: 'First Aid medical center',
             checked: healthFitness.firstAidMedicalCenter,
             type: 'checkbox',
             name: 'firstAidMedicalCenter',
         },
         {
-            label: 'Gym Or Health Club',
+            label: 'Gym/Health club',
             checked: healthFitness.gymOrHealthClub,
             type: 'checkbox',
             name: 'gymOrHealthClub',
@@ -178,19 +178,19 @@ const Ammenities = () => {
             name: 'sauna',
         },
         {
-            label: 'Steam Room',
+            label: 'Steam room',
             checked: healthFitness.steamRoom,
             type: 'checkbox',
             name: 'steamRoom',
         },
         {
-            label: 'Swimming Pool',
+            label: 'Swimming pool',
             checked: healthFitness.swimmingpool,
             type: 'checkbox',
             name: 'swimmingpool',
         },
         {
-            label: 'Facilities For Disabled',
+            label: 'Facilities for disabled',
             checked: healthFitness.facilitiesForDisabled,
             type: 'checkbox',
             name: 'facilitiesForDisabled',
@@ -198,19 +198,19 @@ const Ammenities = () => {
     ];
     let laundryKitchenData = [
         {
-            label: 'Laundry Room',
+            label: 'Laundry room',
             checked: laundryKitchen.laundryRoom,
             type: 'checkbox',
             name: 'laundryRoom',
         },
         {
-            label: 'Laundry Facility',
+            label: 'Laundry facility',
             checked: laundryKitchen.laundryFacilty,
             type: 'checkbox',
             name: 'laundryFacilty',
         },
         {
-            label: 'Shared Kitchen',
+            label: 'Shared kitchen',
             checked: laundryKitchen.sharedKitchen,
             type: 'checkbox',
             name: 'sharedKitchen',
@@ -218,19 +218,19 @@ const Ammenities = () => {
     ];
     let businessSecurityData = [
         {
-            label: 'Business Center',
+            label: 'Business center',
             checked: businessSecurity.bussinessCenter,
             type: 'checkbox',
             name: 'bussinessCenter',
         },
         {
-            label: 'Conference Room',
+            label: 'Conference room',
             checked: businessSecurity.conferenceRoom,
             type: 'checkbox',
             name: 'conferenceRoom',
         },
         {
-            label: 'Security Staff',
+            label: 'Security staff',
             checked: businessSecurity.securityStaff,
             type: 'checkbox',
             name: 'securityStaff',
@@ -245,37 +245,37 @@ const Ammenities = () => {
 
     let buildingData = [
         {
-            label: 'Completion Year',
+            label: 'Completion year',
             value: building.completionYear,
             name: 'completionYear',
             type: 'input',
         },
         {
-            label: 'Elevators in Building',
+            label: 'Elevators in building',
             value: building.elevatorsInBuilding,
             name: 'elevatorsInBuilding',
             type: 'input',
         },
         {
-            label: 'Balcony or Terrace',
+            label: 'Balcony/Terrace',
             checked: building.balconyOrTerrace,
             type: 'checkbox',
             name: 'balconyOrTerrace',
         },
         {
-            label: 'Lobby In Building',
+            label: 'Lobby in building',
             checked: building.lobbyInBuilding,
             type: 'checkbox',
             name: 'lobbyInBuilding',
         },
         {
-            label: 'Prayer Room',
+            label: 'Prayer room',
             checked: building.prayerRoom,
             type: 'checkbox',
             name: 'prayerRoom',
         },
         {
-            label: 'Reception or Waiting Room',
+            label: 'Reception/Waiting room',
             checked: building.receptionOrWaitingRoom,
             type: 'checkbox',
             name: 'receptionOrWaitingRoom',
@@ -284,13 +284,13 @@ const Ammenities = () => {
 
     let technologyData = [
         {
-            label: 'Broadband Internet',
+            label: 'Broadband internet',
             checked: technology.broadBandInternet,
             type: 'checkbox',
             name: 'broadBandInternet',
         },
         {
-            label: 'Satelite / Cable TV',
+            label: 'Satelite/Cable TV',
             checked: technology.satelliteOrCableTv,
             type: 'checkbox',
             name: 'satelliteOrCableTv',
@@ -305,25 +305,25 @@ const Ammenities = () => {
 
     let featuresData = [
         {
-            label: 'Double Glazed Windows',
+            label: 'Double glazed windows',
             checked: features.doubleGlazedWindows,
             type: 'checkbox',
             name: 'doubleGlazedWindows',
         },
         {
-            label: 'Centrally Air-Conditioned',
+            label: 'Centrally air-conditioned',
             checked: features.centrallyAirConditioned,
             type: 'checkbox',
             name: 'centrallyAirConditioned',
         },
         {
-            label: 'Central Heating',
+            label: 'Central heating',
             checked: features.centralHeating,
             type: 'checkbox',
             name: 'centralHeating',
         },
         {
-            label: 'Electricity Back Up',
+            label: 'Electricity backup',
             checked: features.electricityBackUp,
             type: 'checkbox',
             name: 'electricityBackUp',
@@ -335,13 +335,13 @@ const Ammenities = () => {
             name: 'furnished',
         },
         {
-            label: 'Storage Areas',
+            label: 'Storage areas',
             checked: features.storageAreas,
             type: 'checkbox',
             name: 'storageAreas',
         },
         {
-            label: 'Study Room',
+            label: 'Study room',
             checked: features.studyRoom,
             type: 'checkbox',
             name: 'studyRoom',
@@ -356,19 +356,19 @@ const Ammenities = () => {
 
     const cleaningMaintenanceData = [
         {
-            label: 'Waste Disposal',
+            label: 'Waste disposal',
             checked: cleaningMaintenance.wasteDisposal,
             type: 'checkbox',
             name: 'wasteDisposal',
         },
         {
-            label: 'Maintenance Staff',
+            label: 'Maintenance staff',
             checked: cleaningMaintenance.maintainenceStaff,
             type: 'checkbox',
             name: 'maintainenceStaff',
         },
         {
-            label: 'Cleaning Services',
+            label: 'Cleaning services',
             checked: cleaningMaintenance.cleaningServices,
             type: 'checkbox',
             name: 'cleaningServices',
@@ -382,19 +382,19 @@ const Ammenities = () => {
         //     type: 'input',
         // },
         {
-            label: 'Floor',
+            label: 'No. of Floors',
             value: miscellaneous.floor,
             name: 'floor',
             type: 'input',
         },
         {
-            label: 'Other Main Features',
+            label: 'Other main features',
             value: miscellaneous.otherMainFeatures,
             name: 'otherMainFeatures',
             type: 'input',
         },
         {
-            label: 'Free Hold',
+            label: 'Free hold',
             checked: miscellaneous.freeHold,
             type: 'checkbox',
             name: 'freeHold',
@@ -412,80 +412,80 @@ const Ammenities = () => {
         //     type: 'input',
         // },
         {
-            label: 'Atm Facility',
+            label: 'ATM Facility',
             checked: miscellaneous.atmFacility,
             type: 'checkbox',
             name: 'atmFacility',
         },
         {
-            label: 'Other Facility',
+            label: 'Other facilities',
             value: miscellaneous.otherFacility,
             name: 'otherFacility',
             type: 'input',
         },
         {
-            label: 'Land Area',
+            label: 'Land area',
             value: miscellaneous.landArea,
             name: 'landArea',
             type: 'input',
         },
         {
-            label: 'Maids Room',
+            label: 'Maids room',
             checked: miscellaneous.maidsRoom,
             name: 'maidsRoom',
             type: 'checkbox',
         },
         {
-            label: 'Number Of Bathrooms',
+            label: 'Number of bathrooms',
             value: miscellaneous.numberOfBathRooms,
             name: 'numberOfBathRooms',
             type: 'input',
         },
         {
-            label: 'Number Of BedRooms',
+            label: 'Number of bedRooms',
             value: miscellaneous.numberOfBedRooms,
             name: 'numberOfBedRooms',
             type: 'input',
         },
 
         {
-            label: 'Near By Schools',
+            label: 'Near by schools',
             value: miscellaneous.nearBySchools,
             name: 'nearBySchools',
             type: 'input',
         },
         {
-            label: 'Near By Hospital',
+            label: 'Near by hospital',
             value: miscellaneous.nearByHospital,
             name: 'nearByHospital',
             type: 'input',
         },
         {
-            label: 'Near By ShoppingMall',
+            label: 'Near by shopping mall',
             value: miscellaneous.nearByShoppingMall,
             name: 'nearByShoppingMall',
             type: 'input',
         },
         {
-            label: 'Distance From Airport',
+            label: 'Distance from airport',
             value: miscellaneous.distanceFromAirport,
             name: 'distanceFromAirport',
             type: 'input',
         },
         {
-            label: 'Near By Public Transport',
+            label: 'Near by public transport',
             value: miscellaneous.nearBypublicTransort,
             name: 'nearBypublicTransort',
             type: 'input',
         },
         {
-            label: 'Other Near By Places',
+            label: 'Other near by places',
             value: miscellaneous.otherNearByplaces,
             name: 'otherNearByplaces',
             type: 'input',
         },
         {
-            label: 'Hours Carcierge',
+            label: 'Hours carcierge',
             checked: miscellaneous.hoursCarcierge,
             name: 'hoursCarcierge',
             type: 'checkbox',

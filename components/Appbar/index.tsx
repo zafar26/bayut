@@ -137,11 +137,11 @@ export default function MenuAppBar({
     if (client && !isMobile) {
         return (
             <div
-                style={{
-                    background: indexPage ? "":'#4b1037',
-                    // color:"#4b1037"
-                }}
-                className={`w-full absolute left-0 top-0 flex justify-between items-center px-2 py-4 `}
+                // style={{
+                //     background: indexPage ? "#4b1037":'#4b1037',
+                //     // color:"#4b1037"
+                // }}
+                className={`w-full absolute left-0 bg-[#4b1037] top-0 flex justify-between items-center px-2 py-4 `}
             >
                 <div className="w-1/6">
                     <Image
@@ -174,13 +174,13 @@ export default function MenuAppBar({
                                 }}
                                 className={`ml-2 w-full flex items-center ${
                                     indexPage
-                                        ? 'text-[#4b1037]'
+                                        ? 'bg-white'
                                         : 'bg-white'
-                                } opacity-80 p-0 py-1   shadow  rounded hover:bg-gray-200 `}
+                                } opacity-100 p-0 py-1   shadow  rounded hover:bg-gray-200 `}
                                 onClick={() => router.push(link.path)}
                             >
                                 <div
-                                    className="w-full flex items-center px-2 	"
+                                    className="w-full bg-white justify-center flex items-center px-2 	"
                                     onClick={() => router.push(link.path)}
                                 >
                                     <div className="mr-2">{link.icon()}</div>
@@ -197,7 +197,7 @@ export default function MenuAppBar({
                                     indexPage
                                         ? 'text-white'
                                         : 'text-white'
-                                } opacity-100 flex items-center  hover:bg-gray-200 rounded hover:text-green-600`}
+                                } opacity-100 flex items-center justify-center hover:bg-gray-200 rounded hover:text-green-600`}
                                 onClick={() => setSelectedItem(index)}
                             >
                                 <div className="mr-2">{link.icon()}</div>

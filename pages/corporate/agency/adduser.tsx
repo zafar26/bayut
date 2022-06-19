@@ -11,6 +11,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { NextRouter, useRouter } from 'next/router';
+import PhoneNoInput from '../../../components/PhoneInput';
 
 const Alert = forwardRef(function Alert(props:any, ref:any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -22,7 +23,7 @@ const AddUser = () => {
     const [nameAr, setNameAr] = useState<String>('');
     const [password, setPassword] = useState<String>('');
     const [confirmPassword, setConfirmPassword] = useState<String>('');
-    const [mobileNo, setMobileNo] = useState<String>('');
+    const [mobileNo, setMobileNo] = useState<String>('971');
     const [landline, setLandline] = useState<String>('');
     const [whatsapp, setWhatsapp] = useState<String>('');
     const [gender, setGender] = useState<Number>(0);
@@ -111,6 +112,7 @@ const AddUser = () => {
             value: mobileNo,
             setValue: setMobileNo,
             style: 'mx-4 w-72',
+            type:'mobile'
         },
         {
             name: 'Landline',
@@ -212,11 +214,11 @@ const AddUser = () => {
         },
     ];
     function onSubmit() {
-        if(!name){setOpen(true);setErrorSnackbar("Please Enter Name");return }
-        if(!email){setOpen(true);setErrorSnackbar("Please Enter Email");return }
+        if(name!= ""){setOpen(true);setErrorSnackbar("Please Enter Name");return }
+        if(email!= ""){setOpen(true);setErrorSnackbar("Please Enter Email");return }
         if(password != confirmPassword){setOpen(true);setErrorSnackbar("Confirm Password Did'nt MAtch");return}
-        if(!password){setOpen(true);setErrorSnackbar("Please Enter password");return}
-        if(!mobileNo){setOpen(true);setErrorSnackbar("Please Enter Mobile No");return}
+        if(password != ""){setOpen(true);setErrorSnackbar("Please Enter password");return}
+        if(mobileNo != "971" ){setOpen(true);setErrorSnackbar("Please Enter Mobile No");return}
         // if(!email){setErrorSnackbar("Please Enter Email")}
         // if(!email){setErrorSnackbar("Please Enter Email")}
         let addUserBody = {
@@ -246,6 +248,11 @@ const AddUser = () => {
         onAddUser(addUserBody).then((r: any) => {
             // console.log(r, 'RESULTSS');
             setOpen(true);
+            
+            if(r.data.statusCode == 404){
+                setOpen(true);
+                setErrorSnackbar('Invalid Credentials')
+            }
             if (r.error) {
                 setSnackbar(true);
                 setErrorSnackbar("Failed to Add User");
@@ -287,7 +294,19 @@ const AddUser = () => {
                         {addUserInputs.map((d: any) => {
                             if (d.text && !d.value) {
                                 return <p className={d.style}>{d.label}</p>;
-                            } else {
+                            } 
+                            else if(d.type=='mobile'){
+                                return <div className="mt-4 "id="phoneNo">
+                                <PhoneNoInput
+                                    phoneNo={d.value}
+                                    setPhoneNo={d.setValue}
+                                    // onKeyEnter={true}
+                                    // onClick={() => onSubmit()}
+
+                                />
+                            </div>
+                            }
+                            else {
                                 if (d.label) {
                                     return (
                                         <div className={d.style}>

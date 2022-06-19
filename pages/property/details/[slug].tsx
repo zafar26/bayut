@@ -14,6 +14,7 @@ import Box from '@mui/material/Box';
 import { sendMail } from '../../../helpers/apis/sendEmail';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import AddIcon from '@mui/icons-material/Add';
 
 const Alert = forwardRef(function Alert(props:any, ref:any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -35,7 +36,7 @@ const PropertyDetails = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [userSigned, setUserSigned] = useState(true);
     const [loading, setLoading] = useState(false);
-    const [phoneNo, setPhoneNo] = useState<String>('');
+    const [phoneNo, setPhoneNo] = useState<String>('971');
     const [email, setEmail] = useState<String>('');
     const [name, setName] = useState<String>('');
     const [message, setMessage] = useState<String>(
@@ -173,9 +174,18 @@ const PropertyDetails = () => {
             agentEmail: data.email,
         };
         console.log(body,'BODY')
+        if(!name && !email){
+            setOpen(true);
+            setErrorSnackbar('Name & Email Required')
+            return 
+        }
         sendMail(body)
             .then((r: any) => {
-                if(r.statusCode != 200){
+                if(r.statusCode == 404){
+                    setOpen(true);
+                    setErrorSnackbar('Invalid Credentials')
+                }
+                if(r.statusCode != 200 && r.statusCode != 404){
                     setOpen(true);
                     setErrorSnackbar('Request Failed')
                 }
@@ -206,7 +216,7 @@ const PropertyDetails = () => {
     } else {
         return (
             <div className=" w-screen h-screen ">
-                <div className="pt-16   px-2 md:px-12 py-4 md:flex justify-center bg-[#ecdbdc] text-yellow-900 ">
+                <div className="pt-16   px-2 md:px-12 py-4 md:flex justify-center bg-[#ecdbdc] text-[#4b1037] ">
                     {
                         <div className={isMobile ? '' : 'h-12'}>
                             <Navbar
@@ -217,34 +227,40 @@ const PropertyDetails = () => {
                         </div>
                     }
                     <div className="p-2 w-full md:mt-8">
-                    <p className="cursor-pointer" onClick={()=>router.push('/property')}> {"<--    "}Go Back to Search</p>
-                    <div className="p-2 pt-4 mt-2  bg-white w-full flex flex-col items-center   rounded shadow shadow-amber-800/50">
+                        <div className= "flex items-center">
+                            <p className="cursor-pointer " onClick={()=>router.back()}> Go Back to List</p>
+                            <p className="ml-4">Home  >  <b>{data.categoryName}</b> >  <b>{data.subCategoryName}</b></p>
+                        </div>
+                    <div className="p-2 pt-4 mt-2  bg-[#ecdbdc] w-full flex flex-col items-center   rounded shadow shadow-amber-800/50">
                         <div className="flex flex-col w-full justify-center p-4 ">
                             <div className="justify-between flex items-center h-8  w-full">
-                                <p className="text-sm md:text-2xl font-bold md:w-1/2 w-full">
+                                <p className="text-sm md:text-2xl font-bold  w-full">
                                     {data.propertyName}
                                 </p>
-                                <div className="rounded shadow p-2 ml-2    ">
-                                    <p className="text-xs md:text-xl text-center w-12 md:w-32">
-                                        {data.propertyType}
-                                    </p>
-                                </div>
                             </div>
-                            <div className="justify-between  flex mt-4 ">
-                                <div className=" md:flex items-center text-sm md:text-xl font-light w-1/2">
+                            <div className="flex items-end justify-between">
+                            <div className="justify-between md:flex-col flex mt-4 w-2/3 ">
+                                <div className=" mt-4 md:flex items-center text-sm md:text-xl font-light w-2/3">
                                     <p>Category :</p>
                                     <p className="text-sm md:text-xl md:ml-2 font-semibold">
                                         {data.categoryName}
                                     </p>
                                 </div>
 
-                                <div className=" md:flex items-center text-sm md:text-xl font-light">
+                                <div className="mt-4 md:flex items-center text-sm md:text-xl font-light">
                                     <p>Sub Category : </p>
                                     <p className="text-sm md:text-xl md:ml-2 font-semibold">
                                         {data.subCategoryName}
                                     </p>
                                 </div>
                             </div>
+
+                            <div className="rounded shadow p-2 ml-2  w-32 h-12  ">
+                                    <p className="text-xs md:text-xl text-center w-12 md:w-32">
+                                        {data.propertyType}
+                                    </p>
+                                </div>
+                                </div>
                         </div>
 
                         <div className="flex w-full md:justify-center">
@@ -258,33 +274,50 @@ const PropertyDetails = () => {
                             </div>
                         </div>
                         <div className="flex w-full mt-4 p-4  justify-center items-center">
-                            <div className="md:flex items-center  w-1/2">
-                                <p>Price : </p>
-                                <p className="font-bold text-xl md:ml-2">
-                                &#x62f;&#x2e;&#x625; {data.price} {data.tenure}
-                                </p>
-                            </div>
-                            <div className="md:flex items-center  w-3/4 ">
+                        <div className="md:flex items-center  w-3/4 ">
                                 <p>Address : </p>
                                 <p className=" text-lg md:ml-2 font-bold">
                                     {data.address}
                                 </p>
                             </div>
+                            <div className="md:flex items-center  w-1/2">
+                                <p>Price : </p>
+                                <p className="font-bold text-xl md:ml-2">
+                                AED {parseInt(data.price).toLocaleString()} 
+                                {console.log(data.propertyTypeID,data.ownerShipStatusID,'DATAOWNER')}
+                                {data.propertyTypeID === 2 ?  data.ownerShipStatusID != 1?
+                                    data.ownerShipStatusID !=2
+                                        ?
+                                            data.ownerShipStatusID !=3
+                                                ?
+                                                    data.ownerShipStatusID !=4
+                                                        ? " (Yearly)" 
+                                                        :" (Half yearly)"
+                                                : " (Quarterly)" 
+                                        : " (Monthly)" 
+                                        :""
+                                    
+                                    :''
+                                    }
+                                </p>
+                            </div>
+                            
                         </div>
                         <div className="mt-8  p-4 flex w-full   justify-center items-center">
-                            <div className="  w-full flex justify-center flex-col items-center">
-                                <p className="font-bold">Amenities</p>
-                                <div className="flex mt-4  flex-wrap ">
+                            <div className="  w-full flex justify-center flex-col items-start">
+                                <p className="font-bold ">Amenities</p>
+                                <div className="flex mt-4 flex-wrap ">
                                     {ammenityFieldData.map(
                                         (d: any, index: number) => {
                                             let values: any = Object.values(d);
                                             if (values[0].length > 20) {
                                                 return (
                                                     <div className="px-4 w-full  md:flex justify-between">
-                                                        <li className="w-48 ">
+                                                        <AddIcon fontSize={"small"}/>
+                                                        <p className="w-auto ml-2">
                                                             {Object.keys(d)[0]}
                                                             {' : '}
-                                                        </li>
+                                                        </p>
                                                         <p className="w-full ml-6 font-bold">
                                                             {Object.values(d)}
                                                         </p>
@@ -293,9 +326,12 @@ const PropertyDetails = () => {
                                             }
                                             return (
                                                 <div className="px-4 w-72  flex justify-between">
-                                                    <li className="">
+                                                    <div className="flex">
+                                                    <AddIcon fontSize={"small"}/>
+                                                    <p className="w-auto ml-2">
                                                         {Object.keys(d)[0]}
-                                                    </li>
+                                                    </p>
+                                                    </div>
                                                     <p className="font-bold">
                                                         {Object.values(d)}
                                                     </p>
@@ -310,7 +346,11 @@ const PropertyDetails = () => {
                                 </p>
                                 <div className=" p-4  flex flex-wrap">
                                     {ammenityData.map((d: string) => (
-                                        <li className="w-52 ">{d}</li>
+                                        <div className="flex ">
+                                                <AddIcon fontSize={"small"}/>
+                                        <p className="w-52 ml-2">
+                                            {d.replace('Or','/')}</p>
+                                            </div>
                                     ))}
                                 </div>
                             </div>
@@ -332,13 +372,13 @@ const PropertyDetails = () => {
                         <div className="flex flex-col items-center w-full  ">
                             <MyInput
                                 style={'shadow-amber-800/50'}
-                                name="Name"
+                                name="Name *"
                                 value={name}
                                 onChange={setName}
                             />
                             <MyInput
                                 style={'shadow-amber-800/50'}
-                                name="Email"
+                                name="Email *"
                                 value={email}
                                 onChange={setEmail}
                             />

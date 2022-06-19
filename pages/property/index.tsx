@@ -247,7 +247,7 @@ const Properties = () => {
                     <div className="md:flex h-full md:justify-around md:items-center  	">
                         <div className=" p-2 w-full md:w-1/6 md:mt-28 md:h-full ">
                             <div className=" w-full md:h-5/6   ">
-                                <p className="md:text-base text-xs px-2 font-thin md:text-left text-amber-800">
+                                <p className="md:text-base text-xs px-2  md:text-left text-amber-800">
                                     Search Properties:
                                 </p>
                                 {/* <div className="w-full flex md:flex-col overflow-x-auto items-center scroll-smooth ">
@@ -372,7 +372,7 @@ const Properties = () => {
                                 }
                             >
                                 <div className="text-sm md:text-xl flex flex-col justify-around h-auto ">
-                                    <p className="font-bold">&#x62f;&#x2e;&#x625; {d.price}</p>
+                                    <p className="font-bold">AED {parseInt(d.price).toLocaleString()}</p>
 
                                     <p>{d.propertyName}</p>
                                     <p className="text-xs md:text-xs font-thin">

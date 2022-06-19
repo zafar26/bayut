@@ -95,7 +95,7 @@ const Listings = () => {
         // },
         {
             field: 'listedBy',
-            headerName: 'Listed By',
+            headerName: 'Posted By',
             headerClassName: 'super-app-theme--header',
             width: isMobile ? 120 : 120,
         },
@@ -118,7 +118,7 @@ const Listings = () => {
             headerClassName: 'super-app-theme--header',
             width: isMobile ? 130 : 280,
         },
-        { field: 'price', headerName: 'Price', width: isMobile ? 120 : 120 , headerClassName: 'super-app-theme--header',},
+        { field: 'price', headerName: 'Price AED', width: isMobile ? 120 : 120 , headerClassName: 'super-app-theme--header',},
         { field: 'beds', headerName: 'Beds', width: isMobile ? 70 : 80 ,  headerClassName: 'super-app-theme--header',},
        
         { field: 'status', headerName: 'Status', width: isMobile ? 80 : 100,  headerClassName: 'super-app-theme--header', },
@@ -382,9 +382,9 @@ const Listings = () => {
                             </a>
                         </div> */}
                     </div>
-                    <div className="p-2 mt-4 md:mt-4 w-full h-full  rounded shadow">
+                    <div className="p-2 mt-4 md:mt-8 w-full h-full  rounded shadow font-sans">
                         <div className="w-full ">
-                            <p className="text-center text-2xl ">Manage Property Listings</p>
+                            <p className="text-center text-xl font-bold ">Manage Property Listings</p>
                             {/* <div className="flex justify-between items-center px-2   rounded shadow">
                                 Filters
                                 <div className="px-1 py-2 w-4/5 md:w-full flex overflow-x-auto items-center justify-between">
@@ -450,7 +450,7 @@ const Listings = () => {
                             </div> */}
                         </div>
                         <div>
-                            <MyInput
+                            {/* <MyInput
                                 name="search"
                                 value={searchValue}
                                 onChange={setSearchValue}
@@ -464,9 +464,9 @@ const Listings = () => {
                                 // }
                                 
                                 // }
-                                />
+                                /> */}
                         </div>
-                        <div className="pt-2 h-full text-xl">
+                        <div className="pt-2 h-full ">
                         <Box
                             sx={{
                                 height: '100%',
@@ -494,7 +494,7 @@ const Listings = () => {
                                 }}
                                 density={isMobile ? 'compact' : 'comfortable'}
                                 disableSelectionOnClick
-                                className="text-xl"
+                                className="text-base font-sans	"
                             />
                             </Box>
                             {/* <table className="table-fixed w-full">

@@ -64,6 +64,7 @@ export default function MyInput(props: any) {
         }
         if(error!= "" && val.match(mailformat)){
             setError('')
+            props.setValidationError(false)
         }
     }   console.log(error , "ERORORORO")
     return (

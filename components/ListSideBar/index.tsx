@@ -31,6 +31,7 @@ const MyList = ({
 }: any) => {
     const classes = useStyles();
     const [selectedItem, setSelectedItem]: any = useState(0);
+    const [userRoleID, setUserRoleID]: any = useState(0);
     const [selectedList, setSelectedList]: any = useState([]);
     async function getSelectedLinkList(){
         let selectedLinkList: any = corporateLinks;
@@ -54,6 +55,14 @@ const MyList = ({
     }
     useEffect(()=>{
         getSelectedLinkList()
+        db.table('corporate')
+            .toArray()
+            .then((agent: any) => {
+                if (agent.length >= 1 && agent[0].token && !clientUser) {
+                    setUserRoleID(agent[0].userRoleID)
+                    // setName(agent[0].name);
+                }
+            })
         // let selectedLinkList: any = corporateLinks;
         // if (clientUser) {
         //     selectedLinkList = clientLinks;
@@ -101,18 +110,21 @@ const MyList = ({
                     </div>
                 )}
                 <Divider className="mb-6"/>
+                <div className="mt-6 text-xl font-bold text-center">
+                {userRoleID == 4 ?<p>Agent User </p>:<p>Admin User</p>}
+                </div>
                 {selectedList.map((link: any, index: any) => {
                     return selectedLink == link.label ? (
                         <ListItem
                             button
                             key={index}
                             sx={{ padding: 0, color: '#4b1037' }}
-                            className="w-full h-16 text-[#4b1037] p-0 py-0 flex items-center  shadow md:text-xl  "
+                            className="w-full h-16 text-[#4b1037] p-0 py-0 flex items-center  shadow md:text-xs "
                         >
                             <div className="w-1 h-full   bg-[#4b1037] rounded-xl">
                                 i
                             </div>
-                            <div className="w-full flex px-2   ">
+                            <div className="w-full flex px-2 items-center  ">
                                 <div className="mr-2">{link.icon()}</div>
                                 <Link href={`${link.path}`}>{link.label}</Link>
                             </div>
@@ -125,11 +137,11 @@ const MyList = ({
                             button
                             key={link.label}
                             sx={{ color: 'GrayText' }}
-                            className="text-[#bca4b4] h-16 flex items-center md:text-xl "
+                            className="text-[#bca4b4] h-16 flex items-center md:text-xs "
                             onClick={() => setSelectedItem(index)}
                         >
                             <div className="mr-2">{link.icon()}</div>
-                            <Link href={`${link.path}`}>{link.label}</Link>
+                            <Link href={`${link.path}`} >{link.label}</Link>
                         </ListItem>
                     );
                 })}

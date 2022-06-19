@@ -14,4 +14,5 @@ module.exports = withPWA({
         // // next line is not required
         path: '/images',
     },
+    exportTrailingSlash:true
 });

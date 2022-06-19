@@ -252,7 +252,7 @@ const Home = () => {
                                         <p className="text-xs md:text-base font-semibold">
                                             {d.propertyType}
                                         </p>
-                                        <p className="font-bold">&#x62f;&#x2e;&#x625; {d.price}</p>
+                                        <p className="font-bold">AED {parseInt(d.price).toLocaleString()}</p>
 
                                     </div>
                                     <p className="text-xs md:text-base ">

@@ -128,7 +128,7 @@ const AddProperty = () => {
         {
             value: tittle,
             setValue: setTittle,
-            name: 'Tittle *',
+            name: 'Title *',
         },
         // {
         //     value: tittleAr,
@@ -200,7 +200,7 @@ const AddProperty = () => {
         {
             style: 'mt-4 ml-2 w-full',
             text: true,
-            label: 'Property Details',
+            label: 'Posted By',
         },
         {
             value: listingOwners,
@@ -259,7 +259,7 @@ const AddProperty = () => {
             area: area,
             permitNumber: permitNo,
             completionStatusID: 1,
-            ownerShipStatusID: priceTime,
+            ownerShipStatusID: parseInt(purpose) ==1 ? 1:priceTime,
             listingUserID: listingOwners,
             status: 0,
             price: price
