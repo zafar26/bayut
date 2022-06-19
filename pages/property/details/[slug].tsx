@@ -229,7 +229,7 @@ const PropertyDetails = () => {
                     <div className="p-2 w-full md:mt-8">
                         <div className= "flex items-center">
                             <p className="cursor-pointer " onClick={()=>router.back()}> Go Back to List</p>
-                            <p className="ml-4">Home  >  <b>{data.categoryName}</b> >  <b>{data.subCategoryName}</b></p>
+                            <p className="ml-4">Home  {'>'}  <b>{data.categoryName}</b> {'>'}  <b>{data.subCategoryName}</b></p>
                         </div>
                     <div className="p-2 pt-4 mt-2  bg-[#ecdbdc] w-full flex flex-col items-center   rounded shadow shadow-amber-800/50">
                         <div className="flex flex-col w-full justify-center p-4 ">
@@ -284,7 +284,7 @@ const PropertyDetails = () => {
                                 <p>Price : </p>
                                 <p className="font-bold text-xl md:ml-2">
                                 AED {parseInt(data.price).toLocaleString()} 
-                                {console.log(data.propertyTypeID,data.ownerShipStatusID,'DATAOWNER')}
+                                {/* {console.log(data.propertyTypeID,data.ownerShipStatusID,'DATAOWNER')} */}
                                 {data.propertyTypeID === 2 ?  data.ownerShipStatusID != 1?
                                     data.ownerShipStatusID !=2
                                         ?
