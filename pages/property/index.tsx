@@ -18,7 +18,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { url } from 'inspector';
 import house from '../../public/images/properties/house1.jpeg';
-import { myLoader } from '../../helpers/helper';
+import { myLoader,Public_URL } from '../../helpers/helper';
 import Slideshow from '../../components/SlideShow/slideShow';
 import { motion } from 'framer-motion';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -27,6 +27,7 @@ import JsonOptions from '../options.json';
 import {
     onPropertyLookups,
 } from '../../helpers/apis/addProperty';
+
 const Properties = () => {
     const router = useRouter();
     const [purpose, setPurpose] = useState<String>('');
@@ -392,7 +393,7 @@ const Properties = () => {
                                     </div>
                                 </div>
 
-                                <div className="w-1/4 flex items-end justify-end h-auto ">
+                                <div className="w-1/4 flex flex-col items-end justify-between h-auto ">
                                     {/* {auth && (
                                         <TransitionsModal
                                             phoneNo={d.phoneNumber}
@@ -400,6 +401,22 @@ const Properties = () => {
                                         />
                                     )} */}
                                     <p className="text-gray-500">{d.companyName}</p>
+
+                                    {/* {console.log(d.imageName,d,'DIMAGE')} */}
+                                     <Image
+                                            src={d.imageName != ""? d.imageName:"202201220609_imran.jpg"}
+                                            alt="logo "
+                                            width={ 240}
+                                            height={ 240}
+                                            className="rounded-full h-full w-full"
+                                            // layout="responsive"
+                                            objectFit={'fill'}
+                                            loader={({ src, width, quality }:any) => {
+                                                return `${Public_URL}/images/${src}?w=${width}&q=${quality || 75}`
+                                            }}
+                            
+                                            onClick={() => {}}
+                                        />
                                 </div>
                             </div>
                         </div>

@@ -16,6 +16,7 @@
     "@mui/material": "^5.6.0",
     "@mui/styles": "^5.6.0",
     "@mui/x-data-grid": "^5.8.0",
+    "@react-google-maps/api": "^2.12.0",
     "axios": "^0.26.1",
     "dexie": "^3.2.1",
     "dexie-react-hooks": "^1.1.1",
@@ -25,6 +26,8 @@
     "next-pwa": "^5.5.0",
     "react": "18.0.0",
     "react-dom": "18.0.0",
+    "react-google-maps": "^9.4.5",
+    "react-places-autocomplete": "^7.3.0",
     "uniqid": "^5.4.0"
   },
   "devDependencies": {

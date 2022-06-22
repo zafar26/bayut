@@ -102,10 +102,10 @@ const CorporateLogin: NextPage = () => {
         };
         if(email!= "" && password != ""){
             onCorporateLogin(body).then((r: any) => {
-            // console.log(r, 'RESULTSS');
+            console.log(r, 'RESULTSS');
             setOpen(true)
 
-            if (r.error) {
+            if (!r || r.error) {
                 setSnackbar(true);
 
                 setErrorSnackbar(r.message);
@@ -116,7 +116,12 @@ const CorporateLogin: NextPage = () => {
                 if (r.localDb) {
                     setTimeout(() => router.push('/corporate/listings'), 2000);
                 }
-            } else {
+            }
+            else if( r.data.statusCode == 202){
+                setSnackbar(true);
+                setErrorSnackbar(r.data.message)
+            } 
+            else {
                 if (r.data.errorData.message) {
                     setErrorSnackbar(r.data.errorData.message);
                     setSnackbar(true);

@@ -10,8 +10,26 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useState,useEffect } from 'react';
 import { db, resetDatabase } from '../../db';
 import Image from 'next/image';
-import { myPublicLoader } from '../../helpers/helper';
+import { myPublicLoader,Public_URL } from '../../helpers/helper';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import UploadAndDisplayImage from '../Upload';
+import {onLogoUpload} from '../../helpers/apis/auth'
 
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 600,
+    height:500,
+    bgcolor: '#ecdbdc',
+    border: '1px solid #4b1037',
+    boxShadow: 24,
+    p: 4,
+};
 const useStyles = makeStyles({
     list: {},
     fullList: {
@@ -33,6 +51,12 @@ const MyList = ({
     const [selectedItem, setSelectedItem]: any = useState(0);
     const [userRoleID, setUserRoleID]: any = useState(0);
     const [selectedList, setSelectedList]: any = useState([]);
+    const handleClose = () => setOpenUpload(false);
+    const [openUpload, setOpenUpload] = useState(false);
+    const [logo, setLogo] = useState('');
+    const [selectedImage, setSelectedImage] = useState<any>(null);
+    const [imagebase64, setImageBase64] = useState(null);
+
     async function getSelectedLinkList(){
         let selectedLinkList: any = corporateLinks;
         if (clientUser) {
@@ -41,7 +65,8 @@ const MyList = ({
         // console.log(selectedLinkList.slice(1,3),'SLECTD ')
 
         let corporateUser = await db.table('corporate').toArray();
-        // console.log(JSON.parse(corporateUser),"user list SIdeBar")    
+        setLogo(corporateUser[0].logo)
+        console.log(corporateUser[0].logo,"user list SIdeBar")    
         // if()
         if(corporateUser[0] && corporateUser[0].userRoleID == 4 && !clientUser){
             // corporateLinks.splice(2,2)
@@ -69,6 +94,23 @@ const MyList = ({
         // }
         // setSelectedList(selectedLinkList)
         },[db])
+        function onSubmit(){
+            console.log('Submit')
+            let body = {
+                imageData: imagebase64,
+                fileName: selectedImage.name,
+                mediaType: 'image',
+                mediaInfoType:'logo'
+            }
+            onLogoUpload(body).then((r:any)=>{
+                    console.log(r);
+                    // setOpen(false)
+                    if(r.data.statusCode ==200){
+                        setLogo(selectedImage.name)
+                    }
+
+            }).catch((e:any)=>console.log(e,'ERROR'))
+        }
     return (
         <div
             className={clsx(classes.list, {
@@ -109,7 +151,69 @@ const MyList = ({
                     />
                     </div>
                 )}
-                <Divider className="mb-6"/>
+                <Divider className="mb-1"/>
+                <div className= "w-full h-16">
+                {logo !=""?  
+                 <Image
+                 src={logo}
+                 alt="logo "
+                 width={ 280}
+                 height={ 100}
+                 className="rounded h-full w-full"
+                 // layout="responsive"
+                 objectFit={'fill'}
+                 loader={({ src, width, quality }:any) => {
+                     return `${Public_URL}/images/${src}?w=${width}&q=${quality || 75}`
+                   }}
+ 
+                 onClick={() => {}}
+             />
+                :
+                <Button
+                    onClick={() => {
+                        // setSelectedButton(2);
+                        setOpenUpload(true);
+                    }}
+                    className="p-1 ml-1  md:py-1 md:px-2 bg-amber-700 hover:text-lime-600  text-white flex rounded shadow flex items-center"
+                >
+                    
+                    <p className="md:ml-1 text-sm md:text-base">Upload</p>
+                </Button>}
+                <Modal
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
+                open={openUpload}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={openUpload}>
+                    <Box sx={style}>
+                        <div className="w-full flex flex-col items-center">
+                                <UploadAndDisplayImage
+                                                selectedImage={selectedImage}
+                                                setSelectedImage={
+                                                    setSelectedImage
+                                                }
+                                                imagebase64={imagebase64}
+                                                setImageBase64={setImageBase64}
+                                            />
+                                            <Button
+                                                onClick={onSubmit}
+                                                className="p-1 ml-1  md:py-1 md:px-2 bg-amber-700 hover:text-lime-600  text-white flex rounded shadow flex items-center"
+                                            >
+                                                
+                                                <p className="md:ml-1 text-sm md:text-base">Upload</p>
+                                            </Button>
+                        </div>
+
+                    </Box>
+                </Fade>
+            </Modal>
+                </div>
                 <div className="mt-6 text-xl font-bold text-center">
                 {userRoleID == 4 ?<p>Agent User </p>:<p>Admin User</p>}
                 </div>

@@ -19,6 +19,9 @@ import { db } from '../../../db';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { GridCellParams } from '@mui/x-data-grid';
+import {useJsApiLoader,GoogleMap} from "@react-google-maps/api"
+
+let key ="AIzaSyAEMFJTv0QYrsBI7VYkmG4fEKfg1gziW4k"
 
 const Alert = forwardRef(function Alert(props:any, ref:any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -26,6 +29,10 @@ const Alert = forwardRef(function Alert(props:any, ref:any) {
 
 const steps = ['Details', 'Amenities', 'Uploads'];
 
+const center = {
+    lat: -3.745,
+    lng: -38.523
+  };
 const AddProperty = () => {
     const isMobile = useMediaQuery('(max-width:600px)');
     const [loginAs, setLoginAs] = useState<String>('');
@@ -65,7 +72,11 @@ const AddProperty = () => {
     
         setOpen(false);
       };
-    
+      const [map, setMap] = useState(null)
+    const {isLoaded}=useJsApiLoader({
+        googleMapsApiKey:"AIzaSyAEMFJTv0QYrsBI7VYkmG4fEKfg1gziW4k",
+    })
+    console.log(isLoaded,'IS LOADED')
     
     let addPropertyOptions = [
         {
@@ -283,13 +294,20 @@ const AddProperty = () => {
                             router.push(
                                 `/corporate/addproperty/ammenities?propertyid=${r.data.responseData.data}`
                             ),
-                        5000
+                        2000
                     );
-                } else {
+                } 
+                else if (r.data.statusCode != 500){
+                    setSnackbar(true)
+                    setErrorSnackbar('Failed To add Property')
+                }
+                else {
                     if (r.data.errorData.message) {
                         setErrorSnackbar(r.data.errorData.message);
                         setSnackbar(true);
                     }
+                    setErrorSnackbar("Failed To Add Property");
+                    setSnackbar(true);
                 }
             })
             .catch((e) => console.log(e, 'ERR'));
@@ -335,6 +353,9 @@ const AddProperty = () => {
                         />
                     </div>
                 )}
+                 <GoogleMap center={center} zoom={12} mapContainerStyle={{width:'100%',height:'100%'}}>
+                    {/*  */}
+                </GoogleMap> 
                 <div className="pt-16 md:w-5/6 w-full">
                     <MyStepper steps={steps} activeStep={0} />
                     <div className="flex flex-wrap">

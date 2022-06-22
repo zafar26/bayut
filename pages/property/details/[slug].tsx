@@ -15,6 +15,8 @@ import { sendMail } from '../../../helpers/apis/sendEmail';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import AddIcon from '@mui/icons-material/Add';
+import { myLoader,Public_URL } from '../../../helpers/helper';
+import Image from 'next/image';
 
 const Alert = forwardRef(function Alert(props:any, ref:any) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -358,8 +360,23 @@ const PropertyDetails = () => {
                     </div>
                     </div>
                     <div className="pt-16 w-full md:w-4/12 flex flex-col items-center p-4 ">
-                    <div className="flex text-lg py-4">
-                            <p>{data.companyName} </p>
+                    <div className="flex flex-col items-between justify-center text-lg py-4">
+                                        {/* {console.log(data,data.imageName,'IMAGE NAME   =')} */}
+                                        <Image
+                                            src={data.imageName && data.imageName !== ""? data.imageName:"202201220609_imran.jpg"}
+                                            alt="logo "
+                                            width={ 200}
+                                            height={ 200}
+                                            className="rounded-full h-full w-full"
+                                            // layout="responsive"
+                                            objectFit={'fill'}
+                                            loader={({ src, width, quality }:any) => {
+                                                return `${Public_URL}/images/${src}?w=${width}&q=${quality || 75}`
+                                            }}
+                            
+                                            onClick={() => {}}
+                                        />    
+                            <p className="text-center">{data.companyName} </p>
                         </div>
                         <div className="flex text-lg py-1">
                             <p>Agent :</p>

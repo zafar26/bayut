@@ -102,7 +102,7 @@ const CorporateCreateLogin: any = () => {
                 }
                 if (r.error) {
 
-                    setSnackbar(true);
+                    setSnackbar(false);
 
                     setErrorSnackbar(r.message);
                     return;
@@ -112,7 +112,8 @@ const CorporateCreateLogin: any = () => {
                 }
                 if (r.data.statusCode == 200) {
                     console.log(r, 'RESULT');
-                    setSnackbar(true);
+                    setSnackbar(false);
+                    setErrorSnackbar("");
                     setTimeout(
                         () => router.push(`/corporate/login?email=${email}`),
                         5000
@@ -121,16 +122,21 @@ const CorporateCreateLogin: any = () => {
                 } else {
                     if (r.data.errorData.message) {
                         setErrorSnackbar(r.data.errorData.message);
-                        setSnackbar(true);
+                        setSnackbar(false);
                     }
+                    setErrorSnackbar(r.message);
+                    setSnackbar(true);
+                    setOpen(true)
+
                 }
                 setOpen(true)
                 return;
             });
         }else{
-            setOpen(true)
             setErrorSnackbar('Please Enter Name, Email, Password and Confirm Password');
         }
+        setOpen(true)
+
 
     }
     return (
@@ -269,12 +275,13 @@ const CorporateCreateLogin: any = () => {
                         <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                             <Alert onClose={handleClose} severity={errorSnackbar?"error" :"success"} sx={{ width: '100%' }}>
                             {errorSnackbar != ""?
-                            snackbar ?
-                                "Request Failed"
-                            :
-                            errorSnackbar
-                            :
-                            "Created Account!"
+                                                snackbar 
+                                                    ?
+                                                    "Request Failed"
+                                                    :
+                                                    errorSnackbar
+                                                :
+                                                "Created Account!"
                             }
                             </Alert>
                         </Snackbar>
